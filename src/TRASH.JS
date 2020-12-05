@@ -1,4 +1,10 @@
-import React, {useState, Fragment} from "react";
+//TRASH CODE
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css';
 import './App.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
@@ -12,18 +18,21 @@ import {
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-const App = () => {
-  const [collapsed, setCollapsed] = useState(false)
-
-  const onCollapse = collapsed => {
-    console.log(collapsed);
-    setCollapsed({ collapsed });
+class SiderDemo extends React.Component {
+  state = {
+    collapsed: false,
   };
 
-  return (
-    <Fragment>
+  onCollapse = collapsed => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
+
+  render() {
+    const { collapsed } = this.state;
+    return (
       <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
+        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
@@ -62,8 +71,8 @@ const App = () => {
           <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
         </Layout>
       </Layout>
-    </Fragment>
-  );
-};
+    );
+  }
+}
 
-export default App;
+ReactDOM.render(<SiderDemo />, document.getElementById('root'));
