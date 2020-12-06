@@ -21,28 +21,28 @@ import {
 import First from "../src/layouts/Steps/First";
 import Second from "../src/layouts/Steps/Second";
 import Third from "../src/layouts/Steps/Third";
+import Steps from "../src/steps/main";
 
-import {Steps, Step} from "react-step-builder"
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Meta } = Card;
 
-const { Step } = Steps;
+// const { Step } = Steps;
 
-const steps = [
-  {
-    title: "First",
-    content: <First />,
-  },
-  {
-    title: "Second",
-    content: <Second />,
-  },
-  {
-    title: "Last",
-    content: <Third />,
-  },
-];
+// const steps = [
+//   {
+//     title: "First",
+//     content: <First />,
+//   },
+//   {
+//     title: "Second",
+//     content: <Second />,
+//   },
+//   {
+//     title: "Last",
+//     content: <Third />,
+//   },
+// ];
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -152,12 +152,8 @@ const App = () => {
                   description="Design your own impact profile based on your programme priorities and needs"
                 />
                 <br />
-                <div>
-                  <Steps>
-                    <Step title="My First Step" component={First} />
-                    <Step title="My Second Step" component={Second} />
-                    <Step title="My Third Step" component={Third} />
-                  </Steps>
+                <div className="my-app">
+                  <Steps />
                 </div>
               </Card>
             </div>
