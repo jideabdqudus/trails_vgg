@@ -1,6 +1,15 @@
 import React, { useState, Fragment } from "react";
 import "./App.css";
-import { Layout, Menu, Breadcrumb, Container, Row, Col, Card } from "antd";
+import {
+  Layout,
+  Menu,
+  Breadcrumb,
+  Container,
+  Row,
+  Col,
+  Card,
+  Skeleton,
+} from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -8,9 +17,28 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import Chart from "chart.js";
+import { Doughnut } from "react-chartjs-2";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
+const data = {
+  labels: [
+    "No Poverty",
+    "Zero Hunger",
+    "Decent work and Economic Growth",
+    "Quality Education",
+  ],
+  datasets: [
+    {
+      label: "SDGs",
+      backgroundColor: ["#A21942", "#DDA63A", "#E5243B", "#C5192D"],
+      hoverBackgroundColor: ["#A21942", "#DDA63A", "#E5243B", "#C5192D"],
+      data: [65, 59, 80, 81],
+    },
+  ],
+};
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -27,22 +55,30 @@ const App = () => {
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
             <Menu.Item key="1" icon={<PieChartOutlined />}>
-              Option 1
+              Dashboard
             </Menu.Item>
             <Menu.Item key="2" icon={<DesktopOutlined />}>
-              Option 2
+              Programme Report
             </Menu.Item>
-            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
+            <SubMenu
+              key="sub1"
+              icon={<UserOutlined />}
+              title="Programme Manager"
+            >
+              <Menu.Item key="3">SDG 3</Menu.Item>
+              <Menu.Item key="4">SDG 6</Menu.Item>
+              <Menu.Item key="5">SDG 13</Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
+            <SubMenu
+              key="sub2"
+              icon={<TeamOutlined />}
+              title="Forms Management"
+            >
+              <Menu.Item key="6">Poverty Alleviation</Menu.Item>
+              <Menu.Item key="8">Empowerment Scheme</Menu.Item>
             </SubMenu>
             <Menu.Item key="9" icon={<FileOutlined />}>
-              Files
+              Admin
             </Menu.Item>
           </Menu>
         </Sider>
@@ -189,10 +225,54 @@ const App = () => {
               style={{ padding: 24, minHeight: 360 }}
             >
               <Row>
-                <Col span={18}>
-                  <Card style={{borderRadius:"10px"}}>Map</Card>
+                <Col span={14}>
+                  <Card
+                    title="Impact Areas"
+                    style={{
+                      borderRadius: "10px",
+                      backgroundColor: "#f0f2f5",
+                      margin: "10px",
+                      marginRight: "30px",
+                      marginBottom:"30px"
+                    }}
+                  >
+                    <Skeleton active />
+                  </Card>
+                  <Card
+                    title="Funding Status"
+                    style={{
+                      borderRadius: "10px",
+                      backgroundColor: "#f0f2f5",
+                      margin: "10px",
+                      marginRight: "30px",
+                    }}
+                  >
+                    <Skeleton active />
+                  </Card>
                 </Col>
-                <Col span={6}>Chart</Col>
+                <Col span={10}>
+                  <Card
+                    style={{
+                      borderRadius: "10px",
+                      backgroundColor: "#f0f2f5",
+                      margin: "10px",
+                      marginRight: "30px",
+                    }}
+                    title="Impact Summary"
+                  >
+                    <Doughnut
+                      data={data}
+                      width={100}
+                      height={100}
+                      options={{
+                        legend: {
+                          display: true,
+                          position: "bottom",
+                        },
+                      }}
+                    />
+                  </Card>
+                </Col>
               </Row>
             </div>
           </Content>
