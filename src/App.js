@@ -9,13 +9,18 @@ import {
   Col,
   Card,
   Skeleton,
+  Avatar,
 } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
+  LogoutOutlined,
   UserOutlined,
+  MailOutlined,
+  AppstoreOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import Chart from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -42,12 +47,17 @@ const data = {
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [current, setCurrent] = useState("mail");
 
   const onCollapse = (collapsed) => {
     console.log(collapsed);
     setCollapsed({ collapsed });
   };
 
+  const handleClick = (e) => {
+    console.log("click ", e);
+    setCurrent({ current: e.key });
+  };
   return (
     <Fragment>
       <Layout style={{ minHeight: "100vh" }}>
@@ -83,8 +93,31 @@ const App = () => {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            Howfar
+          <Header
+            className="site-layout-background"
+            style={{
+              borderRadius: "0",
+              padding: 0,
+            }}
+          >
+            <div>
+              <Menu
+                onClick={handleClick}
+                selectedKeys={[current]}
+                mode="horizontal"
+              >
+                <Row>
+                  <Col span={16}></Col>
+                  <Col spab={8}>
+                    <Menu.Item key="mail">
+                      <Avatar />
+                      <span>Jide Abdul-Qudus</span>
+                      <p>Administrator</p>
+                    </Menu.Item>
+                  </Col>
+                </Row>
+              </Menu>
+            </div>
           </Header>
           <Content style={{ margin: "0 16px" }}>
             <h1
@@ -233,7 +266,7 @@ const App = () => {
                       backgroundColor: "#f0f2f5",
                       margin: "10px",
                       marginRight: "30px",
-                      marginBottom:"30px"
+                      marginBottom: "30px",
                     }}
                   >
                     <Skeleton active />

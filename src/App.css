@@ -6,7 +6,18 @@
 
 .site-layout .site-layout-background {
   background: #fff;
+  border-radius: 10px;
 }
-  [data-theme="dark"] .site-layout .site-layout-background {
-    background: #141414;
-  }
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: #141414;
+}
+
+.action {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.account .avatar {
+  margin-right: 8px;
+  vertical-align: top;
+  background: rgba(255, 255, 255, 0.85);
+}
