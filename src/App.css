@@ -21,3 +21,11 @@
   vertical-align: top;
   background: rgba(255, 255, 255, 0.85);
 }
+
+.ant-card-meta-title{
+  margin: 0px!important;
+}
+
+.ant-card-meta-description{
+  color:"#53D1BE" !important;
+}
