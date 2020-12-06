@@ -1,28 +1,13 @@
 import React, { useState, Fragment } from "react";
 import "./App.css";
-import {
-  Layout,
-  Menu,
-  Breadcrumb,
-  Container,
-  Row,
-  Col,
-  Card,
-  Skeleton,
-  Avatar,
-} from "antd";
+import { Layout, Menu, Row, Col, Card, Skeleton, Avatar } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
-  LogoutOutlined,
   UserOutlined,
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
 } from "@ant-design/icons";
-import Chart from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -109,22 +94,21 @@ const App = () => {
                 <Row>
                   <Col span={18}></Col>
                   <Col span={6}>
-                    
-                      <Avatar />  {"    "} 
-                      <span style={{ fontSize: "12px", fontWeight: "600" }}>
-                        Jide Abdul-Qudus | {"  "} 
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "8px",
-                          textTransform: "uppercase",
-                          fontWeight: "600",
-                          padding: "0px",
-                          margin: "0px",
-                        }}
-                      >
-                           Administrator
-                      </span>
+                    <Avatar /> {"    "}
+                    <span style={{ fontSize: "12px", fontWeight: "600" }}>
+                      Jide Abdul-Qudus | {"  "}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "8px",
+                        textTransform: "uppercase",
+                        fontWeight: "600",
+                        padding: "0px",
+                        margin: "0px",
+                      }}
+                    >
+                      Administrator
+                    </span>
                   </Col>
                 </Row>
               </Menu>
@@ -320,9 +304,7 @@ const App = () => {
               </Row>
             </div>
           </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Trails ©2020
-          </Footer>
+          <Footer style={{ textAlign: "center" }}>Trails ©2020</Footer>
         </Layout>
       </Layout>
     </Fragment>

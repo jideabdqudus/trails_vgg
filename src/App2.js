@@ -3,12 +3,9 @@ import "./App.css";
 import {
   Layout,
   Menu,
-  Breadcrumb,
-  Container,
   Row,
   Col,
   Card,
-  Skeleton,
   Avatar,
   Button,
 } from "antd";
@@ -17,36 +14,13 @@ import {
   PieChartOutlined,
   FileOutlined,
   TeamOutlined,
-  LogoutOutlined,
   UserOutlined,
-  MailOutlined,
-  AppstoreOutlined,
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined,
 } from "@ant-design/icons";
-import Chart from "chart.js";
-import { Doughnut } from "react-chartjs-2";
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Meta } = Card;
-const data = {
-  labels: [
-    "No Poverty",
-    "Zero Hunger",
-    "Decent work and Economic Growth",
-    "Quality Education",
-  ],
-  datasets: [
-    {
-      label: "SDGs",
-      backgroundColor: ["#A21942", "#DDA63A", "#E5243B", "#C5192D"],
-      hoverBackgroundColor: ["#A21942", "#DDA63A", "#E5243B", "#C5192D"],
-      data: [65, 59, 80, 81],
-    },
-  ],
-};
+
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
