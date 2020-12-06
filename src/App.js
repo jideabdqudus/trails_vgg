@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import "./App.css";
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Container, Row, Col, Card } from "antd";
 import {
   DesktopOutlined,
   PieChartOutlined,
@@ -15,8 +15,9 @@ const { SubMenu } = Menu;
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
 
-  const onCollapse = () => {
-    setCollapsed(true);
+  const onCollapse = (collapsed) => {
+    console.log(collapsed);
+    setCollapsed({ collapsed });
   };
 
   return (
@@ -50,15 +51,149 @@ const App = () => {
             Howfar
           </Header>
           <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
+            <h1
+              style={{
+                fontWeight: "700",
+                fontSize: "23px",
+                padding: "16px",
+                paddingLeft: "0px",
+              }}
+            >
+              Dashboard
+            </h1>
+            {/* <Breadcrumb style={{ margin: "16px 0" }}>
               <Breadcrumb.Item>User</Breadcrumb.Item>
               <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
+            </Breadcrumb> */}
+            <div>
+              <Col span={24}>
+                <Card
+                  style={{
+                    borderRadius: "10px",
+                    marginBottom: "15px",
+                    backgroundColor: "#2C7267",
+                  }}
+                >
+                  <Row>
+                    <Col span={6}>
+                      <span
+                        style={{
+                          textTransform: "uppercase",
+                          fontWeight: "700",
+                          fontSize: "10px",
+                          color: "skyblue",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        Programmes
+                      </span>
+                      <p
+                        style={{
+                          fontWeight: "700",
+                          fontSize: "35px",
+                          color: "white",
+                          marginBottom: "5px",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        3
+                      </p>
+                    </Col>
+
+                    <Col span={6}>
+                      <span
+                        style={{
+                          textTransform: "uppercase",
+                          fontWeight: "700",
+                          fontSize: "10px",
+                          color: "skyblue",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        Impact Targets (SDG)
+                      </span>
+                      <p
+                        style={{
+                          fontWeight: "700",
+                          fontSize: "35px",
+                          color: "white",
+                          marginBottom: "5px",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        04
+                      </p>
+                    </Col>
+                    <Col span={6}>
+                      <span
+                        style={{
+                          textTransform: "uppercase",
+                          fontWeight: "700",
+                          fontSize: "10px",
+                          color: "skyblue",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        Amount Awarded
+                      </span>
+                      <p
+                        style={{
+                          fontWeight: "700",
+                          fontSize: "35px",
+                          color: "white",
+                          marginBottom: "5px",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        ₦52.1B
+                      </p>
+                    </Col>
+                    <Col span={6}>
+                      <span
+                        style={{
+                          textTransform: "uppercase",
+                          fontWeight: "700",
+                          fontSize: "10px",
+                          color: "skyblue",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        Amount Disbursed
+                      </span>
+                      <p
+                        style={{
+                          fontWeight: "700",
+                          fontSize: "35px",
+                          color: "white",
+                          marginBottom: "5px",
+                          display: "block",
+                          textAlign: "center",
+                        }}
+                      >
+                        ₦21.4B
+                      </p>
+                    </Col>
+                  </Row>
+                </Card>
+              </Col>
+            </div>
             <div
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
             >
-              Bill is a cat.
+              <Row>
+                <Col span={18}>
+                  <Card style={{borderRadius:"10px"}}>Map</Card>
+                </Col>
+                <Col span={6}>Chart</Col>
+              </Row>
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
