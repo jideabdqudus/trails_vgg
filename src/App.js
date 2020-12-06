@@ -107,13 +107,24 @@ const App = () => {
                 mode="horizontal"
               >
                 <Row>
-                  <Col span={16}></Col>
-                  <Col spab={8}>
-                    <Menu.Item key="mail">
-                      <Avatar />
-                      <span>Jide Abdul-Qudus</span>
-                      <p>Administrator</p>
-                    </Menu.Item>
+                  <Col span={18}></Col>
+                  <Col span={6}>
+                    
+                      <Avatar />  {"    "} 
+                      <span style={{ fontSize: "12px", fontWeight: "600" }}>
+                        Jide Abdul-Qudus | {"  "} 
+                      </span>
+                      <span
+                        style={{
+                          fontSize: "8px",
+                          textTransform: "uppercase",
+                          fontWeight: "600",
+                          padding: "0px",
+                          margin: "0px",
+                        }}
+                      >
+                           Administrator
+                      </span>
                   </Col>
                 </Row>
               </Menu>
@@ -310,7 +321,7 @@ const App = () => {
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
+            Trails ©2020
           </Footer>
         </Layout>
       </Layout>
