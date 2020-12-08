@@ -234,7 +234,7 @@ const App = () => {
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
             >
-              <h1> PERFORMANCE INDICATORS</h1>
+              <h1 style={{fontSize:"16px"}}> PERFORMANCE INDICATORS</h1>
               <Row>
                 <Col span={12}>
                   <Card
