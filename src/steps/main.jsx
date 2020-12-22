@@ -1,24 +1,23 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React, { useState, useCallback } from "react";
 
-import { Form, FormElement } from "@progress/kendo-react-form";
-import { Button } from "@progress/kendo-react-buttons";
+import { FormElement, Form } from "@progress/kendo-react-form";
+import { ButtonGroup, Button } from "@progress/kendo-react-buttons";
 import { Stepper } from "@progress/kendo-react-layout";
 
-import { AccountDetails } from "./account-details.jsx";
-import { PersonalDetails } from "./personal-details.jsx";
+import { CustomImpact } from "./custom-impact.js";
+import { DevelopmentGoals } from "./development-goals.js";
 import { PaymentDetails } from "./payment-details.jsx";
 import "../App.css";
 
-const stepPages = [AccountDetails, PersonalDetails, PaymentDetails];
+const stepPages = [CustomImpact, DevelopmentGoals, PaymentDetails];
 
 const Steps = () => {
-  const [step, setStep] = React.useState(0);
-  const [formState, setFormState] = React.useState({});
-  const [steps, setSteps] = React.useState([
-    { label: "Account Details", isValid: undefined },
-    { label: "Personal Details", isValid: undefined },
-    { label: "Payment Details", isValid: undefined },
+  const [step, setStep] = useState(0);
+  const [formState, setFormState] = useState({});
+  const [steps, setSteps] = useState([
+    { label: "Custom Impact", isValid: undefined },
+    { label: "SDGs", isValid: undefined },
+    { label: "Indicators", isValid: undefined },
   ]);
 
   const lastStepIndex = steps.length - 1;
@@ -28,7 +27,7 @@ const Steps = () => {
       .slice(0, step)
       .findIndex((currentStep) => currentStep.isValid === false) === -1;
 
-  const onStepSubmit = React.useCallback(
+  const onStepSubmit = useCallback(
     (event) => {
       const { isValid, values } = event;
 
@@ -42,8 +41,7 @@ const Steps = () => {
       setFormState(values);
 
       if (isLastStep && isPreviousStepsValid && isValid) {
-        alert(JSON.stringify(values));
-        console.log(JSON.stringify(values));
+        console.log(values);
       }
     },
     [
@@ -57,7 +55,7 @@ const Steps = () => {
     ]
   );
 
-  const onPrevClick = React.useCallback(
+  const onPrevClick = useCallback(
     (event) => {
       event.preventDefault();
       setStep(() => Math.max(step - 1, 0));

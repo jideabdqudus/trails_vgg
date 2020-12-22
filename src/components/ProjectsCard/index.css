@@ -1,0 +1,23 @@
+.projectCard {
+  margin: 20px !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+}
+
+.projectButton {
+  background-color: #53d1be !important;
+  border-color: #53d1be !important;
+}
+
+.projectSpan {
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  font-size: 8px !important;
+  color: grey !important;
+}
+
+.projectParagraph {
+  font-size: 8px !important;
+  color: black !important;
+}
+

@@ -1,0 +1,23 @@
+.actionCard {
+  border-radius: 10px !important;
+  margin-bottom: 15px !important;
+  background-color: #2c7267 !important;
+}
+
+.actionItemStyle {
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  color: skyblue !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+.actionItemParagraph {
+  font-weight: 700 !important;
+  font-size: 35px !important;
+  color: #fff !important;
+  margin-bottom: 5px !important;
+  display: block !important;
+  text-align: center !important;
+}
