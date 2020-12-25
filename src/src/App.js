@@ -4,7 +4,7 @@ import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Projects from "./views/Projects/Projects";
 import Overview from "./views/ProjectOverview/Overview";
-import Manager from "./views/ImpactManager/Manager";
+import Manager from "./views/Impact/Manager";
 
 export class App extends Component {
   render() {

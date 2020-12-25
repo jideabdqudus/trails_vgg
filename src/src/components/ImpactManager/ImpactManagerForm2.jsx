@@ -9,7 +9,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 import { sdgDump } from "./sdgDump";
-import SvgCard from "../components/SvgCard/SvgCard";
+import SvgCard from "../SvgCard/SvgCard";
 
 const styles = (theme) => ({
   container: {

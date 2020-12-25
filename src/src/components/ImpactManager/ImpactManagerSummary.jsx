@@ -1,12 +1,12 @@
 import React from "react";
-import Aux from "../components/hocs/_Aux";
+import Aux from "../hocs/_Aux";
 import { Button } from "@material-ui/core";
 import { withStore } from "@spyna/react-store";
 import { Row, Col, Card, Form } from "antd";
 import { sdgDump } from "./sdgDump";
-import { appHelpers } from "../appHelpers/appHelpers";
-import SvgCardView from "../components/SvgCard/SvgCardView";
-import IndicatorView from "../components/Indicators/IndicatorView";
+import { appHelpers } from "../../appHelpers/appHelpers";
+import SvgCardView from "../SvgCard/SvgCardView";
+import IndicatorView from "../Indicators/IndicatorView";
 
 class ImpactManagerSummary extends React.Component {
   constructor(props) {

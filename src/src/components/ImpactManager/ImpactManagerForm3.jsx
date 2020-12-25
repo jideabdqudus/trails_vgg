@@ -2,7 +2,7 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Grid, Checkbox, FormControlLabel } from "@material-ui/core";
 import { sdgDump } from "./sdgDump";
-import { appHelpers } from "../appHelpers/appHelpers";
+import { appHelpers } from "../../appHelpers/appHelpers";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";

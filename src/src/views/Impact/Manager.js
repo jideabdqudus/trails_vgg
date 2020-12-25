@@ -3,8 +3,7 @@ import { Layout } from "antd";
 import { TopHeader } from "../../layouts/layout-components/header";
 import { SideBar } from "../../layouts/layout-components/sidebar";
 import { FooterTab } from "../../layouts/layout-components/footer";
-import { ImpactForm } from "../../components/ImpactFormCard/index";
-import ImpactManager from "../../ImpactManager/ImpactManager";
+import ImpactManager from "../../components/ImpactManager/ImpactManager";
 const { Content } = Layout;
 
 export class Projects extends Component {
@@ -20,7 +19,7 @@ export class Projects extends Component {
                 {/* {window.location.href.indexOf("Trails") > -1 ? "Trails" : "Signals"} */}
                 <h1 style={h1}>Impact Manager</h1>
                 <div>
-                  <ImpactManager/>
+                  <ImpactManager />
                 </div>
               </Content>
               <FooterTab />
