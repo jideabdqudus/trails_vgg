@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "@progress/kendo-drawing": "^1.9.3",
     "@progress/kendo-licensing": "^1.1.0",
     "@progress/kendo-react-animation": "^4.1.0",
@@ -18,6 +20,7 @@
     "@progress/kendo-react-layout": "^4.1.0",
     "@progress/kendo-react-progressbars": "^4.1.0",
     "@progress/kendo-react-upload": "^4.1.0",
+    "@spyna/react-store": "^1.5.0",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.3.0",
@@ -30,11 +33,13 @@
     "formik": "^2.2.5",
     "history": "^5.0.0",
     "joi": "^17.3.0",
+    "lodash": "^4.17.20",
     "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
     "react-dom": "^17.0.1",
+    "react-google-maps": "^9.4.5",
     "react-hooks-helper": "^1.6.0",
     "react-redux": "^7.2.2",
     "react-reveal": "^1.2.2",
@@ -49,6 +54,7 @@
     "redux-thunk": "^2.3.0",
     "sal.js": "^0.8.1",
     "styled-components": "^5.2.1",
+    "sweetalert2": "^10.12.6",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

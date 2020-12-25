@@ -45,7 +45,7 @@ export class SideBar extends Component {
               <Link to="/dashboard/projects">Programme Report</Link>
             </Menu.Item>
             <Menu.Item key="3" icon={<HighlightOutlined />}>
-              Programme Manager
+              <Link to="/dashboard/manager">Programme Manager</Link>
             </Menu.Item>
             <Menu.Item key="4" icon={<FileOutlined />}>
               Forms Management
