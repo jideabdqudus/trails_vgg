@@ -2,11 +2,12 @@ import React from "react";
 import Aux from "../hocs/_Aux";
 import { Button } from "@material-ui/core";
 import { withStore } from "@spyna/react-store";
-import { Row, Col, Card, Form } from "antd";
+import { Row, Col, Card } from "antd";
 import { sdgDump } from "./sdgDump";
 import { appHelpers } from "../../appHelpers/appHelpers";
 import SvgCardView from "../SvgCard/SvgCardView";
 import IndicatorView from "../Indicators/IndicatorView";
+import { EditOutlined } from "@ant-design/icons";
 
 class ImpactManagerSummary extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class ImpactManagerSummary extends React.Component {
       projectName: this.props.projectName,
       projectCode: this.props.projectCode,
       projectLocation: this.props.projectLocation,
+      projectBanner: this.props.projectBanner,
       projectDescription: this.props.projectDescription,
       sdgCheckBoxes: this.props.sdgCheckBoxes,
       indicators: this.props.indicators,
@@ -61,118 +63,129 @@ class ImpactManagerSummary extends React.Component {
       projectCode,
       projectName,
       projectLocation,
+      projectBanner,
       sdgChecks,
     } = this.state;
 
     return (
       <Aux>
         <Row>
-          <Col md={12}>
-            <Card>
+          <Col md={24}>
+            <div>
               <Card
-                
+                title={"Programme Profile"}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                 }}
               >
-                <div>
-                  <h5>Project Profile</h5>{" "}
-                </div>
                 <Button
                   size="small"
                   variant="contained"
                   color="primary"
                   onClick={this.editProjectProfile}
                   style={{
-                    backgroundColor: "#53D1BE",
-                    color: "white",
-                    borderRadius: "1rem",
-                    marginBottom: "2rem",
-                  }}
+                      backgroundColor: "white",
+                      color: "#53D1BE",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      borderColor: "#53D1BE",
+                    }}
                 >
-                  Edit
+                  <EditOutlined/>Edit
                 </Button>
               </Card>
               <Card>
-                <div style={{ display: "flex" }}>
-                  <div>
-                    <h6>Project Name</h6>
-                    <label>{projectName}</label>
-                  </div>
-                  <div style={{ marginLeft: "1rem" }}>
-                    <h6>Project Code</h6>
-                    <label>{projectCode}</label>
-                  </div>
-                </div>
+                <Row style={{ display: "flex" }}>
+                  <Col span={"12"}>
+                    <h1>Programme Name</h1>
+                    <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                      {projectName}
+                    </h1>
+                  </Col>
+                  <Col style={{ marginLeft: "1rem" }}>
+                    <h1>Project Code</h1>
+                    <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                      {projectCode}
+                    </h1>
+                  </Col>
+                </Row>
                 <br />
                 <div>
-                  <h6>Project Description</h6>
-                  <label>{projectDescription}</label>
+                  <h1>Programme Description</h1>
+                  <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                    {projectDescription}
+                  </h1>
                 </div>
               </Card>
-            </Card>
-            <Card>
+            </div>
+            <br />
+            <div>
               <Card
-                
+                title={"Sustainable Development Goals"}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  paddingBottom: 0,
                 }}
               >
-                <div>
-                  <h5>Sustainable Development Goals</h5>{" "}
-                </div>
                 <Button
                   size="small"
                   variant="contained"
                   color="primary"
                   onClick={this.editSdgGoals}
                   style={{
-                    backgroundColor: "#53D1BE",
-                    color: "white",
-                    borderRadius: "1rem",
-                    marginBottom: "2rem",
-                  }}
+                      backgroundColor: "white",
+                      color: "#53D1BE",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      borderColor: "#53D1BE",
+                    }}
                 >
-                  Edit
+                  <EditOutlined/>Edit
                 </Button>
               </Card>
-              <Card style={{ paddingTop: 0 }}>
-                {this.renderSvgCards()}
+              <Card>
+                <Row>
+                  <Col span={"24"}>
+                    <div style={{ paddingTop: 0 }}>{this.renderSvgCards()}</div>
+                  </Col>
+                </Row>
               </Card>
-            </Card>
-            <Card>
+            </div>
+            <br />
+            <div>
               <Card
-                
+                title={"Programme Indicators"}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                 }}
               >
-                <div>
-                  <h5>Project Indicators</h5>{" "}
-                </div>
                 <Button
                   size="small"
                   variant="contained"
                   color="primary"
                   onClick={this.editProjectIndicators}
                   style={{
-                    backgroundColor: "#53D1BE",
-                    color: "white",
-                    borderRadius: "1rem",
-                    marginBottom: "2rem",
-                  }}
+                      backgroundColor: "white",
+                      color: "#53D1BE",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      borderColor: "#53D1BE",
+                    }}
                 >
-                  Edit
+                  <EditOutlined/>Edit
                 </Button>
               </Card>
               <Card style={{ paddingTop: 0 }}>
-                {this.renderIndicators()}
+                <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                  {this.renderIndicators()}
+                </h1>
               </Card>
-            </Card>
+            </div>
           </Col>
         </Row>
       </Aux>

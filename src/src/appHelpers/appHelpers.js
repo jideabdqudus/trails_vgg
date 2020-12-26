@@ -232,6 +232,16 @@ export const appHelpers = {
     });
   },
 
+  canceledRequestAlert: (message, timer = 2000) => {
+    swal.fire({
+      titleText: "Too bad",
+      text: message,
+      icon: "error",
+      timer: timer,
+      showConfirmButton: true,
+    });
+  },
+
   successMessageAlert: (message, timer = 2000) => {
     swal.fire({
       titleText: "Succes!",

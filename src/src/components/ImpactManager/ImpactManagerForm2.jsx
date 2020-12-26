@@ -96,15 +96,13 @@ const ImpactManagerForm2 = (props) => {
 
   return (
     <div className={`flex items-center ${classes.root}`}>
-      <Grid container spacing={8}>
+      <Grid>
         <Grid item sm={4} md={12}>
-          <label
-            style={{ color: formTwoErrors.svg === true ? "red" : "black" }}
-          >
+          <p style={{ color: formTwoErrors.svg === true ? "red" : "black", marginTop:"15px" }}>
             Which SDGs aligns with your impact priorities?
-          </label>
+          </p>
 
-          <Grid item sm={7} md={6}>
+          <Grid item sm={12} md={12}>
             {renderSdgs(sdgDump)}
           </Grid>
         </Grid>

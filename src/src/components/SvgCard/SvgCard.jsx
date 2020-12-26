@@ -5,7 +5,7 @@ const SvgCard = props => {
   const {onClick,opacity} = props;
   return (
     <>
-      <img href="svg" onClick={onClick} src={props.path} style={{ width: "20%", opacity:`${opacity}`,cursor:"pointer",padding:".2rem" }} />
+      <img href="svg" onClick={onClick} src={props.path} style={{ width: "10%", opacity:`${opacity}`,cursor:"pointer",padding:".2rem" }} />
     </>
   );
 };

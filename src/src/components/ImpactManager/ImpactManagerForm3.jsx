@@ -8,6 +8,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Row, Col } from "antd";
+import SvgCard from "../SvgCard/SvgCard";
 const styles = (theme) => ({
   container: {
     display: "flex",
@@ -21,6 +23,8 @@ const styles = (theme) => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
+    display: "block",
+    margin: "50px",
   },
   root: {
     flexGrow: 1,
@@ -92,18 +96,32 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
   const sdgPanels = sdgChecks.map((opt, index) => {
     return (
       <ExpansionPanel key={index}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{opt.Text}</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <Grid container spacing={1}>
+          <ExpansionPanelSummary
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+              <SvgCard
+                key={index}
+                path={opt.Image}
+                opacity={"1"}
+                style={{ height: "10px" }}
+              />
+            <Grid item xs={3} sm={3}>
+              <Typography className={classes.heading}>{opt.Text}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <form className={classes.container} noValidate>
+                {renderIndicators(opt.Indicators, props, opt.Number)}
+              </form>
+            </Grid>
+          </ExpansionPanelSummary>
+          {/* <ExpansionPanelDetails>
           <form className={classes.container} noValidate>
             {renderIndicators(opt.Indicators, props, opt.Number)}
           </form>
-        </ExpansionPanelDetails>
+        </ExpansionPanelDetails> */}
+        </Grid>
       </ExpansionPanel>
     );
   });

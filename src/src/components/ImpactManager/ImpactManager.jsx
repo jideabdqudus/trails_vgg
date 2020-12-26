@@ -2,18 +2,40 @@ import React from "react";
 import Aux from "../hocs/_Aux";
 import { Button } from "@material-ui/core";
 import { withStore } from "@spyna/react-store";
-import { Row, Col, Card, Form } from "antd";
+import { Row, Col, Card, Form, Divider } from "antd";
 import ImpactManagerForm1 from "./ImpactManagerForm1";
 import ImpactManagerForm2 from "./ImpactManagerForm2";
 import ImpactManagerForm3 from "./ImpactManagerForm3";
 import ImpactManagerSummary from "./ImpactManagerSummary";
 import { appHelpers } from "../../appHelpers/appHelpers";
 import { sdgDump } from "./sdgDump";
+import "./index.css";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+
+const { Meta } = Card;
 
 const locationsEnum = [
   { label: "Nigeria", value: "ng" },
   { label: "Ghana", value: "gh" },
 ];
+
+const CardTitleForm1 = (
+  <h1 style={{ fontSize: "20px", fontWeight: "normal", margin: 0 }}>
+    Create your custom impact
+  </h1>
+);
+
+const CardTitleForm3 = (
+  <h1 style={{ fontSize: "20px", fontWeight: "normal", margin: 0 }}>
+    Select Indications
+  </h1>
+);
+
+const CardTitleForm2 = (
+  <h1 style={{ fontSize: "25px", fontWeight: "normal", margin: 0 }}>
+    Select the Sustainable Development Goals for this programme
+  </h1>
+);
 
 class ImpactManager extends React.Component {
   constructor(props) {
@@ -27,8 +49,9 @@ class ImpactManager extends React.Component {
       sdgDump: sdgDump,
       projectName: "",
       projectCode: "",
-      projectLocation: "",
+      projectLocation: "ng",
       projectDescription: "",
+      projectBanner: "",
       impactManagerFormOne: true,
       impactManagerFormTwo: false,
       impactManagerFormThree: false,
@@ -53,6 +76,7 @@ class ImpactManager extends React.Component {
         projectDescription: false,
         projectLocation: false,
         projectCode: false,
+        projectBanner: false,
       },
       formTwoErrors: {
         sdg: false,
@@ -71,6 +95,10 @@ class ImpactManager extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleSelectChange = (input) => ({ target: { value } }) => {
+    this.setState({ [input]: value });
+  };
+
   openImageManagerFormTwo = () => {
     if (appHelpers.validateImpactFormOne(this)) {
       this.setState({
@@ -82,6 +110,7 @@ class ImpactManager extends React.Component {
         projectCode: this.state.projectCode,
         projectDescription: this.state.projectDescription,
         projectLocation: this.state.projectLocation,
+        projectBanner: this.state.projectBanner,
         sdgs: [],
         indicators: [],
       };
@@ -135,6 +164,7 @@ class ImpactManager extends React.Component {
       projectDescription,
       sdgCheckBoxes,
       indicatorCheckBoxes,
+      projectBanner,
     } = this.state;
     const payload = {
       projectCode,
@@ -143,12 +173,15 @@ class ImpactManager extends React.Component {
       projectDescription,
       sdgCheckBoxes,
       indicatorCheckBoxes,
+      projectBanner,
     };
     console.log(payload);
+    appHelpers.successMessageAlert("Programme Successfully Created");
   }
 
   cancelProject() {
-    console.log("Project cancelled");
+    appHelpers.canceledRequestAlert("Project Cancelled!");
+    window.location.reload()
   }
 
   goBack = () => {
@@ -269,16 +302,13 @@ class ImpactManager extends React.Component {
     });
   };
 
-  handleSelectChange = (input) => ({ target: { value } }) => {
-    this.setState({ [input]: value });
-  };
-
   render() {
     const {
       projectDescription,
       projectCode,
       projectName,
       projectLocation,
+      projectBanner,
       impactManagerFormOne,
       impactManagerFormTwo,
       impactManagerFormThree,
@@ -301,241 +331,237 @@ class ImpactManager extends React.Component {
             style={{ padding: 24, minHeight: 360 }}
           >
             {" "}
-            <Row>
-              <Col md={12}>
+            <div>
+              {/* Page One */}
+              {impactManagerFormOne && (
                 <Card>
-                  <Card>
-                    <Card>
-                      <Card as="h4">Impact Manager</Card>
-                      {/* Page One */}
-                      {impactManagerFormOne && (
-                        <div>
-                          <Card>
-                            Design your impact profile based on your priorities
-                            and needs
-                          </Card>
-                          <ImpactManagerForm1
-                            projectDescription={projectDescription}
-                            projectName={projectName}
-                            projectCode={projectCode}
-                            projectLocation={projectLocation}
-                            handleInputChange={this.handleInputChange}
-                            handleSelectChange={this.handleSelectChange}
-                            formOneErrors={formOneErrors}
-                            locationsEnum={locationsEnum}
-                          />
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.openImageManagerFormTwo}
-                            style={{
-                              backgroundColor: "#53D1BE",
-                              color: "white",
-                              borderRadius: "2rem",
-                            }}
-                          >
-                            Save & Continue
-                          </Button>
-                        </div>
-                      )}
-                      {/* Page Two */}
-                      {impactManagerFormTwo && (
-                        <div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            {" "}
-                            <Card style={{ fontSize: "large" }}>
-                              Select the Sustainable Development Goals for this
-                              project
-                            </Card>
-                            <Button
-                              size="small"
-                              variant="contained"
-                              color="primary"
-                              onClick={this.goBack}
-                              style={{
-                                backgroundColor: "#53D1BE",
-                                color: "white",
-                                borderRadius: "1rem",
-                                marginBottom: "2rem",
-                              }}
-                            >
-                              Go Back
-                            </Button>
-                          </div>
-                          <div
-                            style={{
-                              backgroundColor: "#53d1be1a",
-                              paddingLeft: ".5rem",
-                              paddingBottom: ".5rem",
-                              paddingTop: ".5rem",
-                            }}
-                          >
-                            <p
-                              style={{
-                                fontSize: "small",
-                                marginBottom: "0rem",
-                              }}
-                            >
-                              First, select the Sustainable Development Goals
-                              (SDGs).
-                            </p>
-                            <p
-                              style={{
-                                fontSize: "small",
-                                marginBottom: "0rem",
-                              }}
-                            >
-                              Next, further specify preferred Indicators that
-                              best match your project goals.
-                            </p>
-                            <p
-                              style={{
-                                fontSize: "small",
-                                marginBottom: "0rem",
-                              }}
-                            >
-                              Now your priorities are complete. Click Save &
-                              View Questions.
-                            </p>
-                          </div>
-                          <ImpactManagerForm2
-                            handleInputChange={this.handleInputChange}
-                            handleSdgBoxChange={this.handleSdgBoxChange}
-                            sdgCheckBoxes={sdgCheckBoxes}
-                            formTwoErrors={formTwoErrors}
-                            {...this.props}
-                          />
-
-                          <br />
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.openImageManagerFormThree}
-                            style={{
-                              backgroundColor: "#53D1BE",
-                              color: "white",
-                              borderRadius: "2rem",
-                            }}
-                          >
-                            Save & Continue
-                          </Button>
-                        </div>
-                      )}
-                      {impactManagerFormThree && (
-                        <div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                            }}
-                          >
-                            {" "}
-                            <Card style={{ fontSize: "large" }}>
-                              Select Indicators
-                            </Card>
-                            <Button
-                              size="small"
-                              variant="contained"
-                              color="primary"
-                              onClick={this.goBackTwo}
-                              style={{
-                                backgroundColor: "#53D1BE",
-                                color: "white",
-                                borderRadius: "1rem",
-                                marginBottom: "2rem",
-                              }}
-                            >
-                              Go Back
-                            </Button>
-                          </div>
-
-                          <ImpactManagerForm3
-                            handleCheckboxChange={this.handleCheckboxChange}
-                            sdgCheckBoxes={sdgCheckBoxes}
-                            indicators={indicators}
-                            indicatorCheckBoxes={indicatorCheckBoxes}
-                            allIndicators={allIndicators}
-                            sdgDump={sdgDump}
-                            sdgChecks={sdgChecks}
-                          />
-
-                          <br />
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.openImpactManagerSummary}
-                            style={{
-                              backgroundColor: "#53D1BE",
-                              color: "white",
-                              borderRadius: "2rem",
-                            }}
-                          >
-                            Save & Continue
-                          </Button>
-                          {this.state.alert}
-                        </div>
-                      )}
-
-                      {impactManagerSummary && (
-                        <div>
-                          <ImpactManagerSummary
-                            {...this.state}
-                            {...this.props}
-                            editProjectProfileCallback={this.editProjectProfile}
-                            editSdgGoalsCallback={this.editSdgGoals}
-                            indicatorCheckBoxes={indicatorCheckBoxes}
-                            editProjectIndicatorsCallback={
-                              this.editProjectIndicators
-                            }
-                          />
-
-                          <br />
-
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.createProject}
-                            style={{
-                              backgroundColor: "#53D1BE",
-                              color: "white",
-                              borderRadius: "2rem",
-                            }}
-                          >
-                            {createBtn}
-                          </Button>
-                          {this.state.alert}
-
-                          <Button
-                            size="large"
-                            variant="contained"
-                            color="secondary"
-                            onClick={this.cancelProject}
-                            style={{
-                              backgroundColor: "#53D1BE",
-                              color: "white",
-                              borderRadius: "2rem",
-                              marginLeft: "2rem",
-                            }}
-                          >
-                            Cancel Project
-                          </Button>
-                          {this.state.alert}
-                        </div>
-                      )}
-                    </Card>
-                  </Card>
+                  <Meta
+                    title={CardTitleForm1}
+                    description="Design your own impact profile based on your programme priorities and needs"
+                  />
+                  <Divider />
+                  <ImpactManagerForm1
+                    projectDescription={projectDescription}
+                    projectName={projectName}
+                    projectCode={projectCode}
+                    projectBanner={projectBanner}
+                    projectLocation={projectLocation}
+                    handleInputChange={this.handleInputChange}
+                    handleSelectChange={this.handleSelectChange}
+                    formOneErrors={formOneErrors}
+                    locationsEnum={locationsEnum}
+                  />
+                  <br />
+                  <Button
+                    size="large"
+                    variant="contained"
+                    onClick={this.openImageManagerFormTwo}
+                    style={{
+                      backgroundColor: "#53D1BE",
+                      color: "white",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      float: "right",
+                    }}
+                  >
+                    Save & Continue
+                  </Button>
                 </Card>
-              </Col>
-            </Row>
+              )}
+              {/* Page Two */}
+              {impactManagerFormTwo && (
+                <Card title={CardTitleForm2}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    {" "}
+                  </div>
+                  <div
+                    style={{
+                      backgroundColor: "#53d1be1a",
+                      paddingLeft: ".5rem",
+                      paddingBottom: ".5rem",
+                      paddingTop: ".5rem",
+                    }}
+                  >
+                    <p
+                      style={{
+                        fontSize: "small",
+                        marginBottom: "0rem",
+                      }}
+                    >
+                      First, select the Sustainable Development Goals (SDGs).
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "small",
+                        marginBottom: "0rem",
+                      }}
+                    >
+                      Next, further specify preferred Indicators that best match
+                      your project goals.
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "small",
+                        marginBottom: "0rem",
+                      }}
+                    >
+                      Now your priorities are complete. Click Save & View
+                      Questions.
+                    </p>
+                  </div>
+                  <ImpactManagerForm2
+                    handleInputChange={this.handleInputChange}
+                    handleSdgBoxChange={this.handleSdgBoxChange}
+                    sdgCheckBoxes={sdgCheckBoxes}
+                    formTwoErrors={formTwoErrors}
+                    {...this.props}
+                  />
+
+                  <br />
+
+                  <Button
+                    size="large"
+                    variant="contained"
+                    onClick={this.goBack}
+                    style={{
+                      backgroundColor: "white",
+                      color: "#53D1BE",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      borderColor: "#53D1BE",
+                    }}
+                  >
+                    <ArrowLeftOutlined />
+                    {"  "}Back
+                  </Button>
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    onClick={this.openImageManagerFormThree}
+                    style={{
+                      backgroundColor: "#53D1BE",
+                      color: "white",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      float: "right",
+                    }}
+                  >
+                    Save & Continue
+                  </Button>
+                </Card>
+              )}
+              {impactManagerFormThree && (
+                <Card title={CardTitleForm3}>
+                  <ImpactManagerForm3
+                    handleCheckboxChange={this.handleCheckboxChange}
+                    sdgCheckBoxes={sdgCheckBoxes}
+                    indicators={indicators}
+                    indicatorCheckBoxes={indicatorCheckBoxes}
+                    allIndicators={allIndicators}
+                    sdgDump={sdgDump}
+                    sdgChecks={sdgChecks}
+                  />
+
+                  <br />
+
+                  <Button
+                    size="large"
+                    variant="contained"
+                    onClick={this.goBackTwo}
+                    style={{
+                      backgroundColor: "white",
+                      color: "#53D1BE",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      borderColor: "#53D1BE",
+                    }}
+                  >
+                    <ArrowLeftOutlined />
+                    {"  "}Back
+                  </Button>
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    onClick={this.openImpactManagerSummary}
+                    style={{
+                      backgroundColor: "#53D1BE",
+                      color: "white",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      float: "right",
+                    }}
+                  >
+                    Save & View Answers
+                  </Button>
+
+                  {this.state.alert}
+                </Card>
+              )}
+
+              {impactManagerSummary && (
+                <div>
+                  <ImpactManagerSummary
+                    {...this.state}
+                    {...this.props}
+                    editProjectProfileCallback={this.editProjectProfile}
+                    editSdgGoalsCallback={this.editSdgGoals}
+                    indicatorCheckBoxes={indicatorCheckBoxes}
+                    editProjectIndicatorsCallback={this.editProjectIndicators}
+                  />
+
+                  <br />
+
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.cancelProject}
+                    style={{
+                      backgroundColor: "white",
+                      color: "red",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      borderColor: "#53D1BE",
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  {this.state.alert}
+
+                  <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    onClick={this.createProject}
+                    style={{
+                      backgroundColor: "#53D1BE",
+                      color: "white",
+                      borderRadius: "2rem",
+                      textTransform: "none",
+                      boxShadow: "none",
+                      float: "right",
+                    }}
+                  >
+                    {createBtn}
+                  </Button>
+
+                  {this.state.alert}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </Aux>
