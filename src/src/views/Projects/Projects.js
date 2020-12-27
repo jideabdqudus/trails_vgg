@@ -9,7 +9,7 @@ const { Content } = Layout;
 export class Projects extends Component {
   render() {
     return (
-      <div> 
+      <div>
         <Fragment>
           <Layout style={{ minHeight: "100vh", marginLeft: "200px" }}>
             <SideBar />
