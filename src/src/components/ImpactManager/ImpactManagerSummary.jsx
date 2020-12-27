@@ -85,15 +85,16 @@ class ImpactManagerSummary extends React.Component {
                   color="primary"
                   onClick={this.editProjectProfile}
                   style={{
-                      backgroundColor: "white",
-                      color: "#53D1BE",
-                      borderRadius: "2rem",
-                      textTransform: "none",
-                      boxShadow: "none",
-                      borderColor: "#53D1BE",
-                    }}
+                    backgroundColor: "white",
+                    color: "#53D1BE",
+                    borderRadius: "2rem",
+                    textTransform: "none",
+                    boxShadow: "none",
+                    borderColor: "#53D1BE",
+                  }}
                 >
-                  <EditOutlined/>Edit
+                  <EditOutlined />
+                  Edit
                 </Button>
               </Card>
               <Card>
@@ -135,15 +136,16 @@ class ImpactManagerSummary extends React.Component {
                   color="primary"
                   onClick={this.editSdgGoals}
                   style={{
-                      backgroundColor: "white",
-                      color: "#53D1BE",
-                      borderRadius: "2rem",
-                      textTransform: "none",
-                      boxShadow: "none",
-                      borderColor: "#53D1BE",
-                    }}
+                    backgroundColor: "white",
+                    color: "#53D1BE",
+                    borderRadius: "2rem",
+                    textTransform: "none",
+                    boxShadow: "none",
+                    borderColor: "#53D1BE",
+                  }}
                 >
-                  <EditOutlined/>Edit
+                  <EditOutlined />
+                  Edit
                 </Button>
               </Card>
               <Card>
@@ -169,15 +171,16 @@ class ImpactManagerSummary extends React.Component {
                   color="primary"
                   onClick={this.editProjectIndicators}
                   style={{
-                      backgroundColor: "white",
-                      color: "#53D1BE",
-                      borderRadius: "2rem",
-                      textTransform: "none",
-                      boxShadow: "none",
-                      borderColor: "#53D1BE",
-                    }}
+                    backgroundColor: "white",
+                    color: "#53D1BE",
+                    borderRadius: "2rem",
+                    textTransform: "none",
+                    boxShadow: "none",
+                    borderColor: "#53D1BE",
+                  }}
                 >
-                  <EditOutlined/>Edit
+                  <EditOutlined />
+                  Edit
                 </Button>
               </Card>
               <Card style={{ paddingTop: 0 }}>

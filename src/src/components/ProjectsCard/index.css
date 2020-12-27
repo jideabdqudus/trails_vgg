@@ -1,5 +1,6 @@
 .projectCard {
-  margin: 20px !important;
+  margin: 10px !important;
+  max-width: 300px !important;
   border-top-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
 }
@@ -20,4 +21,3 @@
   font-size: 8px !important;
   color: black !important;
 }
-

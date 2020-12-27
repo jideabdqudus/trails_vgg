@@ -29,6 +29,14 @@ const data = [
     location: "Nigeria",
     impact: "SDG2, SDG4",
   },
+  {
+    image:
+      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
+    title: "Clean Water",
+    description: "JOI",
+    location: "Nigeria",
+    impact: "SDG2, SDG4",
+  },
 ];
 
 export class ProjectsCard extends Component {

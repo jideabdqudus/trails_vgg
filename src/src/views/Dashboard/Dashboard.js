@@ -15,7 +15,7 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Fragment>
+        <Fragment >
           <Layout style={{ minHeight: "100vh", marginLeft: "200px" }}>
             <SideBar />
             <Layout className="site-layout">
@@ -24,7 +24,6 @@ export class Dashboard extends Component {
                 <h1 style={h1}>Dashboard</h1>
                 <ActionCard />
                 <div
-                  className="site-layout-background"
                   style={{ padding: 24, minHeight: 360 }}
                 >
                   <Row>

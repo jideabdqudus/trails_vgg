@@ -36,8 +36,8 @@ export class SideBar extends Component {
             zIndex: 999,
           }}
         >
-          <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+          <div className="logo"></div>
+          <Menu theme="dark" mode="inline">
             <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
               <Link to="/dashboard">Dashboard</Link>
             </Menu.Item>

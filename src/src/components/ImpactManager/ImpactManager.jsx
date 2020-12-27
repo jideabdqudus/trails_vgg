@@ -177,11 +177,12 @@ class ImpactManager extends React.Component {
     };
     console.log(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
+    window.location.reload();
   }
 
   cancelProject() {
     appHelpers.canceledRequestAlert("Project Cancelled!");
-    window.location.reload()
+    window.location.reload();
   }
 
   goBack = () => {
