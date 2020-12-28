@@ -26,4 +26,5 @@ export class DoughnutChart extends Component {
   }
 }
 
-export default DoughnutChart;
+
+export default (DoughnutChart);

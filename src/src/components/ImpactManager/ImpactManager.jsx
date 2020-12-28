@@ -12,6 +12,9 @@ import { sdgDump } from "./sdgDump";
 import "./index.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
+import { connect } from "react-redux";
+import { testDispatch } from "../../actions/projectAction";
+
 const { Meta } = Card;
 
 const locationsEnum = [
@@ -27,7 +30,7 @@ const CardTitleForm1 = (
 
 const CardTitleForm3 = (
   <h1 style={{ fontSize: "20px", fontWeight: "normal", margin: 0 }}>
-    Select Indications
+    Select Indicators
   </h1>
 );
 
@@ -176,8 +179,9 @@ class ImpactManager extends React.Component {
       projectBanner,
     };
     console.log(payload);
+    this.props.testDispatch(payload)
     appHelpers.successMessageAlert("Programme Successfully Created");
-    window.location.reload();
+    // window.location.reload();
   }
 
   cancelProject() {
@@ -304,6 +308,8 @@ class ImpactManager extends React.Component {
   };
 
   render() {
+    //this.props.project.projects
+    const {projects} = this.props.project
     const {
       projectDescription,
       projectCode,
@@ -340,6 +346,7 @@ class ImpactManager extends React.Component {
                     title={CardTitleForm1}
                     description="Design your own impact profile based on your programme priorities and needs"
                   />
+                  {console.log(projects)}
                   <Divider />
                   <ImpactManagerForm1
                     projectDescription={projectDescription}
@@ -570,4 +577,11 @@ class ImpactManager extends React.Component {
   }
 }
 
-export default ImpactManager;
+
+//this.props.project.projects
+
+const mapStateToProps = (state)=>({
+  project: state.projects
+})
+
+export default connect(mapStateToProps, { testDispatch })(ImpactManager);

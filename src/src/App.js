@@ -5,11 +5,13 @@ import Dashboard from "./views/Dashboard/Dashboard";
 import Projects from "./views/Projects/Projects";
 import Overview from "./views/ProjectOverview/Overview";
 import Manager from "./views/Impact/Manager";
+import { Provider } from 'react-redux'
+  import store from './store'
 
 export class App extends Component {
   render() {
     return (
-      <div>
+      <Provider store={store}>
         <BrowserRouter>
           <Switch>
             <Route exact path="/dashboard" component={Dashboard} />
@@ -22,7 +24,7 @@ export class App extends Component {
             <Route exact path="/dashboard/manager" component={Manager} />
           </Switch>
         </BrowserRouter>
-      </div>
+      </Provider>
     );
   }
 }

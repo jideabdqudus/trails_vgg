@@ -1,0 +1,7 @@
+export const CREATE_PROJECT = 'CREATE_PROJECT'
+export const GET_PROJECT = 'GET_PROJECT'
+
+
+
+
+export const TEST_DISPATCH = 'TEST_DISPATCH'

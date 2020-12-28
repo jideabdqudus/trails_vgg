@@ -7,7 +7,7 @@ import { FooterTab } from "../../../src/layouts/layout-components/footer";
 import { ActionCard } from "../../../src/components/ActionCard";
 import { ImpactMap } from "../../../src/components/ImpactMap";
 import { FundingGraph } from "../../../src/components/FundingGraph";
-import { DoughnutChart } from "../../../src/components/DoughnutChart";
+import  DoughnutChart  from "../../../src/components/DoughnutChart";
 
 const { Content } = Layout;
 

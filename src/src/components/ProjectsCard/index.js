@@ -2,54 +2,21 @@ import React, { Component } from "react";
 import "./index.css";
 import { Layout, Row, Col, Card, Button } from "antd";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 const { Meta } = Card;
-
-const data = [
-  {
-    image:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    title: "Home Grown School Feeding",
-    description: "HGSF",
-    location: "Nigeria",
-    impact: "SDG2",
-  },
-  {
-    image:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    title: "Reduced Inequalities",
-    description: "HGSF",
-    location: "Ghana",
-    impact: "SDG1",
-  },
-  {
-    image:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    title: "Affordable Health Care",
-    description: "JOI",
-    location: "Nigeria",
-    impact: "SDG2, SDG4",
-  },
-  {
-    image:
-      "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png",
-    title: "Clean Water",
-    description: "JOI",
-    location: "Nigeria",
-    impact: "SDG2, SDG4",
-  },
-];
 
 export class ProjectsCard extends Component {
   render() {
+    const { projects } = this.props.project;
     return (
       <div>
         <Row>
-          {data.map((project) => (
+          {projects.map((project) => (
             <div>
               <Col>
                 <Card
                   className={"projectCard"}
-                  cover={<img alt={project.title} src={project.image} />}
+                  cover={<img alt={project.projectName} src={project.image} />}
                   actions={[
                     <Link to={"/dashboard/projects/overview"}>
                       <Button
@@ -63,18 +30,28 @@ export class ProjectsCard extends Component {
                   ]}
                 >
                   <Meta
-                    title={project.title}
-                    description={project.description}
+                    title={project.projectName}
+                    description={project.projectDescription}
                   />
                   <div>
                     <Row style={{ marginTop: "10px" }}>
                       <Col span={12}>
                         <span className={"projectSpan"}>Location</span>
-                        <p className={"projectParagraph"}>{project.location}</p>
+                        <p className={"projectParagraph"}>
+                          {project.projectLocation}
+                        </p>
                       </Col>
                       <Col span={12}>
                         <span className={"projectSpan"}>Impact</span>
-                        <p className={"projectParagraph"}>{project.impact}</p>
+                        <p className={"projectParagraph"}>
+                          <div className="gameStatistics">
+                            {Object.entries(project.sdgCheckBoxes).map(
+                              ([key, val]) => (
+                                <h2 key={key}> SDG {key}</h2>
+                              )
+                            )}
+                          </div>
+                        </p>
                       </Col>
                     </Row>
                   </div>
@@ -88,4 +65,8 @@ export class ProjectsCard extends Component {
   }
 }
 
-export default ProjectsCard;
+const mapStateToProps = (state) => ({
+  project: state.projects,
+});
+
+export default connect(mapStateToProps, {})(ProjectsCard);
