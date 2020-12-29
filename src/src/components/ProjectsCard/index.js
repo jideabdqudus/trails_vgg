@@ -35,19 +35,28 @@ export class ProjectsCard extends Component {
                   />
                   <div>
                     <Row style={{ marginTop: "10px" }}>
-                      <Col span={12}>
+                      <Col span={8}>
                         <span className={"projectSpan"}>Location</span>
                         <p className={"projectParagraph"}>
                           {project.projectLocation}
                         </p>
                       </Col>
-                      <Col span={12}>
+                      <Col span={8}>
+                        <span className={"projectSpan"}>Project Code</span>
+                        <p className={"projectParagraph"}>
+                          {project.projectCode}
+                        </p>
+                      </Col>
+                      <Col span={8}>
                         <span className={"projectSpan"}>Impact</span>
                         <p className={"projectParagraph"}>
                           <div className="gameStatistics">
                             {Object.entries(project.sdgCheckBoxes).map(
                               ([key, val]) => (
-                                <h2 key={key}> SDG {key}</h2>
+                                <p className={"projectParagraph"} key={key}>
+                                  {" "}
+                                  SDG {key}
+                                </p>
                               )
                             )}
                           </div>
