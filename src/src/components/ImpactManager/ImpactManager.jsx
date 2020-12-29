@@ -179,7 +179,7 @@ class ImpactManager extends React.Component {
       projectBanner,
     };
     console.log(payload);
-    this.props.testDispatch(payload)
+    this.props.testDispatch(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
     // window.location.reload();
   }
@@ -309,7 +309,7 @@ class ImpactManager extends React.Component {
 
   render() {
     //this.props.project.projects
-    const {projects} = this.props.project
+    const { projects } = this.props.project;
     const {
       projectDescription,
       projectCode,
@@ -577,11 +577,10 @@ class ImpactManager extends React.Component {
   }
 }
 
-
 //this.props.project.projects
 
-const mapStateToProps = (state)=>({
-  project: state.projects
-})
+const mapStateToProps = (state) => ({
+  project: state.projects,
+});
 
 export default connect(mapStateToProps, { testDispatch })(ImpactManager);
