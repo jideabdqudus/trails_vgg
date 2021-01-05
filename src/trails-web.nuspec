@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
 <package>
   <metadata>
     <id>trails-web</id>
@@ -10,5 +11,9 @@
   <files>
     <file src="*" exclude="*.nuspec"/>
   <file src="build\**" target="" />
+  <file src="src\**" target="Src" />
   </files>
 </package>
+
+
+
