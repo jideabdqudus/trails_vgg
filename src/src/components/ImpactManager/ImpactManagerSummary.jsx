@@ -17,6 +17,7 @@ class ImpactManagerSummary extends React.Component {
       projectCode: this.props.projectCode,
       projectLocation: this.props.projectLocation,
       projectBanner: this.props.projectBanner,
+      programmeLocation: this.props.programmeLocation,
       projectDescription: this.props.projectDescription,
       sdgCheckBoxes: this.props.sdgCheckBoxes,
       indicators: this.props.indicators,
@@ -62,8 +63,9 @@ class ImpactManagerSummary extends React.Component {
       projectDescription,
       projectCode,
       projectName,
-      projectLocation,
-      projectBanner,
+      programmeLocation,
+      //projectLocation,
+     // projectBanner,
       sdgChecks,
     } = this.state;
 
@@ -114,9 +116,9 @@ class ImpactManagerSummary extends React.Component {
                 </Row>
                 <br />
                 <div>
-                  <h1>Programme Description</h1>
+                  <h1>Programme Location</h1>
                   <h1 style={{ fontWeight: "normal", color: "grey" }}>
-                    {projectDescription}
+                    {programmeLocation}
                   </h1>
                 </div>
               </Card>

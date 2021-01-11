@@ -17,10 +17,10 @@ import { testDispatch } from "../../actions/projectAction";
 
 const { Meta } = Card;
 
-const locationsEnum = [
-  { label: "Nigeria", value: "ng" },
-  { label: "Ghana", value: "gh" },
-];
+// const locationsEnum = [
+//   { label: "Nigeria", value: "ng" },
+//   { label: "Ghana", value: "gh" },
+// ];
 
 const CardTitleForm1 = (
   <h1 style={{ fontSize: "20px", fontWeight: "normal", margin: 0 }}>
@@ -52,7 +52,8 @@ class ImpactManager extends React.Component {
       sdgDump: sdgDump,
       projectName: "",
       projectCode: "",
-      projectLocation: "ng",
+      //projectLocation: "",
+      programmeLocation:"",
       projectDescription: "",
       projectBanner: "",
       impactManagerFormOne: true,
@@ -77,7 +78,8 @@ class ImpactManager extends React.Component {
       formOneErrors: {
         projectName: false,
         projectDescription: false,
-        projectLocation: false,
+       // projectLocation: false,
+        programmeLocation:false,
         projectCode: false,
         projectBanner: false,
       },
@@ -112,8 +114,9 @@ class ImpactManager extends React.Component {
         projectName: this.state.projectName,
         projectCode: this.state.projectCode,
         projectDescription: this.state.projectDescription,
-        projectLocation: this.state.projectLocation,
-        projectBanner: this.state.projectBanner,
+        // projectLocation: this.state.projectLocation,
+        programmeLocation: this.state.programmeLocation,
+        // projectBanner: this.state.projectBanner,
         sdgs: [],
         indicators: [],
       };
@@ -163,8 +166,9 @@ class ImpactManager extends React.Component {
     const {
       projectCode,
       projectName,
-      projectLocation,
-      projectDescription,
+     // projectLocation,
+     programmeLocation, 
+     projectDescription,
       sdgCheckBoxes,
       indicatorCheckBoxes,
       projectBanner,
@@ -172,7 +176,8 @@ class ImpactManager extends React.Component {
     const payload = {
       projectCode,
       projectName,
-      projectLocation,
+      //projectLocation,
+      programmeLocation,
       projectDescription,
       sdgCheckBoxes,
       indicatorCheckBoxes,
@@ -314,7 +319,8 @@ class ImpactManager extends React.Component {
       projectDescription,
       projectCode,
       projectName,
-      projectLocation,
+      //projectLocation,
+      programmeLocation,
       projectBanner,
       impactManagerFormOne,
       impactManagerFormTwo,
@@ -353,11 +359,12 @@ class ImpactManager extends React.Component {
                     projectName={projectName}
                     projectCode={projectCode}
                     projectBanner={projectBanner}
-                    projectLocation={projectLocation}
+                    programmeLocation={programmeLocation}
+                    // projectLocation={projectLocation}
                     handleInputChange={this.handleInputChange}
                     handleSelectChange={this.handleSelectChange}
                     formOneErrors={formOneErrors}
-                    locationsEnum={locationsEnum}
+                    // locationsEnum={locationsEnum}
                   />
                   <br />
                   <Button

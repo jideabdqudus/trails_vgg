@@ -1,0 +1,95 @@
+.loginBg {
+  background-image: url(../../assets/background123.svg);
+  background-color: #011b33;
+  background-size: cover;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: auto;
+  padding-bottom: 50px;
+}
+
+.cardHero {
+  background: #fff;
+  border-radius: 10px !important;
+  box-shadow: 0 5px 15px rgba(0, 115, 231, 0.08);
+  margin: 10px;
+  padding: 1rem 1rem 1rem;
+}
+
+.cardWrap {
+  width: 450px;
+  margin: 0 auto;
+  position: relative;
+  right: 0;
+  left: 0;
+  top: 20px;
+  max-width: 95%;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.myBtn {
+  outline: 0;
+  background-color: #0066f5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.95rem;
+  min-height: 42px;
+  color: #fff;
+  line-height: 42px;
+  position: relative;
+  text-decoration: none;
+  padding: 0 1.8em 2.5px;
+  transition-duration: 0.3s;
+  font-family: CW BR Firma, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  font-weight: 600;
+  text-transform: capitalize;
+  transition-property: background-color, opacity, color, transform, box-shadow;
+  transition-timing-function: ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transform-style: preserve-3d;
+  will-change: background-color, opacity, color, transform, box-shadow;
+  box-shadow: 0 2px 4px 0 rgba(10, 46, 101, 0.08);
+}
+
+.createForm {
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+.loginForm {
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+@media screen and (max-width: 600px) {
+  .loginForm {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+  .createForm {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+  .cardHero {
+    background: #fff !important;
+    border-radius: 7px;
+    box-shadow: 0 5px 15px rgba(0, 115, 231, 0.08);
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
