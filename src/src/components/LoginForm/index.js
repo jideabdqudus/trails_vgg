@@ -5,6 +5,9 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const LoginForm = () => {
+  const onFinish = (values) => {
+    console.log(values);
+  };
   return (
     <div className="cardWrap">
       <div className="logo"></div>
@@ -14,9 +17,12 @@ const LoginForm = () => {
           name="normal_login"
           className="login-form"
           initialValues={{ remember: true }}
+          onFinish={onFinish}
         >
           <Form.Item
-            rules={[{ required: true, message: "Please input your Username!" }]}
+            name="email"
+            rules={[{ required: true, message: "Confirm your Input" }]}
+            validateStatus={"warning"}
           >
             <Input
               style={{
@@ -32,7 +38,12 @@ const LoginForm = () => {
               name="email"
             />
           </Form.Item>
-          <Form.Item style={{ color: "#0066f5" }} rules={[{ required: true }]}>
+          <Form.Item
+          name="password"
+            style={{ color: "#0066f5" }}
+            rules={[{ required: true, message: "Confirm your Input" }]}
+            validateStatus={"warning"}
+          >
             <Input
               style={{
                 height: "50px",
@@ -47,7 +58,12 @@ const LoginForm = () => {
               placeholder="Password"
             />
           </Form.Item>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Form.Item
+            name="remember"
+            valuePropName="checked"
+            noStyle
+            validateStatus={"warning"}
+          >
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
           <br />
@@ -62,7 +78,7 @@ const LoginForm = () => {
                   htmlType="submit"
                   className="myBtn"
                 >
-                  <Link to="/dashboard">Login to my account</Link>
+                  Login to my account
                 </Button>
               </Form.Item>
             </Col>
@@ -74,7 +90,7 @@ const LoginForm = () => {
         <Link>Forgot Password ?</Link>
       </p>
       <p style={{ textAlign: "center", color: "#fff" }}>
-        New User? <Link to="/create">Create Account</Link>
+        New User ? <Link to="/create">Create an Account</Link>
       </p>
     </div>
   );
