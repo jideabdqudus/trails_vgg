@@ -57,15 +57,16 @@ const LoginAlt = () => {
                       rules={[
                         { required: true, message: "Confirm your Input" },
                       ]}
+                      style={{ marginBottom: "15px" }}
                     >
                       <Input
                         style={{
-                          height: "50px",
+                          height: "40px",
                           borderRadius: "7px",
-                          fontSize: "1rem",
+                          fontSize: "0.9rem",
                           border: "1px solid rgba(10,46,101,.1)",
                         }}
-                        placeholder="Email Address"
+                        placeholder="E-mail Address"
                         type="email"
                         name="email"
                       />
@@ -78,9 +79,9 @@ const LoginAlt = () => {
                     >
                       <Input
                         style={{
-                          height: "50px",
+                          height: "40px",
                           borderRadius: "7px",
-                          fontSize: "1rem",
+                          fontSize: "0.9rem",
                           border: "1px solid rgba(10,46,101,.1)",
                         }}
                         type="password"
@@ -88,24 +89,30 @@ const LoginAlt = () => {
                         placeholder="Password"
                       />
                     </Form.Item>
-                    <br />
-                    <br />
                     <Row>
-                      <Col span={8}>
+                      <Col span={6}>
                         {" "}
                         <Form.Item>
                           <Button
                             type="primary"
                             htmlType="submit"
-                            className="myBtn"
+                            className="loginBtn"
                           >
                             Login
                           </Button>
                         </Form.Item>
                       </Col>
-                      <Col span={8}>
+                      <Col span={12}>
                         {" "}
-                        <Link to="/">Forgot Password?</Link>
+                        <Link to="/">
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="forgetBtn"
+                          >
+                            Forget Password ?
+                          </Button>
+                        </Link>
                       </Col>
                     </Row>
                   </Form>
