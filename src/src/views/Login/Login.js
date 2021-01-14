@@ -1,11 +1,11 @@
 import React from "react";
-
-import  LoginForm  from "../../../src/components/LoginForm";
+import { Row, Col } from "antd";
+import LoginAlt from "../../../src/components/LoginForm/LoginAlt";
 
 const Login = () => {
   return (
-    <div className='loginBg'>
-      <LoginForm />
+    <div>
+      <LoginAlt />
     </div>
   );
 };

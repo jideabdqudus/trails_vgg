@@ -1,6 +1,5 @@
 .loginBg {
-  background-image: url(../../assets/background123.svg);
-  background-color: #011b33;
+  background-color: #064e89;
   background-size: cover;
   height: 100%;
   position: fixed;
@@ -92,4 +91,69 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+}
+
+body {
+  background-color: #064e89;
+}
+
+.loginH3 {
+  display: inline-block;
+  color: #fff;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 378px;
+  padding-right: 30px;
+}
+
+.loginP {
+  display: inline-block;
+  color: #064e89;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 20px;
+  margin-bottom: 50px;
+  width: 100%;
+  max-width: 378px;
+  padding-right: 30px;
+}
+
+.login_container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.left_container {
+  height: 25rem;
+  width: 25rem;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.right_container {
+  height: 25rem;
+  width: 25rem;
+  margin: auto;
+  padding-top: 100px;
 }

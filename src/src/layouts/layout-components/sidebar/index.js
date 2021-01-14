@@ -10,6 +10,7 @@ import {
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
+
 const { Sider } = Layout;
 
 export class SideBar extends Component {
@@ -48,7 +49,7 @@ export class SideBar extends Component {
               <Link to="/dashboard/manager">Programme Manager</Link>
             </Menu.Item>
             <Menu.Item key="4" icon={<FileOutlined />}>
-              Forms Management
+              <Link to="/dashboard/form"></Link> Forms Management
             </Menu.Item>
             <Menu.Item key="5" icon={<ExportOutlined />}>
               Admin
