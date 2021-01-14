@@ -27,14 +27,14 @@ const LoginAlt = () => {
                   className="loginH3"
                   style={{ color: "#064E89", textAlign: "left" }}
                 >
-                  Get more things done with Loggin platform.
+                  Track your objectives using Trails.
                 </h3>
                 <p className="loginP">
-                  Access to the most powerfull tool in the entire design and web
-                  industry.
+                  Access to the most powerfull tool in the youth and agor
+                  sector.
                 </p>
               </div>
-              <img src={LoginImg} width="400px" />
+              <img src={LoginImg} width="350px" />
             </div>
           </Col>
           <Col
@@ -45,6 +45,8 @@ const LoginAlt = () => {
             <div className="right_container">
               <div className="logo"></div>
               <div className="cardWrap">
+              <span>Login</span>
+              <span>Sign Up</span>
                 <div>
                   <Form
                     name="normal_login"
@@ -116,6 +118,13 @@ const LoginAlt = () => {
                       </Col>
                     </Row>
                   </Form>
+                  <Link
+                    to="/create"
+                    style={{ color: "#fff", textDecoration: "underline" }}
+                  >
+                    {" "}
+                    Sign Up
+                  </Link>
                 </div>
               </div>
             </div>
