@@ -7,10 +7,10 @@ import { data } from "./data";
 export class FundingGraph extends Component {
   render() {
     return (
-      <div>
-        <Card title={"Funding Status"} className={"fundingCard"} >
-          {/* <Skeleton active /> */}
-          <Line
+      <div className="fundingTab">
+        <Card title={"Funding Status"} >
+          <Skeleton active /> 
+          {/* <Line
             data={data}
             options={{
               legend: {
@@ -18,7 +18,7 @@ export class FundingGraph extends Component {
                 position: "bottom",
               },
             }}
-          />
+          /> */}
         </Card>
       </div>
     );

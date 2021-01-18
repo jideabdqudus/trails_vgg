@@ -13,7 +13,7 @@ const FormManager = () => {
   return (
     <div>
       <Fragment>
-        <Layout style={{ minHeight: "100vh", marginLeft: "200px" }}>
+        <Layout style={{ minHeight: "100vh" }}>
           <SideBar />
           <Layout className="site-layout">
             <TopHeader />

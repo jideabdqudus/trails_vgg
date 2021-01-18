@@ -10,7 +10,6 @@ import {
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
-
 const { Sider } = Layout;
 
 export class SideBar extends Component {
@@ -25,38 +24,35 @@ export class SideBar extends Component {
   };
   render() {
     return (
-      <div>
-        <Sider
-          collapsed={this.state.collapsed}
-          onCollapse={this.onCollapse}
-          style={{
-            overflow: "auto",
-            height: "100vh",
-            position: "fixed",
-            left: 0,
-            zIndex: 999,
-          }}
-        >
-          <div className="logo"></div>
-          <Menu theme="dark" mode="inline">
-            <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
-              <Link to="/dashboard">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="/dashboard/projects">Programme Report</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<HighlightOutlined />}>
-              <Link to="/dashboard/manager">Programme Manager</Link>
-            </Menu.Item>
-            <Menu.Item key="4" icon={<FileOutlined />}>
-              <Link to="/dashboard/form"></Link> Forms Management
-            </Menu.Item>
-            <Menu.Item key="5" icon={<ExportOutlined />}>
-              Admin
-            </Menu.Item>
-          </Menu>
-        </Sider>
-      </div>
+      <Sider
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
+        collapsible
+        style={{
+          overflow: "auto",
+          border: "none",
+          zIndex: "999",
+        }}
+      >
+        <div className="logo"></div>
+        <Menu theme="dark" mode="inline">
+          <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
+            <Link to="/dashboard">Dashboard</Link>
+          </Menu.Item>
+          <Menu.Item key="2" icon={<DesktopOutlined />}>
+            <Link to="/dashboard/projects">Programme Report</Link>
+          </Menu.Item>
+          <Menu.Item key="3" icon={<HighlightOutlined />}>
+            <Link to="/dashboard/manager">Programme Manager</Link>
+          </Menu.Item>
+          <Menu.Item key="4" icon={<FileOutlined />}>
+            <Link to="/dashboard/form"></Link> Forms Management
+          </Menu.Item>
+          <Menu.Item key="5" icon={<ExportOutlined />}>
+            Admin
+          </Menu.Item>
+        </Menu>
+      </Sider>
     );
   }
 }

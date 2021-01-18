@@ -7,3 +7,16 @@
   padding: 0px !important;
   border-radius: 7px !important;
 }
+
+
+.impactTab{
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 600px){
+  .impactTab{
+    margin-right: 0px !important;
+    margin-bottom: 10px !important;
+  }
+}

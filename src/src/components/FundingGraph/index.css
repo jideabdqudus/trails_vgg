@@ -1,7 +1,22 @@
 .fundingCard {
   border-radius: 10px !important;
-  background-color: #fff !important;
+  background-color: #f0f2f5 !important;
   margin: 10px !important;
   margin-right: 30px !important;
   margin-bottom: 30px !important;
+  padding: 0px !important;
+  border-radius: 7px !important;
+}
+
+.fundingTab {
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  .fundingTab {
+    margin-top: 10px !important;
+    margin-right: 0px !important;
+    margin-bottom: 20px !important;
+  }
 }

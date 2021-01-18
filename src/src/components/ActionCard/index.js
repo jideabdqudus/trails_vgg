@@ -8,20 +8,20 @@ export class ActionCard extends Component {
         <Col span={24}>
           <Card className={"actionCard"}>
             <Row>
-              <Col span={6}>
+              <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Programmes</span>
                 <p className={"actionItemParagraph"}>3</p>
               </Col>
 
-              <Col span={6}>
+              <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Impact Targets (SDG)</span>
                 <p className={"actionItemParagraph"}>04</p>
               </Col>
-              <Col span={6}>
+              <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Amount Awarded</span>
                 <p className={"actionItemParagraph"}>₦52.1B</p>
               </Col>
-              <Col span={6}>
+              <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Amount Disbursed</span>
                 <p className={"actionItemParagraph"}>₦21.4B</p>
               </Col>

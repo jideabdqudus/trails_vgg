@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import { TopHeader } from "../../../src/layouts/layout-components/header";
 import { SideBar } from "../../../src/layouts/layout-components/sidebar";
 import { FooterTab } from "../../../src/layouts/layout-components/footer";
-import  ProjectsCard  from "../../components/ProjectsCard/index.js";
+import ProjectsCard from "../../components/ProjectsCard/index.js";
 const { Content } = Layout;
 
 export class Projects extends Component {
@@ -11,7 +11,7 @@ export class Projects extends Component {
     return (
       <div>
         <Fragment>
-          <Layout style={{ minHeight: "100vh", marginLeft: "200px" }}>
+          <Layout style={{ minHeight: "100vh" }}>
             <SideBar />
             <Layout className="site-layout">
               <TopHeader />

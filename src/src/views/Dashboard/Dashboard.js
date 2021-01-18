@@ -7,7 +7,7 @@ import { FooterTab } from "../../../src/layouts/layout-components/footer";
 import { ActionCard } from "../../../src/components/ActionCard";
 import { ImpactMap } from "../../../src/components/ImpactMap";
 import { FundingGraph } from "../../../src/components/FundingGraph";
-import  DoughnutChart  from "../../../src/components/DoughnutChart";
+import DoughnutChart from "../../../src/components/DoughnutChart";
 
 const { Content } = Layout;
 
@@ -15,23 +15,21 @@ export class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Fragment >
-          <Layout style={{ minHeight: "100vh", marginLeft: "200px" }}>
+        <Fragment>
+          <Layout style={{ minHeight: "100vh" }}>
             <SideBar />
             <Layout className="site-layout">
               <TopHeader />
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Dashboard</h1>
                 <ActionCard />
-                <div
-                  style={{ padding: 24, minHeight: 360 }}
-                >
+                <div>
                   <Row>
-                    <Col span={14}>
+                    <Col xs={{ span: 24 }} lg={{ span: 14 }}>
                       <ImpactMap />
                       <FundingGraph />
                     </Col>
-                    <Col span={10}>
+                    <Col xs={{ span: 24 }} lg={{ span: 10 }}>
                       <DoughnutChart />
                     </Col>
                   </Row>
