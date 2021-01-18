@@ -1,6 +1,5 @@
 .loginBg {
-  background-image: url(../../assets/background123.svg);
-  background-color: #011b33;
+  background-color: #064e89;
   background-size: cover;
   height: 100%;
   position: fixed;
@@ -93,3 +92,104 @@
     padding: 0 !important;
   }
 }
+
+body {
+  background-color: #064e89;
+}
+
+.loginH3 {
+  display: inline-block;
+  color: #fff;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 378px;
+  padding-right: 30px;
+}
+
+.loginP {
+  display: inline-block;
+  color: #064e89;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 20px;
+  margin-bottom: 50px;
+  width: 100%;
+  max-width: 378px;
+  padding-right: 30px;
+}
+
+.login_container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+.left_container {
+  height: 25rem;
+  width: 25rem;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.right_container {
+  height: 25rem;
+  width: 25rem;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.loginBtn {
+  background-color: #fff !important;
+  color: #064e89 !important;
+  border-radius: 6px !important;
+  border: 0 !important;
+  padding: 6px 28px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  margin-right: 10px !important;
+  outline: none !important;
+  -webkit-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.16) !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.16) !important;
+}
+
+.forgetBtn {
+  background-color: #064e89 !important;
+  color: #fff !important;
+  border: none !important;
+  font-size: 14px !important;
+  text-decoration: underline !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  outline: none !important;
+  -webkit-transition: all 0.3s ease !important;
+  transition: all 0.3s ease !important;
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0.16) !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.16) !important;
+}
+
+

@@ -1,13 +1,13 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import FormIO from "../../components/FormIO/Index";
 import { Layout, Row, Col } from "antd";
 
 import { TopHeader } from "../../../src/layouts/layout-components/header";
 import { SideBar } from "../../../src/layouts/layout-components/sidebar";
 import { FooterTab } from "../../../src/layouts/layout-components/footer";
+import CreateForm from "../../components/FormIO/CreateForm";
 
 const { Content } = Layout;
-
 
 const FormManager = () => {
   return (
@@ -19,8 +19,7 @@ const FormManager = () => {
             <TopHeader />
             <Content style={{ margin: "0 16px" }}>
               <h1 style={h1}>Form Manager</h1>
-
-              <FormIO />
+              <CreateForm />
             </Content>
             <FooterTab />
           </Layout>

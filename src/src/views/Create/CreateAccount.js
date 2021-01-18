@@ -3,7 +3,7 @@ import CreateAcct from '../../components/CreateAcct/Index'
 
 const CreateAccount = () => {
   return (
-    <div className="loginBg">
+    <div>
       <CreateAcct/>
     </div>
   )

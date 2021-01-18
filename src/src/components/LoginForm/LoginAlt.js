@@ -45,8 +45,38 @@ const LoginAlt = () => {
             <div className="right_container">
               <div className="logo"></div>
               <div className="cardWrap">
-              <span>Login</span>
-              <span>Sign Up</span>
+                <div style={{ marginBottom: "30px" }}>
+                  <Link to="/">
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "900",
+                        color: "#fff",
+                        paddingBottom: "10px",
+                        marginRight: "20px",
+                        borderBottom: "2px solid white",
+                        marginBottom: "30px",
+                      }}
+                    >
+                      Login
+                    </span>
+                  </Link>
+                  <Link to="/create">
+                  <span
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "400",
+                      color: "#5183AD",
+                      paddingBottom: "10px",
+                      marginRight: "20px",
+                      borderBottom: "2px solid #5183AD",
+                      marginBottom: "30px",
+                    }}
+                  >
+                    Register
+                  </span>
+                  </Link>
+                </div>
                 <div>
                   <Form
                     name="normal_login"
@@ -112,19 +142,12 @@ const LoginAlt = () => {
                             htmlType="submit"
                             className="forgetBtn"
                           >
-                            Forget Password ?
+                            Forgot Password ?
                           </Button>
                         </Link>
                       </Col>
                     </Row>
                   </Form>
-                  <Link
-                    to="/create"
-                    style={{ color: "#fff", textDecoration: "underline" }}
-                  >
-                    {" "}
-                    Sign Up
-                  </Link>
                 </div>
               </div>
             </div>
