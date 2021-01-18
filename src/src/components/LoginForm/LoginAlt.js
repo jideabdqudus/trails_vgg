@@ -15,11 +15,7 @@ const LoginAlt = () => {
     <div>
       <div className="loginAltBg" style={{ backgroundColor: "#064E89" }}>
         <Row>
-          <Col
-            span="10"
-            style={{ backgroundColor: "white", height: "100vh" }}
-            className="login_container"
-          >
+          <Col xs={{ span: 0 }} lg={{ span: 10 }} className="login_container">
             <div className="left_container">
               <div>
                 {" "}
@@ -34,14 +30,10 @@ const LoginAlt = () => {
                   sector.
                 </p>
               </div>
-              <img src={LoginImg} width="350px" />
+              <img src={LoginImg} width="350px" className="loginImg" />
             </div>
           </Col>
-          <Col
-            span={14}
-            className="login_container"
-            style={{ height: "100vh" }}
-          >
+          <Col xs={{ span: 20 }} lg={{ span: 14 }} className="logins_container">
             <div className="right_container">
               <div className="logo"></div>
               <div className="cardWrap">
@@ -62,19 +54,19 @@ const LoginAlt = () => {
                     </span>
                   </Link>
                   <Link to="/create">
-                  <span
-                    style={{
-                      fontSize: "15px",
-                      fontWeight: "400",
-                      color: "#5183AD",
-                      paddingBottom: "10px",
-                      marginRight: "20px",
-                      borderBottom: "2px solid #5183AD",
-                      marginBottom: "30px",
-                    }}
-                  >
-                    Register
-                  </span>
+                    <span
+                      style={{
+                        fontSize: "15px",
+                        fontWeight: "400",
+                        color: "#5183AD",
+                        paddingBottom: "10px",
+                        marginRight: "20px",
+                        borderBottom: "2px solid #5183AD",
+                        marginBottom: "30px",
+                      }}
+                    >
+                      Register
+                    </span>
                   </Link>
                 </div>
                 <div>
@@ -122,7 +114,7 @@ const LoginAlt = () => {
                       />
                     </Form.Item>
                     <Row>
-                      <Col span={6}>
+                      <Col xs={{ span: 12 }} lg={{ span: 6 }}>
                         {" "}
                         <Form.Item>
                           <Button
@@ -134,7 +126,7 @@ const LoginAlt = () => {
                           </Button>
                         </Form.Item>
                       </Col>
-                      <Col span={12}>
+                      <Col xs={{ span: 12 }} lg={{ span: 12 }}>
                         {" "}
                         <Link to="/">
                           <Button
