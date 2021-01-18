@@ -22,3 +22,12 @@
   font-size: 8px !important;
   color: black !important;
 }
+
+
+@media screen and (max-width: 650px){
+  .projectCard {
+    margin-bottom: 20px !important;
+    width: 250px !important;
+  }
+  
+}

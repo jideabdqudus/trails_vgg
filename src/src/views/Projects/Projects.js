@@ -16,7 +16,6 @@ export class Projects extends Component {
             <Layout className="site-layout">
               <TopHeader />
               <Content style={{ margin: "0 16px" }}>
-                {/* {window.location.href.indexOf("Trails") > -1 ? "Trails" : "Signals"} */}
                 <h1 style={h1}>Projects</h1>
                 <ProjectsCard />
               </Content>

@@ -13,7 +13,7 @@ export class ProjectsCard extends Component {
         <Row>
           {projects.map((project) => (
             <div>
-              <Col>
+              <Col xs={{span: 24}} lg={{span: 8}}>
                 <Card
                   className={"projectCard"}
                   cover={<img alt={project.projectName} src={project.image} />}
