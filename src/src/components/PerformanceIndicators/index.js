@@ -11,7 +11,7 @@ export class Indicators extends Component {
         <Content style={{ margin: "0 16px" }}>
           <h1 style={{ fontSize: "16px" }}> PERFORMANCE INDICATORS</h1>
           <Row>
-            <Col span={12}>
+            <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Card className={"indicatorCard"}>
                 <Skeleton active />
               </Card>
@@ -19,7 +19,7 @@ export class Indicators extends Component {
                 <Skeleton active />
               </Card>
             </Col>
-            <Col span={12}>
+            <Col xs={{ span: 24 }} lg={{ span: 12 }}>
               <Card className={"indicatorCard"}>
                 <Skeleton active />
               </Card>
