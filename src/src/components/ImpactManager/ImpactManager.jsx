@@ -116,7 +116,7 @@ class ImpactManager extends React.Component {
         projectDescription: this.state.projectDescription,
         // projectLocation: this.state.projectLocation,
         programmeLocation: this.state.programmeLocation,
-        // projectBanner: this.state.projectBanner,
+        projectBanner: this.state.projectBanner,
         sdgs: [],
         indicators: [],
       };

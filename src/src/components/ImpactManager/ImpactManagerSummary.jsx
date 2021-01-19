@@ -65,7 +65,7 @@ class ImpactManagerSummary extends React.Component {
       projectName,
       programmeLocation,
       //projectLocation,
-     // projectBanner,
+      projectBanner,
       sdgChecks,
     } = this.state;
 
@@ -112,6 +112,7 @@ class ImpactManagerSummary extends React.Component {
                     <h1 style={{ fontWeight: "normal", color: "grey" }}>
                       {projectCode}
                     </h1>
+                    <img src={projectBanner} alt="Banner"/>
                   </Col>
                 </Row>
                 <br />

@@ -111,7 +111,7 @@ function ImpactManagerForm1(props) {
     programmeLocation,
     formOneErrors,
     //locationsEnum,
-    //projectBanner,
+    projectBanner,
   } = props;
 
   const { handleInputChange, handleSelectChange } = props;
@@ -221,7 +221,7 @@ function ImpactManagerForm1(props) {
         </Grid>
 
         {/* Project Banner */}
-        {/* <Grid item sm={3} md={3}>
+        <Grid item sm={3} md={3}>
           <form className={classes.container} noValidate>
             <FormControl fullWidth required margin="normal">
               <TextField
@@ -241,7 +241,7 @@ function ImpactManagerForm1(props) {
               </TextField>
             </FormControl>
           </form>
-        </Grid> */}
+        </Grid> 
       </Grid>
 
       {/* Second Row */}
