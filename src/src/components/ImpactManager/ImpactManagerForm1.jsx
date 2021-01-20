@@ -12,6 +12,7 @@ import {
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
+import { DropzoneArea } from "material-ui-dropzone";
 
 const styles = (theme) => ({
   container: {
@@ -114,7 +115,7 @@ function ImpactManagerForm1(props) {
     projectBanner,
   } = props;
 
-  const { handleInputChange, handleSelectChange } = props;
+  const { handleInputChange, handleSelectChange, handleBannerChange } = props;
 
   const [query, setQuery] = useState("");
   const autoCompleteRef = useRef(null);
@@ -198,7 +199,7 @@ function ImpactManagerForm1(props) {
                   </MenuItem>
                 ))}
               </TextField> */}
-              
+
               <GooglePlacesAutocomplete apiKey="AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ" />
 
               {/* <input
@@ -221,7 +222,7 @@ function ImpactManagerForm1(props) {
         </Grid>
 
         {/* Project Banner */}
-        <Grid item sm={3} md={3}>
+        {/* <Grid item sm={3} md={3}>
           <form className={classes.container} noValidate>
             <FormControl fullWidth required margin="normal">
               <TextField
@@ -231,17 +232,20 @@ function ImpactManagerForm1(props) {
                 value={projectBanner}
                 label="Project Banner"
                 variant="outlined"
-                onChange={handleInputChange}
+                onChange={handleBannerChange}
                 error={formOneErrors.projectLocation}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                onChange={handleInputChange}
+               
               >
               </TextField>
             </FormControl>
           </form>
-        </Grid> 
+        </Grid>  */}
+        <DropzoneArea
+          acceptedFiles={["image/*"]}
+          filesLimit="1"
+          dropzoneText={"Drag and drop an image here or click"}
+          onChange={handleBannerChange}
+        />
       </Grid>
 
       {/* Second Row */}

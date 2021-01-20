@@ -53,9 +53,9 @@ class ImpactManager extends React.Component {
       projectName: "",
       projectCode: "",
       //projectLocation: "",
-      programmeLocation:"",
+      programmeLocation: "",
       projectDescription: "",
-      projectBanner: "",
+      projectBanner: [],
       impactManagerFormOne: true,
       impactManagerFormTwo: false,
       impactManagerFormThree: false,
@@ -78,8 +78,8 @@ class ImpactManager extends React.Component {
       formOneErrors: {
         projectName: false,
         projectDescription: false,
-       // projectLocation: false,
-        programmeLocation:false,
+        // projectLocation: false,
+        programmeLocation: false,
         projectCode: false,
         projectBanner: false,
       },
@@ -95,6 +95,11 @@ class ImpactManager extends React.Component {
   }
 
   componentDidMount() {}
+
+  handleBannerChange = (files) => {
+    console.log("Files:", files);
+    this.setState({ projectBanner: files });
+  };
 
   handleInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -166,9 +171,9 @@ class ImpactManager extends React.Component {
     const {
       projectCode,
       projectName,
-     // projectLocation,
-     programmeLocation, 
-     projectDescription,
+      // projectLocation,
+      programmeLocation,
+      projectDescription,
       sdgCheckBoxes,
       indicatorCheckBoxes,
       projectBanner,
@@ -363,6 +368,7 @@ class ImpactManager extends React.Component {
                     // projectLocation={projectLocation}
                     handleInputChange={this.handleInputChange}
                     handleSelectChange={this.handleSelectChange}
+                    handleBannerChange={this.handleBannerChange}
                     formOneErrors={formOneErrors}
                     // locationsEnum={locationsEnum}
                   />
