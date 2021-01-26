@@ -13,10 +13,12 @@ export class ProjectsCard extends Component {
         <Row>
           {projects.map((project) => (
             <div>
-              <Col xs={{span: 24}} lg={{span: 8}}>
+              <Col xs={{ span: 24 }} lg={{ span: 8 }}>
                 <Card
                   className={"projectCard"}
-                  cover={<img alt={project.projectName} src={project.image} />}
+                  cover={
+                    <img alt={project.projectName} src={project.projectImage} style={{height:"200px", }} />
+                  }
                   actions={[
                     <Link to={"/dashboard/projects/overview"}>
                       <Button

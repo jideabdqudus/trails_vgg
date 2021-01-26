@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { Row, Col, Card } from "antd";
 import "./index.css";
+import { connect } from "react-redux";
+
 export class ActionCard extends Component {
   render() {
+    const { projects, indicator } = this.props.project;
     return (
       <div>
+        {console.log(indicator.[0])}
         <Col span={24}>
           <Card className={"actionCard"}>
             <Row>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Programmes</span>
-                <p className={"actionItemParagraph"}>3</p>
+                <p className={"actionItemParagraph"}>{projects.length}</p>
               </Col>
 
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
@@ -33,4 +37,8 @@ export class ActionCard extends Component {
   }
 }
 
-export default ActionCard;
+const mapStateToProps = (state) => ({
+  project: state.projects,
+});
+
+export default connect(mapStateToProps, {})(ActionCard);

@@ -13,7 +13,7 @@ import "./index.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
 import { connect } from "react-redux";
-import { testDispatch } from "../../actions/projectAction";
+import { createProject } from "../../actions/projectAction";
 import { useDropzone } from "react-dropzone";
 
 const baseStyle = {
@@ -116,6 +116,7 @@ class ImpactManager extends React.Component {
       //projectLocation: "",
       programmeLocation: "",
       projectDescription: "",
+      programmePlaces:"",
       projectBanner: [],
       impactManagerFormOne: true,
       impactManagerFormTwo: false,
@@ -142,6 +143,7 @@ class ImpactManager extends React.Component {
         // projectLocation: false,
         programmeLocation: false,
         projectCode: false,
+        programmePlaces:"",
         projectBanner: false,
       },
       formTwoErrors: {
@@ -192,6 +194,7 @@ class ImpactManager extends React.Component {
         // projectLocation: this.state.projectLocation,
         programmeLocation: this.state.programmeLocation,
         projectBanner: this.state.projectBanner,
+        programmePlaces:this.state.programmePlaces,
         sdgs: [],
         indicators: [],
       };
@@ -244,6 +247,7 @@ class ImpactManager extends React.Component {
       // projectLocation,
       programmeLocation,
       projectDescription,
+      programmePlaces,
       sdgCheckBoxes,
       indicatorCheckBoxes,
       projectBanner,
@@ -254,12 +258,13 @@ class ImpactManager extends React.Component {
       //projectLocation,
       programmeLocation,
       projectDescription,
+      programmePlaces,
       sdgCheckBoxes,
       indicatorCheckBoxes,
       projectBanner,
     };
     console.log(payload);
-    this.props.testDispatch(payload);
+    this.props.createProject(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
     // window.location.reload();
   }
@@ -396,6 +401,7 @@ class ImpactManager extends React.Component {
       projectName,
       //projectLocation,
       programmeLocation,
+      programmePlaces,
       projectBanner,
       impactManagerFormOne,
       impactManagerFormTwo,
@@ -434,6 +440,7 @@ class ImpactManager extends React.Component {
                     projectName={projectName}
                     projectCode={projectCode}
                     projectBanner={projectBanner}
+                    programmePlaces={programmePlaces}
                     programmeLocation={programmeLocation}
                     // projectLocation={projectLocation}
                     handleInputChange={this.handleInputChange}
@@ -666,4 +673,4 @@ const mapStateToProps = (state) => ({
   project: state.projects,
 });
 
-export default connect(mapStateToProps, { testDispatch })(ImpactManager);
+export default connect(mapStateToProps, { createProject })(ImpactManager);

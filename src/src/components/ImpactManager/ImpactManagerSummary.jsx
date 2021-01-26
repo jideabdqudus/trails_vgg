@@ -20,6 +20,7 @@ class ImpactManagerSummary extends React.Component {
       programmeLocation: this.props.programmeLocation,
       projectDescription: this.props.projectDescription,
       sdgCheckBoxes: this.props.sdgCheckBoxes,
+      programmePlaces: this.props.programmePlaces,
       indicators: this.props.indicators,
     };
   }
@@ -64,6 +65,7 @@ class ImpactManagerSummary extends React.Component {
       projectCode,
       projectName,
       programmeLocation,
+      programmePlaces,
       //projectLocation,
       projectBanner,
       sdgChecks,
@@ -112,15 +114,14 @@ class ImpactManagerSummary extends React.Component {
                     <h1 style={{ fontWeight: "normal", color: "grey" }}>
                       {projectCode}
                     </h1>
-                    
-                    <img src={projectBanner} alt="Banner"/>
                   </Col>
                 </Row>
                 <br />
                 <div>
-                  <h1>Programme Location</h1>
+                  {/* <h1>Programme Location</h1> */}
                   <h1 style={{ fontWeight: "normal", color: "grey" }}>
-                    {programmeLocation}
+                    {/* {programmeLocation} */}
+                    {/* {programmePlaces} */}
                   </h1>
                 </div>
               </Card>

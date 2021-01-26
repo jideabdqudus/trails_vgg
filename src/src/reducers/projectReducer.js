@@ -4,6 +4,8 @@ const initialState = {
   projects: [
     {
       projectName: "Home Grown School Feeding",
+      projectImage:
+        "https://tdma.info/assets/uploads/2017/12/Using_sunlight_to_clean_water_Featured_Image-1.jpg",
       projectCode: "HGSF",
       projectLocation: "ng",
       projectDescription:
@@ -13,6 +15,8 @@ const initialState = {
     },
     {
       projectName: "World Reduced Inequalities",
+      projectImage:
+        "https://media.pri.org/s3fs-public/styles/open_graph/public/migration/PriMigrationsDamanticWordpressAttachmentsImagesMigration/www.theworld.org/wp-content/uploads/IMG_4297.jpg?itok=iB8n0R4j",
       projectCode: "FEC",
       projectLocation: "gh",
       projectDescription:
@@ -22,6 +26,8 @@ const initialState = {
     },
     {
       projectName: "National Woman Rights",
+      projectImage:
+        "https://politicalyouthnetwork.org/wp-content/uploads/2019/01/Womens-rights-are-human-rights.jpg",
       projectCode: "NWR",
       projectLocation: "ng",
       projectDescription:
@@ -30,7 +36,9 @@ const initialState = {
       indicatorCheckBoxes: { 0: "Small Agriculture", 1: "Financial Literacy" },
     },
   ],
-  sdg: [{}],
+  indicator: [
+    { 1: "Financial Literacy", 2: "Food Security", 3: "Food Security" },
+  ],
   loading: false,
 };
 
@@ -40,10 +48,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
       };
-    case TEST_DISPATCH:
+    case CREATE_PROJECT:
       return {
         ...state,
         projects: [...state.projects, action.payload],
+        indicator: [...state.indicator, action.payload.indicatorCheckBoxes],
       };
     default:
       return state;
