@@ -263,7 +263,6 @@ class ImpactManager extends React.Component {
       indicatorCheckBoxes,
       projectBanner,
     };
-    console.log(payload);
     this.props.createProject(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
     // window.location.reload();
@@ -433,7 +432,6 @@ class ImpactManager extends React.Component {
                     title={CardTitleForm1}
                     description="Design your own impact profile based on your programme priorities and needs"
                   />
-                  {console.log(projects)}
                   <Divider />
                   <ImpactManagerForm1
                     projectDescription={projectDescription}

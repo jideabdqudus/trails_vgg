@@ -8,7 +8,6 @@ export class ActionCard extends Component {
     const { projects, indicator } = this.props.project;
     return (
       <div>
-        {console.log(indicator.[0])}
         <Col span={24}>
           <Card className={"actionCard"}>
             <Row>
@@ -19,7 +18,12 @@ export class ActionCard extends Component {
 
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Impact Targets (SDG)</span>
-                <p className={"actionItemParagraph"}>04</p>
+                <p className={"actionItemParagraph"}>
+                  {" "}
+                  {Object.keys(indicator).length == 0
+                    ? "0"
+                    : Object.keys(indicator[0]).length}
+                </p>
               </Col>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Amount Awarded</span>
