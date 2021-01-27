@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Index.css";
 import { Form, Input, Button, Row, Col, Card, Checkbox, Tabs } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import LoginImg from "../../assets/graphic_login.svg";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+//import { setAlert } from "../actions/alertActions";
+//import { register, clearErrors } from "../actions/authActions";
+import { Redirect } from "react-router";
 
 const CreateAcct = () => {
   const onFinish = (values) => {
@@ -90,6 +95,9 @@ const CreateAcct = () => {
                         }}
                         placeholder="First Name"
                         name="firstname"
+                        type="text"
+                        value={firstname}
+                        onChange={onChange}
                       />
                     </Form.Item>
                     <Form.Item
@@ -108,6 +116,9 @@ const CreateAcct = () => {
                         }}
                         placeholder="Last Name"
                         name="lastname"
+                        type="text"
+                        value={lastname}
+                        onChange={onChange}
                       />
                     </Form.Item>
                     <Form.Item
@@ -196,4 +207,6 @@ const textLogin = {
   paddingBottom: 10,
 };
 
-export default CreateAcct;
+const mapStateToProps = (state) => ({});
+
+export default connect()(CreateAcct);

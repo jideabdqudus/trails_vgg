@@ -1,4 +1,9 @@
-import { CREATE_PROJECT, GET_PROJECT, TEST_DISPATCH } from "../constants/Types";
+import {
+  CREATE_PROJECT,
+  GET_PROJECT,
+  TEST_DISPATCH,
+  GET_INDICATORS,
+} from "../constants/Types";
 
 export const getProject = () => {
   return {

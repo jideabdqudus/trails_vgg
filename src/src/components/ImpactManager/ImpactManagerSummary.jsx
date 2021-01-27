@@ -55,9 +55,9 @@ class ImpactManagerSummary extends React.Component {
     const allIndicators = indicators.map((item, index) => {
       return <IndicatorView key={index} indicator={item.Text} />;
     });
-
     return allIndicators;
   };
+
 
   render() {
     const {
@@ -70,7 +70,6 @@ class ImpactManagerSummary extends React.Component {
       projectBanner,
       sdgChecks,
     } = this.state;
-
     return (
       <Aux>
         <Row>

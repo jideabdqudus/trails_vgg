@@ -18,11 +18,17 @@ export class ActionCard extends Component {
 
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
                 <span className={"actionItemStyle"}>Impact Targets (SDG)</span>
-                <p className={"actionItemParagraph"}>
+                {/* <p className={"actionItemParagraph"}>
                   {" "}
                   {Object.keys(indicator).length == 0
                     ? "0"
                     : Object.keys(indicator[0]).length}
+                </p> */}
+                <p className={"actionItemParagraph"}>
+                  {" "}
+                  {indicator.length == 0
+                    ? "0"
+                    : indicator.length}
                 </p>
               </Col>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>

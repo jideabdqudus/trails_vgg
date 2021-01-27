@@ -29,26 +29,26 @@ const baseStyle = {
   backgroundColor: "#fafafa",
   color: "#bdbdbd",
   outline: "none",
-  transition: "border .24s ease-in-out"
+  transition: "border .24s ease-in-out",
 };
 
 const activeStyle = {
-  borderColor: "#2196f3"
+  borderColor: "#2196f3",
 };
 
 const acceptStyle = {
-  borderColor: "#00e676"
+  borderColor: "#00e676",
 };
 
 const rejectStyle = {
-  borderColor: "#ff1744"
+  borderColor: "#ff1744",
 };
 
 const thumbsContainer = {
   display: "flex",
   flexDirection: "row",
   flexWrap: "wrap",
-  marginTop: 16
+  marginTop: 16,
 };
 
 const thumb = {
@@ -60,21 +60,20 @@ const thumb = {
   width: "auto",
   height: 200,
   padding: 4,
-  boxSizing: "border-box"
+  boxSizing: "border-box",
 };
 
 const thumbInner = {
   display: "flex",
   minWidth: 0,
-  overflow: "hidden"
+  overflow: "hidden",
 };
 
 const img = {
   display: "block",
   width: "auto",
-  height: "100%"
+  height: "100%",
 };
-
 
 const { Meta } = Card;
 
@@ -116,7 +115,7 @@ class ImpactManager extends React.Component {
       //projectLocation: "",
       programmeLocation: "",
       projectDescription: "",
-      programmePlaces:"",
+      programmePlaces: "",
       projectBanner: [],
       impactManagerFormOne: true,
       impactManagerFormTwo: false,
@@ -125,6 +124,7 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes: {},
       sdgChecks: [],
       indicatorCheckBoxes: {},
+      theIndicators: [],
       alert: null,
       allIndicators: null,
       indicators: [
@@ -143,7 +143,7 @@ class ImpactManager extends React.Component {
         // projectLocation: false,
         programmeLocation: false,
         projectCode: false,
-        programmePlaces:"",
+        programmePlaces: "",
         projectBanner: false,
       },
       formTwoErrors: {
@@ -163,15 +163,12 @@ class ImpactManager extends React.Component {
     console.log("Files:", file);
     this.setState({
       projectBanner: file.map((file) =>
-          Object.assign(file, {
-              preview: URL.createObjectURL(file),
-          })
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
       ),
-  });
+    });
   };
-
-  
-
 
   handleInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
@@ -194,7 +191,7 @@ class ImpactManager extends React.Component {
         // projectLocation: this.state.projectLocation,
         programmeLocation: this.state.programmeLocation,
         projectBanner: this.state.projectBanner,
-        programmePlaces:this.state.programmePlaces,
+        programmePlaces: this.state.programmePlaces,
         sdgs: [],
         indicators: [],
       };
@@ -284,6 +281,7 @@ class ImpactManager extends React.Component {
     });
   };
 
+
   handleCheckboxChange = (indicatorValue, e, indicatorIndex, sdgIndex) => {
     const { allIndicators, sdgChecks } = this.state;
     const newIndicators = allIndicators.map((indicator, id) => {
@@ -309,7 +307,6 @@ class ImpactManager extends React.Component {
           }
         : q
     );
-
     this.setState({
       indicatorCheckBoxes: {
         ...this.state.indicatorCheckBoxes,
@@ -318,6 +315,7 @@ class ImpactManager extends React.Component {
       allIndicators: newIndicators,
       sdgChecks: newSdgChecks,
     });
+    console.log(newSdgChecks)
   };
 
   updateSvgState = (sdg) => {

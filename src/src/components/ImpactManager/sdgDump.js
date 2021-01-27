@@ -5,23 +5,13 @@ export const sdgDump = [
     Text: "No Poverty",
     Indicators: [
       {
-        Id: 101,
-        Text: "A",
+        Id: 3,
+        Text: "Small Agriculture",
         Status: false,
       },
       {
-        Id: 102,
-        Text: "B",
-        Status: false,
-      },
-      {
-        Id: 103,
-        Text: "C",
-        Status: false,
-      },
-      {
-        Id: 104,
-        Text: "D",
+        Id: 2,
+        Text: "Financial Literacy",
         Status: false,
       },
     ],
@@ -32,18 +22,18 @@ export const sdgDump = [
     Text: "Zero Hunger",
     Indicators: [
       {
-        Id: 105,
-        Text: "X",
+        Id: 1,
+        Text: "Good Health",
         Status: false,
       },
       {
-        Id: 106,
-        Text: "Y",
+        Id: 8,
+        Text: "More Money",
         Status: false,
       },
       {
-        Id: 107,
-        Text: "Z",
+        Id: 9,
+        Text: "Energy Access",
         Status: false,
       },
     ],

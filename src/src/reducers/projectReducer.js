@@ -36,7 +36,7 @@ const initialState = {
       indicatorCheckBoxes: { 0: "Small Agriculture", 1: "Financial Literacy" },
     },
   ],
-  indicator: [],
+  indicator: ["a", "b", "c", "d", "e", "f", "c", "y"],
   loading: false,
 };
 
