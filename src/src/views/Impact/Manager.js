@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Layout } from "antd";
-import { TopHeader } from "../../layouts/layout-components/header";
-import { SideBar } from "../../layouts/layout-components/sidebar";
-import { FooterTab } from "../../layouts/layout-components/footer";
+import TopHeader from "../../layouts/layout-components/header";
+import SideBar from "../../layouts/layout-components/sidebar";
+import FooterTab from "../../layouts/layout-components/footer";
 import ImpactManager from "../../components/ImpactManager/ImpactManager";
 const { Content } = Layout;
 

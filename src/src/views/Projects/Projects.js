@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Layout } from "antd";
-import { TopHeader } from "../../../src/layouts/layout-components/header";
-import { SideBar } from "../../../src/layouts/layout-components/sidebar";
-import { FooterTab } from "../../../src/layouts/layout-components/footer";
+import TopHeader from "../../../src/layouts/layout-components/header";
+import SideBar from "../../../src/layouts/layout-components/sidebar";
+import FooterTab from "../../../src/layouts/layout-components/footer";
 import ProjectsCard from "../../components/ProjectsCard/index.js";
 const { Content } = Layout;
 

@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { Layout, Row, Col } from "antd";
 
-import { TopHeader } from "../../../src/layouts/layout-components/header";
-import { SideBar } from "../../../src/layouts/layout-components/sidebar";
-import { FooterTab } from "../../../src/layouts/layout-components/footer";
-import { IndicatorsCard } from "../../components/IndicatorsCard";
-import { Indicators } from "../../components/PerformanceIndicators";
+import TopHeader from "../../../src/layouts/layout-components/header";
+import SideBar from "../../../src/layouts/layout-components/sidebar";
+import FooterTab from "../../../src/layouts/layout-components/footer";
+import IndicatorsCard from "../../components/IndicatorsCard";
+import Indicators from "../../components/PerformanceIndicators";
 const { Content } = Layout;
 
 export class Dashboard extends Component {
