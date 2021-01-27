@@ -6,14 +6,52 @@ import { Link } from "react-router-dom";
 import LoginImg from "../../assets/graphic_login.svg";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-//import { setAlert } from "../actions/alertActions";
-//import { register, clearErrors } from "../actions/authActions";
+import { setAlert } from "../../actions/alertActions";
+import { register, clearErrors } from "../../actions/authAuctions";
 import { Redirect } from "react-router";
+import AlertInfo from "../Alert/index";
 
-const CreateAcct = () => {
-  const onFinish = (values) => {
-    console.log(values);
+const CreateAcct = (
+  { setAlert, error, register, isAuthenticated, clearErrors },
+  props
+) => {
+  // useEffect(() => {
+  //   if (error === "User already exists") {
+  //     setAlert(error, "error");
+  //     clearErrors();
+  //   } //eslint-disable-next-line
+  // }, [error, isAuthenticated, props.history]);
+
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
+
+  const { firstname, lastname, email, password, password2 } = formData;
+
+  const onChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const onFinish = async () => {
+    if (firstname === "" || lastname === "" || email === "") {
+      setAlert("Please enter all fields", "error");
+    } else if (password.length < 8) {
+      setAlert("Password must be more than 8 characters", "warning");
+    } else if (password != password2) {
+      setAlert("The passwords are different", "warning");
+    } else {
+      console.log(formData);
+      register(formData);
+    }
+  };
+
+  // if (isAuthenticated) {
+  //   return <Redirect to="/dashboard" />;
+  // }
+
   return (
     <div>
       <div className="loginAltBg" style={{ backgroundColor: "#064E89" }}>
@@ -73,6 +111,8 @@ const CreateAcct = () => {
                   </Link>
                 </div>
                 <div>
+                  <AlertInfo />
+                  <br/>
                   <Form
                     name="normal_login"
                     className="login-form"
@@ -138,6 +178,9 @@ const CreateAcct = () => {
                         placeholder="E-mail Address"
                         type="email"
                         name="email"
+                        type="text"
+                        value={email}
+                        onChange={onChange}
                       />
                     </Form.Item>
                     <Form.Item
@@ -156,6 +199,8 @@ const CreateAcct = () => {
                         type="password"
                         name="password"
                         placeholder="Password"
+                        value={password}
+                        onChange={onChange}
                       />
                     </Form.Item>
                     <Form.Item
@@ -174,6 +219,8 @@ const CreateAcct = () => {
                         type="password"
                         name="password2"
                         placeholder="Re-type Password"
+                        value={password2}
+                        onChange={onChange}
                       />
                     </Form.Item>
                     <Row>
@@ -207,6 +254,17 @@ const textLogin = {
   paddingBottom: 10,
 };
 
-const mapStateToProps = (state) => ({});
+CreateAcct.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
+};
 
-export default connect()(CreateAcct);
+const mapStateToProps = (state) => ({
+  error: state.auth.error,
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register, clearErrors })(
+  CreateAcct
+);
