@@ -17,7 +17,11 @@ export class ProjectsCard extends Component {
                 <Card
                   className={"projectCard"}
                   cover={
-                    <img alt={project.projectName} src={project.projectImage} style={{height:"200px", }} />
+                    <img
+                      alt={project.projectName}
+                      src={project.projectImage}
+                      style={{ height: "200px" }}
+                    />
                   }
                   actions={[
                     <Link to={"/dashboard/projects/overview"}>
@@ -40,7 +44,7 @@ export class ProjectsCard extends Component {
                       <Col span={8}>
                         <span className={"projectSpan"}>Location</span>
                         <p className={"projectParagraph"}>
-                          {project.projectLocation}
+                          {project.activeMarker.description}
                         </p>
                       </Col>
                       <Col span={8}>

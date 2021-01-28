@@ -15,6 +15,10 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { DropzoneArea } from "material-ui-dropzone";
 import { useDropzone } from "react-dropzone";
 import ImpactManagerSummary from "./ImpactManagerSummary";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 const styles = (theme) => ({
   container: {
@@ -135,116 +139,18 @@ function ImpactManagerForm1(props) {
     //locationsEnum,
     projectBanner,
     programmePlaces,
+    address,
   } = props;
 
-  const { handleInputChange, handleSelectChange, handleBannerChange } = props;
-
-  const [files, setFiles] = useState([]);
   const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-    acceptedFiles,
-    open,
-  } = useDropzone({
-    accept: "image/*",
-    noClick: true,
-    noKeyboard: true,
-    onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
-    },
-  });
+    handleInputChange,
+    handleSelectChange,
+    handleBannerChange,
+    handleChangePlace,
+    handleSelectPlace,
+  } = props;
 
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isDragActive ? activeStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    [isDragActive, isDragReject]
-  );
 
-  const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
-        <img src={file.preview} style={img} />
-      </div>
-    </div>
-  ));
-
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
-
-  //Google Places
-
-  let autoComplete;
-
-  const loadScript = (url, callback) => {
-    let script = document.createElement("script");
-    script.type = "text/javascript";
-
-    if (script.readyState) {
-      script.onreadystatechange = function () {
-        if (
-          script.readyState === "loaded" ||
-          script.readyState === "complete"
-        ) {
-          script.onreadystatechange = null;
-          callback();
-        }
-      };
-    } else {
-      script.onload = () => callback();
-    }
-
-    script.src = url;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  };
-
-  function handleScriptLoad(updateQuery, autoCompleteRef) {
-    autoComplete = new window.google.maps.places.Autocomplete(
-      autoCompleteRef.current,
-      { types: ["(cities)"] }
-    );
-    autoComplete.setFields(["address_components", "formatted_address"]);
-    autoComplete.addListener("place_changed", () =>
-      handlePlaceSelect(updateQuery)
-    );
-  }
-
-  async function handlePlaceSelect(updateQuery) {
-    const addressObject = autoComplete.getPlace();
-    const query = addressObject.formatted_address;
-    updateQuery(query);
-    console.log(addressObject);
-    console.log(addressObject.formatted_address);
-    setPlaces(addressObject.formatted_address);
-  }
-
-  const [query, setQuery] = useState("");
-  const [places, setPlaces] = useState("");
-  const autoCompleteRef = useRef(null);
-
-  useEffect(() => {
-    loadScript(
-      `https://maps.googleapis.com/maps/api/js?key=AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ&libraries=places`,
-      () => handleScriptLoad(setQuery, autoCompleteRef)
-    );
-  }, []);
   return (
     <div className={`flex items-center ${classes.root}`}>
       <Grid container spacing={3}>
@@ -293,7 +199,7 @@ function ImpactManagerForm1(props) {
         </Grid>
 
         {/* Project Location */}
-        <Grid item sm={3} md={3}>
+        <Grid item sm={5} md={5}>
           <form className={classes.container} noValidate>
             <label for="outlined-select-currency" style={{ margin: 0 }}>
               Programme Location
@@ -318,29 +224,53 @@ function ImpactManagerForm1(props) {
                 ))}
               </TextField> */}
 
-              {/* <GooglePlacesAutocomplete apiKey="AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ" /> */}
+              <PlacesAutocomplete
+              className={classes.textField}
+              variant="outlined"
+          value={address}
+          onChange={handleChangePlace}
+          onSelect={handleSelectPlace}
+        >
+          {({
+            getInputProps,
+            suggestions,
+            getSuggestionItemProps,
+            loading,
+          }) => (
+            <div>
+              <input
+              style={{padding:"15px", }}
+                {...getInputProps({
+                  placeholder: "Search Location",
+                  className: "location-search-input",
+                })}
+              />
+              <div className="autocomplete-dropdown-container">
+                {loading && <div>...</div>}
+                {suggestions.map((suggestion) => {
+                  const className = suggestion.active
+                    ? "suggestion-item--active"
+                    : "suggestion-item";
+                  // inline style for demonstration purpose
+                  const style = suggestion.active
+                    ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                    : { backgroundColor: "#ffffff", cursor: "pointer" };
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style,
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </PlacesAutocomplete>
 
-              {/* <input
-                ref={autoCompleteRef}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Enter a City"
-                value={query}
-              /> */}
-              {/* <input
-                id="outlined-select-currency"
-                value={programmeLocation}
-                className={classes.textField}
-                variant="outlined"
-                onChange={handleSelectChange("projectLocation")}
-                error={formOneErrors.projectLocation}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                ref={autoCompleteRef}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Enter a City"
-                value={query}
-              /> */}
             </FormControl>
           </form>
         </Grid>
@@ -409,3 +339,8 @@ function ImpactManagerForm1(props) {
 }
 
 export default withStyles(styles, { withTheme: true })(ImpactManagerForm1);
+
+
+// export default GoogleApiWrapper({
+//   apiKey: "AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ",
+// })(MapContainer);

@@ -38,7 +38,8 @@ export class ImpactMap extends Component {
   render() {
     return (
       <div className="impactTab">
-        <div>
+        <h4>Impact Map</h4>
+        <div className="map-container">
           {/* <Skeleton active /> */}
           <Map
             google={this.props.google}

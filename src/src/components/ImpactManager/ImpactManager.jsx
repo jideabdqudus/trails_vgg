@@ -15,6 +15,11 @@ import { ArrowLeftOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectAction";
 import { useDropzone } from "react-dropzone";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 
 const baseStyle = {
   flex: 1,
@@ -152,10 +157,39 @@ class ImpactManager extends React.Component {
       formThreeErrors: {
         indicator: false,
       },
+      // for google map places autocomplete
+      address: "",
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+      mapCenter: {
+        lat: 49.2827291,
+        lng: -123.1207375,
+      },
     };
     this.createProject = this.createProject.bind(this);
     this.cancelProject = this.cancelProject.bind(this);
   }
+
+  handleChangePlace = (address) => {
+    this.setState({ address });
+    console.log(address);
+    console.log("Happuning")
+  };
+
+  handleSelectPlace = (address, selectedPlace, activeMarker) => {
+    this.setState({ address, selectedPlace, activeMarker });
+    console.log(activeMarker);
+
+    geocodeByAddress(address)
+      .then((results) => getLatLng(results[0]))
+      .then((latLng) => {
+        console.log("Success", latLng);
+        // update center state
+        this.setState({ mapCenter: latLng });
+      })
+      .catch((error) => console.error("Error", error));
+  };
 
   componentDidMount() {}
 
@@ -248,6 +282,7 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes,
       indicatorCheckBoxes,
       projectBanner,
+      activeMarker,
     } = this.state;
     const payload = {
       projectCode,
@@ -259,9 +294,11 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes,
       indicatorCheckBoxes,
       projectBanner,
+      activeMarker,
     };
     this.props.createProject(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
+    console.log(payload);
     // window.location.reload();
   }
 
@@ -280,7 +317,6 @@ class ImpactManager extends React.Component {
       impactManagerFormThree: false,
     });
   };
-
 
   handleCheckboxChange = (indicatorValue, e, indicatorIndex, sdgIndex) => {
     const { allIndicators, sdgChecks } = this.state;
@@ -315,7 +351,7 @@ class ImpactManager extends React.Component {
       allIndicators: newIndicators,
       sdgChecks: newSdgChecks,
     });
-    console.log(newSdgChecks)
+    console.log(newSdgChecks);
   };
 
   updateSvgState = (sdg) => {
@@ -444,6 +480,9 @@ class ImpactManager extends React.Component {
                     handleBannerChange={this.handleBannerChange}
                     formOneErrors={formOneErrors}
                     // locationsEnum={locationsEnum}
+                    address={this.state.address}
+                    handleChangePlace={this.handleChangePlace}
+                    handleSelectPlace={this.handleSelectPlace}
                   />
                   <br />
                   <Button
@@ -669,4 +708,8 @@ const mapStateToProps = (state) => ({
   project: state.projects,
 });
 
-export default connect(mapStateToProps, { createProject })(ImpactManager);
+const WrappedContainer = GoogleApiWrapper({
+  apiKey: "AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ",
+})(ImpactManager);
+
+export default connect(mapStateToProps, { createProject })(WrappedContainer);
