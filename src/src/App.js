@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import CreateAccount from "./views/Create/CreateAccount";
 import FormManager from "./views/FormManager/FormManager";
+import FormBuild from "./views/FormBuilder/FormBuild";
 
 export class App extends Component {
   render() {
@@ -29,6 +30,7 @@ export class App extends Component {
             />
             <Route exact path="/dashboard/manager" component={Manager} />
             <Route exact path="/dashboard/form" component={FormManager} />
+            <Route exact path="/dashboard/build_form" component={FormBuild} />
           </Switch>
         </BrowserRouter>
       </Provider>

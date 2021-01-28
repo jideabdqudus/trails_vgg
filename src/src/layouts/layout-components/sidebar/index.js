@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
+import "./index.css";
 
 const { Sider } = Layout;
 
@@ -34,7 +35,7 @@ export class SideBar extends Component {
           zIndex: "999",
         }}
       >
-        <div className="logo"></div>
+        <div className="logos"></div>
         <Menu theme="dark" mode="inline">
           <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
             <Link to="/dashboard">Dashboard</Link>

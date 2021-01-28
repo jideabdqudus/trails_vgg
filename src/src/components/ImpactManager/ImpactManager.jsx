@@ -690,7 +690,6 @@ class ImpactManager extends React.Component {
                   >
                     {createBtn}
                   </Button>
-
                   {this.state.alert}
                 </div>
               )}

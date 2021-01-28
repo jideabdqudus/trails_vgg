@@ -150,7 +150,6 @@ function ImpactManagerForm1(props) {
     handleSelectPlace,
   } = props;
 
-
   return (
     <div className={`flex items-center ${classes.root}`}>
       <Grid container spacing={3}>
@@ -205,105 +204,55 @@ function ImpactManagerForm1(props) {
               Programme Location
             </label>
             <FormControl fullWidth required>
-              {/* <TextField
-                id="outlined-select-currency"
-                select
-                value={projectLocation}
+              <PlacesAutocomplete
                 className={classes.textField}
                 variant="outlined"
-                onChange={handleSelectChange("projectLocation")}
-                error={formOneErrors.projectLocation}
-                InputLabelProps={{
-                  shrink: true,
-                }}
+                value={address}
+                onChange={handleChangePlace}
+                onSelect={handleSelectPlace}
               >
-                {locationsEnum.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField> */}
-
-              <PlacesAutocomplete
-              className={classes.textField}
-              variant="outlined"
-          value={address}
-          onChange={handleChangePlace}
-          onSelect={handleSelectPlace}
-        >
-          {({
-            getInputProps,
-            suggestions,
-            getSuggestionItemProps,
-            loading,
-          }) => (
-            <div>
-              <input
-              style={{padding:"15px", }}
-                {...getInputProps({
-                  placeholder: "Search Location",
-                  className: "location-search-input",
-                })}
-              />
-              <div className="autocomplete-dropdown-container">
-                {loading && <div>...</div>}
-                {suggestions.map((suggestion) => {
-                  const className = suggestion.active
-                    ? "suggestion-item--active"
-                    : "suggestion-item";
-                  // inline style for demonstration purpose
-                  const style = suggestion.active
-                    ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                    : { backgroundColor: "#ffffff", cursor: "pointer" };
-                  return (
-                    <div
-                      {...getSuggestionItemProps(suggestion, {
-                        className,
-                        style,
+                {({
+                  getInputProps,
+                  suggestions,
+                  getSuggestionItemProps,
+                  loading,
+                }) => (
+                  <div>
+                    <input
+                      style={{ padding: "15px" }}
+                      {...getInputProps({
+                        placeholder: "Search Location",
+                        className: "location-search-input",
                       })}
-                    >
-                      <span>{suggestion.description}</span>
+                    />
+                    <div className="autocomplete-dropdown-container">
+                      {loading && <div>...</div>}
+                      {suggestions.map((suggestion) => {
+                        const className = suggestion.active
+                          ? "suggestion-item--active"
+                          : "suggestion-item";
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                          : { backgroundColor: "#ffffff", cursor: "pointer" };
+                        return (
+                          <div
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <span>{suggestion.description}</span>
+                          </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </PlacesAutocomplete>
-
+                  </div>
+                )}
+              </PlacesAutocomplete>
             </FormControl>
           </form>
         </Grid>
-
-        {/* Project Banner */}
-        {/* <Grid item sm={3} md={3}>
-          <form className={classes.container} noValidate>
-            <FormControl fullWidth required margin="normal">
-              <TextField
-                id="project-banner"
-                name={"projectBanner"}
-                type="file"
-                value={projectBanner}
-                label="Project Banner"
-                variant="outlined"
-                onChange={handleBannerChange}
-                error={formOneErrors.projectLocation}
-               
-              >
-              </TextField>
-            </FormControl>
-          </form>
-        </Grid>  */}
-        {/* <div className="container">
-            <div {...getRootProps({ style })}>
-              <input {...getInputProps()} />
-              <p>Drag 'n' drop some files here</p>
-              <button type="button" onClick={open}>
-                Open File Dialog
-              </button>
-            </div>
-            <aside style={thumbsContainer}>{thumbs}</aside>
-          </div> */}
       </Grid>
 
       {/* Second Row */}
@@ -339,7 +288,6 @@ function ImpactManagerForm1(props) {
 }
 
 export default withStyles(styles, { withTheme: true })(ImpactManagerForm1);
-
 
 // export default GoogleApiWrapper({
 //   apiKey: "AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ",

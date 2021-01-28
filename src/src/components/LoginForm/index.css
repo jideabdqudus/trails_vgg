@@ -163,10 +163,10 @@ body {
 }
 
 .right_container {
-  height: 25rem;
+  height: 15rem;
   width: 25rem;
   margin: auto;
-  padding-top: 200px;
+  padding-top: 20px;
 }
 
 .loginBtn {

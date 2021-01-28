@@ -78,7 +78,7 @@ const CreateAcct = (
             <div className="right_container">
               <div className="logo"></div>
               <div className="cardWrap">
-                <div style={{ marginBottom: "30px" }}>
+                <div>
                   <Link to="/">
                     <span
                       style={{
