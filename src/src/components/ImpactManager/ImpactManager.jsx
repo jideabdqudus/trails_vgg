@@ -117,11 +117,10 @@ class ImpactManager extends React.Component {
       sdgDump: sdgDump,
       projectName: "",
       projectCode: "",
-      //projectLocation: "",
       programmeLocation: "",
       projectDescription: "",
       programmePlaces: "",
-      projectBanner: [],
+      projectBanner: {},
       impactManagerFormOne: true,
       impactManagerFormTwo: false,
       impactManagerFormThree: false,
@@ -174,7 +173,7 @@ class ImpactManager extends React.Component {
   handleChangePlace = (address) => {
     this.setState({ address });
     console.log(address);
-    console.log("Happuning")
+    console.log("Happuning");
   };
 
   handleSelectPlace = (address, selectedPlace, activeMarker) => {
@@ -189,6 +188,15 @@ class ImpactManager extends React.Component {
         this.setState({ mapCenter: latLng });
       })
       .catch((error) => console.error("Error", error));
+  };
+
+  normFile = (e: any) => {
+    this.setState({ projectBanner: e });
+    console.log("Upload event:", e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
   };
 
   componentDidMount() {}
@@ -283,6 +291,7 @@ class ImpactManager extends React.Component {
       indicatorCheckBoxes,
       projectBanner,
       activeMarker,
+      mapCenter,
     } = this.state;
     const payload = {
       projectCode,
@@ -295,6 +304,7 @@ class ImpactManager extends React.Component {
       indicatorCheckBoxes,
       projectBanner,
       activeMarker,
+      mapCenter,
     };
     this.props.createProject(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
@@ -478,6 +488,7 @@ class ImpactManager extends React.Component {
                     handleInputChange={this.handleInputChange}
                     handleSelectChange={this.handleSelectChange}
                     handleBannerChange={this.handleBannerChange}
+                    normFile={this.normFile}
                     formOneErrors={formOneErrors}
                     // locationsEnum={locationsEnum}
                     address={this.state.address}

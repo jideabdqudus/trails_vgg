@@ -2,34 +2,24 @@ import React, { Component } from "react";
 import { Card, Skeleton } from "antd";
 import "./index.css";
 import { Map, GoogleApiWrapper, Marker } from "google-maps-react";
+import { connect } from "react-redux";
 
 export class ImpactMap extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      stores: [
-        { lat: 47.49855629475769, lng: -122.14184416996333 },
-        { latitude: 47.359423, longitude: -122.021071 },
-        { latitude: 47.2052192687988, longitude: -121.988426208496 },
-        { latitude: 47.6307081, longitude: -122.1434325 },
-        { latitude: 47.3084488, longitude: -122.2140121 },
-        { latitude: 47.5524695, longitude: -122.0425407 },
-      ],
-    };
   }
 
   displayMarkers = () => {
-    return this.state.stores.map((store, index) => {
+    return this.props.project.projects.map((project) => {
       return (
         <Marker
-          key={index}
-          id={index}
+          key={project.mapCenter.lng}
+          id={project.mapCenter.lng}
           position={{
-            lat: store.latitude,
-            lng: store.longitude,
+            lat: project.mapCenter.lat,
+            lng: project.mapCenter.lng,
           }}
-          onClick={() => console.log("You clicked me!")}
+          onClick={() => console.log(`You clicked me! ${project}`)}
         />
       );
     });
@@ -45,7 +35,10 @@ export class ImpactMap extends Component {
             google={this.props.google}
             zoom={8}
             style={mapStyles}
-            initialCenter={{ lat: 47.444, lng: -122.176 }}
+            initialCenter={{
+              lat: this.props.project.projects[0].mapCenter.lat,
+              lng: this.props.project.projects[0].mapCenter.lng,
+            }}
           >
             {this.displayMarkers()}
           </Map>
@@ -60,6 +53,12 @@ const mapStyles = {
   height: "100%",
 };
 
-export default GoogleApiWrapper({
+const mapStateToProps = (state) => ({
+  project: state.projects,
+});
+
+const WrappedContainer = GoogleApiWrapper({
   apiKey: "AIzaSyB5vf0DbG-X2_Qdya9IPHl1ZbhPdn276gQ",
 })(ImpactMap);
+
+export default connect(mapStateToProps, {})(WrappedContainer);

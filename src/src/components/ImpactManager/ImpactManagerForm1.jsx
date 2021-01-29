@@ -9,6 +9,7 @@ import {
   Button,
   FormControl,
 } from "@material-ui/core";
+import { Upload, Form } from "antd";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
@@ -19,6 +20,9 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+
+const { Option } = Select;
 
 const styles = (theme) => ({
   container: {
@@ -148,6 +152,7 @@ function ImpactManagerForm1(props) {
     handleBannerChange,
     handleChangePlace,
     handleSelectPlace,
+    normFile,
   } = props;
 
   return (
@@ -197,8 +202,25 @@ function ImpactManagerForm1(props) {
           </form>
         </Grid>
 
+        {/* Project Banner */}
+        <Grid item sm={3} md={3}>
+          <form className={classes.container} noValidate>
+            <FormControl fullWidth required margin="normal">
+              <Form.Item
+                name="upload"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <Upload name="logo" action="/upload.do" listType="picture">
+                  <Button icon={<UploadOutlined />}>Click to upload</Button>
+                </Upload>
+              </Form.Item>
+            </FormControl>
+          </form>
+        </Grid>
+
         {/* Project Location */}
-        <Grid item sm={5} md={5}>
+        <Grid item sm={3} md={3}>
           <form className={classes.container} noValidate>
             <label for="outlined-select-currency" style={{ margin: 0 }}>
               Programme Location
