@@ -102,7 +102,7 @@ const initialState = {
       mapCenter: { lat: 47.3084488, lng: -122.2140121 },
     },
   ],
-  indicator: ["a", "b", "c", "d", "e", "f", "c", "y"],
+  indicator: ["a", "b", "c", "d"],
   loading: false,
 };
 

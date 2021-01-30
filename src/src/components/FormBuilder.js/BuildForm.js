@@ -302,14 +302,19 @@ const BuildForm = ({ project }) => {
                                 ]}
                               >
                                 <Select
-                                  placeholder="Select programme"
+                                  placeholder="Select Indicator"
                                   label={"Indicators"}
                                 >
-                                  {indicator.map((inputIndicator) => (
+                                  {projects.map((project) => (
                                     <Fragment>
-                                      <Option value={inputIndicator}>
-                                        {inputIndicator}
-                                      </Option>
+                                      {Object.entries(
+                                        project.indicatorCheckBoxes
+                                      ).map(([key, val]) => (
+                                        <Option value={val} key={key}>
+                                          {" "}
+                                          {val}
+                                        </Option>
+                                      ))}
                                     </Fragment>
                                   ))}
                                 </Select>

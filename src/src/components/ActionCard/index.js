@@ -1,11 +1,46 @@
 import React, { Component } from "react";
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Result } from "antd";
 import "./index.css";
 import { connect } from "react-redux";
 
 export class ActionCard extends Component {
+  renderObjects = () => {
+    const { projects, indicator } = this.props.project;
+    const dataArray = [];
+    let value = 0;
+    const json = projects.map((project) => (
+      <>
+        {" "}
+        {Object.entries(project.indicatorCheckBoxes, value).map(
+          ([key, val]) => (
+            <p className={"projectParagraph"} key={key}>
+              {" "}
+              {val}
+              {value++}
+            </p>
+          )
+        )}
+      </>
+    ));
+    return value;
+  };
+
+  renderObjectsPart2 = () => {
+    const { projects, indicator } = this.props.project;
+    {
+      console.log("Ijebu", projects);
+    }
+
+    var fullname = [projects.indicatorCheckBoxes].join(" ");
+    console.log(fullname);
+    return fullname;
+  };
+
   render() {
     const { projects, indicator } = this.props.project;
+    {
+    }
+
     return (
       <div>
         <Col span={24}>
@@ -26,7 +61,20 @@ export class ActionCard extends Component {
                 </p> */}
                 <p className={"actionItemParagraph"}>
                   {" "}
-                  {indicator.length == 0 ? "0" : indicator.length}
+                  {/* {projects.map((project) => (
+                    <div>
+                      {Object.entries(project.indicatorCheckBoxes).map(
+                        ([key, val]) => (
+                          <p className={"projectParagraph"} key={key}>
+                            {" "}
+                            {val}
+                          </p>
+                        )
+                      )}
+                    </div>
+                  ))} */}
+                  {this.renderObjects()}
+                  {/* {indicator.length == 0 ? "0" : indicator.length} */}
                 </p>
               </Col>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
