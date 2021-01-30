@@ -26,9 +26,7 @@ export class ActionCard extends Component {
                 </p> */}
                 <p className={"actionItemParagraph"}>
                   {" "}
-                  {indicator.length == 0
-                    ? "0"
-                    : indicator.length}
+                  {indicator.length == 0 ? "0" : indicator.length}
                 </p>
               </Col>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>

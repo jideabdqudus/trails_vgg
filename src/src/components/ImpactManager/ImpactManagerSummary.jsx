@@ -22,6 +22,7 @@ class ImpactManagerSummary extends React.Component {
       sdgCheckBoxes: this.props.sdgCheckBoxes,
       programmePlaces: this.props.programmePlaces,
       indicators: this.props.indicators,
+      allImpacts: this.props.allImpacts,
     };
   }
 
@@ -56,8 +57,9 @@ class ImpactManagerSummary extends React.Component {
       return <IndicatorView key={index} indicator={item.Text} />;
     });
     return allIndicators;
-  };
 
+    // this.setState({ allImpacts: allIndicators });
+  };
 
   render() {
     const {
@@ -70,6 +72,9 @@ class ImpactManagerSummary extends React.Component {
       projectBanner,
       sdgChecks,
     } = this.state;
+    {
+      console.log("Heres", this.renderIndicators());
+    }
     return (
       <Aux>
         <Row>

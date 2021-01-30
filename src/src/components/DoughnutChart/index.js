@@ -6,6 +6,7 @@ import "./index.css";
 import { connect } from "react-redux";
 
 export class DoughnutChart extends Component {
+  
   data = {
     labels: this.props.project.indicator,
     datasets: [
@@ -18,9 +19,10 @@ export class DoughnutChart extends Component {
     ],
   };
   render() {
+    const {indicator} = this.props.project
     {
       console.log(
-        Object.entries(this.props.project.indicator).map(([key, val]) =>
+        Object.entries(indicator).map(([key, val]) =>
           console.log(val)
         )
       );
