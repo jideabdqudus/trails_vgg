@@ -37,13 +37,16 @@
   background-position: center;
 }
 
-
 .site-layout .site-layout-background {
   background: #fff;
   border-radius: 10px;
 }
 [data-theme="dark"] .site-layout .site-layout-background {
   background: #141414;
+}
+
+.site-layout {
+  padding-left: 200px !important;
 }
 
 .action {

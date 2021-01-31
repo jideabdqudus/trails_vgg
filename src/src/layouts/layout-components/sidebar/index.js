@@ -17,7 +17,7 @@ export class SideBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapsed: true,
+      collapsed: false,
     };
   }
   onCollapse = (collapsed) => {
@@ -30,13 +30,15 @@ export class SideBar extends Component {
         onCollapse={this.onCollapse}
         collapsible
         style={{
-          overflow: "auto",
           border: "none",
+          backgroundColor: "#001529",
+          position: "fixed",
           zIndex: "999",
+          height: "100vh",
         }}
       >
         <div className="logos"></div>
-        <Menu theme="dark" mode="inline">
+        <Menu theme="dark" mode="inline" style={{ backgroundColor: "#001529" }}>
           <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
             <Link to="/dashboard">Dashboard</Link>
           </Menu.Item>
