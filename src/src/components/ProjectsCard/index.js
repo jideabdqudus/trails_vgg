@@ -6,8 +6,24 @@ import { connect } from "react-redux";
 const { Meta } = Card;
 
 export class ProjectsCard extends Component {
+  renderProjects = () => {
+    const { projects } = this.props.project;
+    let string = "";
+    projects.map((project, string) => {
+      <>
+        {project.projectBanner.fileList.map((image) => {
+          <>{image.thumbUrl}</>;
+        })}
+      </>;
+    });
+    console.log("file", string);
+  };
+
   render() {
     const { projects } = this.props.project;
+    {
+      this.renderProjects();
+    }
     return (
       <div>
         <Row>
@@ -19,7 +35,9 @@ export class ProjectsCard extends Component {
                   cover={
                     <img
                       alt={project.projectName}
-                      src={project.projectImage}
+                      src={project.projectBanner.fileList.map((image) => {
+                        <>{image.thumbUrl}</>;
+                      })}
                       style={{ height: "200px" }}
                     />
                   }

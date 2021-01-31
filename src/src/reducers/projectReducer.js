@@ -102,7 +102,6 @@ const initialState = {
       mapCenter: { lat: 47.3084488, lng: -122.2140121 },
     },
   ],
-  indicator: ["a", "b", "c", "d"],
   loading: false,
 };
 
@@ -116,7 +115,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         projects: [...state.projects, action.payload],
-        indicator: [...state.indicator, action.payload.indicatorCheckBoxes],
       };
     default:
       return state;

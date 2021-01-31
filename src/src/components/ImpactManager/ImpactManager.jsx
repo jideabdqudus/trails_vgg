@@ -190,7 +190,7 @@ class ImpactManager extends React.Component {
       .catch((error) => console.error("Error", error));
   };
 
-  normFile = (e: any) => {
+  normFile = (e) => {
     this.setState({ projectBanner: e });
     console.log("Upload event:", e);
     if (Array.isArray(e)) {

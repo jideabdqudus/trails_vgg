@@ -6,10 +6,9 @@ import {
   Checkbox,
   FormControlLabel,
   MenuItem,
-  Button,
   FormControl,
 } from "@material-ui/core";
-import { Upload, Form } from "antd";
+import { Upload, Form, Row, Col, Button } from "antd";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
@@ -157,9 +156,8 @@ function ImpactManagerForm1(props) {
 
   return (
     <div className={`flex items-center ${classes.root}`}>
-      <Grid container spacing={3}>
-        {/* Project Name */}
-        <Grid item sm={5} md={5}>
+      <Row>
+        <Col span={8}>
           <form className={classes.container} noValidate>
             <label for="project-name" style={{ margin: 0 }}>
               Programme Name
@@ -178,10 +176,9 @@ function ImpactManagerForm1(props) {
               onChange={handleInputChange}
             />
           </form>
-        </Grid>
-
-        {/* Project Code */}
-        <Grid item sm={2} md={2}>
+        </Col>
+        <Col span={1}></Col>
+        <Col span={4}>
           <form className={classes.container} noValidate>
             <label for="project-code" style={{ margin: 0 }}>
               Programme Code
@@ -200,33 +197,15 @@ function ImpactManagerForm1(props) {
               onChange={handleInputChange}
             />
           </form>
-        </Grid>
-
-        {/* Project Banner */}
-        <Grid item sm={3} md={3}>
-          <form className={classes.container} noValidate>
-            <FormControl fullWidth required margin="normal">
-              <Form.Item
-                name="upload"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <Upload name="logo" action="/upload.do" listType="picture">
-                  <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-              </Form.Item>
-            </FormControl>
-          </form>
-        </Grid>
-
-        {/* Project Location */}
-        <Grid item sm={3} md={3}>
+        </Col>
+        <Col span={1}></Col>
+        <Col span={5}>
           <form className={classes.container} noValidate>
             <label for="outlined-select-currency" style={{ margin: 0 }}>
               Programme Location
             </label>
             <FormControl fullWidth required>
-              <PlacesAutocomplete
+              {/* <PlacesAutocomplete
                 className={classes.textField}
                 variant="outlined"
                 value={address}
@@ -271,10 +250,40 @@ function ImpactManagerForm1(props) {
                     </div>
                   </div>
                 )}
-              </PlacesAutocomplete>
+              </PlacesAutocomplete> */}
             </FormControl>
           </form>
-        </Grid>
+        </Col>
+        <Col span={1}></Col>
+        <Col span={3}>
+          <form className={classes.container} noValidate>
+            <label for="outlined-select-currency" style={{ margin: 0 }}>
+              Banner
+            </label>
+            <FormControl fullWidth required margin="normal">
+              <Form.Item
+                name="upload"
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <Upload name="logo" action="/" listType="picture">
+                  <Button icon={<UploadOutlined />} type="dashed" size="large">
+                    Click to upload
+                  </Button>
+                </Upload>
+              </Form.Item>
+            </FormControl>
+          </form>
+        </Col>
+      </Row>
+      <Grid container spacing={3}>
+        {/* Project Name */}
+
+        {/* Project Banner */}
+        <Grid item sm={3} md={3}></Grid>
+
+        {/* Project Location */}
+        <Grid item sm={3} md={3}></Grid>
       </Grid>
 
       {/* Second Row */}

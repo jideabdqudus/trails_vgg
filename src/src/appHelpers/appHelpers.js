@@ -243,7 +243,7 @@ export const appHelpers = {
 
   successMessageAlert: (message, timer = 2000) => {
     swal.fire({
-      titleText: "Succes!",
+      titleText: "Success!",
       text: message,
       icon: "success",
       timer: timer,

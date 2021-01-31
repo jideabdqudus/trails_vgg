@@ -108,25 +108,35 @@ class ImpactManagerSummary extends React.Component {
               <Card>
                 <Row style={{ display: "flex" }}>
                   <Col span={"12"}>
-                    <h1>Programme Name</h1>
-                    <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                    <h6>Programme Name</h6>
+                    <h6 style={{ fontWeight: "normal", color: "grey" }}>
                       {projectName}
-                    </h1>
+                    </h6>
                   </Col>
-                  <Col style={{ marginLeft: "1rem" }}>
-                    <h1>Project Code</h1>
-                    <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                  <Col span={12}>
+                    <h6>Project Code</h6>
+                    <h6 style={{ fontWeight: "normal", color: "grey" }}>
                       {projectCode}
-                    </h1>
+                    </h6>
                   </Col>
                 </Row>
                 <br />
+                <Row>
+                  <Col span={12}>
+                    <h6>Programme Description</h6>
+                    <h6 style={{ fontWeight: "normal", color: "grey" }}>
+                      {projectDescription}
+                    </h6>
+                  </Col>
+                  
+                </Row>
+                <br />
                 <div>
-                  {/* <h1>Programme Location</h1> */}
-                  <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                  {/* <h6>Programme Location</h6> */}
+                  <h6 style={{ fontWeight: "normal", color: "grey" }}>
                     {/* {programmeLocation} */}
                     {/* {programmePlaces} */}
-                  </h1>
+                  </h6>
                 </div>
               </Card>
             </div>
@@ -193,9 +203,9 @@ class ImpactManagerSummary extends React.Component {
                 </Button>
               </Card>
               <Card style={{ paddingTop: 0 }}>
-                <h1 style={{ fontWeight: "normal", color: "grey" }}>
+                <h6 style={{ fontWeight: "normal", color: "grey" }}>
                   {this.renderIndicators()}
-                </h1>
+                </h6>
               </Card>
             </div>
           </Col>
