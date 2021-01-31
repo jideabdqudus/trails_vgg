@@ -33,11 +33,13 @@ const BuildForm = ({ project }) => {
 
   const [formData, setFormData] = useState({
     title: "",
+    display: "form",
+    type: "form",
+    name: "",
+    path: "",
     programme: "",
     instruction: "",
-    question: "",
-    inputIndicator: "",
-    target: "",
+    components: [],
   });
 
   const {
@@ -47,11 +49,17 @@ const BuildForm = ({ project }) => {
     question,
     inputIndicator,
     target,
+    name,
+    path,
+    type,
+    components,
+    display,
   } = formData;
+
   const { projects, indicator } = project;
 
   const onChange = (e) => {
-    form.setFieldsValue({ components: [] });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const onFinish = (formData) => {
     console.log(formData);
@@ -89,7 +97,8 @@ const BuildForm = ({ project }) => {
                 <Col span={8}>
                   <Form.Item
                     label={titleName2}
-                    name={["programme", "formProgramme"]}
+                    name={"programme"}
+                    value={programme}
                     rules={[
                       { required: true, message: "Please select a programme" },
                     ]}
@@ -125,116 +134,15 @@ const BuildForm = ({ project }) => {
               </Row>
             </Card>
             <Divider />
+
+            {/* Form Builder */}
+
             <Card>
-              {/* <Card title={"Question 1"}>
-                <Row>
-                  <Col span={8}>
-                    <Form.Item
-                      name="question"
-                      rules={[
-                        { required: true, message: "Confirm your Input" },
-                      ]}
-                      style={{ marginBottom: "15px" }}
-                    >
-                      <Input
-                        type="text"
-                        name="question"
-                        placeholder={"Input your question"}
-                        value={question}
-                        onChange={onChange}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={2}></Col>
-                  <Col span={4}>
-                    <Form.Item
-                      name={["inputType", "inputType"]}
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please select an input type",
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Select an Input type"
-                        label={"Short free text"}
-                      >
-                        <Option value="text">Short Free Text</Option>
-                        <Option value="checkbox">Checkbox</Option>
-                        <Option value="number">Number</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={2}></Col>
-                  <Col span={8}>
-                    {" "}
-                    <Form.Item
-                      name={["inputIndicator", "inputIndicator"]}
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please select an Indicator",
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Select question indicator"
-                        label={"Indicators"}
-                      >
-                        {indicator.map((inputIndicator) => (
-                          <Fragment>
-                            <Option value={inputIndicator}>
-                              {inputIndicator}
-                            </Option>
-                          </Fragment>
-                        ))}
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col span={8}>
-                    {" "}
-                    <Form.Item
-                      name="target"
-                      rules={[
-                        { required: true, message: "Confirm your Input" },
-                      ]}
-                      style={{ marginBottom: "15px" }}
-                    >
-                      <Input
-                        placeholder={"Target Line"}
-                        type="number"
-                        name="target"
-                        value={target}
-                        onChange={onChange}
-                      />
-                    </Form.Item>
-                  </Col>
-                  <Col span={2}></Col>
-                  <Col span={4}>
-                    <Form.Item
-                      name={["indicatorMetric", "indicatorMetric"]}
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please select a metric",
-                        },
-                      ]}
-                    >
-                      <Select
-                        placeholder="Select indicator metric"
-                        label={"Select indicator metric"}
-                      >
-                        <Option value="text">Numeric</Option>
-                        <Option value="checkbox">Percentage</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
-              </Card> */}
-              <Form.List name="sights" className="newComponents">
+              <Form.List
+                name="components"
+                value={components}
+                className="newComponents"
+              >
                 {(fields, { add, remove }) => (
                   <>
                     {fields.map((field) => (
@@ -245,8 +153,8 @@ const BuildForm = ({ project }) => {
                             <Col span={8}>
                               <Form.Item
                                 {...field}
-                                name={[field.name, "question"]}
-                                fieldKey={[field.fieldKey, "question"]}
+                                name={[field.name, "label"]}
+                                fieldKey={[field.fieldKey, "label"]}
                                 rules={[
                                   {
                                     required: true,
@@ -257,10 +165,8 @@ const BuildForm = ({ project }) => {
                               >
                                 <Input
                                   type="text"
-                                  name="question"
+                                  name="label"
                                   placeholder={"Input your question here"}
-                                  value={question}
-                                  onChange={onChange}
                                 />
                               </Form.Item>
                             </Col>
@@ -283,7 +189,6 @@ const BuildForm = ({ project }) => {
                                 >
                                   <Option value="text">Short Free Text</Option>
                                   <Option value="checkbox">Checkbox</Option>
-                                  <Option value="number">Number</Option>
                                 </Select>
                               </Form.Item>
                             </Col>
@@ -358,8 +263,8 @@ const BuildForm = ({ project }) => {
                                   placeholder="Select indicator metric"
                                   label={"Select indicator metric"}
                                 >
-                                  <Option value="text">Numeric</Option>
-                                  <Option value="checkbox">Percentage</Option>
+                                  <Option value="numeric">Numeric</Option>
+                                  <Option value="percentage">Percentage</Option>
                                 </Select>
                               </Form.Item>
                             </Col>
