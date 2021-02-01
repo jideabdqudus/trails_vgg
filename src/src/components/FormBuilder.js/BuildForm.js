@@ -62,7 +62,7 @@ const BuildForm = ({ project }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const onFinish = (formData) => {
-    console.log(formData);
+    console.log("Data", formData);
   };
 
   return (
