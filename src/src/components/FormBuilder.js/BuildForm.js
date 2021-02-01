@@ -56,7 +56,7 @@ const BuildForm = ({ project }) => {
     display,
   } = formData;
 
-  const { projects, indicator } = project;
+  const { projects } = project;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
