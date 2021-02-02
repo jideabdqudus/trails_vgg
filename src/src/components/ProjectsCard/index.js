@@ -35,9 +35,10 @@ export class ProjectsCard extends Component {
                   cover={
                     <img
                       alt={project.projectName}
-                      src={project.projectBanner.fileList.map((image) => {
-                        <>{image.thumbUrl}</>;
-                      })}
+                      // src={project.projectBanner.fileList.map((image) => {
+                      //   <>{image.thumbUrl}</>;
+                      // })}
+                      src={project.projectImage}
                       style={{ height: "200px" }}
                     />
                   }

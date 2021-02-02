@@ -158,49 +158,6 @@ const BuildForm = ({ project }) => {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "Confirm your Input",
-                                  },
-                                ]}
-                                style={{ marginBottom: "15px" }}
-                              >
-                                <Input
-                                  type="text"
-                                  name="label"
-                                  placeholder={"Input your question here"}
-                                />
-                              </Form.Item>
-                            </Col>
-                            <Col span={2}></Col>
-                            <Col span={4}>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "inputType"]}
-                                fieldKey={[field.fieldKey, "inputType"]}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Please select an input type",
-                                  },
-                                ]}
-                              >
-                                <Select
-                                  placeholder="Select Input"
-                                  label={"Short free text"}
-                                >
-                                  <Option value="text">Short Free Text</Option>
-                                  <Option value="checkbox">Checkbox</Option>
-                                </Select>
-                              </Form.Item>
-                            </Col>
-                            <Col span={2}></Col>
-                            <Col span={8}>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "inputIndicator"]}
-                                fieldKey={[field.fieldKey, "inputIndicator"]}
-                                rules={[
-                                  {
-                                    required: true,
                                     message:
                                       "Please select a question indicator",
                                   },
@@ -225,9 +182,30 @@ const BuildForm = ({ project }) => {
                                 </Select>
                               </Form.Item>
                             </Col>
-                          </Row>
-                          <Row>
-                            <Col span={8}>
+                            <Col span={1}></Col>
+                            <Col span={4}>
+                              <Form.Item
+                                {...field}
+                                name={[field.name, "inputData"]}
+                                fieldKey={[field.fieldKey, "inputData"]}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: "Please select an input type",
+                                  },
+                                ]}
+                              >
+                                <Select
+                                  placeholder="Select Input"
+                                  label={"Short free text"}
+                                >
+                                  <Option value="text">Short Free Text</Option>
+                                  <Option value="checkbox">Checkbox</Option>
+                                </Select>
+                              </Form.Item>
+                            </Col>
+                            <Col span={1}></Col>
+                            <Col span={4}>
                               <Form.Item
                                 {...field}
                                 name={[field.name, "target"]}
@@ -246,7 +224,7 @@ const BuildForm = ({ project }) => {
                                 />
                               </Form.Item>
                             </Col>
-                            <Col span={2}></Col>
+                            <Col span={1}></Col>
                             <Col span={4}>
                               <Form.Item
                                 {...field}
@@ -269,10 +247,17 @@ const BuildForm = ({ project }) => {
                               </Form.Item>
                             </Col>
                           </Row>
+                          <h1></h1>
+                          <Button
+                          block
+                            type="danger"
+                            onClick={() => remove(field.name)}
+                          >
+                            <MinusCircleOutlined /> Delete Field
+                          </Button>
                         </Card>
-                        <MinusCircleOutlined
-                          onClick={() => remove(field.name)}
-                        />
+                        <br />
+                        <br />
                       </div>
                     ))}
                     <Divider />
