@@ -172,14 +172,10 @@ class ImpactManager extends React.Component {
 
   handleChangePlace = (address) => {
     this.setState({ address });
-    console.log(address);
-    console.log("Happuning");
   };
 
   handleSelectPlace = (address, selectedPlace, activeMarker) => {
     this.setState({ address, selectedPlace, activeMarker });
-    console.log(activeMarker);
-
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {

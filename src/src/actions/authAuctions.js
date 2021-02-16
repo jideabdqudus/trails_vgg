@@ -16,7 +16,7 @@ import setAuthToken from "../utils/setAuthToken";
 export const loadUser = () => async (dispatch) => {
   setAuthToken(localStorage.token);
   try {
-    const res = await axios.get("/api/auth");
+    const res = await axios.get("http://trail-api.test.vggdev.com/user");
     dispatch({
       type: USER_LOADED,
       payload: res.data,
@@ -38,7 +38,11 @@ export const register = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post("/api/users", formData, config);
+    const res = await axios.post(
+      "http://trail-api.test.vggdev.com/user/",
+      formData,
+      config
+    );
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -63,7 +67,11 @@ export const login = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post("/api/auth", formData, config);
+    const res = await axios.post(
+      "http://trail-api.test.vggdev.com/authenticate/",
+      formData,
+      config
+    );
 
     dispatch({
       type: LOGIN_SUCCESS,

@@ -15,7 +15,7 @@ export const sdgDump = [
         Status: false,
       },
     ],
-  },
+  },    
   {
     Number: "2",
     Image: "../sdgs/sdg2.svg",

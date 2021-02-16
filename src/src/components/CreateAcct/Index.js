@@ -8,49 +8,50 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setAlert } from "../../actions/alertActions";
 import { register, clearErrors } from "../../actions/authAuctions";
+import { appHelpers } from "../../appHelpers/appHelpers";
 import { Redirect } from "react-router";
 import AlertInfo from "../Alert/index";
 
 const CreateAcct = (
-  { setAlert, error, register, isAuthenticated, clearErrors },
+  { setAlert, error, register, isAuthenticated, clearErrors, registerSuccess },
   props
 ) => {
-  // useEffect(() => {
-  //   if (error === "User already exists") {
-  //     setAlert(error, "error");
-  //     clearErrors();
-  //   } //eslint-disable-next-line
-  // }, [error, isAuthenticated, props.history]);
+  useEffect(() => {
+    if (error === "A user with this email already exists") {
+      setAlert(error, "error");
+      clearErrors();
+    } //eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
-    password2: "",
   });
 
-  const { firstname, lastname, email, password, password2 } = formData;
-
+  const { firstName, lastName, email, password, password2 } = formData;
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const onFinish = async () => {
-    if (firstname === "" || lastname === "" || email === "") {
+    if (firstName === "" || lastName === "" || email === "") {
       setAlert("Please enter all fields", "error");
     } else if (password.length < 8) {
       setAlert("Password must be more than 8 characters", "warning");
     } else if (password != password2) {
-      setAlert("The passwords are different", "warning");
+      setAlert("Check if passwords are equal", "warning");
     } else {
-      console.log(formData);
-      register(formData);
+      register({ firstName, lastName, email, password });
     }
   };
 
-  // if (isAuthenticated) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+  if (registerSuccess) {
+    appHelpers.successMessageAlert("Succesfully Registered, Login here", 2000);
+    return <Redirect to="/" />;
+  }
+
+  console.log(registerSuccess);
 
   return (
     <div>
@@ -112,7 +113,7 @@ const CreateAcct = (
                 </div>
                 <div>
                   <AlertInfo />
-                  <br/>
+                  <br />
                   <Form
                     name="normal_login"
                     className="login-form"
@@ -120,7 +121,7 @@ const CreateAcct = (
                     onFinish={onFinish}
                   >
                     <Form.Item
-                      name="firstname"
+                      name="firstName"
                       rules={[
                         { required: true, message: "This field is compulsory" },
                       ]}
@@ -134,14 +135,14 @@ const CreateAcct = (
                           border: "1px solid rgba(10,46,101,.1)",
                         }}
                         placeholder="First Name"
-                        name="firstname"
+                        name="firstName"
                         type="text"
-                        value={firstname}
+                        value={firstName}
                         onChange={onChange}
                       />
                     </Form.Item>
                     <Form.Item
-                      name="lastname"
+                      name="lastName"
                       rules={[
                         { required: true, message: "This field is compulsory" },
                       ]}
@@ -155,9 +156,9 @@ const CreateAcct = (
                           border: "1px solid rgba(10,46,101,.1)",
                         }}
                         placeholder="Last Name"
-                        name="lastname"
+                        name="lastName"
                         type="text"
-                        value={lastname}
+                        value={lastName}
                         onChange={onChange}
                       />
                     </Form.Item>
@@ -263,6 +264,7 @@ CreateAcct.propTypes = {
 const mapStateToProps = (state) => ({
   error: state.auth.error,
   isAuthenticated: state.auth.isAuthenticated,
+  registerSuccess: state.auth.registerSuccess,
 });
 
 export default connect(mapStateToProps, { setAlert, register, clearErrors })(

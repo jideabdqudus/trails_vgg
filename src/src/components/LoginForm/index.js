@@ -17,12 +17,12 @@ const LoginForm = (
   { setAlert, error, login, isAuthenticated, clearErrors },
   props
 ) => {
-  // useEffect(() => {
-  //   if (error === "Invalid Credentials") {
-  //     setAlert(error, "error");
-  //     clearErrors();
-  //   } //eslint-disable-next-line
-  // }, [error, isAuthenticated, props.history]);
+  useEffect(() => {
+    if (error) {
+      setAlert(error, "error");
+      clearErrors();
+    } //eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -42,10 +42,9 @@ const LoginForm = (
       console.log(formData);
     }
   };
-
-  // if (isAuthenticated) {
-  //   return <Redirect to="/dashboard" />;
-  // }
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
+  }
   return (
     <div>
       <div className="loginAltBg" style={{ backgroundColor: "#064E89" }}>
@@ -105,6 +104,8 @@ const LoginForm = (
                   </Link>
                 </div>
                 <div>
+                  <AlertInfo />
+                  <br />
                   <Form
                     name="normal_login"
                     className="login-form"

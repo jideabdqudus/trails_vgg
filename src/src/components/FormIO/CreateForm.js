@@ -22,14 +22,14 @@ const CreateForm = () => {
     <Layout>
       <Row>
         <Col span={6}>
-          <h6>Create new form</h6>
+          <h1 style={{ fontSize: "20px" }}>Create new form</h1>
           <br />
           <Link to="/dashboard/build_form">
             <Card style={{ width: 300, height: 350, borderColor: "black" }}>
               <h1
                 style={{
                   textAlign: "center",
-                  fontSize: "200px",
+                  fontSize: "150px",
                   margin: "0",
                   padding: "0",
                   fontWeight: "200",
@@ -42,7 +42,7 @@ const CreateForm = () => {
         </Col>
         <Col span={2}></Col>
         <Col span={16}>
-          <h6>Available Forms</h6>
+          <h6 style={{ fontSize: "20px" }}>Available Forms</h6>
           <br />
           <Link to="/dashboard/build_form">
             <Card

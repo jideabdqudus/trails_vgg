@@ -51,9 +51,6 @@ export class SideBar extends Component {
           <Menu.Item key="4" icon={<FileOutlined />}>
             <Link to="/dashboard/form"></Link> Forms Management
           </Menu.Item>
-          <Menu.Item key="5" icon={<ExportOutlined />}>
-            Admin
-          </Menu.Item>
         </Menu>
       </Sider>
     );

@@ -26,23 +26,32 @@ export class ImpactMap extends Component {
   };
 
   render() {
+    {
+      console.log(this.props.google);
+    }
     return (
       <div className="impactTab">
         <h4>Impact Map</h4>
-        <div className="map-container">
-          {/* <Skeleton active /> */}
-          <Map
-            google={this.props.google}
-            zoom={8}
-            style={mapStyles}
-            initialCenter={{
-              lat: this.props.project.projects[0].mapCenter.lat,
-              lng: this.props.project.projects[0].mapCenter.lng,
-            }}
-          >
-            {this.displayMarkers()}
-          </Map>
-        </div>
+        {this.props.google == undefined ? (
+          <Card>
+            <Skeleton active />
+            <br/>
+          </Card>
+        ) : (
+          <div className="map-container">
+            <Map
+              google={this.props.google}
+              zoom={8}
+              style={mapStyles}
+              initialCenter={{
+                lat: this.props.project.projects[0].mapCenter.lat,
+                lng: this.props.project.projects[0].mapCenter.lng,
+              }}
+            >
+              {this.displayMarkers()}
+            </Map>
+          </div>
+        )}
       </div>
     );
   }

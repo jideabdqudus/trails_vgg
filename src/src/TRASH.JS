@@ -710,3 +710,176 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {})(BuildForm);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Card>
+<Form.List
+  name="components"
+  value={components}
+  className="newComponents"
+>
+  {(fields, { add, remove }) => (
+    <>
+      {fields.map((field) => (
+        <div key={field.key} size="100%" width={"100%"}>
+          <Form.Item noStyle> {() => <div></div>}</Form.Item>
+          <Card>
+            <Row>
+              <Col span={7}>
+                <Form.Item
+                  {...field}
+                  name={[field.name, "label"]}
+                  fieldKey={[field.fieldKey, "label"]}
+                  rules={[
+                    {
+                      required: true,
+                      message:
+                        "Please select a question indicator",
+                    },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select Indicator"
+                    label={"Indicators"}
+                  >
+                    {projects.map((project) => (
+                      <Fragment>
+                        {Object.entries(
+                          project.indicatorCheckBoxes
+                        ).map(([key, val]) => (
+                          <Option value={val} key={key}>
+                            {" "}
+                            {val}
+                          </Option>
+                        ))}
+                      </Fragment>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={1}></Col>
+              <Col span={4}>
+                <Form.Item
+                  {...field}
+                  name={[field.name, "inputData"]}
+                  fieldKey={[field.fieldKey, "inputData"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select an input type",
+                    },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select Input"
+                    label={"Short free text"}
+                  >
+                    <Option value="text">Short Free Text</Option>
+                    <Option value="checkbox">Checkbox</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={1}></Col>
+              <Col span={4}>
+                <Form.Item
+                  {...field}
+                  name={[field.name, "target"]}
+                  fieldKey={[field.fieldKey, "target"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Confirm your Input",
+                    },
+                  ]}
+                  style={{ marginBottom: "15px" }}
+                >
+                  <Input
+                    type="number"
+                    placeholder={"Target line"}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={1}></Col>
+              <Col span={4}>
+                <Form.Item
+                  {...field}
+                  name={[field.name, "indicatorMetric"]}
+                  fieldKey={[field.fieldKey, "indicatorMetric"]}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please select a metric",
+                    },
+                  ]}
+                >
+                  <Select
+                    placeholder="Select indicator metric"
+                    label={"Select indicator metric"}
+                  >
+                    <Option value="numeric">Numeric</Option>
+                    <Option value="percentage">Percentage</Option>
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={1}></Col>
+              <Col span={1}>
+                <Button
+                  type="danger"
+                  onClick={() => remove(field.name)}
+                  icon={<MinusCircleOutlined />}
+                  size={"medium"}
+                />
+              </Col>
+            </Row>
+          </Card>
+          <br />
+          <br />
+        </div>
+      ))}
+      <Divider />
+      <Row>
+        <Col span={2}>
+          <Form.Item>
+            <Button
+              type="dashed"
+              onClick={() => add()}
+              icon={<PlusOutlined />}
+            >
+              Create Field
+            </Button>
+          </Form.Item>
+        </Col>
+        <Col span={1}></Col>
+        <Col span={2}>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="forgetBtn"
+              onSubmit={onFinish}
+            >
+              Create Form
+            </Button>
+          </Form.Item>
+          
+        </Col>
+      </Row>
+    </>
+  )}
+</Form.List>
+</Card>
+
+

@@ -102,6 +102,8 @@ const initialState = {
       mapCenter: { lat: 47.3084488, lng: -122.2140121 },
     },
   ],
+  awarded: null,
+  disbursed: null,
   loading: false,
 };
 

@@ -5,18 +5,25 @@ import { LogoutOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout, loadUser } from "../../../actions/authAuctions";
+import { Redirect } from "react-router";
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
-export const TopHeader = ({ logout, user, loadUser, isAuthenticated }) => {
+export const TopHeader = (
+  { logout, user, loadUser, isAuthenticated, auth },
+  props
+) => {
+  const { data } = auth;
   useEffect(() => {
     loadUser();
     //eslint-disable-next-line
+    console.log(data);
   }, []);
+  
+  
   const onLogout = () => {
-    logout();
-    console.log("Logged Out");
+    return <Redirect to="/" />;
   };
 
   const [current, setCurrent] = useState("account");
@@ -37,15 +44,14 @@ export const TopHeader = ({ logout, user, loadUser, isAuthenticated }) => {
           >
             <SubMenu
               key={"account"}
-              icon={<Avatar style={{ margin: "10px" }} />}
-              title={`null`}
+              title={`${data.firstName} ${data.lastName}`}
             >
               <Menu.ItemGroup>
                 <Menu.Item key="setting:1">Account Settings</Menu.Item>
                 <Menu.Item key="setting:2">Status</Menu.Item>
               </Menu.ItemGroup>
               <Menu.ItemGroup>
-                <Menu.Item key="setting:3" onClick={onLogout}>
+                <Menu.Item key="setting:3" to='/' onClick={onLogout}>
                   Logout
                 </Menu.Item>
               </Menu.ItemGroup>
@@ -63,7 +69,7 @@ TopHeader.propTypes = {
 
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { logout, loadUser })(TopHeader);

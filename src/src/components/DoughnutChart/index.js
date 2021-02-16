@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Card } from "antd";
+import { Card, Skeleton } from "antd";
 import { Doughnut } from "react-chartjs-2";
-//import { data } from "./data";
 import "./index.css";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -132,21 +131,25 @@ export class DoughnutChart extends Component {
 
   render() {
     const { indicator } = this.props.project;
-
+    
     return (
       <div>
         <Card title={"Impact Summary"} className={"doughnutCard"}>
-          <Doughnut
-            data={this.data}
-            width={100}
-            height={100}
-            options={{
-              legend: {
-                display: true,
-                position: "bottom",
-              },
-            }}
-          />
+          {this.renderOccurence().length == 0 ? (
+            <Skeleton active />
+          ) : (
+            <Doughnut
+              data={this.data}
+              width={100}
+              height={100}
+              options={{
+                legend: {
+                  display: true,
+                  position: "bottom",
+                },
+              }}
+            />
+          )}
         </Card>
       </div>
     );

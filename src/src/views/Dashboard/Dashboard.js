@@ -1,17 +1,24 @@
 import React, { Component, Fragment } from "react";
 import { Layout, Row, Col } from "antd";
-
-import TopHeader from "../../../src/layouts/layout-components/header";
+import Navbar from "../../../src/layouts/layout-components/menu";
 import SideBar from "../../../src/layouts/layout-components/sidebar";
 import FooterTab from "../../../src/layouts/layout-components/footer";
 import ActionCard from "../../../src/components/ActionCard";
 import ImpactMap from "../../../src/components/ImpactMap";
 import FundingGraph from "../../../src/components/FundingGraph";
 import DoughnutChart from "../../../src/components/DoughnutChart";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { loadUser } from "../../actions/authAuctions";
 
 const { Content } = Layout;
 
 export class Dashboard extends Component {
+  // data = this.props
+  componentDidMount() {
+    loadUser();
+    console.log(this.props.auth.data);
+  }
   render() {
     return (
       <div>
@@ -23,7 +30,7 @@ export class Dashboard extends Component {
           >
             <SideBar />
             <Layout className="site-layout">
-              <TopHeader />
+              <Navbar />
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Dashboard</h1>
                 <ActionCard />
@@ -48,7 +55,15 @@ export class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+  loadUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { loadUser })(Dashboard);
 
 const h1 = {
   fontWeight: "700",

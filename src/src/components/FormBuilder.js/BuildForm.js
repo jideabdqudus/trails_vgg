@@ -12,11 +12,6 @@ import {
   Space,
 } from "antd";
 import "./index.css";
-import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import NavigationIcon from "@material-ui/icons/Navigation";
-import { Link } from "react-router-dom";
 
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { connect } from "react-redux";
@@ -39,6 +34,12 @@ const BuildForm = ({ project }) => {
     path: "",
     programme: "",
     instruction: "",
+    components: [],
+  });
+
+  const [field, setField] = useState({
+    age:"34",
+    working: true,
     components: [],
   });
 
@@ -150,7 +151,7 @@ const BuildForm = ({ project }) => {
                         <Form.Item noStyle> {() => <div></div>}</Form.Item>
                         <Card>
                           <Row>
-                            <Col span={8}>
+                            <Col span={7}>
                               <Form.Item
                                 {...field}
                                 name={[field.name, "label"]}
@@ -246,15 +247,16 @@ const BuildForm = ({ project }) => {
                                 </Select>
                               </Form.Item>
                             </Col>
+                            <Col span={1}></Col>
+                            <Col span={1}>
+                              <Button
+                                type="danger"
+                                onClick={() => remove(field.name)}
+                                icon={<MinusCircleOutlined />}
+                                size={"medium"}
+                              />
+                            </Col>
                           </Row>
-                          <h1></h1>
-                          <Button
-                          block
-                            type="danger"
-                            onClick={() => remove(field.name)}
-                          >
-                            <MinusCircleOutlined /> Delete Field
-                          </Button>
                         </Card>
                         <br />
                         <br />

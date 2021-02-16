@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Layout } from "antd";
-import TopHeader from "../../layouts/layout-components/header";
+import Navbar from "../../../src/layouts/layout-components/menu";
 import SideBar from "../../layouts/layout-components/sidebar";
 import FooterTab from "../../layouts/layout-components/footer";
 import ImpactManager from "../../components/ImpactManager/ImpactManager";
@@ -14,7 +14,7 @@ export class Projects extends Component {
           <Layout style={{ minHeight: "100vh" }}>
             <SideBar />
             <Layout className="site-layout">
-              <TopHeader />
+              <Navbar />
               <Content style={{ margin: "0 16px" }}>
                 {/* {window.location.href.indexOf("Trails") > -1 ? "Trails" : "Signals"} */}
                 <h1 style={h1}>Impact Manager</h1>
