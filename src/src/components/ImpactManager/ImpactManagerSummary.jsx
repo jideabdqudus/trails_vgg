@@ -45,7 +45,7 @@ class ImpactManagerSummary extends React.Component {
       sdgDump
     );
     const allSdgs = filtered.map((item, index) => {
-      return <SvgCardView key={index} path={item.Image} width="10%" />;
+      return <SvgCardView key={index} path={item.image} width="10%" />;
     });
 
     return allSdgs;
@@ -54,7 +54,7 @@ class ImpactManagerSummary extends React.Component {
   renderIndicators = () => {
     const indicators = appHelpers.indicatorSummary(this.props.sdgChecks);
     const allIndicators = indicators.map((item, index) => {
-      return <IndicatorView key={index} indicator={item.Text} />;
+      return <IndicatorView key={index} indicator={item.description} />;
     });
     return allIndicators;
 

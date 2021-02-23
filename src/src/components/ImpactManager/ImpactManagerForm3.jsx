@@ -76,19 +76,19 @@ const renderIndicators = (indicators, props, sdgIndex) => {
         style={{ width: "100%", }}
         control={
           <Checkbox
-            checked={item.Status}
+            checked={item.status}
             onChange={(e) =>
               props.handleCheckboxChange(
-                item.Text,
+                item.description,
                 e,
                 index,
                 parseInt(sdgIndex)
               )
             }
-            value={item.Text}
+            value={item.description}
           />
         }
-        label={item.Text}
+        label={item.description}
       />
     );
   });
@@ -107,12 +107,12 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
           >
             <SvgCard
               key={index}
-              path={opt.Image}
+              path={opt.image}
               opacity={"1"}
               style={{ height: "10px" }}
             />
             <Grid item xs={3} sm={3}>
-              <Typography className={classes.heading}>{opt.Text}</Typography>
+              <Typography className={classes.heading}>{opt.description}</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <div
@@ -128,16 +128,11 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
                   style={{ width: "100%" }}
                   noValidate
                 >
-                  {renderIndicators(opt.Indicators, props, opt.Number)}
+                  {renderIndicators(opt.indicators, props, opt.id)}
                 </form>
               </div>
             </Grid>
           </ExpansionPanelSummary>
-          {/* <ExpansionPanelDetails>
-          <form className={classes.container} noValidate>
-            {renderIndicators(opt.Indicators, props, opt.Number)}
-          </form>
-        </ExpansionPanelDetails> */}
         </Grid>
       </ExpansionPanel>
     );

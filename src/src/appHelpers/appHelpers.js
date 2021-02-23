@@ -46,7 +46,7 @@ export const appHelpers = {
       }
     });
     return Object.keys(sdgCheckBoxes).map((id) =>
-      sdgDump.find((sdg) => sdg.Number === id)
+      sdgDump.find((sdg) => sdg.id === id)
     );
   },
 
@@ -60,11 +60,11 @@ export const appHelpers = {
     const filtered = appHelpers.returnSelectedSdgs(sdgCheckBoxes, sdgDump);
     const returnedIndicators = [];
     filtered.map((filteredItem, index) => {
-      filteredItem.Indicators.map((item, index) => {
+      filteredItem.indicators.map((item, index) => {
         returnedIndicators.push({
-          value: item.Text,
+          value: item.description,
           status: false,
-          sdgId: filteredItem.Number,
+          sdgId: filteredItem.id,
         });
       });
     });
@@ -76,11 +76,11 @@ export const appHelpers = {
     const returnedIndicators = [];
 
     sdgChecks.map((item, index) => {
-      item.Indicators.map((indicator, indicatorIndex) => {
-        if (indicator.Status === true) {
+      item.indicators.map((indicator, indicatorIndex) => {
+        if (indicator.status === true) {
           returnedIndicators.push({
-            Text: indicator.Text,
-            SdgId: item.Number,
+            description: indicator.description,
+            SdgId: item.id,
           });
         }
       });
@@ -149,7 +149,7 @@ export const appHelpers = {
   containsObject: (obj, list) => {
     var i;
     for (i = 0; i < list.length; i++) {
-      if (parseInt(list[i].Number) === parseInt(obj.Number)) {
+      if (parseInt(list[i].id) === parseInt(obj.id)) {
         return true;
       }
     }
@@ -164,10 +164,10 @@ export const appHelpers = {
   },
   returnSdgNameById: (id, sdgDump) => {
     let filtered = sdgDump.filter((item) => {
-      return parseInt(item.Number) === parseInt(id);
+      return parseInt(item.id) === parseInt(id);
     });
     const filteredObj = Object.assign({}, ...filtered);
-    return filteredObj.Text;
+    return filteredObj.description;
   },
   setIndicatorCheckBoxes: (indicators, index) => {
     let isTrue = false;

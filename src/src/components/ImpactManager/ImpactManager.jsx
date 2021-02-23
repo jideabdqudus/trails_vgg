@@ -135,11 +135,11 @@ class ImpactManager extends React.Component {
       indicators: [
         {
           id: 1,
-          Name: "No Poverty",
+          description: "No Poverty",
         },
         {
           id: 2,
-          Name: "No Hunger",
+          description: "No Hunger",
         },
       ],
       formOneErrors: {
@@ -172,6 +172,7 @@ class ImpactManager extends React.Component {
   }
 
   componentDidMount() {
+    console.log(sdgDump)
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -184,6 +185,7 @@ class ImpactManager extends React.Component {
       .then((res) => {
         const api = res.data.data;
         console.log("new api from", api);
+        
       });
   }
 
@@ -348,14 +350,14 @@ class ImpactManager extends React.Component {
     });
 
     const newSdgChecks = sdgChecks.map((q, i) =>
-      parseInt(q.Number) === sdgIndex
+      parseInt(q.id) === sdgIndex
         ? {
             ...q,
-            Indicators: q.Indicators.map((o, i) =>
+            indicators: q.indicators.map((o, i) =>
               i === indicatorIndex
                 ? {
                     ...o,
-                    Status: e.target.checked,
+                    status: e.target.checked,
                   }
                 : o
             ),
@@ -377,7 +379,7 @@ class ImpactManager extends React.Component {
     const { sdgDump, sdgChecks } = this.state;
 
     let filtered = sdgDump.filter((item) => {
-      return parseInt(item.Number) === parseInt(sdg);
+      return parseInt(item.id) === parseInt(sdg);
     });
     const obj = Object.assign({}, ...filtered);
     const svgExist = appHelpers.containsObject(obj, sdgChecks);
@@ -390,7 +392,7 @@ class ImpactManager extends React.Component {
       });
       this.setState((prevState) => ({
         sdgChecks: prevState.sdgChecks.filter(
-          (SDG) => SDG.Number !== obj.Number
+          (SDG) => SDG.id !== obj.id
         ),
       }));
     } else {

@@ -83,10 +83,10 @@ const ImpactManagerForm2 = (props) => {
       return (
         <SvgCard
           key={index}
-          path={item.Image}
+          path={item.image}
           sdgCheckBoxes={sdgCheckBoxes}
-          opacity={setOpacity(sdgCheckBoxes, item.Number)}
-          onClick={handleSdgBoxChange.bind(this, item.Number)}
+          opacity={setOpacity(sdgCheckBoxes, item.id)}
+          onClick={handleSdgBoxChange.bind(this, item.id)}
         />
       );
     });
