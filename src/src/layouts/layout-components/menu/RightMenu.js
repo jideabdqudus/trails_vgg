@@ -18,9 +18,8 @@ export const RightMenu = (
 ) => {
   const { data } = auth;
   useEffect(() => {
-    loadUser();
+   // loadUser();
     //eslint-disable-next-line
-    console.log(data);
   }, []);
 
   const onLogout = () => {

@@ -13,12 +13,12 @@ class ImpactManagerSummary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      projectName: this.props.projectName,
-      projectCode: this.props.projectCode,
+      name: this.props.name,
+      code: this.props.code,
       projectLocation: this.props.projectLocation,
-      projectBanner: this.props.projectBanner,
+      image: this.props.image,
       programmeLocation: this.props.programmeLocation,
-      projectDescription: this.props.projectDescription,
+      description: this.props.description,
       sdgCheckBoxes: this.props.sdgCheckBoxes,
       programmePlaces: this.props.programmePlaces,
       indicators: this.props.indicators,
@@ -63,13 +63,13 @@ class ImpactManagerSummary extends React.Component {
 
   render() {
     const {
-      projectDescription,
-      projectCode,
-      projectName,
+      description,
+      code,
+      name,
       programmeLocation,
       programmePlaces,
       //projectLocation,
-      projectBanner,
+      image,
       sdgChecks,
     } = this.state;
     {
@@ -110,13 +110,13 @@ class ImpactManagerSummary extends React.Component {
                   <Col span={"12"}>
                     <h6>Programme Name</h6>
                     <h6 style={{ fontWeight: "normal", color: "grey" }}>
-                      {projectName}
+                      {name}
                     </h6>
                   </Col>
                   <Col span={12}>
                     <h6>Project Code</h6>
                     <h6 style={{ fontWeight: "normal", color: "grey" }}>
-                      {projectCode}
+                      {code}
                     </h6>
                   </Col>
                 </Row>
@@ -125,10 +125,9 @@ class ImpactManagerSummary extends React.Component {
                   <Col span={12}>
                     <h6>Programme Description</h6>
                     <h6 style={{ fontWeight: "normal", color: "grey" }}>
-                      {projectDescription}
+                      {description}
                     </h6>
                   </Col>
-                  
                 </Row>
                 <br />
                 <div>

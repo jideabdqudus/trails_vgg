@@ -25,24 +25,24 @@ export class Layout extends React.Component {
                 {/* All unthenticated Routes will go here */}
                 {/* login, reset-password, update-password */}
 
-                <Route path={"/"} exact render={props => <UserLogin />} />
+                <Route path={"/"} exact render={(props) => <UserLogin />} />
 
                 <Route
                   path={"/reset-password"}
                   exact
-                  render={props => <ResetPassword />}
+                  render={(props) => <ResetPassword />}
                 />
 
                 <Route
                   path={"/update-password"}
                   exact
-                  render={props => <UpdatePassword />}
+                  render={(props) => <UpdatePassword />}
                 />
 
                 {/* This layout with house a layout containing all authenticated routes */}
                 <Route
                   path="/app"
-                  render={props => (
+                  render={(props) => (
                     <AuthenticatedLayout {...this.props} {...props} />
                   )}
                 />
@@ -56,16 +56,16 @@ export class Layout extends React.Component {
 }
 const initialValue = {
   userData: {
-    firstname: "John"
+    firstname: "John",
   },
   impactManager: {
-    projectName: "",
-    projectDescription: "",
-    projectCode: "",
+    name: "",
+    description: "",
+    code: "",
     projectLocation: "",
     sdgs: [],
-    indicators: []
-  }
+    indicators: [],
+  },
 };
 
 export default createStore(Layout, initialValue);

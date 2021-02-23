@@ -8,8 +8,12 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Row, Col } from "antd";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Row, Col, Select } from "antd";
 import SvgCard from "../SvgCard/SvgCard";
+import { DataGrid } from "@material-ui/data-grid";
+
+const { Option } = Select;
 const styles = (theme) => ({
   container: {
     display: "flex",
@@ -69,6 +73,7 @@ const renderIndicators = (indicators, props, sdgIndex) => {
     return (
       <FormControlLabel
         key={index}
+        style={{ width: "100%", }}
         control={
           <Checkbox
             checked={item.Status}
@@ -87,7 +92,6 @@ const renderIndicators = (indicators, props, sdgIndex) => {
       />
     );
   });
-
   return allUIIndicators;
 };
 
@@ -101,19 +105,32 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-              <SvgCard
-                key={index}
-                path={opt.Image}
-                opacity={"1"}
-                style={{ height: "10px" }}
-              />
+            <SvgCard
+              key={index}
+              path={opt.Image}
+              opacity={"1"}
+              style={{ height: "10px" }}
+            />
             <Grid item xs={3} sm={3}>
               <Typography className={classes.heading}>{opt.Text}</Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
-              <form className={classes.container} noValidate>
-                {renderIndicators(opt.Indicators, props, opt.Number)}
-              </form>
+              <div
+                style={{
+                  overflowX: "auto",
+                  width: "100%",
+                  height: "200px",
+                }}
+                className="impact"
+              >
+                <form
+                  className={classes.container}
+                  style={{ width: "100%" }}
+                  noValidate
+                >
+                  {renderIndicators(opt.Indicators, props, opt.Number)}
+                </form>
+              </div>
             </Grid>
           </ExpansionPanelSummary>
           {/* <ExpansionPanelDetails>

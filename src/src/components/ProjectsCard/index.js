@@ -11,12 +11,11 @@ export class ProjectsCard extends Component {
     let string = "";
     projects.map((project, string) => {
       <>
-        {project.projectBanner.fileList.map((image) => {
+        {project.image.fileList.map((image) => {
           <>{image.thumbUrl}</>;
         })}
       </>;
     });
-    console.log("filse", string);
   };
 
   render() {
@@ -26,7 +25,10 @@ export class ProjectsCard extends Component {
       <div>
         {projects.length == 0 ? (
           <div>
-              <h3>When you add new projects, It would appear here!, <Link to="/dashboard/manager">Click to add</Link> </h3>
+            <h3>
+              When you add new projects, It would appear here!,{" "}
+              <Link to="/dashboard/manager">Click to add</Link>{" "}
+            </h3>
           </div>
         ) : (
           <Row>
@@ -37,8 +39,8 @@ export class ProjectsCard extends Component {
                     className={"projectCard"}
                     cover={
                       <img
-                        alt={project.projectName}
-                        // src={project.projectBanner.fileList.map((image) => {
+                        alt={project.name}
+                        // src={project.image.fileList.map((image) => {
                         //   <>{image.thumbUrl}</>;
                         // })}
                         src={project.projectImage}
@@ -58,8 +60,8 @@ export class ProjectsCard extends Component {
                     ]}
                   >
                     <Meta
-                      title={project.projectName}
-                      description={project.projectDescription}
+                      title={project.name}
+                      description={project.description}
                     />
                     <div>
                       <Row style={{ marginTop: "10px" }}>
@@ -71,9 +73,7 @@ export class ProjectsCard extends Component {
                         </Col>
                         <Col span={8}>
                           <span className={"projectSpan"}>Project Code</span>
-                          <p className={"projectParagraph"}>
-                            {project.projectCode}
-                          </p>
+                          <p className={"projectParagraph"}>{project.code}</p>
                         </Col>
                         <Col span={8}>
                           <span className={"projectSpan"}>Impact</span>

@@ -5,437 +5,72 @@ export const sdgDump = [
     Text: "No Poverty",
     Indicators: [
       {
+        Id: 1,
+        Text: "Do you currently live above 1000 Naira daily?",
+        Status: false,
+      },
+      {
+        Id: 2,
+        Text: "Are you employed and living above 1000 Naira daily?",
+        Status: false,
+      },
+      {
         Id: 3,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-    ],
-  },    
-  {
-    Number: "2",
-    Image: "../sdgs/sdg2.svg",
-    Text: "Zero Hunger",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Good Health",
-        Status: false,
-      },
-      {
-        Id: 8,
-        Text: "More Money",
-        Status: false,
-      },
-      {
-        Id: 9,
-        Text: "Energy Access",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "3",
-    Image: "../sdgs/sdg3.svg",
-    Text: "Good Health and Well-Being",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
+        Text: "Are you unemployed and living above 1000 Naira daily?",
         Status: false,
       },
       {
         Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "4",
-    Image: "../sdgs/sdg4.svg",
-    Text: "Quality Education",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
+        Text: "Are you a man and living above 1000 Naira daily?",
         Status: false,
       },
       {
         Id: 5,
-        Text: "Food Security",
+        Text: "Are you a woman and living above 1000 Naira daily?",
         Status: false,
       },
     ],
   },
-  {
-    Number: "5",
-    Image: "../sdgs/sdg5.svg",
-    Text: "Gender Equality",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "6",
-    Image: "../sdgs/sdg6.svg",
-    Text: "Clean Water And Sanitation",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "7",
-    Image: "../sdgs/sdg7.svg",
-    Text: "Affortable And Clean Energy",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "8",
-    Image: "../sdgs/sdg8.svg",
-    Text: "Decent Work and Economic Growth",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "9",
-    Image: "../sdgs/sdg9.svg",
-    Text: "Industry Innovation and Infrastructure",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "10",
-    Image: "../sdgs/sdg10.svg",
-    Text: "Reduced Inequalities",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "11",
-    Image: "../sdgs/sdg11.svg",
-    Text: "Sustainable Cities and Communities",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "12",
-    Image: "../sdgs/sdg12.svg",
-    Text: "Responsible Consumption and Production",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "13",
-    Image: "../sdgs/sdg13.svg",
-    Text: "Climate Action",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "14",
-    Image: "../sdgs/sdg14.svg",
-    Text: "Life Below Water",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "15",
-    Image: "../sdgs/sdg15.svg",
-    Text: "Life on Land",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "16",
-    Image: "../sdgs/sdg16.svg",
-    Text: "Peace, Justice and Strong Institutions",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
-  {
-    Number: "17",
-    Image: "../sdgs/sdg17.svg",
-    Text: "Partnerships For the Goals",
-    Indicators: [
-      {
-        Id: 1,
-        Text: "Small Agriculture",
-        Status: false,
-      },
-      {
-        Id: 2,
-        Text: "Financial Literacy",
-        Status: false,
-      },
-      {
-        Id: 4,
-        Text: "Food Security",
-        Status: false,
-      },
-      {
-        Id: 5,
-        Text: "Food Security",
-        Status: false,
-      },
-    ],
-  },
+  // {
+  //   id: 1,
+  //   name: "Free Medicine",
+  //   description: "Free Medicine",
+  //   image:
+  //     "../sdgs/sdg3.svg",
+  //   indicators: [
+  //     { id: 71, description: "Food Security", status: false },
+  //     { id: 82, description: "Smallholder Agriculture", status: false },
+  //     { id: 93, description: "Sustainable Agriculture", status: false },
+  //     { id: 11, description: "Pollution Prevention", status: false },
+  //     { id: 51, description: "Smallholder Agriculture", status: false },
+  //   ],
+  // },
+  // {
+  //   id: 2,
+  //   name: "Free Money",
+  //   description: "Free Money",
+  //   image:
+  //     "../sdgs/sdg6.svg",
+  //   indicators: [
+  //     { id: 7, description: "Food Security", status: false },
+  //     { id: 8, description: "Smallholder Agriculture", status: false },
+  //     { id: 9, description: "Sustainable Agriculture", status: false },
+  //     { id: 19, description: "Pollution Prevention", status: false },
+  //     { id: 71, description: "Smallholder Agriculture", status: false },
+  //   ],
+  // },
+  // {
+  //   id: 17,
+  //   name: "Zero hunger",
+  //   description: "Zero hunger",
+  //   image:
+  //     "https://boi-dta-prod.s3.eu-west-1.amazonaws.com/trails/2FA7FD5AACzero hunger.svg",
+  //   indicators: [
+  //     { id: 34, description: "Food Security", status: false },
+  //     { id: 67, description: "Smallholder Agriculture", status: false },
+  //     { id: 97, description: "Sustainable Agriculture", status: false },
+  //     { id: 80, description: "Pollution Prevention", status: false },
+  //     { id: 61, description: "Smallholder Agriculture", status: false },
+  //   ],
+  // },
 ];

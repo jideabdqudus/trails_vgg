@@ -349,8 +349,8 @@ const BuildForm = ({ project }) => {
                     <Select placeholder="Select programme">
                       {projects.map((project) => (
                         <Fragment>
-                          <Option value={project.projectCode}>
-                            {project.projectCode}
+                          <Option value={project.code}>
+                            {project.code}
                           </Option>
                         </Fragment>
                       ))}

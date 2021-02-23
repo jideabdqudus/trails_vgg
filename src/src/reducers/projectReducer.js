@@ -1,14 +1,19 @@
-import { CREATE_PROJECT, GET_PROJECT, TEST_DISPATCH } from "../constants/Types";
+import {
+  CREATE_PROJECT,
+  GET_PROJECT,
+  TEST_DISPATCH,
+  GET_PROGRAMS,
+} from "../constants/Types";
 
 const initialState = {
   projects: [
     {
-      projectName: "Home Grown School Feeding",
+      name: "Home Grown School Feeding",
       projectImage:
         "https://tdma.info/assets/uploads/2017/12/Using_sunlight_to_clean_water_Featured_Image-1.jpg",
-      projectCode: "HGSF",
+      code: "HGSF",
       projectLocation: "ng",
-      projectDescription:
+      description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, sint!",
       sdgCheckBoxes: { 3: true, 13: true },
       indicatorCheckBoxes: { 0: "Good Health", 2: "Food Security" },
@@ -21,7 +26,7 @@ const initialState = {
         placeId: "ChIJfTxB93w5QIcRcvYseNxCK8E",
         types: (3)[("locality", "political", "geocode")],
       },
-      projectBanner: {
+      image: {
         file: {
           uid: "rc-upload-1611946216843-9",
           lastModified: 1523649214000,
@@ -36,12 +41,12 @@ const initialState = {
       mapCenter: { lat: 7.3775355, lng: 3.9470396 },
     },
     {
-      projectName: "World Reduced Inequalities",
+      name: "World Reduced Inequalities",
       projectImage:
         "https://media.pri.org/s3fs-public/styles/open_graph/public/migration/PriMigrationsDamanticWordpressAttachmentsImagesMigration/www.theworld.org/wp-content/uploads/IMG_4297.jpg?itok=iB8n0R4j",
-      projectCode: "FEC",
+      code: "FEC",
       projectLocation: "gh",
-      projectDescription:
+      description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, sint!",
       sdgCheckBoxes: { 12: true, 8: true },
       indicatorCheckBoxes: { 0: "Small Agriculture", 1: "Financial Literacy" },
@@ -54,7 +59,7 @@ const initialState = {
         placeId: "ChIJfTxB93w5QIcRcvYseNxCK8E",
         types: (3)[("locality", "political", "geocode")],
       },
-      projectBanner: {
+      image: {
         file: {
           uid: "rc-upload-1611946216843-9",
           lastModified: 1523649214000,
@@ -69,12 +74,12 @@ const initialState = {
       mapCenter: { lat: 6.334986, lng: 5.6037465 },
     },
     {
-      projectName: "National Woman Rights",
+      name: "National Woman Rights",
       projectImage:
         "https://politicalyouthnetwork.org/wp-content/uploads/2019/01/Womens-rights-are-human-rights.jpg",
-      projectCode: "NWR",
+      code: "NWR",
       projectLocation: "ng",
-      projectDescription:
+      description:
         "National lorem ipsum dolor sit amet consectetur adipisicing elit. Non, sint!",
       sdgCheckBoxes: { 5: true, 2: true },
       indicatorCheckBoxes: { 0: "Small Agriculture", 1: "Financial Literacy" },
@@ -87,7 +92,7 @@ const initialState = {
         placeId: "ChIJfTxB93w5QIcRcvYseNxCK8E",
         types: (3)[("locality", "political", "geocode")],
       },
-      projectBanner: {
+      image: {
         file: {
           uid: "rc-upload-1611946216843-9",
           lastModified: 1523649214000,
@@ -109,6 +114,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case GET_PROGRAMS:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+      };
     case GET_PROJECT:
       return {
         ...state,
@@ -116,6 +127,7 @@ export default (state = initialState, action) => {
     case CREATE_PROJECT:
       return {
         ...state,
+        ...action.payload,
         projects: [...state.projects, action.payload],
       };
     default:

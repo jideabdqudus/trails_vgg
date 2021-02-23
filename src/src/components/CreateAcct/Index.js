@@ -190,7 +190,7 @@ const CreateAcct = (
                         { required: true, message: "Confirm your Input" },
                       ]}
                     >
-                      <Input
+                      <Input.Password
                         style={{
                           height: "40px",
                           borderRadius: "7px",
@@ -210,7 +210,7 @@ const CreateAcct = (
                         { required: true, message: "Confirm your Input" },
                       ]}
                     >
-                      <Input
+                      <Input.Password
                         style={{
                           height: "40px",
                           borderRadius: "7px",

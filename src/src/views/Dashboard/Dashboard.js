@@ -9,15 +9,32 @@ import FundingGraph from "../../../src/components/FundingGraph";
 import DoughnutChart from "../../../src/components/DoughnutChart";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { getPrograms } from "../../actions/projectAction";
 import { loadUser } from "../../actions/authAuctions";
+import axios from "axios";
 
 const { Content } = Layout;
 
 export class Dashboard extends Component {
   // data = this.props
   componentDidMount() {
-    loadUser();
-    console.log(this.props.auth.data);
+    getPrograms(this.props.auth.data.accessToken);
+  }
+
+  componentDidMount() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: this.props.auth.data.accessToken,
+      },
+    };
+
+    axios
+      .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
+      .then((res) => {
+        const api = res.data.data;
+        console.log("new api", api);
+      });
   }
   render() {
     return (
@@ -57,13 +74,14 @@ export class Dashboard extends Component {
 
 Dashboard.propTypes = {
   loadUser: PropTypes.func.isRequired,
+  getPrograms: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { loadUser })(Dashboard);
+export default connect(mapStateToProps, { loadUser, getPrograms })(Dashboard);
 
 const h1 = {
   fontWeight: "700",

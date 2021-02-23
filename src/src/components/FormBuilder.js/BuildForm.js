@@ -38,7 +38,7 @@ const BuildForm = ({ project }) => {
   });
 
   const [field, setField] = useState({
-    age:"34",
+    age: "34",
     working: true,
     components: [],
   });
@@ -107,9 +107,7 @@ const BuildForm = ({ project }) => {
                     <Select placeholder="Select programme">
                       {projects.map((project) => (
                         <Fragment>
-                          <Option value={project.projectCode}>
-                            {project.projectCode}
-                          </Option>
+                          <Option value={project.code}>{project.code}</Option>
                         </Fragment>
                       ))}
                     </Select>

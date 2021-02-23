@@ -133,14 +133,14 @@ const img = {
 function ImpactManagerForm1(props) {
   const {
     classes,
-    projectDescription,
-    projectCode,
-    projectName,
+    description,
+    code,
+    name,
     //projectLocation,
     programmeLocation,
     formOneErrors,
     //locationsEnum,
-    projectBanner,
+    image,
     programmePlaces,
     address,
   } = props;
@@ -164,9 +164,9 @@ function ImpactManagerForm1(props) {
             </label>
             <TextField
               id="project-name"
-              error={formOneErrors.projectName}
-              name={"projectName"}
-              value={projectName}
+              error={formOneErrors.name}
+              name={"name"}
+              value={name}
               className={classes.textField}
               margin="normal"
               variant="outlined"
@@ -185,9 +185,9 @@ function ImpactManagerForm1(props) {
             </label>
             <TextField
               id="project-code"
-              name={"projectCode"}
-              error={formOneErrors.projectCode}
-              value={projectCode}
+              name={"code"}
+              error={formOneErrors.code}
+              value={code}
               className={classes.textField}
               margin="normal"
               variant="outlined"
@@ -205,7 +205,7 @@ function ImpactManagerForm1(props) {
               Programme Location
             </label>
             <FormControl fullWidth required>
-              <PlacesAutocomplete
+              {/* <PlacesAutocomplete
                 className={classes.textField}
                 variant="outlined"
                 value={address}
@@ -250,8 +250,8 @@ function ImpactManagerForm1(props) {
                     </div>
                   </div>
                 )}
-              </PlacesAutocomplete>
-            </FormControl>
+              </PlacesAutocomplete>*/}
+            </FormControl> 
           </form>
         </Col>
         <Col span={1}></Col>
@@ -297,9 +297,9 @@ function ImpactManagerForm1(props) {
             </label>
             <TextField
               id="project-description"
-              name={"projectDescription"}
-              value={projectDescription}
-              error={formOneErrors.projectDescription}
+              name={"description"}
+              value={description}
+              error={formOneErrors.description}
               multiline
               rows={4}
               rowsMax={6}

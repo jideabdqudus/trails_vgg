@@ -19,6 +19,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import axios from "axios";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
 
 const baseStyle = {
@@ -115,12 +116,12 @@ class ImpactManager extends React.Component {
         </span>
       ),
       sdgDump: sdgDump,
-      projectName: "",
-      projectCode: "",
+      name: "",
+      code: "",
       programmeLocation: "",
-      projectDescription: "",
+      description: "",
       programmePlaces: "",
-      projectBanner: {},
+      image: {},
       impactManagerFormOne: true,
       impactManagerFormTwo: false,
       impactManagerFormThree: false,
@@ -142,13 +143,13 @@ class ImpactManager extends React.Component {
         },
       ],
       formOneErrors: {
-        projectName: false,
-        projectDescription: false,
+        name: false,
+        description: false,
         // projectLocation: false,
         programmeLocation: false,
-        projectCode: false,
+        code: false,
         programmePlaces: "",
-        projectBanner: false,
+        image: false,
       },
       formTwoErrors: {
         sdg: false,
@@ -170,6 +171,22 @@ class ImpactManager extends React.Component {
     this.cancelProject = this.cancelProject.bind(this);
   }
 
+  componentDidMount() {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: this.props.auth.data.accessToken,
+      },
+    };
+
+    axios
+      .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
+      .then((res) => {
+        const api = res.data.data;
+        console.log("new api from", api);
+      });
+  }
+
   handleChangePlace = (address) => {
     this.setState({ address });
   };
@@ -187,7 +204,7 @@ class ImpactManager extends React.Component {
   };
 
   normFile = (e) => {
-    this.setState({ projectBanner: e });
+    this.setState({ image: e });
     console.log("Upload event:", e);
     if (Array.isArray(e)) {
       return e;
@@ -195,12 +212,10 @@ class ImpactManager extends React.Component {
     return e && e.fileList;
   };
 
-  componentDidMount() {}
-
   handleBannerChange = (file) => {
     console.log("Files:", file);
     this.setState({
-      projectBanner: file.map((file) =>
+      image: file.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
         })
@@ -223,12 +238,12 @@ class ImpactManager extends React.Component {
         impactManagerFormTwo: true,
       });
       const impactManager = {
-        projectName: this.state.projectName,
-        projectCode: this.state.projectCode,
-        projectDescription: this.state.projectDescription,
+        name: this.state.name,
+        code: this.state.code,
+        description: this.state.description,
         // projectLocation: this.state.projectLocation,
         programmeLocation: this.state.programmeLocation,
-        projectBanner: this.state.projectBanner,
+        image: this.state.image,
         programmePlaces: this.state.programmePlaces,
         sdgs: [],
         indicators: [],
@@ -277,28 +292,26 @@ class ImpactManager extends React.Component {
   createProject() {
     const indicatorStrings = [];
     const {
-      projectCode,
-      projectName,
+      code,
+      name,
       // projectLocation,
       programmeLocation,
-      projectDescription,
+      description,
       programmePlaces,
       sdgCheckBoxes,
       indicatorCheckBoxes,
-      projectBanner,
+      image,
       activeMarker,
       mapCenter,
     } = this.state;
     const payload = {
-      projectCode,
-      projectName,
+      code,
+      name,
       //projectLocation,
-      programmeLocation,
-      projectDescription,
-      programmePlaces,
+      description,
       sdgCheckBoxes,
       indicatorCheckBoxes,
-      projectBanner,
+      image,
       activeMarker,
       mapCenter,
     };
@@ -435,13 +448,13 @@ class ImpactManager extends React.Component {
     //this.props.project.projects
     const { projects } = this.props.project;
     const {
-      projectDescription,
-      projectCode,
-      projectName,
+      description,
+      code,
+      name,
       //projectLocation,
       programmeLocation,
       programmePlaces,
-      projectBanner,
+      image,
       impactManagerFormOne,
       impactManagerFormTwo,
       impactManagerFormThree,
@@ -456,6 +469,7 @@ class ImpactManager extends React.Component {
       sdgChecks,
       createBtn,
     } = this.state;
+
     return (
       <Aux>
         <div>
@@ -474,10 +488,10 @@ class ImpactManager extends React.Component {
                   />
                   <Divider />
                   <ImpactManagerForm1
-                    projectDescription={projectDescription}
-                    projectName={projectName}
-                    projectCode={projectCode}
-                    projectBanner={projectBanner}
+                    description={description}
+                    name={name}
+                    code={code}
+                    image={image}
                     programmePlaces={programmePlaces}
                     programmeLocation={programmeLocation}
                     // projectLocation={projectLocation}
@@ -712,6 +726,7 @@ class ImpactManager extends React.Component {
 
 const mapStateToProps = (state) => ({
   project: state.projects,
+  auth: state.auth,
 });
 
 const WrappedContainer = GoogleApiWrapper({

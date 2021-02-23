@@ -1,6 +1,8 @@
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const GET_PROJECT = "GET_PROJECT";
 export const PROJECT_ERROR = "PROJECT_ERROR";
+export const GET_PROGRAMS = "GET_PROGRAMS"
+
 
 
 export const SET_CURRENT = "SET_CURRENT";

@@ -16,6 +16,7 @@ const initialState = {
   loading: true,
   user: {},
   data: {},
+  programs:[]
 };
 
 export default function (state = initialState, action) {
@@ -39,9 +40,11 @@ export default function (state = initialState, action) {
       localStorage.setItem("token", action.payload.data.accessToken);
       return {
         ...state,
+        user: action.payload.data,
         ...action.payload,
         isAuthenticated: true,
         loading: false,
+        token: action.payload.data.accessToken
       };
     case LOGIN_FAIL:
     case REGISTER_FAIL:

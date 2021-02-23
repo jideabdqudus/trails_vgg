@@ -14,18 +14,19 @@ import setAuthToken from "../utils/setAuthToken";
 //Load User
 
 export const loadUser = () => async (dispatch) => {
-  setAuthToken(localStorage.token);
-  try {
-    const res = await axios.get("http://trail-api.test.vggdev.com/user");
-    dispatch({
-      type: USER_LOADED,
-      payload: res.data,
-    });
-  } catch (error) {
-    dispatch({
-      type: AUTH_ERROR,
-    });
-  }
+  // setAuthToken(localStorage.token);
+  // try {
+  //   const res = await axios.get("http://trail-api.test.vggdev.com/user");
+  //   dispatch({
+  //     type: USER_LOADED,
+  //     payload: res.data,
+  //   });
+  // } catch (error) {
+  //   dispatch({
+  //     type: AUTH_ERROR,
+  //     payload: error.response,
+  //   });
+  // } 
 };
 
 //Register User
@@ -52,7 +53,7 @@ export const register = (formData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
-      payload: error.response.data.msg,
+      payload: error.response,
     });
   }
 };
@@ -81,7 +82,7 @@ export const login = (formData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: LOGIN_FAIL,
-      payload: error.response.data.msg,
+      payload: error.response,
     });
   }
 };

@@ -4,8 +4,34 @@ import {
   TEST_DISPATCH,
   GET_INDICATORS,
   PROJECT_ERROR,
+  GET_PROGRAMS,
 } from "../constants/Types";
 import axios from "axios";
+
+export const getPrograms = (token) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      accessToken: token,
+    },
+  };
+  try {
+    const res = await axios.get(
+      "http://trail-api.test.vggdev.com/programs",
+      config
+    );
+    dispatch({
+      type: GET_PROGRAMS,
+      payload: res.data,
+    });
+    console.log("Sameerah", res.data);
+  } catch (err) {
+    dispatch({
+      type: PROJECT_ERROR,
+      payload: err.response,
+    });
+  }
+};
 
 export const getProject = () => {
   return {
@@ -20,11 +46,11 @@ export const createProject = (project) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.post(
-      "http://trail-api.test.vggdev.com/programs",
-      project,
-      config
-    );
+    // const res = await axios.post(
+    //   "/api/plans",
+    //   project,
+    //   config
+    // );
     dispatch({
       type: CREATE_PROJECT,
       payload: project,
@@ -32,7 +58,11 @@ export const createProject = (project) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: PROJECT_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response, status: err.response },
     });
   }
 };
+
+
+
+
