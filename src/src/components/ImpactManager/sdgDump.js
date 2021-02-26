@@ -33,10 +33,10 @@ export const sdgDump = [
   // },
   {
     id: "1",
+    number: "23",
     name: "Free Medicine",
     description: "Free Medicine",
-    image:
-      "../sdgs/sdg3.svg",
+    image: "../sdgs/sdg3.svg",
     indicators: [
       { id: 71, description: "Food Security", status: false },
       { id: 82, description: "Smallholder Agriculture", status: false },
@@ -48,9 +48,9 @@ export const sdgDump = [
   {
     id: "2",
     name: "Free Money",
+    number: "25",
     description: "Free Money",
-    image:
-      "../sdgs/sdg6.svg",
+    image: "../sdgs/sdg6.svg",
     indicators: [
       { id: 7, description: "Food Security", status: false },
       { id: 8, description: "Smallholder Agriculture", status: false },
@@ -61,10 +61,41 @@ export const sdgDump = [
   },
   {
     id: "17",
+    number: "53",
     name: "Zero hunger",
     description: "Zero hunger",
     image:
-      "https://boi-dta-prod.s3.eu-west-1.amazonaws.com/trails/2FA7FD5AACzero hunger.svg",
+      "https://boi-dta-prod.s3.eu-west-1.amazonaws.com/trails/2FA7FD5AACzero%20hunger.svg",
+    indicators: [
+      { id: 34, description: "Food Security", status: false },
+      { id: 67, description: "Smallholder Agriculture", status: false },
+      { id: 97, description: "Sustainable Agriculture", status: false },
+      { id: 80, description: "Pollution Prevention", status: false },
+      { id: 61, description: "Smallholder Agriculture", status: false },
+    ],
+  },
+  {
+    id: "19",
+    name: "Zero hunger",
+    number: "65",
+    description: "Zero hunger",
+    image:
+      "https://boi-dta-prod.s3.eu-west-1.amazonaws.com/trails/2FA7FD5AACzero%20hunger.svg",
+    indicators: [
+      { id: 34, description: "Food Security", status: false },
+      { id: 67, description: "Smallholder Agriculture", status: false },
+      { id: 97, description: "Sustainable Agriculture", status: false },
+      { id: 80, description: "Pollution Prevention", status: false },
+      { id: 61, description: "Smallholder Agriculture", status: false },
+    ],
+  },
+  {
+    id: "59",
+    name: "Zero hunger",
+    number: "76",
+    description: "Zero hunger",
+    image:
+      "https://boi-dta-prod.s3.eu-west-1.amazonaws.com/trails/2FA7FD5AACzero%20hunger.svg",
     indicators: [
       { id: 34, description: "Food Security", status: false },
       { id: 67, description: "Smallholder Agriculture", status: false },

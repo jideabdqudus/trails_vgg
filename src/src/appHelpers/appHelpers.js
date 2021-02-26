@@ -58,7 +58,7 @@ export const appHelpers = {
 
   returnIndicators: (sdgCheckBoxes, sdgDump) => {
     const filtered = appHelpers.returnSelectedSdgs(sdgCheckBoxes, sdgDump);
-    const returnedIndicators = [];
+     const returnedIndicators = [];
     filtered.map((filteredItem, index) => {
       filteredItem.indicators.map((item, index) => {
         returnedIndicators.push({
@@ -68,7 +68,7 @@ export const appHelpers = {
         });
       });
     });
-
+    //console.log("asjaskj",filtered)
     return returnedIndicators;
   },
 
@@ -149,7 +149,7 @@ export const appHelpers = {
   containsObject: (obj, list) => {
     var i;
     for (i = 0; i < list.length; i++) {
-      if (parseInt(list[i].id) === parseInt(obj.id)) {
+      if (list[i].id === obj.id) {
         return true;
       }
     }
@@ -158,13 +158,13 @@ export const appHelpers = {
   },
   filterSdgById: (id, allIndicators) => {
     let filtered = allIndicators.filter((item) => {
-      return parseInt(item.sdgId) === parseInt(id);
+      return item.sdgId === id;
     });
     return filtered;
   },
   returnSdgNameById: (id, sdgDump) => {
     let filtered = sdgDump.filter((item) => {
-      return parseInt(item.id) === parseInt(id);
+      return item.id === id;
     });
     const filteredObj = Object.assign({}, ...filtered);
     return filteredObj.description;
@@ -172,7 +172,7 @@ export const appHelpers = {
   setIndicatorCheckBoxes: (indicators, index) => {
     let isTrue = false;
     Object.keys(indicators).forEach(function (key) {
-      isTrue = parseInt(key) === index ? true : false;
+      isTrue = key === index ? true : false;
     });
     return isTrue;
   },

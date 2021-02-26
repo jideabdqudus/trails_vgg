@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { withStore } from "@spyna/react-store";
 import {
@@ -8,9 +8,9 @@ import {
   FormControlLabel,
   MenuItem,
 } from "@material-ui/core";
-import { sdgDump } from "./sdgDump";
+//import { sdgDump } from "./sdgDump";
 import SvgCard from "../SvgCard/SvgCard";
-
+import axios from "axios";
 const styles = (theme) => ({
   container: {
     display: "flex",
@@ -59,6 +59,22 @@ const styles = (theme) => ({
 });
 
 const ImpactManagerForm2 = (props) => {
+  const [sdgDumping, setSdgDumping] = useState("");
+
+  useEffect(async () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: props.auth.data.accessToken,
+      },
+    };
+    const result = await axios.get(
+      "http://trail-api.test.vggdev.com/sdgs/all/indicators",
+      config
+    );
+    setSdgDumping(result.data.data);
+  });
+
   const { classes } = props;
 
   const setOpacity = (sdgCheckBoxes, sdgNum) => {
@@ -76,10 +92,11 @@ const ImpactManagerForm2 = (props) => {
     handleSdgBoxChange,
     sdgCheckBoxes,
     formTwoErrors,
+    sdgDump,
   } = props;
 
-  const renderSdgs = (sdgDump) => {
-    const allSdgs = sdgDump.map((item, index) => {
+  const renderSdgs = () => {
+    const allSdgs = props.sdgDump.map((item, index) => {
       return (
         <SvgCard
           key={index}
@@ -98,7 +115,12 @@ const ImpactManagerForm2 = (props) => {
     <div className={`flex items-center ${classes.root}`}>
       <Grid>
         <Grid item sm={4} md={12}>
-          <p style={{ color: formTwoErrors.svg === true ? "red" : "black", marginTop:"15px" }}>
+          <p
+            style={{
+              color: formTwoErrors.svg === true ? "red" : "black",
+              marginTop: "15px",
+            }}
+          >
             Which SDGs aligns with your impact priorities?
           </p>
 

@@ -3,7 +3,7 @@ import Aux from "../hocs/_Aux";
 import { Button } from "@material-ui/core";
 import { withStore } from "@spyna/react-store";
 import { Row, Col, Card } from "antd";
-import { sdgDump } from "./sdgDump";
+//import { sdgDump } from "./sdgDump";
 import { appHelpers } from "../../appHelpers/appHelpers";
 import SvgCardView from "../SvgCard/SvgCardView";
 import IndicatorView from "../Indicators/IndicatorView";
@@ -23,6 +23,7 @@ class ImpactManagerSummary extends React.Component {
       programmePlaces: this.props.programmePlaces,
       indicators: this.props.indicators,
       allImpacts: this.props.allImpacts,
+      sdgDump: this.props.sdgDump,
     };
   }
 
@@ -42,7 +43,7 @@ class ImpactManagerSummary extends React.Component {
   renderSvgCards = () => {
     const filtered = appHelpers.returnSelectedSdgs(
       this.state.sdgCheckBoxes,
-      sdgDump
+      this.state.sdgDump
     );
     const allSdgs = filtered.map((item, index) => {
       return <SvgCardView key={index} path={item.image} width="10%" />;
@@ -71,6 +72,7 @@ class ImpactManagerSummary extends React.Component {
       //projectLocation,
       image,
       sdgChecks,
+      sdgDump,
     } = this.state;
     {
       console.log("Heres", this.renderIndicators());

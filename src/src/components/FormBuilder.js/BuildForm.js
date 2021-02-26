@@ -10,6 +10,7 @@ import {
   Select,
   Divider,
   Space,
+  Checkbox,
 } from "antd";
 import "./index.css";
 
@@ -28,34 +29,14 @@ const BuildForm = ({ project }) => {
 
   const [formData, setFormData] = useState({
     title: "",
-    display: "form",
-    type: "form",
     name: "",
-    path: "",
-    programme: "",
+    button: true,
+    program: "",
     instruction: "",
     components: [],
   });
 
-  const [field, setField] = useState({
-    age: "34",
-    working: true,
-    components: [],
-  });
-
-  const {
-    title,
-    programme,
-    instruction,
-    question,
-    inputIndicator,
-    target,
-    name,
-    path,
-    type,
-    components,
-    display,
-  } = formData;
+  const { title, program, instruction, components, name, button } = formData;
 
   const { projects } = project;
 
@@ -94,23 +75,39 @@ const BuildForm = ({ project }) => {
                     />
                   </Form.Item>
                 </Col>
-                <Col span={2}></Col>
-                <Col span={8}>
+                <Col span={1}></Col>
+                <Col span={5}>
                   <Form.Item
                     label={titleName2}
-                    name={"programme"}
-                    value={programme}
+                    name={"program"}
+                    value={program}
                     rules={[
-                      { required: true, message: "Please select a programme" },
+                      { required: true, message: "Please select a program" },
                     ]}
                   >
-                    <Select placeholder="Select programme">
+                    <Select placeholder="Select program">
                       {projects.map((project) => (
                         <Fragment>
                           <Option value={project.code}>{project.code}</Option>
                         </Fragment>
                       ))}
                     </Select>
+                  </Form.Item>
+                </Col>
+                <Col span={1}></Col>
+                <Col span={8}>
+                  <Form.Item
+                    label={titleName4}
+                    name="name"
+                    rules={[{ required: true, message: "Confirm your Input" }]}
+                    style={{ marginBottom: "15px" }}
+                  >
+                    <Input
+                      type="text"
+                      name="name"
+                      value={name}
+                      onChange={onChange}
+                    />
                   </Form.Item>
                 </Col>
               </Row>
@@ -128,7 +125,10 @@ const BuildForm = ({ project }) => {
               </Row>
               <Row>
                 <Col xs={{ span: 12 }} lg={{ span: 12 }}>
-                  {" "}
+                  <Form.Item name="remember" valuePropName="checked">
+                    <Checkbox checked disabled />
+                  </Form.Item>
+                  <Form.Item></Form.Item>
                 </Col>
               </Row>
             </Card>
@@ -152,8 +152,8 @@ const BuildForm = ({ project }) => {
                             <Col span={7}>
                               <Form.Item
                                 {...field}
-                                name={[field.name, "label"]}
-                                fieldKey={[field.fieldKey, "label"]}
+                                name={[field.name, "linkedIndicator"]}
+                                fieldKey={[field.fieldKey, "linkedIndicator"]}
                                 rules={[
                                   {
                                     required: true,
@@ -185,8 +185,8 @@ const BuildForm = ({ project }) => {
                             <Col span={4}>
                               <Form.Item
                                 {...field}
-                                name={[field.name, "inputData"]}
-                                fieldKey={[field.fieldKey, "inputData"]}
+                                name={[field.name, "value"]}
+                                fieldKey={[field.fieldKey, "value"]}
                                 rules={[
                                   {
                                     required: true,
@@ -199,8 +199,20 @@ const BuildForm = ({ project }) => {
                                   label={"Short free text"}
                                 >
                                   <Option value="text">Short Free Text</Option>
-                                  <Option value="checkbox">Checkbox</Option>
                                 </Select>
+                              </Form.Item>
+                            </Col>
+                            <Col span={4}>
+                              <Form.Item
+                                {...field}
+                                name={[field.name, "label"]}
+                                fieldKey={[field.fieldKey, "label"]}
+                              >
+                                {" "}
+                                <Input
+                                  type="text"
+                                  placeholder={"Input Label"}
+                                />
                               </Form.Item>
                             </Col>
                             <Col span={1}></Col>
@@ -325,7 +337,7 @@ const titleName2 = (
       fontWeight: "bold",
     }}
   >
-    Link Form to Programme
+    Link Form to program
   </p>
 );
 const titleName3 = (
@@ -340,6 +352,21 @@ const titleName3 = (
     }}
   >
     Instruction (Optional)
+  </p>
+);
+
+const titleName4 = (
+  <p
+    style={{
+      margin: "0px",
+      padding: "0px",
+      color: "#001529",
+      fontSize: "14px",
+      border: "none",
+      fontWeight: "bold",
+    }}
+  >
+    Name
   </p>
 );
 

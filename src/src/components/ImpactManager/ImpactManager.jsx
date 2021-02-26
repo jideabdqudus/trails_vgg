@@ -8,7 +8,7 @@ import ImpactManagerForm2 from "./ImpactManagerForm2";
 import ImpactManagerForm3 from "./ImpactManagerForm3";
 import ImpactManagerSummary from "./ImpactManagerSummary";
 import { appHelpers } from "../../appHelpers/appHelpers";
-import { sdgDump } from "./sdgDump";
+//import { sdgDump } from "./sdgDump";
 import "./index.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
@@ -115,7 +115,7 @@ class ImpactManager extends React.Component {
           Create Project <i className="fa fa-angle-right" />{" "}
         </span>
       ),
-      sdgDump: sdgDump,
+      sdgDump: "",
       name: "",
       code: "",
       programmeLocation: "",
@@ -172,7 +172,6 @@ class ImpactManager extends React.Component {
   }
 
   componentDidMount() {
-    console.log(sdgDump)
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -183,9 +182,8 @@ class ImpactManager extends React.Component {
     axios
       .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
       .then((res) => {
-        const api = res.data.data;
-        console.log("new api from", api);
-        
+        const sdgDump = res.data.data;
+        this.setState({ sdgDump });
       });
   }
 
@@ -350,7 +348,7 @@ class ImpactManager extends React.Component {
     });
 
     const newSdgChecks = sdgChecks.map((q, i) =>
-      parseInt(q.id) === sdgIndex
+      q.id === sdgIndex
         ? {
             ...q,
             indicators: q.indicators.map((o, i) =>
@@ -376,7 +374,7 @@ class ImpactManager extends React.Component {
   };
 
   updateSvgState = (sdg) => {
-    const { sdgDump, sdgChecks } = this.state;
+    const { sdgChecks, sdgDump } = this.state;
 
     let filtered = sdgDump.filter((item) => {
       return parseInt(item.id) === parseInt(sdg);
@@ -391,9 +389,7 @@ class ImpactManager extends React.Component {
         },
       });
       this.setState((prevState) => ({
-        sdgChecks: prevState.sdgChecks.filter(
-          (SDG) => SDG.id !== obj.id
-        ),
+        sdgChecks: prevState.sdgChecks.filter((SDG) => SDG.id !== obj.id),
       }));
     } else {
       this.setState(
@@ -471,7 +467,6 @@ class ImpactManager extends React.Component {
       sdgChecks,
       createBtn,
     } = this.state;
-
     return (
       <Aux>
         <div>
@@ -576,6 +571,7 @@ class ImpactManager extends React.Component {
                     handleSdgBoxChange={this.handleSdgBoxChange}
                     sdgCheckBoxes={sdgCheckBoxes}
                     formTwoErrors={formTwoErrors}
+                    sdgDump={sdgDump}
                     {...this.props}
                   />
 

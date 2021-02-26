@@ -1,7 +1,7 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Grid, Checkbox, FormControlLabel } from "@material-ui/core";
-import { sdgDump } from "./sdgDump";
+//import { sdgDump } from "./sdgDump";
 import { appHelpers } from "../../appHelpers/appHelpers";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -68,6 +68,7 @@ const styles = (theme) => ({
 });
 
 const renderIndicators = (indicators, props, sdgIndex) => {
+  const {sdgDump} = props
   const { allIndicators } = props;
   const allUIIndicators = indicators.map((item, index) => {
     return (
@@ -82,7 +83,7 @@ const renderIndicators = (indicators, props, sdgIndex) => {
                 item.description,
                 e,
                 index,
-                parseInt(sdgIndex)
+                sdgIndex
               )
             }
             value={item.description}
@@ -143,7 +144,7 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
 
 function ImpactManagerForm3(props) {
   const { classes } = props;
-
+  const {sdgDump} = props
   const { allIndicators, sdgChecks } = props;
 
   return (
