@@ -70,7 +70,7 @@ export const login = (formData) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      `${appConstants.BASE_URL}/authenticate/`,
+      `${appConstants.REACT_APP_BASE_URL}/authenticate/`,
       formData,
       config
     );
