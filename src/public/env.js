@@ -1,5 +1,4 @@
 window.env = {
-  REACT_APP_BASE_URL: '#{appUrl}', //check octopus to confirm
+  BASE_URL: 'https://trail.test.vggdev.com/',
   INACTIVITY_TIMEOUT: 90000,
 };
-

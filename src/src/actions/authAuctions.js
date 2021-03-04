@@ -10,7 +10,7 @@ import {
 } from "../constants/Types";
 import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
-import { appConstants } from "../constants/app.constants";
+
 
 //Load User
 
@@ -41,7 +41,7 @@ export const register = (formData) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      `${appConstants.BASE_URL}/user/`,
+      "http://trail-api.test.vggdev.com/user/",
       formData,
       config
     );
@@ -70,7 +70,7 @@ export const login = (formData) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      `${appConstants.REACT_APP_BASE_URL}/authenticate/`,
+      "http://trail-api.test.vggdev.com/authenticate/",
       formData,
       config
     );
