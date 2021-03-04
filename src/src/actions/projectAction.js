@@ -6,7 +6,6 @@ import {
   PROJECT_ERROR,
   GET_PROGRAMS,
 } from "../constants/Types";
-import { appConstants } from "../constants/app.constants";
 import axios from "axios";
 
 export const getPrograms = (token) => async (dispatch) => {
@@ -18,13 +17,14 @@ export const getPrograms = (token) => async (dispatch) => {
   };
   try {
     const res = await axios.get(
-      `${appConstants.BASE_URL}/programs`,
+      "http://trail-api.test.vggdev.com/programs",
       config
     );
     dispatch({
       type: GET_PROGRAMS,
       payload: res.data,
     });
+    console.log("Sameerah", res.data);
   } catch (err) {
     dispatch({
       type: PROJECT_ERROR,
@@ -62,3 +62,7 @@ export const createProject = (project) => async (dispatch) => {
     });
   }
 };
+
+
+
+
