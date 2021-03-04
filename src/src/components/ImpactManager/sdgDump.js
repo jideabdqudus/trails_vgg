@@ -31,6 +31,39 @@ export const sdgDump = [
   //     },
   //   ],
   // },
+  // {
+  //   id: 15,
+  //   name: "qMVE",
+  //   description: "LCPEw",
+  //   code: "00",
+  //   image:
+  //     "https://boi-dta-prod.s3.eu-west-1.amazonaws.com/trails/DC829AE914Screenshot_20210106-170931.jpg",
+  //   locations: [
+  //     {
+  //       lat: "1.02344555",
+  //       long: "5.9732723878",
+  //       name: "Lagos",
+  //       placeId: "dsdsdscdsfs",
+  //       description: "yaml, the place of reckoning",
+  //     },
+  //   ],
+  //   location: [
+  //     {
+  //       lat: "1.02344555",
+  //       long: "5.9732723878",
+  //       name: "Lagos",
+  //       placeId: "dsdsdscdsfs",
+  //       description: "yaml, the place of reckoning",
+  //     },
+  //   ],
+  //   sdgs:[
+  //         {
+  //           "id" : 8
+  //           "indicators" : [27,28,29,30]
+  //       },
+  // ]
+  //   created: "Feb 24, 2021 12:12PM",
+  // },
   {
     id: "1",
     number: "23",

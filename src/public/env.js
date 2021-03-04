@@ -1,4 +1,5 @@
 window.env = {
-  BASE_URL: 'https://trail.test.vggdev.com/',
+  BASE_URL: '#{appUrl}', //check octopus to confirm
   INACTIVITY_TIMEOUT: 90000,
 };
+

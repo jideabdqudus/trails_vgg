@@ -205,7 +205,7 @@ function ImpactManagerForm1(props) {
               Programme Location
             </label>
             <FormControl fullWidth required>
-              {/* <PlacesAutocomplete
+              <PlacesAutocomplete
                 className={classes.textField}
                 variant="outlined"
                 value={address}
@@ -250,7 +250,7 @@ function ImpactManagerForm1(props) {
                     </div>
                   </div>
                 )}
-              </PlacesAutocomplete> */}
+              </PlacesAutocomplete>
             </FormControl> 
           </form>
         </Col>

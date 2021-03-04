@@ -132,6 +132,7 @@ class ImpactManager extends React.Component {
       theIndicators: [],
       alert: null,
       allIndicators: null,
+      mySdg: [],
       indicators: [
         {
           id: 1,
@@ -160,7 +161,7 @@ class ImpactManager extends React.Component {
       // for google map places autocomplete
       address: "",
       showingInfoWindow: false,
-      activeMarker: {},
+      location: {},
       selectedPlace: {},
       mapCenter: {
         lat: 49.2827291,
@@ -191,8 +192,8 @@ class ImpactManager extends React.Component {
     this.setState({ address });
   };
 
-  handleSelectPlace = (address, selectedPlace, activeMarker) => {
-    this.setState({ address, selectedPlace, activeMarker });
+  handleSelectPlace = (address, selectedPlace, location) => {
+    this.setState({ address, selectedPlace, location });
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
@@ -204,23 +205,11 @@ class ImpactManager extends React.Component {
   };
 
   normFile = (e) => {
-    this.setState({ image: e });
-    console.log("Upload event:", e);
+    this.setState({ image: e.fileList[0].thumbUrl });
     if (Array.isArray(e)) {
-      return e;
+      return e.fileList[0].thumbUrl;
     }
-    return e && e.fileList;
-  };
-
-  handleBannerChange = (file) => {
-    console.log("Files:", file);
-    this.setState({
-      image: file.map((file) =>
-        Object.assign(file, {
-          preview: URL.createObjectURL(file),
-        })
-      ),
-    });
+    return e.fileList[0].thumbUrl;
   };
 
   handleInputChange = (event) => {
@@ -292,28 +281,26 @@ class ImpactManager extends React.Component {
   createProject() {
     const indicatorStrings = [];
     const {
-      code,
       name,
-      // projectLocation,
-      programmeLocation,
       description,
-      programmePlaces,
+      code,
+      mySdg,
       sdgCheckBoxes,
       indicatorCheckBoxes,
       image,
-      activeMarker,
+      location,
       mapCenter,
     } = this.state;
     const payload = {
-      code,
       name,
-      //projectLocation,
       description,
-      sdgCheckBoxes,
-      indicatorCheckBoxes,
+      code,
       image,
-      activeMarker,
+      location,
       mapCenter,
+      sdgCheckBoxes,
+      mySdg,
+      indicatorCheckBoxes,
     };
     this.props.createProject(payload);
     appHelpers.successMessageAlert("Programme Successfully Created");
@@ -337,7 +324,13 @@ class ImpactManager extends React.Component {
     });
   };
 
-  handleCheckboxChange = (indicatorValue, e, indicatorIndex, sdgIndex) => {
+  handleCheckboxChange = (
+    indicatorValue,
+    e,
+    indicatorIndex,
+    sdgIndex,
+    indicatorID
+  ) => {
     const { allIndicators, sdgChecks } = this.state;
     const newIndicators = allIndicators.map((indicator, id) => {
       if (indicatorIndex !== id) return indicator;
@@ -365,12 +358,11 @@ class ImpactManager extends React.Component {
     this.setState({
       indicatorCheckBoxes: {
         ...this.state.indicatorCheckBoxes,
-        [indicatorIndex]: indicatorValue,
+        [indicatorID]: indicatorValue,
       },
       allIndicators: newIndicators,
       sdgChecks: newSdgChecks,
     });
-    console.log(newSdgChecks);
   };
 
   updateSvgState = (sdg) => {

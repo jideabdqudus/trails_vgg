@@ -83,7 +83,8 @@ const renderIndicators = (indicators, props, sdgIndex) => {
                 item.description,
                 e,
                 index,
-                sdgIndex
+                sdgIndex,
+                item.id
               )
             }
             value={item.description}

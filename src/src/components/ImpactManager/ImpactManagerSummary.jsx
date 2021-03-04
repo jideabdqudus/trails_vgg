@@ -74,9 +74,7 @@ class ImpactManagerSummary extends React.Component {
       sdgChecks,
       sdgDump,
     } = this.state;
-    {
-      console.log("Heres", this.renderIndicators());
-    }
+    
     return (
       <Aux>
         <Row>

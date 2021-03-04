@@ -58,7 +58,7 @@ export const appHelpers = {
 
   returnIndicators: (sdgCheckBoxes, sdgDump) => {
     const filtered = appHelpers.returnSelectedSdgs(sdgCheckBoxes, sdgDump);
-     const returnedIndicators = [];
+    const returnedIndicators = [];
     filtered.map((filteredItem, index) => {
       filteredItem.indicators.map((item, index) => {
         returnedIndicators.push({

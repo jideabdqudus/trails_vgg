@@ -43,7 +43,7 @@ export class ProjectsCard extends Component {
                         // src={project.image.fileList.map((image) => {
                         //   <>{image.thumbUrl}</>;
                         // })}
-                        src={project.projectImage}
+                        src={project.image}
                         style={{ height: "200px" }}
                       />
                     }
@@ -68,7 +68,7 @@ export class ProjectsCard extends Component {
                         <Col span={8}>
                           <span className={"projectSpan"}>Location</span>
                           <p className={"projectParagraph"}>
-                            {project.activeMarker.description}
+                            {project.location.description}
                           </p>
                         </Col>
                         <Col span={8}>
