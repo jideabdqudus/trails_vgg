@@ -21,6 +21,8 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import axios from "axios";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { appConstants } from "../../constants/app.constants";
+import CustomButton from "../CustomButton/CustomButton";
 
 const baseStyle = {
   flex: 1,
@@ -133,6 +135,7 @@ class ImpactManager extends React.Component {
       alert: null,
       allIndicators: null,
       mySdg: [],
+      creating:false,
       indicators: [
         {
           id: 1,
@@ -158,6 +161,7 @@ class ImpactManager extends React.Component {
       formThreeErrors: {
         indicator: false,
       },
+      imageData:null,
       // for google map places autocomplete
       address: "",
       showingInfoWindow: false,
@@ -205,7 +209,8 @@ class ImpactManager extends React.Component {
   };
 
   normFile = (e) => {
-    this.setState({ image: e.fileList[0].thumbUrl });
+    
+    this.setState({ image: e.fileList[0].thumbUrl ,imageData:e.file});
     if (Array.isArray(e)) {
       return e.fileList[0].thumbUrl;
     }
@@ -280,6 +285,7 @@ class ImpactManager extends React.Component {
 
   createProject() {
     const indicatorStrings = [];
+    this.setState({creating:true})
     const {
       name,
       description,
@@ -289,7 +295,7 @@ class ImpactManager extends React.Component {
       indicatorCheckBoxes,
       image,
       location,
-      mapCenter,
+      mapCenter,imageData
     } = this.state;
     const payload = {
       name,
@@ -302,10 +308,28 @@ class ImpactManager extends React.Component {
       mySdg,
       indicatorCheckBoxes,
     };
-    this.props.createProject(payload);
-    appHelpers.successMessageAlert("Programme Successfully Created");
+    // this.props.createProject(payload);
+    // appHelpers.successMessageAlert("Programme Successfully Created");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: this.props.auth.data.accessToken,
+      },
+    };
+    let apiPayload = new FormData();
+    apiPayload.append("name", name);
+    apiPayload.append("description", description);
+    apiPayload.append("code", code);
+    apiPayload.append("image", imageData);
+    apiPayload.append("image", imageData);
+
+    // not yet done
+
+     axios.post(
+      `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}`,
+      config
+    ,apiPayload);
     console.log(payload);
-    // window.location.reload();
   }
 
   cancelProject() {
@@ -458,6 +482,7 @@ class ImpactManager extends React.Component {
       sdgDump,
       sdgChecks,
       createBtn,
+      creating
     } = this.state;
     return (
       <Aux>
@@ -685,22 +710,14 @@ class ImpactManager extends React.Component {
                   </Button>
                   {this.state.alert}
 
-                  <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={this.createProject}
-                    style={{
-                      backgroundColor: "#53D1BE",
-                      color: "white",
-                      borderRadius: "2rem",
-                      textTransform: "none",
-                      boxShadow: "none",
-                      float: "right",
-                    }}
-                  >
-                    {createBtn}
-                  </Button>
+                  <CustomButton 
+                  onClick={this.createProject}
+                  content={
+                    createBtn
+                  }
+                  loading={creating}
+                  />
+                  
                   {this.state.alert}
                 </div>
               )}
