@@ -30,7 +30,7 @@ export class ImpactMap extends Component {
       console.log(this.props.google);
     }
     return (
-      <div className="impactTab">
+      <div className="impactT">
         <h4>Impact Map</h4>
         {this.props.google == undefined ? (
           <Card>

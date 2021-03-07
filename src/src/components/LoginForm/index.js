@@ -11,15 +11,13 @@ import { login, clearErrors } from "../../actions/authAuctions";
 import { Redirect } from "react-router";
 import AlertInfo from "../Alert/index";
 
-const { TabPane } = Tabs;
-
 const LoginForm = (
-  { setAlert, error, login, isAuthenticated, clearErrors },
+  { setAlert, error, login, isAuthenticated, clearErrors, auth },
   props
 ) => {
   useEffect(() => {
     if (error) {
-      setAlert(error, "error");
+      setAlert(error.data.message, "error");
       clearErrors();
     } //eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
@@ -37,9 +35,10 @@ const LoginForm = (
   const onFinish = async () => {
     if (email === "") {
       setAlert("Please enter all fields", "error");
+    } else if (password === "") {
+      setAlert("Please enter all fields", "error");
     } else {
       login(formData);
-      console.log(formData);
     }
   };
   if (isAuthenticated) {
@@ -205,6 +204,7 @@ LoginForm.propTypes = {
 const mapStateToProps = (state) => ({
   error: state.auth.error,
   isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { setAlert, login, clearErrors })(

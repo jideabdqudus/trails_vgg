@@ -33,7 +33,6 @@ export class Dashboard extends Component {
       .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
       .then((res) => {
         const api = res.data.data;
-        console.log("new api", api);
       });
   }
   render() {
@@ -55,7 +54,6 @@ export class Dashboard extends Component {
                   <Row>
                     <Col xs={{ span: 24 }} lg={{ span: 14 }}>
                       <ImpactMap />
-                      <FundingGraph />
                     </Col>
                     <Col xs={{ span: 24 }} lg={{ span: 10 }}>
                       <DoughnutChart />
