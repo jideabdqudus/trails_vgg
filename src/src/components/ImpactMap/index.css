@@ -23,11 +23,10 @@
 
 
 .map-container {
-  position: relative;
   padding-bottom: 26.25%;
-  padding-top: 30px;
   height: 0;
   overflow: hidden;
+  max-height: 200px !important;
 }
 
 .map-container iframe,

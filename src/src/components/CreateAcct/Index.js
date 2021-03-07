@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
 import { Form, Input, Button, Row, Col, Card, Checkbox, Tabs } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import LoginImg from "../../assets/graphic_login.svg";
 import { connect } from "react-redux";
@@ -11,6 +10,11 @@ import { register, clearErrors } from "../../actions/authAuctions";
 import { appHelpers } from "../../appHelpers/appHelpers";
 import { Redirect } from "react-router";
 import AlertInfo from "../Alert/index";
+
+/* eslint-disable */
+const regEx = new RegExp(
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/
+);
 
 const CreateAcct = (
   { setAlert, error, register, isAuthenticated, clearErrors, registerSuccess },
@@ -41,6 +45,8 @@ const CreateAcct = (
       setAlert("Password must be more than 8 characters", "warning");
     } else if (password != password2) {
       setAlert("Check if passwords are equal", "warning");
+    } else if (regEx.test(password) == false) {
+      setAlert("Passwords must contain at least 1 Capital letter, 1 small letter and a special character", "warning");
     } else {
       register({ firstName, lastName, email, password });
     }
@@ -50,8 +56,6 @@ const CreateAcct = (
     appHelpers.successMessageAlert("Succesfully Registered, Login here", 2000);
     return <Redirect to="/" />;
   }
-
-  console.log(registerSuccess);
 
   return (
     <div>

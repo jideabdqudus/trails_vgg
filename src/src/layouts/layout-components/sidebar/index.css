@@ -1,7 +1,13 @@
 .logos {
-  background-image: url(../../../assets//Trail2.svg);
+  background-image: url(../../../assets/Trail2.svg);
   background-repeat: no-repeat;
   padding-top: 0px;
   margin-top: 0px;
   background-position: center;
+}
+
+.logoImg {
+  padding: 0px;
+  margin: 0px;
+  width: 120px;
 }

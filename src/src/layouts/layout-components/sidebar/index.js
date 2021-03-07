@@ -10,6 +10,7 @@ import {
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
 import "./index.css";
+import LogoTrail from "../../../assets/Trail2.svg";
 
 const { Sider } = Layout;
 
@@ -28,7 +29,6 @@ export class SideBar extends Component {
       <Sider
         collapsed={this.state.collapsed}
         onCollapse={this.onCollapse}
-        collapsible
         style={{
           border: "none",
           backgroundColor: "#001529",
@@ -37,8 +37,10 @@ export class SideBar extends Component {
           height: "100vh",
         }}
       >
-        <div className="logos"></div>
         <Menu theme="dark" mode="inline" style={{ backgroundColor: "#001529" }}>
+          <div style={{ textAlign: "center", marginBottom: "30px" }}>
+            <img src={LogoTrail} className={"logoImg"} />
+          </div>
           <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
             <Link to="/dashboard">Dashboard</Link>
           </Menu.Item>
