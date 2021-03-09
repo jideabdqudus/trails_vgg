@@ -64,6 +64,7 @@ export class Projects extends Component {
 
   handleOverview = (id)=>{
     console.log("id",id)
+    this.props.history.push("/dashboard/projects/overview")
   }
   render() {
 
