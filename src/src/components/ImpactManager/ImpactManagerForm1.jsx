@@ -20,6 +20,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import ImageUpload from "../Upload/ImageUpload";
 
 const { Option } = Select;
 
@@ -143,6 +144,8 @@ function ImpactManagerForm1(props) {
     image,
     programmePlaces,
     address,
+    handleDrop,
+    files
   } = props;
 
   const {
@@ -275,6 +278,9 @@ function ImpactManagerForm1(props) {
             </FormControl>
           </form>
         </Col>
+      </Row>
+      <Row>
+      <ImageUpload handleDrop={handleDrop} files={files} />
       </Row>
       <Grid container spacing={3}>
         {/* Project Name */}

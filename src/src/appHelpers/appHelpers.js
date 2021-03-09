@@ -39,6 +39,24 @@ export const appHelpers = {
     return "1T+";
   },
 
+  returnIndicatorsOnly : (indicators)=>{
+    let ind =[]
+    let f = indicators.filter((o) => o.status === true)
+    for(let i in f){
+      ind.push(parseInt(f[i].id))
+    }
+    return ind;
+  },
+  formatSdgsIndicatorsPayload : (finalSdgChecks) =>{
+    let sdgs = []
+    for(let i in finalSdgChecks){
+      sdgs.push({
+        indicators:finalSdgChecks[i].indicators,
+        id:finalSdgChecks[i].id
+      })
+    }
+    return sdgs
+  },
   returnSelectedSdgs: (sdgCheckBoxes, sdgDump) => {
     Object.entries(sdgCheckBoxes).forEach(([key, value]) => {
       if (value === false) {

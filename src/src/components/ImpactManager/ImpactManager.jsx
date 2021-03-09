@@ -131,7 +131,6 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes: {},
       sdgChecks: [],
       indicatorCheckBoxes: {},
-      theIndicators: [],
       alert: null,
       allIndicators: null,
       mySdg: [],
@@ -162,6 +161,8 @@ class ImpactManager extends React.Component {
         indicator: false,
       },
       imageData:null,
+      files:[],
+      fileForm:null,
       // for google map places autocomplete
       address: "",
       showingInfoWindow: false,
@@ -197,6 +198,11 @@ class ImpactManager extends React.Component {
   };
 
   handleSelectPlace = (address, selectedPlace, location) => {
+    console.log("address",address);
+    console.log("selectedPlace",selectedPlace)
+    console.log("location",location)
+    // const locations = "{ "name" : "Lagos", "description" : "yaml, the place of reckoning", "lat" : "1.02344555", "long" : "5.9732723878", "placeId" : "dsdsdscdsfs"}"
+    
     this.setState({ address, selectedPlace, location });
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -210,7 +216,7 @@ class ImpactManager extends React.Component {
 
   normFile = (e) => {
     
-    this.setState({ image: e.fileList[0].thumbUrl ,imageData:e.file});
+    this.setState({ image: e.fileList[0].thumbUrl ,imageData:e.fileList});
     if (Array.isArray(e)) {
       return e.fileList[0].thumbUrl;
     }
@@ -282,7 +288,7 @@ class ImpactManager extends React.Component {
       });
     }
   };
-
+  
   createProject() {
     const indicatorStrings = [];
     this.setState({creating:true})
@@ -294,7 +300,7 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes,
       indicatorCheckBoxes,
       image,
-      location,
+      location,address,
       mapCenter,imageData
     } = this.state;
     const payload = {
@@ -316,25 +322,84 @@ class ImpactManager extends React.Component {
         accessToken: this.props.auth.data.accessToken,
       },
     };
+    const locations ={
+      name: location.formattedSuggestion.mainText,
+      description:location.description,
+      lat:mapCenter.lat,
+      long:mapCenter.lng
+    }
+    const activeMarker ={
+      name: location.formattedSuggestion.mainText,
+      description:location.description,
+      lat:mapCenter.lat,
+      long:mapCenter.lng
+    }
+    // const sdgs = appHelpers.formatSdgsPayload(indicatorCheckBoxes,sdgCheckBoxes,this.state.sdgDump)
+   
+    const finalSdgChecks = this.state.sdgChecks.map((q,i)=>{
+      return {
+        ...q,
+        indicators:appHelpers.returnIndicatorsOnly(q.indicators)
+        
+      }
+    })
+    const sdgs = appHelpers.formatSdgsIndicatorsPayload(finalSdgChecks)
     let apiPayload = new FormData();
     apiPayload.append("name", name);
     apiPayload.append("description", description);
     apiPayload.append("code", code);
-    apiPayload.append("image", imageData);
-    apiPayload.append("image", imageData);
+    apiPayload.append("locations",JSON.stringify(locations))
+    apiPayload.append("sdgs",JSON.stringify(sdgs))
+    apiPayload.append("activeMarker",JSON.stringify(activeMarker))
+    apiPayload.append("image", this.state.fileForm,this.state.fileForm.name);
 
-    // not yet done
+    console.log("payload---",payload);
+    console.log("sdgssdgs---",sdgs);
+    console.log("fileeeForm---",this.state.fileForm);
 
-     axios.post(
-      `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}`,
-      config
-    ,apiPayload);
-    console.log(payload);
+    console.log("all state---",this.state);
+
+    axios({
+      method: "post",
+      url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
+      data: apiPayload,
+      headers: { "Content-Type": "multipart/form-data",accessToken: this.props.auth.data.accessToken},
+    })
+    .then(({data})=>{
+      if(data){
+        appHelpers.successMessageAlert(data.message)
+        this.setState({creating:false})
+        this.resetPage()
+        }else{
+
+        }
+    })
+    .catch((err)=>{
+      appHelpers.failedRequestAlert(err.response.data.message,3500)
+    })
+     
   }
 
   cancelProject() {
     appHelpers.canceledRequestAlert("Project Cancelled!");
     window.location.reload();
+  }
+
+
+  resetPage = () =>{
+    this.setState({
+      impactManagerFormOne:true,
+      impactManagerFormTwo:false,
+      impactManagerFormThree:false,
+      impactManagerSummary:false,
+      name:"",
+      code:"",
+      address:"",
+      description:"",
+      files:[],
+      fileForm:null,
+      sdgCheckBoxes:{},sdgChecks:[],indicatorCheckBoxes:{},location:{}
+    })
   }
 
   goBack = () => {
@@ -458,6 +523,16 @@ class ImpactManager extends React.Component {
     });
   };
 
+  handleDrop = (file) => {
+    this.setState({
+      fileForm:file[0],
+      files: file.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      ),
+    });
+  };
   render() {
     //this.props.project.projects
     const { projects } = this.props.project;
@@ -508,6 +583,8 @@ class ImpactManager extends React.Component {
                     image={image}
                     programmePlaces={programmePlaces}
                     programmeLocation={programmeLocation}
+                    files={this.state.files}
+                    handleDrop={this.handleDrop}
                     // projectLocation={projectLocation}
                     handleInputChange={this.handleInputChange}
                     handleSelectChange={this.handleSelectChange}
