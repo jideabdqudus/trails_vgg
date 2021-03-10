@@ -51,7 +51,7 @@ export class Projects extends Component {
     let projectElem = []
     for (let i in projects){
       projectElem.push(
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={4}key={projects[i].id}>
         <ImageCard
         name={projects[i].name}
         code={projects[i].code}
@@ -67,8 +67,11 @@ export class Projects extends Component {
   }
 
   handleOverview = (id)=>{
-    console.log("id",id)
     this.props.history.push("/dashboard/projects/overview")
+    this.props.history.push({
+      pathname: '/dashboard/projects/overview',
+      state: { detail: id }
+    })
   }
   render() {
 
@@ -86,9 +89,9 @@ export class Projects extends Component {
                 <h1 style={h1}>Projects</h1>
                 <Grid container spacing={3}>
                   { loading &&
-                  [0,1,2,3,4,5].map(()=>{
+                  [0,1,2,3,4,5].map((index)=>{
                     return(
-                      <Grid item xs={12} sm={4}>
+                      <Grid item xs={12} sm={4} key={index}>
                       <CatalogMagic />
                       </Grid>
                     )

@@ -47,6 +47,14 @@ export const appHelpers = {
     }
     return ind;
   },
+  countProjectIndicators : (sdgs) =>{
+    let projectIndicators = [];
+    for(let i in sdgs){
+      const indicators = sdgs[i].indicators
+      projectIndicators.push(indicators)
+    }
+    return projectIndicators.length
+  },
   formatSdgsIndicatorsPayload : (finalSdgChecks) =>{
     let sdgs = []
     for(let i in finalSdgChecks){
@@ -174,6 +182,7 @@ export const appHelpers = {
 
     return false;
   },
+
   filterSdgById: (id, allIndicators) => {
     let filtered = allIndicators.filter((item) => {
       return item.sdgId === id;
