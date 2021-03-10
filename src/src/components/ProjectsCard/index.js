@@ -3,9 +3,17 @@ import "./index.css";
 import { Layout, Row, Col, Card, Button, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import axios from "axios";
+import { appConstants } from "../../constants/app.constants";
 const { Meta } = Card;
 
 export class ProjectsCard extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      projects:[]
+    }
+  }
   renderProjects = () => {
     const { projects } = this.props.project;
     let string = "";
@@ -17,10 +25,22 @@ export class ProjectsCard extends Component {
       </>;
     });
   };
+  
+  componentDidMount =() =>{
+    axios({
+      method: "GET",
+      url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
+       headers: { accessToken: this.props.auth.data.accessToken},
+    })
+    .then(({data})=>{
+      console.log("data".data)
+      debugger
+      this.setState({projects:data.data})
+    })
+  }
 
   render() {
-    const { projects } = this.props.project;
-
+    const {projects} = this.state
     return (
       <div>
         {projects.length == 0 ? (
@@ -68,7 +88,8 @@ export class ProjectsCard extends Component {
                         <Col span={8}>
                           <span className={"projectSpan"}>Location</span>
                           <p className={"projectParagraph"}>
-                            {project.location.description}
+                            {/* {project.location.description} */}
+                            {project.locations[0].description}
                           </p>
                         </Col>
                         <Col span={8}>
@@ -79,14 +100,24 @@ export class ProjectsCard extends Component {
                           <span className={"projectSpan"}>Impact</span>
                           <p className={"projectParagraph"}>
                             <div className="gameStatistics">
-                              {Object.entries(project.sdgCheckBoxes).map(
+                              {/* {Object.entries(project.sdgs).map(
                                 ([key, val]) => (
                                   <p className={"projectParagraph"} key={key}>
                                     {" "}
                                     SDG {key}
                                   </p>
                                 )
-                              )}
+                              )} */}
+                              {project.sdgs.map((val,index)=>{
+                                (
+                                  <p className={"projectParagraph"} key={index}>
+                                  {" "}
+                                  SDG {val.sdgId}
+                                </p> 
+                                )
+                              })
+
+                              }
                             </div>
                           </p>
                         </Col>
@@ -105,6 +136,7 @@ export class ProjectsCard extends Component {
 
 const mapStateToProps = (state) => ({
   project: state.projects,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, {})(ProjectsCard);

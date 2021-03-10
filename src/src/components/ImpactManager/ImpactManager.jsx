@@ -21,6 +21,8 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import axios from "axios";
 import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { appConstants } from "../../constants/app.constants";
+import CustomButton from "../CustomButton/CustomButton";
 
 const baseStyle = {
   flex: 1,
@@ -89,7 +91,7 @@ const { Meta } = Card;
 // ];
 
 const CardTitleForm1 = (
-  <h1 style={{ fontSize: "20px", fontWeight: "normal", margin: 0 }}>
+  <h1 style={{ fontSize: "25px", fontWeight: "normal", margin: 0 }}>
     Create your custom impact
   </h1>
 );
@@ -115,7 +117,7 @@ class ImpactManager extends React.Component {
           Create Project <i className="fa fa-angle-right" />{" "}
         </span>
       ),
-      sdgDump: "",
+      sdgDump: [],
       name: "",
       code: "",
       programmeLocation: "",
@@ -129,10 +131,10 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes: {},
       sdgChecks: [],
       indicatorCheckBoxes: {},
-      theIndicators: [],
       alert: null,
       allIndicators: null,
       mySdg: [],
+      creating:false,
       indicators: [
         {
           id: 1,
@@ -158,6 +160,9 @@ class ImpactManager extends React.Component {
       formThreeErrors: {
         indicator: false,
       },
+      imageData:null,
+      files:[],
+      fileForm:null,
       // for google map places autocomplete
       address: "",
       showingInfoWindow: false,
@@ -193,6 +198,11 @@ class ImpactManager extends React.Component {
   };
 
   handleSelectPlace = (address, selectedPlace, location) => {
+    console.log("address",address);
+    console.log("selectedPlace",selectedPlace)
+    console.log("location",location)
+    // const locations = "{ "name" : "Lagos", "description" : "yaml, the place of reckoning", "lat" : "1.02344555", "long" : "5.9732723878", "placeId" : "dsdsdscdsfs"}"
+    
     this.setState({ address, selectedPlace, location });
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -205,7 +215,8 @@ class ImpactManager extends React.Component {
   };
 
   normFile = (e) => {
-    this.setState({ image: e.fileList[0].thumbUrl });
+    
+    this.setState({ image: e.fileList[0].thumbUrl ,imageData:e.fileList});
     if (Array.isArray(e)) {
       return e.fileList[0].thumbUrl;
     }
@@ -277,9 +288,10 @@ class ImpactManager extends React.Component {
       });
     }
   };
-
+  
   createProject() {
     const indicatorStrings = [];
+    this.setState({creating:true})
     const {
       name,
       description,
@@ -288,8 +300,8 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes,
       indicatorCheckBoxes,
       image,
-      location,
-      mapCenter,
+      location,address,
+      mapCenter,imageData
     } = this.state;
     const payload = {
       name,
@@ -302,15 +314,92 @@ class ImpactManager extends React.Component {
       mySdg,
       indicatorCheckBoxes,
     };
-    this.props.createProject(payload);
-    appHelpers.successMessageAlert("Programme Successfully Created");
-    console.log(payload);
-    // window.location.reload();
+    // this.props.createProject(payload);
+    // appHelpers.successMessageAlert("Programme Successfully Created");
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: this.props.auth.data.accessToken,
+      },
+    };
+    const locations ={
+      name: location.formattedSuggestion.mainText,
+      description:location.description,
+      lat:mapCenter.lat,
+      long:mapCenter.lng
+    }
+    const activeMarker ={
+      name: location.formattedSuggestion.mainText,
+      description:location.description,
+      lat:mapCenter.lat,
+      long:mapCenter.lng
+    }
+    // const sdgs = appHelpers.formatSdgsPayload(indicatorCheckBoxes,sdgCheckBoxes,this.state.sdgDump)
+   
+    const finalSdgChecks = this.state.sdgChecks.map((q,i)=>{
+      return {
+        ...q,
+        indicators:appHelpers.returnIndicatorsOnly(q.indicators)
+        
+      }
+    })
+    const sdgs = appHelpers.formatSdgsIndicatorsPayload(finalSdgChecks)
+    let apiPayload = new FormData();
+    apiPayload.append("name", name);
+    apiPayload.append("description", description);
+    apiPayload.append("code", code);
+    apiPayload.append("locations",JSON.stringify(locations))
+    apiPayload.append("sdgs",JSON.stringify(sdgs))
+    apiPayload.append("activeMarker",JSON.stringify(activeMarker))
+    apiPayload.append("image", this.state.fileForm,this.state.fileForm.name);
+
+    console.log("payload---",payload);
+    console.log("sdgssdgs---",sdgs);
+    console.log("fileeeForm---",this.state.fileForm);
+
+    console.log("all state---",this.state);
+
+    axios({
+      method: "post",
+      url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
+      data: apiPayload,
+      headers: { "Content-Type": "multipart/form-data",accessToken: this.props.auth.data.accessToken},
+    })
+    .then(({data})=>{
+      if(data){
+        appHelpers.successMessageAlert(data.message)
+        this.setState({creating:false})
+        this.resetPage()
+        }else{
+
+        }
+    })
+    .catch((err)=>{
+      appHelpers.failedRequestAlert(err.response.data.message,3500)
+    })
+     
   }
 
   cancelProject() {
     appHelpers.canceledRequestAlert("Project Cancelled!");
     window.location.reload();
+  }
+
+
+  resetPage = () =>{
+    this.setState({
+      impactManagerFormOne:true,
+      impactManagerFormTwo:false,
+      impactManagerFormThree:false,
+      impactManagerSummary:false,
+      name:"",
+      code:"",
+      address:"",
+      description:"",
+      files:[],
+      fileForm:null,
+      sdgCheckBoxes:{},sdgChecks:[],indicatorCheckBoxes:{},location:{}
+    })
   }
 
   goBack = () => {
@@ -434,6 +523,16 @@ class ImpactManager extends React.Component {
     });
   };
 
+  handleDrop = (file) => {
+    this.setState({
+      fileForm:file[0],
+      files: file.map((file) =>
+        Object.assign(file, {
+          preview: URL.createObjectURL(file),
+        })
+      ),
+    });
+  };
   render() {
     //this.props.project.projects
     const { projects } = this.props.project;
@@ -458,6 +557,7 @@ class ImpactManager extends React.Component {
       sdgDump,
       sdgChecks,
       createBtn,
+      creating
     } = this.state;
     return (
       <Aux>
@@ -483,6 +583,8 @@ class ImpactManager extends React.Component {
                     image={image}
                     programmePlaces={programmePlaces}
                     programmeLocation={programmeLocation}
+                    files={this.state.files}
+                    handleDrop={this.handleDrop}
                     // projectLocation={projectLocation}
                     handleInputChange={this.handleInputChange}
                     handleSelectChange={this.handleSelectChange}
@@ -685,22 +787,14 @@ class ImpactManager extends React.Component {
                   </Button>
                   {this.state.alert}
 
-                  <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    onClick={this.createProject}
-                    style={{
-                      backgroundColor: "#53D1BE",
-                      color: "white",
-                      borderRadius: "2rem",
-                      textTransform: "none",
-                      boxShadow: "none",
-                      float: "right",
-                    }}
-                  >
-                    {createBtn}
-                  </Button>
+                  <CustomButton 
+                  onClick={this.createProject}
+                  content={
+                    createBtn
+                  }
+                  loading={creating}
+                  />
+                  
                   {this.state.alert}
                 </div>
               )}

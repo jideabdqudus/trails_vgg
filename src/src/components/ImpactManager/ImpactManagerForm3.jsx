@@ -110,6 +110,8 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
             <SvgCard
               key={index}
               path={opt.image}
+              alt={opt.image}
+              height={150}
               opacity={"1"}
               style={{ height: "10px" }}
             />
