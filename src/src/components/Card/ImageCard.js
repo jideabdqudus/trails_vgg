@@ -33,7 +33,6 @@ const ImageCard = ({ name, image, code ,handleOverview,id,sdgs}) => {
 }
   return (
     <Card className={classes.root}>
-      <CardActionArea>
         <CardMedia
           component="img"
           alt="Contemplative Reptile"
@@ -78,7 +77,6 @@ const ImageCard = ({ name, image, code ,handleOverview,id,sdgs}) => {
             species, ranging across all continents except Antarctica
           </Typography> */}
         </CardContent>
-      </CardActionArea>
       <CardActions>
         <Button size="large" color="primary" onClick={(e)=>handleOverview(id)} className="projectButton">
           Overview

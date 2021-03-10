@@ -9,6 +9,7 @@ import ImageCard from "../../components/Card/ImageCard";
 import axios from "axios";
 import { appConstants } from "../../constants/app.constants";
 import { connect } from "react-redux";
+import CatalogMagic from "../../components/Loader/CatalogMagic";
 const { Content } = Layout;
 
 const styles = theme => ({
@@ -24,7 +25,8 @@ export class Projects extends Component {
   constructor(props){
     super(props);
     this.state={
-      projects:[]
+      projects:[],
+      loading:true
     }
   }
 
@@ -38,7 +40,9 @@ export class Projects extends Component {
     })
     .then(({data})=>{
       console.log("data".data)
-      this.setState({projects:data.data})
+      this.setState({projects:data.data},()=>{
+        this.setState({loading:false})
+      })
     })
   }
 
@@ -70,7 +74,7 @@ export class Projects extends Component {
 
 
     const {classes} = this.props;
-    const {projects}= this.state;
+    const {projects,loading}= this.state;
     return (
       <div>
         <Fragment>
@@ -80,9 +84,18 @@ export class Projects extends Component {
               <Navbar />
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Projects</h1>
-                {/* <ProjectsCard /> */}
                 <Grid container spacing={3}>
-                   {this.renderProjectList(projects)}
+                  { loading &&
+                  [0,1,2,3,4,5].map(()=>{
+                    return(
+                      <Grid item xs={12} sm={4}>
+                      <CatalogMagic />
+                      </Grid>
+                    )
+                  })
+
+                  }
+                   {!loading&&this.renderProjectList(projects)}
                   
                   
                 </Grid>
