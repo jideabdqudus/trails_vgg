@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 const IndicatorView = props => {
   return (
-    <ul>
-      <li>{props.indicator}</li>
-    </ul>
+      <>
+<label style={{fontSize:"15px"}}>{" - "}{props.indicator}</label>
+      </>
   );
 };
 

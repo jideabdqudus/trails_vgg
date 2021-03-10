@@ -9,6 +9,8 @@
 .projectButton {
   background-color: #53d1be !important;
   border-color: #53d1be !important;
+  color:white !important;
+  border-radius: 2rem !important;
 }
 
 .projectSpan {

@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const SvgCard = props => {
-  const {onClick,opacity} = props;
+  const {onClick,opacity,alt,height,width} = props;
   return (
     <>
-      <img href="svg" onClick={onClick} src={props.path} style={{ width: "10%", opacity:`${opacity}`,cursor:"pointer",padding:".2rem" }} />
+      <img href="svg" alt={alt} onClick={onClick} src={props.path} style={{ width:`${width}px`, height: `${height}px`, opacity:`${opacity}`,cursor:"pointer",padding:".2rem" }} />
     </>
   );
 };
