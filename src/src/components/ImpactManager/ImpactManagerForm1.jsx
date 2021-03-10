@@ -21,6 +21,7 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
 import ImageUpload from "../Upload/ImageUpload";
+import TopSpace from "../Space/TopSpace";
 
 const { Option } = Select;
 
@@ -30,7 +31,7 @@ const styles = (theme) => ({
     flexWrap: "wrap",
   },
   textField: {
-    marginLeft: theme.spacing(),
+    marginLeft: 0,
     marginRight: theme.spacing(),
     marginTop: 0,
     width: "100%",
@@ -160,11 +161,24 @@ function ImpactManagerForm1(props) {
   return (
     <div className={`flex items-center ${classes.root}`}>
       <Row>
+        <Col span={5}>
+        <h4 className="m-0 p-0"  >
+              Banner Image
+            </h4>
+           <TopSpace length={6}/>
+        <ImageUpload handleDrop={handleDrop} files={files} />
+
+        </Col>
+      </Row>
+      <TopSpace length={10}/>
+      <Row>
+
+      
         <Col span={8}>
           <form className={classes.container} noValidate>
-            <label for="project-name" style={{ margin: 0 }}>
+            <h4 for="project-name" style={{ margin: 0 }}>
               Programme Name
-            </label>
+            </h4>
             <TextField
               id="project-name"
               error={formOneErrors.name}
@@ -183,9 +197,9 @@ function ImpactManagerForm1(props) {
         <Col span={1}></Col>
         <Col span={4}>
           <form className={classes.container} noValidate>
-            <label for="project-code" style={{ margin: 0 }}>
+            <h4 for="project-code" style={{ margin: 0 }}>
               Programme Code
-            </label>
+            </h4>
             <TextField
               id="project-code"
               name={"code"}
@@ -204,9 +218,9 @@ function ImpactManagerForm1(props) {
         <Col span={1}></Col>
         <Col span={5}>
           <form className={classes.container} noValidate>
-            <label for="outlined-select-currency" style={{ margin: 0 }}>
+            <h4 for="outlined-select-currency" style={{ margin: 0 }}>
               Programme Location
-            </label>
+            </h4>
             <FormControl fullWidth required>
               <PlacesAutocomplete
                 className={classes.textField}
@@ -223,7 +237,7 @@ function ImpactManagerForm1(props) {
                 }) => (
                   <div>
                     <input
-                      style={{ padding: "15px" }}
+                      style={{ padding: "15px",width:"100%", border:"1px solid rgba(0, 0, 0, 0.23)", borderRadius:"4px" }}
                       {...getInputProps({
                         placeholder: "Search Location",
                         className: "location-search-input",
@@ -258,7 +272,8 @@ function ImpactManagerForm1(props) {
           </form>
         </Col>
         <Col span={1}></Col>
-        <Col span={3}>
+        {/* No Longer supported */}
+        {/* <Col span={3}>
           <form className={classes.container} noValidate>
             <label for="outlined-select-currency" style={{ margin: 0 }}>
               Banner
@@ -277,11 +292,9 @@ function ImpactManagerForm1(props) {
               </Form.Item>
             </FormControl>
           </form>
-        </Col>
+        </Col> */}
       </Row>
-      <Row>
-      <ImageUpload handleDrop={handleDrop} files={files} />
-      </Row>
+      
       <Grid container spacing={3}>
         {/* Project Name */}
 
@@ -298,9 +311,9 @@ function ImpactManagerForm1(props) {
         {/* Project Description */}
         <Grid item sm={4} md={12}>
           <form className={classes.container} noValidate>
-            <label for="project-description" style={{ margin: 0 }}>
+            <h4 for="project-description" style={{ margin: 0 }}>
               Programme Description
-            </label>
+            </h4>
             <TextField
               id="project-description"
               name={"description"}

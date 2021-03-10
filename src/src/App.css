@@ -4,6 +4,9 @@
 .m-0{
   margin: 0;
 }
+.location-search-input:focus{
+  outline-color: #3f51b5 !important;
+}
 .container {
   padding-right: 15px;
   padding-left: 15px;

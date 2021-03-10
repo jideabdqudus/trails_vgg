@@ -64,23 +64,24 @@ const ImpactManagerForm2 = (props) => {
   const [sdgDumping, setSdgDumping] = useState("");
 
 
-  useEffect(() => {
-    async function fetchSdgDump() {
-     const config = {
-        headers: {
-          "Content-Type": "application/json",
-          accessToken: props.auth.data.accessToken,
-        },
-      };
-      let result = await axios.get(
-        "http://trail-api.test.vggdev.com/sdgs/all/indicators",
-        config
-      );
-      setSdgDumping(result.data.data);
-    }
+  console.log("props in form 2",props)
+  // useEffect(() => {
+  //   async function fetchSdgDump() {
+  //    const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         accessToken: props.auth.data.accessToken,
+  //       },
+  //     };
+  //     let result = await axios.get(
+  //       "http://trail-api.test.vggdev.com/sdgs/all/indicators",
+  //       config
+  //     );
+  //     setSdgDumping(result.data.data);
+  //   }
 
-    fetchSdgDump();
-  }, []); 
+  //   fetchSdgDump();
+  // }, []); 
   
   const { classes } = props;
 
@@ -103,7 +104,7 @@ const ImpactManagerForm2 = (props) => {
   } = props;
 
   const renderSdgs = () => {
-    const allSdgs = props.sdgDump.map((item, index) => {
+    const allSdgs =props.sdgDump&& props.sdgDump.map((item, index) => {
       return (
         <SvgCard
           key={index}

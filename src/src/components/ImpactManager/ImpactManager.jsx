@@ -91,7 +91,7 @@ const { Meta } = Card;
 // ];
 
 const CardTitleForm1 = (
-  <h1 style={{ fontSize: "20px", fontWeight: "normal", margin: 0 }}>
+  <h1 style={{ fontSize: "25px", fontWeight: "normal", margin: 0 }}>
     Create your custom impact
   </h1>
 );
@@ -117,7 +117,7 @@ class ImpactManager extends React.Component {
           Create Project <i className="fa fa-angle-right" />{" "}
         </span>
       ),
-      sdgDump: "",
+      sdgDump: [],
       name: "",
       code: "",
       programmeLocation: "",
