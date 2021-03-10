@@ -13,7 +13,7 @@ import CatalogMagic from "../../components/Loader/CatalogMagic";
 const { Content } = Layout;
 
 const styles = theme => ({
- 
+
   paper: {
     padding: theme.spacing(2),
     textAlign: 'center',
@@ -22,62 +22,61 @@ const styles = theme => ({
 });
 export class Projects extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      projects:[],
-      loading:true
+    this.state = {
+      projects: [],
+      loading: true
     }
   }
 
 
 
-  componentDidMount =() =>{
+  componentDidMount = () => {
     axios({
       method: "GET",
-      url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
-       headers: { accessToken: this.props.auth.data.accessToken},
+      url: `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
+      headers: { accessToken: this.props.auth.data.accessToken },
     })
-    .then(({data})=>{
-      console.log("data".data)
-      this.setState({projects:data.data},()=>{
-        this.setState({loading:false})
+      .then(({ data }) => {
+        this.setState({ projects: data.data }, () => {
+          this.setState({ loading: false })
+        })
       })
-    })
   }
 
 
-  renderProjectList = (projects)=>{
+  renderProjectList = (projects) => {
     let projectElem = []
-    for (let i in projects){
+    for (let i in projects) {
       projectElem.push(
-        <Grid item xs={12} sm={4}key={projects[i].id}>
-        <ImageCard
-        name={projects[i].name}
-        code={projects[i].code}
-        handleOverview={this.handleOverview}
-        id={projects[i].id}
-        image={projects[i].image}
-        sdgs={projects[i].sdgs}
-        />
-      </Grid>
+        <Grid item xs={12} sm={4} key={projects[i].id}>
+          <ImageCard
+            name={projects[i].name}
+            code={projects[i].code}
+            handleOverview={this.handleOverview}
+            id={projects[i].id}
+            image={projects[i].image}
+            sdgs={projects[i].sdgs}
+          />
+        </Grid>
       )
     }
     return projectElem
   }
 
-  handleOverview = (id)=>{
+  handleOverview = (id,name) => {
     this.props.history.push("/dashboard/projects/overview")
     this.props.history.push({
       pathname: '/dashboard/projects/overview',
-      state: { detail: id }
+      state: { detail: id ,name:name }
     })
   }
   render() {
 
 
-    const {classes} = this.props;
-    const {projects,loading}= this.state;
+    const { classes } = this.props;
+    const { projects, loading } = this.state;
     return (
       <div>
         <Fragment>
@@ -88,19 +87,19 @@ export class Projects extends Component {
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Projects</h1>
                 <Grid container spacing={3}>
-                  { loading &&
-                  [0,1,2,3,4,5].map((index)=>{
-                    return(
-                      <Grid item xs={12} sm={4} key={index}>
-                      <CatalogMagic />
-                      </Grid>
-                    )
-                  })
+                  {loading &&
+                    [0, 1, 2, 3, 4, 5].map((index) => {
+                      return (
+                        <Grid item xs={12} sm={4} key={index}>
+                          <CatalogMagic />
+                        </Grid>
+                      )
+                    })
 
                   }
-                   {!loading&&this.renderProjectList(projects)}
-                  
-                  
+                  {!loading && this.renderProjectList(projects)}
+
+
                 </Grid>
               </Content>
               <FooterTab />

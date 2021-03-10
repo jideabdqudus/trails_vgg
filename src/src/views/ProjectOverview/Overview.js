@@ -16,21 +16,22 @@ export class Overview extends Component {
   constructor(props){
     super(props);
     this.state={
-      projectDetails:{}
+      projectDetails:{},
+      projectName:"",
+      loading:true
     }
   }
 
   componentDidMount =() =>{
-    console.log("details",this.props.location.state.detail)
     if(this.props.location && this.props.location.state && this.props.location.state.detail){
-      const {detail} = this.props.location.state
+      const {detail,name} = this.props.location.state
+      this.setState({projectName:name})
     axios({
       method: "GET",
       url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/${detail}`,
        headers: { accessToken: this.props.auth.data.accessToken},
     })
     .then(({data})=>{
-      console.log("data",data)
       this.setState({projectDetails:data.data},()=>{
         this.setState({loading:false})
       })
@@ -41,7 +42,7 @@ export class Overview extends Component {
   }
   render() {
 
-    const {projectDetails} = this.state
+    const {projectDetails,projectName,loading} = this.state
     return (
       <div>
         <Fragment>
@@ -50,11 +51,12 @@ export class Overview extends Component {
             <Layout className="site-layout">
               <Navbar />
               <Content style={{ margin: "0 16px" }}>
-                <h1 style={h1}>NIGERIA YOUTH INVESTMENT FUND</h1>
+                <h1 style={h1}>{projectName}</h1>
                 <div>
                   <IndicatorsCard 
                   sdgCount={projectDetails.sdgs && projectDetails.sdgs.length}
                   indicatorCount={appHelpers.countProjectIndicators(projectDetails.sdgs && projectDetails.sdgs)}
+                  loading={loading}
                   />
                 </div>
                 <div

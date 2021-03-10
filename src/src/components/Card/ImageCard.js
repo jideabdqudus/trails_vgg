@@ -78,7 +78,7 @@ const ImageCard = ({ name, image, code ,handleOverview,id,sdgs}) => {
           </Typography> */}
         </CardContent>
       <CardActions>
-        <Button size="large" color="primary" onClick={(e)=>handleOverview(id)} className="projectButton">
+        <Button size="large" color="primary" onClick={(e)=>handleOverview(id,name)} className="projectButton">
           Overview
         </Button>
         
