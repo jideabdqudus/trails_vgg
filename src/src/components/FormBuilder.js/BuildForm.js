@@ -88,7 +88,7 @@ const BuildForm = ({ project }) => {
     if (!state?.components || !state?.components.length) {
       return message.error('Please create some question fields')
     }
-    reduxDispatch(createForm(omit(state,['customQuestionInput']), token, history))
+    reduxDispatch(createForm(omit(state,['customQuestionInput','builderType']), token, history))
   };
 
   const selectedProgramSdgs = (_programId) => {
@@ -107,15 +107,27 @@ const BuildForm = ({ project }) => {
             payload: [
                 ...components,
                 {
-                  question: "",
-                  targetValue : null,
-                  targetType : "percentage",
-                  type: COMPONENT_TYPES.radio,
-                  input: true,
-                  placeholder: "",
-                  linkedIndicator : null,
-                  indicatorquestion: "",
-                  value:'number',
+                question: "",
+                targetValue : null,
+                targetType : "percentage",
+                type: COMPONENT_TYPES.radio,
+                input: true,
+                placeholder: "",
+                linkedIndicator : null,
+                indicatorquestion: "",
+                value:'number',
+                // values: [
+                //   {
+                //     label: "Yes",
+                //     value: "1",
+                //     shortcut: ""
+                //   },
+                //   {
+                //     label: "No",
+                //     value: "2",
+                //     shortcut: ""
+                //   },
+                // ],
                 },
             ],
             type: 'components',

@@ -22,7 +22,7 @@ export const getPrograms = (token) => async (dispatch) => {
     );
     dispatch({
       type: GET_PROGRAMS,
-      payload: res.data,
+      payload: res.data.data,
     });
     console.log("Sameerah", res.data);
   } catch (err) {

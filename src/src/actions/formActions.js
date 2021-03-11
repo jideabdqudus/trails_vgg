@@ -182,7 +182,7 @@ export const deleteForm = (token,id,page) => async (dispatch) => {
   };
   try {
     const response = await axios.delete(
-      `${appConstants.REACT_APP_BASE_URL}/form/${id}`,
+      `${appConstants.REACT_APP_BASE_URL}/form/${id}/`,
       config
     );
     console.log(response)
@@ -191,7 +191,7 @@ export const deleteForm = (token,id,page) => async (dispatch) => {
     });
     appHelpers.successMessageAlert("Form Deleted Successfully", 2000)
     alert.destroy()
-    dispatch(getForms(token,page))
+    window.location.reload()
   } catch (err) {
     alert.destroy()
     alert.error('There was an error deleting this form')

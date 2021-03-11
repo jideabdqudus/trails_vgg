@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import { Layout, Row, Col } from "antd";
 import Navbar from "../../../src/layouts/layout-components/menu";
 import SideBar from "../../../src/layouts/layout-components/sidebar";
@@ -7,36 +7,24 @@ import ActionCard from "../../../src/components/ActionCard";
 import ImpactMap from "../../../src/components/ImpactMap";
 import FundingGraph from "../../../src/components/FundingGraph";
 import DoughnutChart from "../../../src/components/DoughnutChart";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { getPrograms } from "../../actions/projectAction";
 import { loadUser } from "../../actions/authAuctions";
 import axios from "axios";
+import { appConstants } from "../../constants/app.constants";
 
 const { Content } = Layout;
 
-export class Dashboard extends Component {
-  // data = this.props
-  componentDidMount() {
-    getPrograms(this.props.auth.data.accessToken);
-  }
+const Dashboard = () =>{ 
+  const {token} = useSelector(state => state.auth)
+  const dispatch = useDispatch()  
+  
+  useEffect(() => {
+    dispatch(getPrograms(token))
+  },[token,dispatch])
 
-  componentDidMount() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        accessToken: this.props.auth.data.accessToken,
-      },
-    };
-
-    axios
-      .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
-      .then((res) => {
-        const api = res.data.data;
-      });
-  }
-  render() {
-    return (
+  return (
       <div>
         <Fragment>
           <Layout
@@ -66,9 +54,9 @@ export class Dashboard extends Component {
           </Layout>
         </Fragment>
       </div>
-    );
-  }
+    )
 }
+  
 
 Dashboard.propTypes = {
   loadUser: PropTypes.func.isRequired,
