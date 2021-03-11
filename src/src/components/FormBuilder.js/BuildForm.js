@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useReducer, useState } from "react";
 import {
   Row,
   Col,
@@ -6,65 +6,199 @@ import {
   Form,
   Input,
   Button,
-  Radio,
   Select,
   Divider,
-  Space,
-  Checkbox,
+  message,
+  InputNumber,
+  Dropdown,
+  Menu
 } from "antd";
 import "./index.css";
-
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { connect } from "react-redux";
+import { COMPONENT_TYPES } from '../../appHelpers/constants'
+import { MinusCircleOutlined} from "@ant-design/icons";
+import { connect,useDispatch, useSelector } from "react-redux";
+import { createForm } from '../../actions/formActions'
+import { camelCase, isEmpty, omit } from "lodash";
+import {useHistory} from 'react-router-dom'
+import { dummyQuestionLibrary } from "./constants";
 
 const { Option } = Select;
 
-const areas = [
-  { label: "Beijing", value: "Beijing" },
-  { label: "Shanghai", value: "Shanghai" },
-];
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case 'components':
+     return {...state, components: payload}
+    case 'formData':
+      return {...state, [payload.name]: payload.value}
+    case 'builderType':
+      return { ...state, builderType: payload }
+    case 'customQuestionInput':
+      return {...state, customQuestionInput: {...state.customQuestionInput, [payload.id]: payload.value}}
+    default:
+      return state
+  }
+}
+
+const transformNonEventChange = ({ name, value }) => {
+    const event = {
+        target: {},
+    };
+    event.target.name = name;
+    event.target.value = value;
+
+    return event;
+};
 
 const BuildForm = ({ project }) => {
-  const [form] = Form.useForm();
-
-  const [formData, setFormData] = useState({
+  const initialState = {
     title: "",
+    display: "form",
+    type: "form",
     name: "",
-    button: true,
     program: "",
-    instruction: "",
-    components: [],
-  });
+    instructions: "",
+    buttonType:"submit",
+    buttonValue: "Submit",
+    customQuestionInput: {},
+    components: []
+  }
 
-  const { title, program, instruction, components, name, button } = formData;
+  const [state, dispatch] = useReducer(reducer,initialState)
+  const { title,name,program,instructions, components, customQuestionInput } = state
 
-  const { projects } = project;
+  const reduxDispatch = useDispatch()
+  const token = useSelector(state => state.auth.token)
+  const projects = useSelector(state => state.projects.projects)
+  const loadingState = useSelector(state => state.form.loading)
+  const history = useHistory()
+  const [indicatorId, setIndicatorId] = useState(null)
 
   const onChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-  const onFinish = (formData) => {
-    console.log("Data", formData);
+    dispatch({ payload: { name: e.target.name,value:e.target.value }, type:'formData'})
   };
 
+  const onFinish = () => {
+    if (!state?.components || !state?.components.length) {
+      return message.error('Please create some question fields')
+    }
+    reduxDispatch(createForm(omit({...state, name: camelCase(name) },['builderType','customQuestionInput']), token, history))
+  };
+
+  const uniqIndicators = (_projects) => {
+    const indicatorCheckBoxes = _projects?.map(({ indicatorCheckBoxes }) => ({ val: indicatorCheckBoxes }))
+    const indicators = [];
+    for (const {val} of indicatorCheckBoxes) {
+      indicators.push(...Object.values(val))
+    }
+    return Array.from(new Set(indicators))
+  }
+
+  const handleChangeBuilderType = (_type) => {  
+    dispatch({ payload: _type, type: 'builderType' })
+    switch (_type) {
+      case COMPONENT_TYPES.radio:
+       return dispatch({
+            payload: [
+                ...components,
+                {
+                question: "",
+                targetValue : 99,
+                targetType : "percentage",
+                type: COMPONENT_TYPES.radio,
+                input: true,
+                placeholder: "",
+                linkedIndicator : 2,
+                indicatorquestion: "",
+                value:'number',
+                values: [
+                  {
+                    label: "Yes",
+                    value: "1",
+                    shortcut: ""
+                  },
+                  {
+                    label: "No",
+                    value: "2",
+                    shortcut: ""
+                  },
+                ],
+                },
+            ],
+            type: 'components',
+        });
+
+      case COMPONENT_TYPES.text:
+       return dispatch({
+            payload: [
+                ...components,
+                {
+                  input: true,
+                  type: COMPONENT_TYPES.text,
+                  value: "number",
+                  placeholder: "",
+                  question: "",
+                  linkedIndicator : 1,
+                  targetValue : 99,
+                  targetType : "percentage",
+                  indicatorquestion: ""
+                },
+            ],
+            type: 'components',
+        });
+    
+      default:
+       return dispatch({payload:[...components], type: 'components'})
+    }
+ 
+  }
+console.log(components)
+  const BUILDER_TYPES = [
+    {
+      name: 'Text Input',
+      value: COMPONENT_TYPES.text
+    },
+    {
+      name: 'Radio Input',
+      value: COMPONENT_TYPES.radio
+    }
+  ]
+
+  const menu = (
+    <Menu style={{ display: 'flex', flexDirection: 'column' }}>
+      {BUILDER_TYPES?.map(({name,value}) => <Menu.Item key={value} onClick={()=> handleChangeBuilderType(value)}>{name}</Menu.Item> )}
+    </Menu>
+  )
+
+    const change = (e, idx) => {
+        const { name, value } = e.target;
+        components[idx][name] = value;
+        dispatch({ payload: [...components], type: 'components' });
+    };
+
+    const handleRemoveClick = (e, index) => {
+        e.stopPropagation();
+        const list = [...components];
+        const otherLists = list.filter((_, idx) => idx !== index);
+        dispatch({ payload: otherLists, type: 'components' });
+    };
+console.log(indicatorId)
   return (
-    <div>
+    <div className="form-builder">
       <Row>
         <Col span={24}>
           <Form
             name="normal_login"
             layout={"vertical"}
             className="login-form"
-            initialValues={{ remember: true }}
             onFinish={onFinish}
           >
             <Card title={"Create your custom form"}>
-              <Row>
+              <Row gutter={[16,16]}>
                 <Col span={8}>
                   <Form.Item
                     label={titleName}
                     name="title"
-                    rules={[{ required: true, message: "Confirm your Input" }]}
+                    rules={[{ required: true, message: "Form title is required" }]}
                     style={{ marginBottom: "15px" }}
                   >
                     <Input
@@ -75,8 +209,7 @@ const BuildForm = ({ project }) => {
                     />
                   </Form.Item>
                 </Col>
-                <Col span={1}></Col>
-                <Col span={5}>
+                <Col span={8}>
                   <Form.Item
                     label={titleName2}
                     name={"program"}
@@ -85,21 +218,18 @@ const BuildForm = ({ project }) => {
                       { required: true, message: "Please select a program" },
                     ]}
                   >
-                    <Select placeholder="Select program">
-                      {projects.map((project) => (
-                        <Fragment>
-                          <Option value={project.code}>{project.code}</Option>
-                        </Fragment>
+                    <Select onChange={(value) => dispatch({ payload: { name: 'program',value: value.toString() }, type:'formData'})} placeholder="Select program">
+                      {(projects||[]).map((project, idx) => (
+                          <Option value={project?.id || idx}>{project.code}</Option>
                       ))}
                     </Select>
                   </Form.Item>
                 </Col>
-                <Col span={1}></Col>
                 <Col span={8}>
                   <Form.Item
                     label={titleName4}
                     name="name"
-                    rules={[{ required: true, message: "Confirm your Input" }]}
+                    rules={[{ required: true, message: "Form name is required" }]}
                     style={{ marginBottom: "15px" }}
                   >
                     <Input
@@ -113,195 +243,183 @@ const BuildForm = ({ project }) => {
               </Row>
               <Row>
                 <Col span={24}>
-                  <Form.Item label={titleName3} name="instruction">
+                  <Form.Item label={titleName3} name="instructions">
                     <Input.TextArea
                       type="text"
-                      name="instruction"
-                      value={instruction}
+                      name="instructions"
+                      value={instructions}
                       onChange={onChange}
                     />
                   </Form.Item>
                 </Col>
               </Row>
-              <Row>
-                <Col xs={{ span: 12 }} lg={{ span: 12 }}>
-                  <Form.Item name="remember" valuePropName="checked">
-                    <Checkbox checked disabled />
-                  </Form.Item>
-                  <Form.Item></Form.Item>
-                </Col>
-              </Row>
-            </Card>
+        </Card>
             <Divider />
 
             {/* Form Builder */}
-
             <Card>
-              <Form.List
-                name="components"
-                value={components}
-                className="newComponents"
-              >
-                {(fields, { add, remove }) => (
-                  <>
-                    {fields.map((field) => (
-                      <div key={field.key} size="100%" width={"100%"}>
-                        <Form.Item noStyle> {() => <div></div>}</Form.Item>
-                        <Card>
-                          <Row>
-                            <Col span={7}>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "linkedIndicator"]}
-                                fieldKey={[field.fieldKey, "linkedIndicator"]}
-                                rules={[
+              <Dropdown trigger={['hover','click']} overlay={menu}>
+                <Button style={{marginBottom:20}} type="primary" ghost>Create Field</Button>
+              </Dropdown> 
+
+              {components?.map((component, idx) => {
+                const { targetType } = component
+                
+                const handleSelectQuestion = (val) => {
+                  if (val === 'custom') {
+                    return dispatch({payload:{value:true,id:idx}, type:'customQuestionInput'})
+                  }
+                  dispatch({payload:{value:false,id:idx}, type:'customQuestionInput'})
+                  change(transformNonEventChange({ name: 'indicatorquestion', value: val }), idx)
+                }
+                return (
+                <Form.Item>
+                  <Card>
+                    <Row gutter={[16,16]}>
+                      <Col span={7}>
+                        <Form.Item
+                          rules={[
                                   {
                                     required: true,
                                     message:
                                       "Please select a question indicator",
                                   },
-                                ]}
-                              >
-                                <Select
-                                  placeholder="Select Indicator"
-                                  label={"Indicators"}
-                                >
-                                  {projects.map((project) => (
-                                    <Fragment>
-                                      {Object.entries(
-                                        project.indicatorCheckBoxes
-                                      ).map(([key, val]) => (
-                                        <Option value={val} key={key}>
-                                          {" "}
-                                          {val}
-                                        </Option>
-                                      ))}
-                                    </Fragment>
-                                  ))}
-                                </Select>
-                              </Form.Item>
-                            </Col>
-                            <Col span={1}></Col>
-                            <Col span={4}>
+                              ]}
+                          style={{ marginBottom: 0 }}
+                        >
+                          <Select onSelect={id => setIndicatorId(id + 1)} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val+1 }), idx)} placeholder="--Select Indicator--" >
+                            {uniqIndicators(projects)?.map((value, idx) => <Option key={idx} value={idx}>{value}</Option> )}
+                          </Select>
+                        </Form.Item>
+                       </Col>
+                       <Col span={8}>
                               <Form.Item
-                                {...field}
-                                name={[field.name, "value"]}
-                                fieldKey={[field.fieldKey, "value"]}
                                 rules={[
                                   {
                                     required: true,
-                                    message: "Please select an input type",
+                                    message: "Please select a Question",
                                   },
                                 ]}
+                                style={{ marginBottom: 0 }}
                               >
                                 <Select
-                                  placeholder="Select Input"
-                                  label={"Short free text"}
-                                >
-                                  <Option value="text">Short Free Text</Option>
+                                  placeholder="Select Question"
+                                  onChange={handleSelectQuestion}
+                            >
+                              <Option value="custom">Custom Question</Option>
+                              {indicatorId && dummyQuestionLibrary[indicatorId]?.map(({question, questionId}) => <Option value={question}>{question}</Option> )}
                                 </Select>
                               </Form.Item>
-                            </Col>
-                            <Col span={4}>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "label"]}
-                                fieldKey={[field.fieldKey, "label"]}
+                        </Col>
+                         {(customQuestionInput && customQuestionInput[idx]) && <Col span={6}>
+                          <Form.Item
+                              placeholder="--Type Question--"
+                              style={{marginBottom: 0}}
                               >
-                                {" "}
                                 <Input
                                   type="text"
-                                  placeholder={"Input Label"}
+                                  name="question"
+                                  placeholder="--Type Question--"
+                                  onChange={(e) => change(e,idx)}
                                 />
                               </Form.Item>
-                            </Col>
-                            <Col span={1}></Col>
-                            <Col span={4}>
+                            </Col>}
+                         <Col span={4}>
                               <Form.Item
-                                {...field}
-                                name={[field.name, "target"]}
-                                fieldKey={[field.fieldKey, "target"]}
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Confirm your Input",
-                                  },
-                                ]}
-                                style={{ marginBottom: "15px" }}
-                              >
-                                <Input
-                                  type="number"
-                                  placeholder={"Target line"}
-                                />
-                              </Form.Item>
-                            </Col>
-                            <Col span={1}></Col>
-                            <Col span={4}>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "indicatorMetric"]}
-                                fieldKey={[field.fieldKey, "indicatorMetric"]}
                                 rules={[
                                   {
                                     required: true,
                                     message: "Please select a metric",
                                   },
-                                ]}
+                            ]}
+                            style={{ marginBottom: 0 }}
                               >
                                 <Select
                                   placeholder="Select indicator metric"
-                                  label={"Select indicator metric"}
+                                  label="--Select indicator metric--"
+                                  onChange={(val) => change(transformNonEventChange({name:'targetType', value:val}), idx)}
+                                defaultValue={targetType}
                                 >
-                                  <Option value="numeric">Numeric</Option>
+                                  <Option value="number">Number</Option>
                                   <Option value="percentage">Percentage</Option>
                                 </Select>
                               </Form.Item>
                             </Col>
-                            <Col span={1}></Col>
-                            <Col span={1}>
+                        <Col span={4}>
+                              <Form.Item
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: "Target Value is required",
+                                  },
+                                ]}
+                                style={{ marginBottom: 0 }}
+                              >
+                                <InputNumber
+                              min={0}
+                              max={targetType === 'percentage' ? 99 : null}
+                              style={{width:'100%'}}
+                              placeholder="--Target Value--"
+                              onChange={(val) => change(transformNonEventChange({name:'targetValue', value:val}), idx)}
+                                />
+                              </Form.Item>
+                            </Col>
+                      <Col span={6}>
+                          <Form.Item
+                              placeholder="--Placeholder--"
+                              style={{marginBottom: 0}}
+                              >
+                                <Input
+                                  type="text"
+                                  name="placeholder"
+                                placeholder={"Input Placeholder"}
+                                onChange={(e) => change(e,idx)}
+                                />
+                              </Form.Item>
+                            </Col>
+                        <Col span={1}>
                               <Button
                                 type="danger"
-                                onClick={() => remove(field.name)}
+                                onClick={(e) => handleRemoveClick(e, idx)}
                                 icon={<MinusCircleOutlined />}
                                 size={"medium"}
                               />
                             </Col>
-                          </Row>
-                        </Card>
-                        <br />
-                        <br />
-                      </div>
-                    ))}
-                    <Divider />
-                    <Row>
-                      <Col span={2}>
-                        <Form.Item>
-                          <Button
-                            type="dashed"
-                            onClick={() => add()}
-                            icon={<PlusOutlined />}
-                          >
-                            Create Field
-                          </Button>
-                        </Form.Item>
-                      </Col>
-                      <Col span={1}></Col>
-                      <Col span={2}>
-                        <Form.Item>
-                          <Button
-                            type="primary"
-                            htmlType="submit"
-                            className="forgetBtn"
-                            onSubmit={onFinish}
-                          >
-                            Create Form
-                          </Button>
-                        </Form.Item>
-                      </Col>
                     </Row>
-                  </>
-                )}
-              </Form.List>
+                  </Card>
+                </Form.Item>
+              )
+              })}
+              {!isEmpty(components) && <>
+                <Divider />
+                <Row gutter={[16, 16]}>
+                  <Col span={3}>
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="forgetBtn"
+                        onSubmit={onFinish}
+                        loading={loadingState}
+                      >
+                        Create Form
+                          </Button>
+                    </Form.Item>
+                  </Col>
+                  <Col>
+                    <Form.Item>
+                       <Dropdown trigger={['hover','click']} overlay={menu}>
+                        <Button
+                          type="link"
+                          htmlType="submit"
+                        >
+                          Create Field
+                        </Button>
+                      </Dropdown> 
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </>}
             </Card>
           </Form>
         </Col>

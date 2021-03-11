@@ -12,6 +12,8 @@ import store from "./store";
 import CreateAccount from "./views/Create/CreateAccount";
 import FormManager from "./views/FormManager/FormManager";
 import FormBuild from "./views/FormBuilder/FormBuild";
+import FormPreview from './views/FormPreview';
+import PublishedForm from './views/PublishedForm';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -26,6 +28,7 @@ export class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Login} />
+            <Route exact path="/form/:id" component={PublishedForm} />
             <Route exact path="/create" component={CreateAccount} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/projects" component={Projects} />
@@ -37,6 +40,7 @@ export class App extends Component {
             <Route exact path="/dashboard/manager" component={Manager} />
             <Route exact path="/dashboard/form" component={FormManager} />
             <Route exact path="/dashboard/build_form" component={FormBuild} />
+            <Route exact path="/dashboard/form/preview/:id" component={FormPreview} />
           </Switch>
         </BrowserRouter>
       </Provider>
