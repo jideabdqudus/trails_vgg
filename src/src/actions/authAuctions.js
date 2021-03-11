@@ -70,7 +70,7 @@ export const login = (formData) => async (dispatch) => {
 
   try {
     const res = await axios.post(
-      "http://trail-api.test.vggdev.com/authenticate/",
+      "https://trail-api.test.vggdev.com/authenticate/",
       formData,
       config
     );
