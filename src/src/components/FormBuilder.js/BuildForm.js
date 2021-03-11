@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import {
   Row,
   Col,
@@ -17,8 +17,8 @@ import "./index.css";
 import { COMPONENT_TYPES } from '../../appHelpers/constants'
 import { MinusCircleOutlined} from "@ant-design/icons";
 import { connect,useDispatch, useSelector } from "react-redux";
-import { createForm } from '../../actions/formActions'
-import { camelCase, isEmpty, omit } from "lodash";
+import { createForm, getPrograms } from '../../actions/formActions'
+import { camelCase, flatten, isEmpty, omit } from "lodash";
 import {useHistory} from 'react-router-dom'
 import { dummyQuestionLibrary } from "./constants";
 
@@ -70,8 +70,15 @@ const BuildForm = ({ project }) => {
   const token = useSelector(state => state.auth.token)
   const projects = useSelector(state => state.projects.projects)
   const loadingState = useSelector(state => state.form.loading)
+  const programs = useSelector(state => state.form.programs)
+
+  console.log(programs)
   const history = useHistory()
   const [indicatorId, setIndicatorId] = useState(null)
+
+  useEffect(() => {
+    reduxDispatch(getPrograms(token))
+  },[token, reduxDispatch])
 
   const onChange = (e) => {
     dispatch({ payload: { name: e.target.name,value:e.target.value }, type:'formData'})
@@ -81,19 +88,18 @@ const BuildForm = ({ project }) => {
     if (!state?.components || !state?.components.length) {
       return message.error('Please create some question fields')
     }
-    reduxDispatch(createForm(omit({...state, name: camelCase(name) },['builderType','customQuestionInput']), token, history))
+    reduxDispatch(createForm(omit(state,['customQuestionInput']), token, history))
   };
 
-  const uniqIndicators = (_projects) => {
-    const indicatorCheckBoxes = _projects?.map(({ indicatorCheckBoxes }) => ({ val: indicatorCheckBoxes }))
-    const indicators = [];
-    for (const {val} of indicatorCheckBoxes) {
-      indicators.push(...Object.values(val))
-    }
-    return Array.from(new Set(indicators))
+  const selectedProgramSdgs = (_programId) => {
+    const selectedProgram = programs?.filter((program) =>  program?.id === _programId)
+    return selectedProgram[0]?.sdgs || []
   }
 
+  const indicators = (sdgs) => flatten(sdgs?.map(({indicators}) => indicators))
+
   const handleChangeBuilderType = (_type) => {  
+    if(isEmpty(state?.program)) return message.error('Please select a program')
     dispatch({ payload: _type, type: 'builderType' })
     switch (_type) {
       case COMPONENT_TYPES.radio:
@@ -101,27 +107,15 @@ const BuildForm = ({ project }) => {
             payload: [
                 ...components,
                 {
-                question: "",
-                targetValue : 99,
-                targetType : "percentage",
-                type: COMPONENT_TYPES.radio,
-                input: true,
-                placeholder: "",
-                linkedIndicator : 2,
-                indicatorquestion: "",
-                value:'number',
-                values: [
-                  {
-                    label: "Yes",
-                    value: "1",
-                    shortcut: ""
-                  },
-                  {
-                    label: "No",
-                    value: "2",
-                    shortcut: ""
-                  },
-                ],
+                  question: "",
+                  targetValue : null,
+                  targetType : "percentage",
+                  type: COMPONENT_TYPES.radio,
+                  input: true,
+                  placeholder: "",
+                  linkedIndicator : null,
+                  indicatorquestion: "",
+                  value:'number',
                 },
             ],
             type: 'components',
@@ -134,11 +128,11 @@ const BuildForm = ({ project }) => {
                 {
                   input: true,
                   type: COMPONENT_TYPES.text,
-                  value: "number",
+                  value: "text",
                   placeholder: "",
                   question: "",
-                  linkedIndicator : 1,
-                  targetValue : 99,
+                  linkedIndicator : null,
+                  targetValue : null,
                   targetType : "percentage",
                   indicatorquestion: ""
                 },
@@ -151,7 +145,7 @@ const BuildForm = ({ project }) => {
     }
  
   }
-console.log(components)
+
   const BUILDER_TYPES = [
     {
       name: 'Text Input',
@@ -174,15 +168,16 @@ console.log(components)
         components[idx][name] = value;
         dispatch({ payload: [...components], type: 'components' });
     };
-
+console.log(components)
     const handleRemoveClick = (e, index) => {
         e.stopPropagation();
         const list = [...components];
         const otherLists = list.filter((_, idx) => idx !== index);
         dispatch({ payload: otherLists, type: 'components' });
     };
-console.log(indicatorId)
-  return (
+console.log(state)
+ 
+    return (
     <div className="form-builder">
       <Row>
         <Col span={24}>
@@ -219,8 +214,8 @@ console.log(indicatorId)
                     ]}
                   >
                     <Select onChange={(value) => dispatch({ payload: { name: 'program',value: value.toString() }, type:'formData'})} placeholder="Select program">
-                      {(projects||[]).map((project, idx) => (
-                          <Option value={project?.id || idx}>{project.code}</Option>
+                      {(programs||[])?.map((program) => (
+                          <Option key={program?.id} value={program?.id}>{program?.name}</Option>
                       ))}
                     </Select>
                   </Form.Item>
@@ -287,8 +282,8 @@ console.log(indicatorId)
                               ]}
                           style={{ marginBottom: 0 }}
                         >
-                          <Select onSelect={id => setIndicatorId(id + 1)} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val+1 }), idx)} placeholder="--Select Indicator--" >
-                            {uniqIndicators(projects)?.map((value, idx) => <Option key={idx} value={idx}>{value}</Option> )}
+                          <Select onSelect={id => setIndicatorId(id)} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val }), idx)} placeholder="--Select Indicator--" >
+                            {indicators(selectedProgramSdgs(+state?.program))?.map((indicator,idx) => <Option key={idx} value={indicator?.programIndicatorId}>{indicator?.description}</Option> )}
                           </Select>
                         </Form.Item>
                        </Col>

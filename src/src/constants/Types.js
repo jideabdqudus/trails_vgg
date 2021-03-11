@@ -35,5 +35,7 @@ export const FORM = {
     getFormSuccess: 'GET_FORM_SUCCESS',
     setLoadingState: 'SET_LOADING_STATE',
     createSubmissionSuccess: 'CREATE_SUBMISSION_SUCCESS',
-    buildAnswers: 'BUILD_ANSWERS'
-}
+    buildAnswers: 'BUILD_ANSWERS',
+    getPrograms: 'GET_PROGRAMS_SUCCESS',
+    deleteForm: 'DELETE_FORM'
+} 

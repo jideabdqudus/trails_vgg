@@ -10,10 +10,6 @@ export const Summary = ({form}) => {
                     <Card title="Programme Summary">
                         <Row gutter={[16,16]}>
                             <Col span={12}>
-                                <Typography.Text className="programme-summary-title">Programme Name</Typography.Text>
-                                <Typography.Paragraph className="programme-summary-description">{form?.program}</Typography.Paragraph>
-                            </Col>
-                            <Col span={12}>
                                 <Typography.Text className="programme-summary-title">Form Name</Typography.Text>
                                 <Typography.Paragraph className="programme-summary-description">{startCase(form?.name)}</Typography.Paragraph>
                             </Col>

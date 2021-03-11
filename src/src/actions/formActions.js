@@ -1,7 +1,7 @@
 import { FORM } from "../constants/Types";
 import axios from "axios";
 import { appConstants } from '../constants/app.constants'
-import {message as alert} from 'antd'
+import {message as alert, message} from 'antd'
 import { appHelpers } from "../appHelpers/appHelpers";
 
 export const setLoadingState = (payload) => ({
@@ -99,6 +99,7 @@ export const getForm = (id, token) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
+    console.log(err)
       console.log(err.response)
     dispatch({
       type: FORM.errors,
@@ -145,3 +146,58 @@ export const createSubmission = (id,answers) => async (dispatch) => {
     dispatch(setLoadingState(false))
   }
 };
+
+export const getPrograms = (token) => async (dispatch) => {
+ const config = {
+   headers: {
+         "Content-Type": "application/json",
+         "accessToken": token
+   },
+ };
+ try {
+   const response = await axios.get(
+     `${appConstants.REACT_APP_BASE_URL}/${appConstants.PROGRAMS}/`,
+     config
+   );
+   const { data } = response.data
+   dispatch({
+     type: FORM.getPrograms,
+     payload: data,
+   });
+ } catch (err) {
+   dispatch({
+     type: FORM.errors,
+     payload: { msg: err.response, status: err.response },
+   });
+ } 
+};
+
+export const deleteForm = (token,id,page) => async (dispatch) => {
+  alert.loading('Deleting Form', 0)
+  const config = {
+    headers: {
+          "Content-Type": "application/json",
+          "accessToken": token
+    },
+  };
+  try {
+    const response = await axios.delete(
+      `${appConstants.REACT_APP_BASE_URL}/form/${id}`,
+      config
+    );
+    console.log(response)
+    dispatch({
+      type: FORM.deleteForm,
+    });
+    appHelpers.successMessageAlert("Form Deleted Successfully", 2000)
+    alert.destroy()
+    dispatch(getForms(token,page))
+  } catch (err) {
+    alert.destroy()
+    alert.error('There was an error deleting this form')
+    dispatch({
+      type: FORM.errors,
+      payload: { msg: err.response, status: err.response },
+    });
+  }
+ };

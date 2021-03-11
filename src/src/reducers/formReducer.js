@@ -6,7 +6,8 @@ const initialState = {
     forms: [],
     loading: false,
     pagination: {},
-    answers: {}
+    answers: {},
+    programs: []
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -29,6 +30,9 @@ export default (state = initialState, { type, payload }) => {
     
         case FORM.buildAnswers:
             return {...state, answers: {...state.answers, [payload.questionId]: payload }}
+        
+            case FORM.getPrograms:
+                return {...state, programs: payload}
     default:
         return state
     }

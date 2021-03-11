@@ -1,23 +1,41 @@
 import React,{useEffect, useState} from "react";
-import { Row, Col, Layout, Card, Typography, Pagination, Skeleton } from "antd";
+import { Row, Col, Layout, Card, Typography, Pagination, Skeleton,Dropdown,Menu } from "antd";
 import { Link } from "react-router-dom";
 import './styles.scss'
-import {getForms} from '../../actions/formActions'
+import {getForms,deleteForm} from '../../actions/formActions'
 import { useSelector, useDispatch } from 'react-redux'
 import background from '../../assets/background123.svg'
+import {MoreOutlined} from '@ant-design/icons'
 
-const FormCard = ({title}) => (
+const FormCard = ({title,id,page}) => {
+  const {token} = useSelector(state => state.auth)
+const dispatch = useDispatch()
+  const menu = (
+    <Menu>
+      <Menu.Item onClick={() => dispatch(deleteForm(token,id,page))} danger>Delete</Menu.Item>
+    </Menu>
+  )
+
+  return (
     <Card
     cover={<img alt="example" className="form-card-image" src={background} />}
     className="form-card"
   >
     <div className="form-card-text-wrapper">
-      <Typography.Paragraph className="form-card-text" ellipsis={{
+    <Link to={`/dashboard/form/preview/${id}`}>
+        <Typography.Paragraph className="form-card-text" ellipsis={{
         rows:2,
       }}>{title}</Typography.Paragraph>
+    </Link>
+    </div>
+    <div style={{textAlign:'right', cursor:'pointer'}}>
+      <Dropdown trigger={['click','hover']} placement="bottomCenter" overlay={menu}>
+        <MoreOutlined />
+      </Dropdown>
     </div>
   </Card>
-)
+  )
+} 
 
 const CreateForm = () => {
   const dispatch = useDispatch()
@@ -30,7 +48,7 @@ const CreateForm = () => {
   useEffect(() => {
     dispatch(getForms(token, page))
   },[dispatch, token,page])
-
+console.log(forms)
   return (
     <Layout className="create-form">
       <Row gutter={[16, 16]}>
@@ -47,9 +65,7 @@ const CreateForm = () => {
           <Row gutter={[16, 16]}>
             {loading ? <Skeleton /> : forms?.map(({name,id},idx) => (
               <Col key={name} span={6}>
-                <Link to={`/dashboard/form/preview/${id}`}>
-                  <FormCard title={name} />
-                </Link>
+                  <FormCard title={name} id={id} page={page} />
               </Col>
             ))}
           </Row>

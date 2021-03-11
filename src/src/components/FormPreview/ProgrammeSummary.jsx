@@ -11,10 +11,6 @@ export const ProgrammeSummary = ({ form }) => {
                     <Card title="Programme Summary" extra={<Button icon={<EditOutlined />} type="primary" ghost shape="round">Edit</Button>} >
                         <Row gutter={[16,16]}>
                             <Col span={12}>
-                                <Typography.Text className="programme-summary-title">Programme Name</Typography.Text>
-                                <Typography.Paragraph className="programme-summary-description">{form?.program}</Typography.Paragraph>
-                            </Col>
-                            <Col span={12}>
                                 <Typography.Text className="programme-summary-title">Form Name</Typography.Text>
                                 <Typography.Paragraph className="programme-summary-description">{startCase(form?.name)}</Typography.Paragraph>
                             </Col>

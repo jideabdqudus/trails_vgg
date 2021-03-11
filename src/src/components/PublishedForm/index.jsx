@@ -1,6 +1,5 @@
 import { Button, Col, Row, Skeleton, Typography, message } from 'antd'
 import React, { useEffect } from 'react'
-import { dummyForms } from '../FormIO/constants'
 import { Questions } from './Questions'
 import { Summary } from './Summary'
 import {useSelector,useDispatch} from 'react-redux'
@@ -22,8 +21,13 @@ const PublisedForm = () => {
 
     const onFinish = () => {
         const answersArray = Object.values(answers)
-        if (isEmpty(answersArray)) return message.error('Answers cannot be empty')
         if(size(answersArray) !== size(form.components)) return message.error('You have one or more empty fields')
+        if (isEmpty(answersArray)) return message.error('Answers cannot be empty')
+        for (const value of answersArray) {
+            if(isEmpty(value?.answer) || isEmpty(value?.value) || isEmpty(value?.questionId)){
+                return message.error('You have one or more empty fields')
+            }
+        }
         dispatch(createSubmission(id, { answers: answersArray }))
     } 
 
