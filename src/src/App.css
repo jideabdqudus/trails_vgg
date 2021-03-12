@@ -58,6 +58,13 @@
   padding-left: 200px !important;
 }
 
+@media screen and (max-width: 600px) {
+  .site-layout {
+    padding-left: 0px !important;
+  }
+}
+
+
 .action {
   color: rgba(255, 255, 255, 0.85);
 }
@@ -259,3 +266,4 @@ label img {
   /* box-shadow: 0 0 5px #333; */
   z-index: -1;
 }
+

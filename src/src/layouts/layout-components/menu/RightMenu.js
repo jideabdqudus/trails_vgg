@@ -18,7 +18,7 @@ export const RightMenu = (
 ) => {
   const { data } = auth;
   useEffect(() => {
-   // loadUser();
+    // loadUser();
     //eslint-disable-next-line
   }, []);
 
@@ -30,7 +30,18 @@ export const RightMenu = (
   return (
     <Menu mode={md ? "horizontal" : "inline"}>
       <SubMenu key="sub1" title={`${data.firstName} ${data.lastName}`}>
-        <Menu.Item key="setting:1">Settings</Menu.Item>
+        <Menu.Item key="setting:1">
+          <Link to="/dashboard">Dashboard</Link>
+        </Menu.Item>
+        <Menu.Item key="setting:2">
+          <Link to="/dashboard/projects">Projects</Link>
+        </Menu.Item>
+        <Menu.Item key="setting:3">
+          <Link to="/dashboard/manager">Programme Manager</Link>
+        </Menu.Item>
+        <Menu.Item key="setting:4">
+          <Link to="/dashboard/form">Forms</Link>
+        </Menu.Item>
         <Menu.Item key="setting:2">
           <Link to="/">Logout</Link>
         </Menu.Item>

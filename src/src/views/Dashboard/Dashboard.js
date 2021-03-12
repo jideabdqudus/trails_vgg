@@ -45,6 +45,7 @@ export class Dashboard extends Component {
             }}
           >
             <SideBar />
+
             <Layout className="site-layout">
               <Navbar />
               <Content style={{ margin: "0 16px" }}>

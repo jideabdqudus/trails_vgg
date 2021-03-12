@@ -46,7 +46,10 @@ const CreateAcct = (
     } else if (password != password2) {
       setAlert("Check if passwords are equal", "warning");
     } else if (regEx.test(password) == false) {
-      setAlert("Passwords must contain at least 1 Capital letter, 1 small letter and a special character", "warning");
+      setAlert(
+        "Passwords must contain at least 1 Capital letter, 1 small letter and a special character",
+        "warning"
+      );
     } else {
       register({ firstName, lastName, email, password });
     }
@@ -72,8 +75,8 @@ const CreateAcct = (
                   Track your objectives using Trails.
                 </h3>
                 <p className="loginP">
-                  Access to the most powerfull tool in the youth and agor
-                  sector.
+                  Access to the most powerfull tool that allows you track your
+                  Objectives and Goals.{" "}
                 </p>
               </div>
               <img src={LoginImg} width="350px" className="loginImg" />

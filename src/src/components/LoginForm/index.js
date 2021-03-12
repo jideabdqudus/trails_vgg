@@ -59,8 +59,7 @@ const LoginForm = (
                   Track your objectives using Trails.
                 </h3>
                 <p className="loginP">
-                  Access to the most powerfull tool in the youth and agor
-                  sector.
+                  Access to the most powerfull tool that allows you track your Objectives and Goals.
                 </p>
               </div>
               <img src={LoginImg} width="350px" className="loginImg" />
