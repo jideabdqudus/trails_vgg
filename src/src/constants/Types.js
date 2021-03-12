@@ -28,3 +28,15 @@ export const LOGOUT = "LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
 
+export const FORM = {
+    createFormSuccess: 'CREATE_FORM_SUCCESS',
+    errors: 'FORM_ERROR',
+    getFormsSuccess: 'GET_FORMS_SUCCESS',
+    getFormSuccess: 'GET_FORM_SUCCESS',
+    setLoadingState: 'SET_LOADING_STATE',
+    createSubmissionSuccess: 'CREATE_SUBMISSION_SUCCESS',
+    buildAnswers: 'BUILD_ANSWERS',
+    getPrograms: 'GET_PROGRAMS_SUCCESS',
+    deleteForm: 'DELETE_FORM',
+    getIndicatorQuestionSuccess: 'GET_INDICATOR_QUESTIONS_SUCCESS'
+} 

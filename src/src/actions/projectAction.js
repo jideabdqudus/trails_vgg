@@ -24,7 +24,7 @@ export const getPrograms = (token, ServiceBase,Constants) => async (dispatch) =>
     // const res = await ServiceBase.getItems(Constants.PROGRAMS)
     dispatch({
       type: GET_PROGRAMS,
-      payload: res.data,
+      payload: res.data.data,
     });
     console.log("Sameerah", res.data);
   } catch (err) {

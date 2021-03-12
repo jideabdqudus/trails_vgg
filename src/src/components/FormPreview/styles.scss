@@ -1,0 +1,28 @@
+.programme-summary {
+  .programme-summary {
+    &-title {
+      font-size: 18px;
+    }
+    &-description {
+      font-size: 15px;
+    }
+  }
+}
+
+.form-preview-section {
+  .form-preview-section {
+    &-title {
+      font-size: 20px;
+    }
+    &-link {
+      font-size: 16px;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.preview-question-card {
+  margin-bottom: 20px !important;
+}

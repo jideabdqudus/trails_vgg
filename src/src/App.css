@@ -267,3 +267,15 @@ label img {
   z-index: -1;
 }
 
+.published-section-container {
+  max-width: 960rem;
+  margin: 40px auto;
+  padding: 0 10px;
+  width: 80%;
+}
+
+@media (max-width: 425px) {
+  .published-section-container {
+    width: 100%;
+  }
+}

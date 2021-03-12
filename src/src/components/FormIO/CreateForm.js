@@ -1,55 +1,86 @@
-import React from "react";
-import { Row, Col, Layout, Card } from "antd";
-import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
-import AddIcon from "@material-ui/icons/Add";
-import NavigationIcon from "@material-ui/icons/Navigation";
+import React,{useEffect, useState} from "react";
+import { Row, Col, Layout, Card, Typography, Pagination, Skeleton,Dropdown,Menu } from "antd";
 import { Link } from "react-router-dom";
+import './styles.scss'
+import {getForms,deleteForm} from '../../actions/formActions'
+import { useSelector, useDispatch } from 'react-redux'
+import background from '../../assets/background123.svg'
+import {MoreOutlined} from '@ant-design/icons'
 
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
-  },
-}));
-
-const CreateForm = () => {
-  const classes = useStyles();
+const FormCard = ({title,id,page}) => {
+  const {token} = useSelector(state => state.auth)
+const dispatch = useDispatch()
+  const menu = (
+    <Menu>
+      <Menu.Item onClick={() => dispatch(deleteForm(token,id,page))} danger>Delete</Menu.Item>
+    </Menu>
+  )
 
   return (
-    <Layout>
-      <Row>
-        <Col span={6}>
-          <h1 style={{ fontSize: "20px" }}>Create new form</h1>
-          <br />
+    <Card
+    cover={<img alt="example" className="form-card-image" src={background} />}
+    className="form-card"
+  >
+    <div className="form-card-text-wrapper">
+    <Link to={`/dashboard/form/preview/${id}`}>
+        <Typography.Paragraph className="form-card-text" ellipsis={{
+        rows:2,
+      }}>{title}</Typography.Paragraph>
+    </Link>
+    </div>
+    <div style={{textAlign:'right', cursor:'pointer'}}>
+      <Dropdown trigger={['click','hover']} placement="bottomCenter" overlay={menu}>
+        <MoreOutlined />
+      </Dropdown>
+    </div>
+  </Card>
+  )
+} 
+
+const CreateForm = () => {
+  const dispatch = useDispatch()
+  const {token} = useSelector(state => state.auth)
+  const { forms, pagination,loading } = useSelector(state => state.form)
+  const [page, setPage] = useState(1)
+
+  const handlePageChange = (_page) => setPage(_page)
+
+  useEffect(() => {
+    dispatch(getForms(token, page))
+  },[dispatch, token,page])
+console.log(forms)
+  return (
+    <Layout className="create-form">
+      <Row gutter={[16, 16]}>
+        <Col span={8}>
+          <h1 className="create-form-title" >Create new form</h1>
           <Link to="/app/dashboard/build_form">
-            <Card style={{ width: 300, height: 350, borderColor: "black" }}>
-              <h1
-                style={{
-                  textAlign: "center",
-                  fontSize: "150px",
-                  margin: "0",
-                  padding: "0",
-                  fontWeight: "200",
-                }}
-              >
-                +
-              </h1>
+            <Card className="create-form-new-form">
+              <h1 className="create-form-plus">+</h1>
             </Card>
           </Link>
         </Col>
-        <Col span={2}></Col>
         <Col span={16}>
-          <h6 style={{ fontSize: "20px" }}>Available Forms</h6>
-          <br />
-          <Link to="/app/dashboard/build_form">
-            <Card
-              style={{ width: 100, height: 150, borderColor: "black" }}
-              title="GEEP"
-            ></Card>
-          </Link>
+          <h6 className="create-form-title">Available Forms</h6>
+          <Row gutter={[16, 16]}>
+            {loading ? <Skeleton /> : forms?.map(({name,id},idx) => (
+              <Col key={name} span={6}>
+                  <FormCard title={name} id={id} page={page} />
+              </Col>
+            ))}
+          </Row>
+          <Row gutter={[16, 16]} style={{marginTop: 20}}>
+              <Col>
+              <Pagination
+                current={pagination?.currentPage || 1}
+                hideOnSinglePage
+                pageSize={pagination?.limit || 0}
+                pageSizeOptions={[10, 20, 50, 100]}
+                onChange={handlePageChange}
+                total={(+pagination?.totalPages || 0) * (+pagination?.limit || 0)}
+              />
+              </Col>
+           </Row>
         </Col>
       </Row>
     </Layout>

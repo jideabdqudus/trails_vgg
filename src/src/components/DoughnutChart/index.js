@@ -1,56 +1,28 @@
 import React, { Component } from "react";
-import { Card, Skeleton } from "antd";
+import { Card, Skeleton, Typography } from "antd";
 import { Doughnut } from "react-chartjs-2";
 import "./index.css";
 import { connect } from "react-redux";
-import _ from "lodash";
+import _, { flatten, uniqBy } from "lodash";
+
+const renderObjects =  (programs) => {
+  const sdgs = uniqBy(flatten(programs?.map(({sdgs}) => sdgs)),'sdgId')
+  const sdgsNames = sdgs?.map(({name}) => name)
+  console.log(sdgsNames)
+  return sdgsNames; 
+};
+
+const renderOccurence = (programs) => {
+  const sdgs = flatten(programs?.map(({sdgs}) => sdgs))
+  const sdgsNames = sdgs?.map(({name}) => name)
+  const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
+
+  const counts = countOccurrences(sdgsNames);
+  console.log(counts)
+  return Object.values(counts);
+};
 
 export class DoughnutChart extends Component {
-  renderObjects = () => {
-    const { projects, indicator } = this.props.project;
-    const dataArray = [];
-    const json = projects.map((project) => (
-      <>
-        {" "}
-        {Object.entries(project.indicatorCheckBoxes, dataArray).map(
-          ([key, val]) => (
-            <p className={"projectParagraph"} key={key}>
-              {val}
-              {dataArray.push(val)}
-            </p>
-          )
-        )}
-      </>
-    ));
-    var arr = dataArray;
-    arr = _.uniq(arr);
-    return arr;
-  };
-
-  renderOccurence = () => {
-    const { projects, indicator } = this.props.project;
-    const dataArray = [];
-    let countObj = {};
-    const json = projects.map((project) => (
-      <>
-        {" "}
-        {Object.entries(project.indicatorCheckBoxes, dataArray).map(
-          ([key, val]) => (
-            <p className={"projectParagraph"} key={key}>
-              {val}
-              {dataArray.push(val)}
-            </p>
-          )
-        )}
-      </>
-    ));
-    const countOccurrences = (arr) =>
-      arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
-
-    const counts = countOccurrences(dataArray);
-
-    return Object.values(counts);
-  };
 
   colorArray = [
     "#4DB380",
@@ -109,7 +81,7 @@ export class DoughnutChart extends Component {
     "#6666FF",
   ];
   data = {
-    labels: this.renderObjects(),
+    labels: renderObjects(this.props.project?.programs),
     datasets: [
       {
         label: "SDGs",
@@ -123,20 +95,21 @@ export class DoughnutChart extends Component {
           "#CC9999",
           "#B3B31A",
           "#00E680",
-        ],
-        data: this.renderOccurence(),
+        ], 
+        data: renderOccurence(this.props.project?.programs),
       },
     ],
   };
 
   render() {
-    const { indicator } = this.props.project;
-    
+   
     return (
       <div>
         <Card title={"Impact Summary"} className={"doughnutCard"}>
-          {this.renderOccurence().length == 0 ? (
-            <Skeleton active />
+          {renderOccurence(this.props.project?.programs).length === 0 ? (
+            <div style={{textAlign: 'center'}}>
+              <Skeleton active />
+            </div>
           ) : (
             <Doughnut
               data={this.data}
