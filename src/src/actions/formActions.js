@@ -201,3 +201,32 @@ export const deleteForm = (token,id,page) => async (dispatch) => {
     });
   }
  };
+
+ export const getIndicatorQuestion = (id, token) => async (dispatch) => {
+  const config = {
+    headers: {
+          "Content-Type": "application/json",
+          "accessToken": token,
+    },
+  };
+  try {
+
+    const response = await axios.get(
+      `${appConstants.REACT_APP_BASE_URL}/all_indicator_questions/${id}/`,
+       config
+    );
+    const {data} = response.data
+   
+    dispatch({
+      type: FORM.getIndicatorQuestionSuccess,
+      payload: data,
+    });
+  } catch (err) {
+    console.log(err)
+      console.log(err.response)
+    dispatch({
+      type: FORM.errors,
+      payload: { msg: err.response, status: err.response },
+    });
+  }
+};

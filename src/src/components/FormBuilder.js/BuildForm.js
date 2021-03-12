@@ -17,7 +17,7 @@ import "./index.css";
 import { COMPONENT_TYPES } from '../../appHelpers/constants'
 import { MinusCircleOutlined} from "@ant-design/icons";
 import { connect,useDispatch, useSelector } from "react-redux";
-import { createForm, getPrograms } from '../../actions/formActions'
+import { createForm, getPrograms,getIndicatorQuestion } from '../../actions/formActions'
 import { camelCase, flatten, isEmpty, omit } from "lodash";
 import {useHistory} from 'react-router-dom'
 import { dummyQuestionLibrary } from "./constants";
@@ -71,8 +71,9 @@ const BuildForm = ({ project }) => {
   const projects = useSelector(state => state.projects.projects)
   const loadingState = useSelector(state => state.form.loading)
   const programs = useSelector(state => state.form.programs)
+  const indicatorQuestions = useSelector(state =>  state.form.indicatorQuestions)
 
-  console.log(programs)
+  console.log({indicatorQuestions})
   const history = useHistory()
   const [indicatorId, setIndicatorId] = useState(null)
 
@@ -188,6 +189,11 @@ console.log(components)
         dispatch({ payload: otherLists, type: 'components' });
     };
 console.log(state)
+
+  const handleSelect = (id) => {
+    setIndicatorId(id)
+    reduxDispatch(getIndicatorQuestion(id, token))
+  }
  
     return (
     <div className="form-builder">
@@ -274,6 +280,7 @@ console.log(state)
                 
                 const handleSelectQuestion = (val) => {
                   if (val === 'custom') {
+                    change(transformNonEventChange({ name: 'indicatorquestion', value: '' }), idx)
                     return dispatch({payload:{value:true,id:idx}, type:'customQuestionInput'})
                   }
                   dispatch({payload:{value:false,id:idx}, type:'customQuestionInput'})
@@ -294,7 +301,7 @@ console.log(state)
                               ]}
                           style={{ marginBottom: 0 }}
                         >
-                          <Select onSelect={id => setIndicatorId(id)} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val }), idx)} placeholder="--Select Indicator--" >
+                          <Select onSelect={handleSelect} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val }), idx)} placeholder="--Select Indicator--" >
                             {indicators(selectedProgramSdgs(+state?.program))?.map((indicator,idx) => <Option key={idx} value={indicator?.programIndicatorId}>{indicator?.description}</Option> )}
                           </Select>
                         </Form.Item>
@@ -314,7 +321,7 @@ console.log(state)
                                   onChange={handleSelectQuestion}
                             >
                               <Option value="custom">Custom Question</Option>
-                              {indicatorId && dummyQuestionLibrary[indicatorId]?.map(({question, questionId}) => <Option value={question}>{question}</Option> )}
+                              {indicatorQuestions?.map(({question, id}) => <Option value={id}>{question}</Option> )}
                                 </Select>
                               </Form.Item>
                         </Col>
