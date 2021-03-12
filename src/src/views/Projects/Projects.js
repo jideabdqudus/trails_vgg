@@ -3,13 +3,15 @@ import { Layout } from "antd";
 import Navbar from "../../../src/layouts/layout-components/menu";
 import SideBar from "../../../src/layouts/layout-components/sidebar";
 import FooterTab from "../../../src/layouts/layout-components/footer";
-import ProjectsCard from "../../components/ProjectsCard/index.js";
+// import ProjectsCard from "../../components/ProjectsCard/index.js";
 import { Grid, Paper, withStyles } from "@material-ui/core";
 import ImageCard from "../../components/Card/ImageCard";
 import axios from "axios";
 import { appConstants } from "../../constants/app.constants";
 import { connect } from "react-redux";
 import CatalogMagic from "../../components/Loader/CatalogMagic";
+import { Link } from "react-router-dom";
+import "./index.css"
 const { Content } = Layout;
 
 const styles = theme => ({
@@ -33,11 +35,9 @@ export class Projects extends Component {
 
 
   componentDidMount = () => {
-    axios({
-      method: "GET",
-      url: `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
-      headers: { accessToken: this.props.auth.data.accessToken },
-    })
+
+    const {ServiceBase, Constants} = this.props;
+    ServiceBase.getItems(Constants.PROGRAMS)
       .then(({ data }) => {
         this.setState({ projects: data.data }, () => {
           this.setState({ loading: false })
@@ -66,9 +66,8 @@ export class Projects extends Component {
   }
 
   handleOverview = (id,name) => {
-    this.props.history.push("/dashboard/projects/overview")
     this.props.history.push({
-      pathname: '/dashboard/projects/overview',
+      pathname: '/app/dashboard/overview',
       state: { detail: id ,name:name }
     })
   }
@@ -81,11 +80,19 @@ export class Projects extends Component {
       <div>
         <Fragment>
           <Layout style={{ minHeight: "100vh" }}>
-            <SideBar />
+            <SideBar userData={this.props.userData} history={this.props.history}/>
             <Layout className="site-layout">
-              <Navbar />
+              <Navbar userData={this.props.userData} history={this.props.history}/>
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Projects</h1>
+                {!loading && projects.length === 0&&
+                  <div>
+                  <h3>
+                    When you add new projects, It would appear here!,{" "}
+                    <Link to="/app/dashboard/manager">Click to add</Link>{" "}
+                  </h3>
+                </div>
+                }
                 <Grid container spacing={3}>
                   {loading &&
                     [0, 1, 2, 3, 4, 5].map((index) => {

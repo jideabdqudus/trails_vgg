@@ -8,7 +8,8 @@ import {
 } from "../constants/Types";
 import axios from "axios";
 
-export const getPrograms = (token) => async (dispatch) => {
+export const getPrograms = (token, ServiceBase,Constants) => async (dispatch) => {
+  debugger
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -20,6 +21,7 @@ export const getPrograms = (token) => async (dispatch) => {
       "http://trail-api.test.vggdev.com/programs",
       config
     );
+    // const res = await ServiceBase.getItems(Constants.PROGRAMS)
     dispatch({
       type: GET_PROGRAMS,
       payload: res.data,

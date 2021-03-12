@@ -41,17 +41,17 @@ export class SideBar extends Component {
           <div style={{ textAlign: "center", marginBottom: "30px" }}>
             <img src={LogoTrail} className={"logoImg"} />
           </div>
-          <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
-            <Link to="/dashboard">Dashboard</Link>
+          <Menu.Item to="/app/dashboard" key="1" icon={<PieChartOutlined />}>
+            <Link to="/app/dashboard">Dashboard</Link>
           </Menu.Item>
           <Menu.Item key="2" icon={<DesktopOutlined />}>
-            <Link to="/dashboard/projects">Programme Report</Link>
+            <Link to="/app/dashboard/projects">Programme Report</Link>
           </Menu.Item>
           <Menu.Item key="3" icon={<HighlightOutlined />}>
-            <Link to="/dashboard/manager">Programme Manager</Link>
+            <Link to="/app/dashboard/manager">Programme Manager</Link>
           </Menu.Item>
           <Menu.Item key="4" icon={<FileOutlined />}>
-            <Link to="/dashboard/form"></Link> Forms Management
+            <Link to="/app/dashboard/form"></Link> Forms Management
           </Menu.Item>
         </Menu>
       </Sider>

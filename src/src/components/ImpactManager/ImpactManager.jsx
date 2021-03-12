@@ -134,7 +134,7 @@ class ImpactManager extends React.Component {
       alert: null,
       allIndicators: null,
       mySdg: [],
-      creating:false,
+      creating: false,
       indicators: [
         {
           id: 1,
@@ -160,9 +160,9 @@ class ImpactManager extends React.Component {
       formThreeErrors: {
         indicator: false,
       },
-      imageData:null,
-      files:[],
-      fileForm:null,
+      imageData: null,
+      files: [],
+      fileForm: null,
       // for google map places autocomplete
       address: "",
       showingInfoWindow: false,
@@ -178,19 +178,20 @@ class ImpactManager extends React.Component {
   }
 
   componentDidMount() {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        accessToken: this.props.auth.data.accessToken,
-      },
-    };
-
-    axios
-      .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
-      .then((res) => {
+    
+    const { ServiceBase, Constants } = this.props;
+    ServiceBase.getDataById(
+      Constants.SDGS,
+      Constants.ALL,
+      Constants.INDICATORS
+    ).then((res) => {
+      if (res.data) {
         const sdgDump = res.data.data;
         this.setState({ sdgDump });
-      });
+      } else {
+        appHelpers.alertError("An Error Ocurred.");
+      }
+    });
   }
 
   handleChangePlace = (address) => {
@@ -198,11 +199,7 @@ class ImpactManager extends React.Component {
   };
 
   handleSelectPlace = (address, selectedPlace, location) => {
-    console.log("address",address);
-    console.log("selectedPlace",selectedPlace)
-    console.log("location",location)
-    // const locations = "{ "name" : "Lagos", "description" : "yaml, the place of reckoning", "lat" : "1.02344555", "long" : "5.9732723878", "placeId" : "dsdsdscdsfs"}"
-    
+   
     this.setState({ address, selectedPlace, location });
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -215,8 +212,7 @@ class ImpactManager extends React.Component {
   };
 
   normFile = (e) => {
-    
-    this.setState({ image: e.fileList[0].thumbUrl ,imageData:e.fileList});
+    this.setState({ image: e.fileList[0].thumbUrl, imageData: e.fileList });
     if (Array.isArray(e)) {
       return e.fileList[0].thumbUrl;
     }
@@ -288,10 +284,10 @@ class ImpactManager extends React.Component {
       });
     }
   };
-  
+
   createProject() {
     const indicatorStrings = [];
-    this.setState({creating:true})
+    this.setState({ creating: true });
     const {
       name,
       description,
@@ -300,8 +296,10 @@ class ImpactManager extends React.Component {
       sdgCheckBoxes,
       indicatorCheckBoxes,
       image,
-      location,address,
-      mapCenter,imageData
+      location,
+      address,
+      mapCenter,
+      imageData,
     } = this.state;
     const payload = {
       name,
@@ -322,62 +320,58 @@ class ImpactManager extends React.Component {
         accessToken: this.props.auth.data.accessToken,
       },
     };
-    const locations ={
+    const locations = {
       name: location.formattedSuggestion.mainText,
-      description:location.description,
-      lat:mapCenter.lat,
-      long:mapCenter.lng
-    }
-    const activeMarker ={
+      description: location.description,
+      lat: mapCenter.lat,
+      long: mapCenter.lng,
+    };
+    const activeMarker = {
       name: location.formattedSuggestion.mainText,
-      description:location.description,
-      lat:mapCenter.lat,
-      long:mapCenter.lng
-    }
+      description: location.description,
+      lat: mapCenter.lat,
+      long: mapCenter.lng,
+    };
     // const sdgs = appHelpers.formatSdgsPayload(indicatorCheckBoxes,sdgCheckBoxes,this.state.sdgDump)
-   
-    const finalSdgChecks = this.state.sdgChecks.map((q,i)=>{
+
+    const finalSdgChecks = this.state.sdgChecks.map((q, i) => {
       return {
         ...q,
-        indicators:appHelpers.returnIndicatorsOnly(q.indicators)
-        
-      }
-    })
-    const sdgs = appHelpers.formatSdgsIndicatorsPayload(finalSdgChecks)
+        indicators: appHelpers.returnIndicatorsOnly(q.indicators),
+      };
+    });
+    const sdgs = appHelpers.formatSdgsIndicatorsPayload(finalSdgChecks);
     let apiPayload = new FormData();
     apiPayload.append("name", name);
     apiPayload.append("description", description);
     apiPayload.append("code", code);
-    apiPayload.append("locations",JSON.stringify(locations))
-    apiPayload.append("sdgs",JSON.stringify(sdgs))
-    apiPayload.append("activeMarker",JSON.stringify(activeMarker))
-    apiPayload.append("image", this.state.fileForm,this.state.fileForm.name);
-
-    console.log("payload---",payload);
-    console.log("sdgssdgs---",sdgs);
-    console.log("fileeeForm---",this.state.fileForm);
-
-    console.log("all state---",this.state);
+    apiPayload.append("locations", JSON.stringify(locations));
+    apiPayload.append("sdgs", JSON.stringify(sdgs));
+    apiPayload.append("activeMarker", JSON.stringify(activeMarker));
+    apiPayload.append("image", this.state.fileForm, this.state.fileForm.name);
 
     axios({
       method: "post",
-      url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
+      url: `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
       data: apiPayload,
-      headers: { "Content-Type": "multipart/form-data",accessToken: this.props.auth.data.accessToken},
+      headers: {
+        "Content-Type": "multipart/form-data",
+        accessToken: this.props.auth.data.accessToken,
+      },
     })
-    .then(({data})=>{
-      if(data){
-        appHelpers.successMessageAlert(data.message)
-        this.setState({creating:false})
-        this.resetPage()
-        }else{
-
+      .then(({ data }) => {
+        if (data) {
+          appHelpers.successMessageAlert(data.message);
+          this.setState({ creating: false });
+          this.resetPage();
+        } else {
         }
-    })
-    .catch((err)=>{
-      appHelpers.failedRequestAlert(err.response.data.message,3500)
-    })
-     
+      })
+      .catch((err) => {
+        appHelpers.failedRequestAlert(err.response.data.message, 3500);
+        this.setState({ creating: false });
+
+      });
   }
 
   cancelProject() {
@@ -385,22 +379,24 @@ class ImpactManager extends React.Component {
     window.location.reload();
   }
 
-
-  resetPage = () =>{
+  resetPage = () => {
     this.setState({
-      impactManagerFormOne:true,
-      impactManagerFormTwo:false,
-      impactManagerFormThree:false,
-      impactManagerSummary:false,
-      name:"",
-      code:"",
-      address:"",
-      description:"",
-      files:[],
-      fileForm:null,
-      sdgCheckBoxes:{},sdgChecks:[],indicatorCheckBoxes:{},location:{}
-    })
-  }
+      impactManagerFormOne: true,
+      impactManagerFormTwo: false,
+      impactManagerFormThree: false,
+      impactManagerSummary: false,
+      name: "",
+      code: "",
+      address: "",
+      description: "",
+      files: [],
+      fileForm: null,
+      sdgCheckBoxes: {},
+      sdgChecks: [],
+      indicatorCheckBoxes: {},
+      location: {},
+    });
+  };
 
   goBack = () => {
     this.setState({ impactManagerFormOne: true, impactManagerFormTwo: false });
@@ -525,7 +521,7 @@ class ImpactManager extends React.Component {
 
   handleDrop = (file) => {
     this.setState({
-      fileForm:file[0],
+      fileForm: file[0],
       files: file.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
@@ -557,7 +553,7 @@ class ImpactManager extends React.Component {
       sdgDump,
       sdgChecks,
       createBtn,
-      creating
+      creating,
     } = this.state;
     return (
       <Aux>
@@ -787,14 +783,12 @@ class ImpactManager extends React.Component {
                   </Button>
                   {this.state.alert}
 
-                  <CustomButton 
-                  onClick={this.createProject}
-                  content={
-                    createBtn
-                  }
-                  loading={creating}
+                  <CustomButton
+                    onClick={this.createProject}
+                    content={createBtn}
+                    loading={creating}
                   />
-                  
+
                   {this.state.alert}
                 </div>
               )}

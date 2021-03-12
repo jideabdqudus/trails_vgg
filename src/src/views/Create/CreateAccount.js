@@ -1,10 +1,10 @@
 import React from 'react'
 import CreateAcct from '../../components/CreateAcct/Index'
 
-const CreateAccount = () => {
+const CreateAccount = (props) => {
   return (
     <div>
-      <CreateAcct/>
+      <CreateAcct {...props}/>
     </div>
   )
 }

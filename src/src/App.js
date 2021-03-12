@@ -12,33 +12,93 @@ import store from "./store";
 import CreateAccount from "./views/Create/CreateAccount";
 import FormManager from "./views/FormManager/FormManager";
 import FormBuild from "./views/FormBuilder/FormBuild";
+import { appHelpers } from "./appHelpers/appHelpers";
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-  console.log(localStorage.token)
-}
+// if (localStorage.token) {
+//   setAuthToken(localStorage.token);
+//   console.log(localStorage.token)
+// }
 
 
-export class App extends Component {  
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      token: "",
+      ServiceBase: null,
+      userData: null
+    }
+  }
+
+  componentDidMount() {
+
+    let token = JSON.parse(localStorage.getItem("TRAIL_TOKEN"))
+    let user = JSON.parse(localStorage.getItem("TRAIL_USER"))
+    if (token !== null && user !== null) {
+      const AUTH_TOKEN = `${token}`;
+      // the token in LocalStorage was set on Login
+      this.setState({ token: AUTH_TOKEN, userData: user, }, () => {
+        this.setState({ ServiceBase: this.props.Service(this.state.token, this.props.history) });
+        this.setState({ sending: false })
+
+      })
+    } else {
+      appHelpers.alertError("Invalid session, login again.")
+      this.props.history.push("/")
+    }
+
+    // api call would be made to get detailed user information then the user state would be set and cascaded to all wrapper.
+
+
+  }
+
   render() {
+    const { ServiceBase, sending, userData } = this.state
     return (
       <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/create" component={CreateAccount} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/dashboard/projects" component={Projects} />
-            <Route
-              exact
-              path="/dashboard/projects/overview"
-              component={Overview}
-            />
-            <Route exact path="/dashboard/manager" component={Manager} />
-            <Route exact path="/dashboard/form" component={FormManager} />
-            <Route exact path="/dashboard/build_form" component={FormBuild} />
-          </Switch>
-        </BrowserRouter>
+        {ServiceBase !== null && sending === false && userData !== null && <Switch>
+          {/* <Route exact path="/" component={Login} /> */}
+          {/* <Route exact path="/create" component={CreateAccount} /> */}
+          {/* <Route exact path="/app/dashboard" component={Dashboard} /> */}
+          <Route
+            exact
+            path="/app/dashboard"
+            render={(props) => (
+              <Dashboard  {...props} {...this.state} userData={userData} {...this.props} ServiceBase={ServiceBase} Constants={this.props.Constants} />
+            )}
+          />
+
+          <Route
+            path="/app/dashboard/projects"
+            exact
+            render={(props) => (
+              <Projects  {...props} {...this.state} userData={userData} {...this.props} ServiceBase={ServiceBase} Constants={this.props.Constants} />
+            )}
+          />
+          <Route
+            path="/app/dashboard/overview"
+            exact
+            render={(props) => (
+              <Overview  {...props} {...this.state} userData={userData} {...this.props} ServiceBase={ServiceBase} Constants={this.props.Constants} />
+            )}
+          />
+          <Route exact path="/app/dashboard/manager"
+            render={(props) => (
+              <Manager  {...props} {...this.state} userData={userData} {...this.props} ServiceBase={ServiceBase} Constants={this.props.Constants} />
+            )}
+          />
+          <Route exact path="/app/dashboard/form"
+            render={(props) => (
+              <FormManager  {...props} {...this.state} userData={userData} {...this.props} ServiceBase={ServiceBase} Constants={this.props.Constants} />
+            )}
+
+          />
+          <Route exact path="/app/dashboard/build_form"
+            render={(props) => (
+              <FormBuild  {...props} {...this.state} userData={userData} {...this.props} ServiceBase={ServiceBase} Constants={this.props.Constants} />
+            )}
+          />
+        </Switch>}
       </Provider>
     );
   }

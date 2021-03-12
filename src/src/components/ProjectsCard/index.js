@@ -7,6 +7,8 @@ import axios from "axios";
 import { appConstants } from "../../constants/app.constants";
 const { Meta } = Card;
 
+
+// NO MORE NEEDED
 export class ProjectsCard extends Component {
   constructor(props){
     super(props)
@@ -27,6 +29,7 @@ export class ProjectsCard extends Component {
   };
   
   componentDidMount =() =>{
+    // no more in use at all
     axios({
       method: "GET",
       url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
@@ -34,7 +37,6 @@ export class ProjectsCard extends Component {
     })
     .then(({data})=>{
       console.log("data".data)
-      debugger
       this.setState({projects:data.data})
     })
   }
@@ -68,7 +70,7 @@ export class ProjectsCard extends Component {
                       />
                     }
                     actions={[
-                      <Link to={"/dashboard/projects/overview"}>
+                      <Link to={"/app/dashboard/projects/overview"}>
                         <Button
                           shape="round"
                           type="primary"

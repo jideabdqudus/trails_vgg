@@ -14,9 +14,9 @@ const FormBuild = () => {
     <div>
       <Fragment>
         <Layout style={{ minHeight: "100vh" }}>
-          <SideBar />
+          <SideBar  userData={this.props.userData}history={this.props.history}/>
           <Layout className="site-layout">
-            <Navbar />
+            <Navbar  userData={this.props.userData}history={this.props.history}/>
             <Content style={{ margin: "0 16px" }}>
               <h1 style={h1}>Form Manager</h1>
               <BuildForm />

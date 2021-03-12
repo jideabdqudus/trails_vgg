@@ -32,7 +32,7 @@ export const loadUser = () => async (dispatch) => {
 
 //Register User
 
-export const register = (formData) => async (dispatch) => {
+export const register = (formData,ServiceBase,Constants) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -40,12 +40,12 @@ export const register = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(
-      "http://trail-api.test.vggdev.com/user/",
-      formData,
-      config
-    );
-
+    // const res = await axios.post(
+    //   "http://trail-api.test.vggdev.com/user/",
+    //   formData,
+    //   config
+    // );
+    const res = await ServiceBase.createItemV1(formData,Constants.USER)
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
@@ -61,7 +61,7 @@ export const register = (formData) => async (dispatch) => {
 
 // Login User
 
-export const login = (formData) => async (dispatch) => {
+export const login = (formData, ServiceBase,Constants) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -69,11 +69,14 @@ export const login = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(
-      "https://trail-api.test.vggdev.com/authenticate/",
-      formData,
-      config
-    );
+    // const res = await axios.post(
+    //   "https://trail-api.test.vggdev.com/authenticate/",
+    //   formData,
+    //   config
+    // );
+    const res = await ServiceBase.createItemV1(formData,Constants.AUTHENTICATE)
+      localStorage.setItem("TRAIL_TOKEN",JSON.stringify(res.data.data.accessToken))
+      localStorage.setItem("TRAIL_USER",JSON.stringify(res.data.data))
 
     dispatch({
       type: LOGIN_SUCCESS,
