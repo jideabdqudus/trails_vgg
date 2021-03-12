@@ -17,11 +17,20 @@ const regEx = new RegExp(
 );
 
 const CreateAcct = (
-  { setAlert, error, register, isAuthenticated, clearErrors, registerSuccess, Service, Constants },
+  {
+    setAlert,
+    error,
+    register,
+    isAuthenticated,
+    clearErrors,
+    registerSuccess,
+    Service,
+    Constants,
+  },
   props
 ) => {
   useEffect(() => {
-    console.log("props in login",Service ,{Constants})
+    console.log("props in login", Service, { Constants });
 
     if (error === "A user with this email already exists") {
       setAlert(error, "error");
@@ -48,10 +57,17 @@ const CreateAcct = (
     } else if (password != password2) {
       setAlert("Check if passwords are equal", "warning");
     } else if (regEx.test(password) == false) {
-      setAlert("Passwords must contain at least 1 Capital letter, 1 small letter and a special character", "warning");
+      setAlert(
+        "Passwords must contain at least 1 Capital letter, 1 small letter and a special character",
+        "warning"
+      );
     } else {
-      const ServiceBase = Service(null,null)
-      register({ firstName, lastName, email, password },ServiceBase,Constants);
+      const ServiceBase = Service(null, null);
+      register(
+        { firstName, lastName, email, password },
+        ServiceBase,
+        Constants
+      );
     }
   };
 

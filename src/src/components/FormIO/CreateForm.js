@@ -24,7 +24,7 @@ const CreateForm = () => {
         <Col span={6}>
           <h1 style={{ fontSize: "20px" }}>Create new form</h1>
           <br />
-          <Link to="/dashboard/build_form">
+          <Link to="/app/dashboard/build_form">
             <Card style={{ width: 300, height: 350, borderColor: "black" }}>
               <h1
                 style={{
@@ -44,7 +44,7 @@ const CreateForm = () => {
         <Col span={16}>
           <h6 style={{ fontSize: "20px" }}>Available Forms</h6>
           <br />
-          <Link to="/dashboard/build_form">
+          <Link to="/app/dashboard/build_form">
             <Card
               style={{ width: 100, height: 150, borderColor: "black" }}
               title="GEEP"
