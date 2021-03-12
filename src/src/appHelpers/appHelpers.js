@@ -1,4 +1,5 @@
 import swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 export const appHelpers = {
   returnLabelsforDonut: (arr) => {
@@ -8,7 +9,12 @@ export const appHelpers = {
     }
     return label;
   },
-
+  alertError: (message, duration) => {
+    toast.error(message, {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: duration,
+    });
+  },
   toCapitalLetters: (value) => {
     if (typeof value === "string") {
       return value.toLocaleUpperCase();

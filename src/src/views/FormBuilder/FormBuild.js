@@ -9,26 +9,36 @@ import BuildForm from "../../components/FormBuilder.js/BuildForm";
 
 const { Content } = Layout;
 
-const FormBuild = () => {
-  return (
-    <div>
-      <Fragment>
-        <Layout style={{ minHeight: "100vh" }}>
-          <SideBar />
-          <Layout className="site-layout">
-            <Navbar />
-            <Content style={{ margin: "0 16px" }}>
-              <h1 style={h1}>Form Manager</h1>
-              <BuildForm />
-            </Content>
-            <FooterTab />
+class FormBuild extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Fragment>
+          <Layout style={{ minHeight: "100vh" }}>
+            <SideBar
+              userData={this.props.userData}
+              history={this.props.history}
+            />
+            <Layout className="site-layout">
+              <Navbar
+                userData={this.props.userData}
+                history={this.props.history}
+              />
+              <Content style={{ margin: "0 16px" }}>
+                <h1 style={h1}>Form Manager</h1>
+                <BuildForm />
+              </Content>
+              <FooterTab />
+            </Layout>
           </Layout>
-        </Layout>
-      </Fragment>
-    </div>
-  );
-};
-
+        </Fragment>
+      </div>
+    );
+  }
+}
 export default FormBuild;
 
 const h1 = {

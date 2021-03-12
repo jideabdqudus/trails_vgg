@@ -16,24 +16,27 @@ import axios from "axios";
 const { Content } = Layout;
 
 export class Dashboard extends Component {
-  // data = this.props
-  componentDidMount() {
-    getPrograms(this.props.auth.data.accessToken);
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
+  // data = this.props
+  // componentDidMount() {
+
+  // }
 
   componentDidMount() {
+    console.log("props in dashboard", this.props);
+    const { ServiceBase, Constants } = this.props;
+    getPrograms(this.props.auth.data.accessToken, ServiceBase, Constants);
+
+    // no more needed
     const config = {
       headers: {
         "Content-Type": "application/json",
         accessToken: this.props.auth.data.accessToken,
       },
     };
-
-    axios
-      .get("http://trail-api.test.vggdev.com/sdgs/all/indicators", config)
-      .then((res) => {
-        const api = res.data.data;
-      });
   }
   render() {
     return (
@@ -44,10 +47,16 @@ export class Dashboard extends Component {
               minHeight: "100vh",
             }}
           >
-            <SideBar />
-
+            <SideBar
+              userData={this.props.userData}
+              history={this.props.history}
+            />
             <Layout className="site-layout">
-              <Navbar />
+              <Navbar
+                {...this.props}
+                userData={this.props.userData}
+                history={this.props.history}
+              />
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Dashboard</h1>
                 <ActionCard />

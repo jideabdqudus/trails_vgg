@@ -23,20 +23,19 @@ export class Overview extends Component {
   }
 
   componentDidMount =() =>{
+    const {ServiceBase, Constants} = this.props
     if(this.props.location && this.props.location.state && this.props.location.state.detail){
       const {detail,name} = this.props.location.state
       this.setState({projectName:name})
-    axios({
-      method: "GET",
-      url:  `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/${detail}`,
-       headers: { accessToken: this.props.auth.data.accessToken},
-    })
+
+      ServiceBase && ServiceBase.getDataUsingId(Constants.PROGRAMS,detail)
     .then(({data})=>{
       this.setState({projectDetails:data.data},()=>{
         this.setState({loading:false})
       })
     })
   }else{
+
     this.props.history.push("/dashboard/projects")
   }
   }
@@ -47,9 +46,9 @@ export class Overview extends Component {
       <div>
         <Fragment>
           <Layout style={{ minHeight: "100vh" }}>
-            <SideBar />
+            <SideBar userData={this.props.userData} history={this.props.history}/>
             <Layout className="site-layout">
-              <Navbar />
+              <Navbar userData={this.props.userData} history={this.props.history}/>
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>{projectName}</h1>
                 <div>

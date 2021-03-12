@@ -17,10 +17,21 @@ const regEx = new RegExp(
 );
 
 const CreateAcct = (
-  { setAlert, error, register, isAuthenticated, clearErrors, registerSuccess },
+  {
+    setAlert,
+    error,
+    register,
+    isAuthenticated,
+    clearErrors,
+    registerSuccess,
+    Service,
+    Constants,
+  },
   props
 ) => {
   useEffect(() => {
+    console.log("props in login", Service, { Constants });
+
     if (error === "A user with this email already exists") {
       setAlert(error, "error");
       clearErrors();
@@ -51,7 +62,12 @@ const CreateAcct = (
         "warning"
       );
     } else {
-      register({ firstName, lastName, email, password });
+      const ServiceBase = Service(null, null);
+      register(
+        { firstName, lastName, email, password },
+        ServiceBase,
+        Constants
+      );
     }
   };
 

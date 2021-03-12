@@ -23,14 +23,15 @@ class Navbar extends Component {
   };
 
   render() {
+    console.log("userData={userData}",this.props)
     return (
       <nav className="menuBar">
         <div className="menuCon" style={{ marginLeft: "20px" }}>
           <div className="leftMenu">
-            <LeftMenu />
+            <LeftMenu {...this.props} history={this.props.history}/>
           </div>
           <div className="rightMenu">
-            <RightMenu />
+            <RightMenu userData={this.props.userData} history={this.props.history} />
           </div>
           <Button className="barsMenu" type="primary" onClick={this.showDrawer}>
             <span className="barsBtn"></span>

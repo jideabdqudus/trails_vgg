@@ -12,10 +12,12 @@ import { Redirect } from "react-router";
 import AlertInfo from "../Alert/index";
 
 const LoginForm = (
-  { setAlert, error, login, isAuthenticated, clearErrors, auth },
+  { setAlert, error, login, isAuthenticated, clearErrors, auth,  Service, Constants },
   props
 ) => {
   useEffect(() => {
+    console.log("props in login",Service ,{Constants})
+
     if (error) {
       setAlert(error.data.message, "error");
       clearErrors();
@@ -33,16 +35,18 @@ const LoginForm = (
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const onFinish = async () => {
+
     if (email === "") {
       setAlert("Please enter all fields", "error");
     } else if (password === "") {
       setAlert("Please enter all fields", "error");
     } else {
-      login(formData);
+      const ServiceBase = Service(null,null)
+      login(formData,ServiceBase,Constants );
     }
   };
   if (isAuthenticated) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/app/dashboard" />;
   }
   return (
     <div>
