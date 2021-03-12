@@ -18,7 +18,7 @@ export const getPrograms = (token, ServiceBase,Constants) => async (dispatch) =>
   };
   try {
     const res = await axios.get(
-      "http://trail-api.test.vggdev.com/programs",
+      "https://trail-api.test.vggdev.com/programs",
       config
     );
     // const res = await ServiceBase.getItems(Constants.PROGRAMS)
@@ -26,7 +26,6 @@ export const getPrograms = (token, ServiceBase,Constants) => async (dispatch) =>
       type: GET_PROGRAMS,
       payload: res.data.data,
     });
-    console.log("Sameerah", res.data);
   } catch (err) {
     dispatch({
       type: PROJECT_ERROR,
