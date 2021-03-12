@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 const ActionCard = () => {
   const {programs} = useSelector(state => state.projects)
-console.log(programs)
+console.log("mrPrograms",programs)
   const handleSdgs = (_programs) => {
     const sdgs = uniqBy(flatten(_programs?.map(({sdgs}) => sdgs)),'sdgId')
     return sdgs || []

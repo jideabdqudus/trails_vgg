@@ -178,7 +178,6 @@ class ImpactManager extends React.Component {
   }
 
   componentDidMount() {
-    
     const { ServiceBase, Constants } = this.props;
     ServiceBase.getDataById(
       Constants.SDGS,
@@ -199,7 +198,6 @@ class ImpactManager extends React.Component {
   };
 
   handleSelectPlace = (address, selectedPlace, location) => {
-   
     this.setState({ address, selectedPlace, location });
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
@@ -314,7 +312,7 @@ class ImpactManager extends React.Component {
     };
     // this.props.createProject(payload);
     // appHelpers.successMessageAlert("Programme Successfully Created");
-    const {ServiceBase, Constants} = this.props;
+    const { ServiceBase, Constants } = this.props;
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -351,7 +349,7 @@ class ImpactManager extends React.Component {
     apiPayload.append("activeMarker", JSON.stringify(activeMarker));
     apiPayload.append("image", this.state.fileForm, this.state.fileForm.name);
 
-    ServiceBase.uploadProgram(Constants.PROGRAMS,apiPayload)
+    ServiceBase.uploadProgram(Constants.PROGRAMS, apiPayload)
       .then(({ data }) => {
         if (data) {
           appHelpers.successMessageAlert(data.message);
@@ -363,7 +361,9 @@ class ImpactManager extends React.Component {
       .catch((err) => {
         appHelpers.failedRequestAlert(err.response.data.message, 3500);
         this.setState({ creating: false });
-
+        if (err) {
+          appHelpers.canceledRequestAlert(err.response.data.message);
+        }
       });
   }
 
