@@ -314,6 +314,7 @@ class ImpactManager extends React.Component {
     };
     // this.props.createProject(payload);
     // appHelpers.successMessageAlert("Programme Successfully Created");
+    const {ServiceBase, Constants} = this.props;
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -350,15 +351,7 @@ class ImpactManager extends React.Component {
     apiPayload.append("activeMarker", JSON.stringify(activeMarker));
     apiPayload.append("image", this.state.fileForm, this.state.fileForm.name);
 
-    axios({
-      method: "post",
-      url: `http://trail-api.test.vggdev.com/${appConstants.PROGRAMS}/`,
-      data: apiPayload,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        accessToken: this.props.auth.data.accessToken,
-      },
-    })
+    ServiceBase.uploadProgram(Constants.PROGRAMS,apiPayload)
       .then(({ data }) => {
         if (data) {
           appHelpers.successMessageAlert(data.message);

@@ -78,9 +78,13 @@ export const Service = (baseUrl, Axios, token, history) => {
   const getItems = (controller) => {
     return instance.get(`${getApiv1Url(controller)}`);
   };
+  const uploadProgram = (controller, data) => {
+    return instance.post(`${getApiv1Url(controller)}`, data);
+  }
   // all other api service functions can be created here which is then accessible to other routes and components in the Authorized Layout
 
   return {
+    uploadProgram,
     getDataUsingId,
     getDataById,
     deleteItem,
