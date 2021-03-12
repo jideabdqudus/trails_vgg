@@ -82,14 +82,17 @@ class ImpactManagerSummary extends React.Component {
             <div>
               <Card
                 title={"Programme Profile"}
+                headStyle={{
+                  fontSize:"20px"
+                }}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                }}
+                 }}
               >
                 <Button
-                  size="small"
-                  variant="contained"
+                  size="large"
+                  variant="outlined"
                   color="primary"
                   onClick={this.editProjectProfile}
                   style={{
@@ -108,25 +111,25 @@ class ImpactManagerSummary extends React.Component {
               <Card>
                 <Row style={{ display: "flex" }}>
                   <Col span={"12"}>
-                    <h6>Programme Name</h6>
-                    <h6 style={{ fontWeight: "normal", color: "grey" }}>
+                    <h3>Programme Name</h3>
+                    <h4 style={{ fontWeight: "normal", color: "grey" }}>
                       {name}
-                    </h6>
+                    </h4>
                   </Col>
                   <Col span={12}>
-                    <h6>Project Code</h6>
-                    <h6 style={{ fontWeight: "normal", color: "grey" }}>
+                    <h3>Project Code</h3>
+                    <h4 style={{ fontWeight: "normal", color: "grey" }}>
                       {code}
-                    </h6>
+                    </h4>
                   </Col>
                 </Row>
                 <br />
                 <Row>
                   <Col span={12}>
-                    <h6>Programme Description</h6>
-                    <h6 style={{ fontWeight: "normal", color: "grey" }}>
+                    <h3>Programme Description</h3>
+                    <h4 style={{ fontWeight: "normal", color: "grey" }}>
                       {description}
-                    </h6>
+                    </h4>
                   </Col>
                 </Row>
                 <br />
@@ -143,14 +146,17 @@ class ImpactManagerSummary extends React.Component {
             <div>
               <Card
                 title={"Sustainable Development Goals"}
+                headStyle={{
+                  fontSize:"20px"
+                }}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                 }}
               >
                 <Button
-                  size="small"
-                  variant="contained"
+                  size="large"
+                  variant="outlined"
                   color="primary"
                   onClick={this.editSdgGoals}
                   style={{
@@ -182,10 +188,13 @@ class ImpactManagerSummary extends React.Component {
                   display: "flex",
                   justifyContent: "space-between",
                 }}
+                headStyle={{
+                  fontSize:"20px"
+                }}
               >
                 <Button
-                  size="small"
-                  variant="contained"
+                  size="large"
+                  variant="outlined"
                   color="primary"
                   onClick={this.editProjectIndicators}
                   style={{

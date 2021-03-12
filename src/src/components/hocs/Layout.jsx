@@ -1,13 +1,12 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Loader from "../Loader";
-import { AuthenticatedLayout } from "./AuthenticatedLayout";
+import Loader from "../Loader/Loader";
 import ScrollToTop from "../ScrollToTop";
 import Aux from "../hocs/_Aux";
-import { createStore } from "@spyna/react-store";
-import UserLogin from "../UserLogin/Login";
-import ResetPassword from "../ResetPassword/ResetPassword";
-import UpdatePassword from "../UpdatePassword/UpdatePassword";
+
+import App from "../../App";
+import Login from "../../views/Login/Login";
+import CreateAccount from "../../views/Create/CreateAccount";
 
 export class Layout extends React.Component {
   constructor(props) {
@@ -25,25 +24,16 @@ export class Layout extends React.Component {
                 {/* All unthenticated Routes will go here */}
                 {/* login, reset-password, update-password */}
 
-                <Route path={"/"} exact render={(props) => <UserLogin />} />
+                <Route path={"/"} exact render={(props) => <Login {...this.props} />} />
 
-                <Route
-                  path={"/reset-password"}
-                  exact
-                  render={(props) => <ResetPassword />}
-                />
+                <Route path={"/create"} exact render={(props) => <CreateAccount {...this.props}/>} />
 
-                <Route
-                  path={"/update-password"}
-                  exact
-                  render={(props) => <UpdatePassword />}
-                />
-
+               
                 {/* This layout with house a layout containing all authenticated routes */}
                 <Route
                   path="/app"
                   render={(props) => (
-                    <AuthenticatedLayout {...this.props} {...props} />
+                    <App {...this.props} {...props} />
                   )}
                 />
               </Router>
@@ -68,4 +58,4 @@ const initialValue = {
   },
 };
 
-export default createStore(Layout, initialValue);
+export default Layout;

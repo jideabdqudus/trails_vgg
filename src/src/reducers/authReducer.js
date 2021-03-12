@@ -7,6 +7,7 @@ import {
   CLEAR_ERRORS,
   LOGIN_FAIL,
   LOGOUT,
+  CLEAR_SESS
 } from "../constants/Types";
 
 const initialState = {
@@ -19,7 +20,7 @@ const initialState = {
   programs:[]
 };
 
-export default function (state = initialState, action) {
+const auth = (state = initialState, action) => {
   switch (action.type) {
     case USER_LOADED:
       return {
@@ -46,6 +47,16 @@ export default function (state = initialState, action) {
         loading: false,
         token: action.payload.data.accessToken
       };
+
+      case CLEAR_SESS:
+        localStorage.removeItem("token");
+        return {
+          ...state,
+          user: {},
+          isAuthenticated: false,
+          loading: false,
+          token: null
+        };
     case LOGIN_FAIL:
     case REGISTER_FAIL:
     case AUTH_ERROR:
@@ -68,3 +79,4 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+export default auth

@@ -12,14 +12,14 @@ export class Projects extends Component {
       <div>
         <Fragment>
           <Layout style={{ minHeight: "100vh" }}>
-            <SideBar />
+            <SideBar userData={this.props.userData} history={this.props.history}/>
             <Layout className="site-layout">
-              <Navbar />
+              <Navbar userData={this.props.userData} history={this.props.history}/>
               <Content style={{ margin: "0 16px" }}>
                 {/* {window.location.href.indexOf("Trails") > -1 ? "Trails" : "Signals"} */}
                 <h1 style={h1}>Impact Manager</h1>
                 <div>
-                  <ImpactManager />
+                  <ImpactManager  {...this.props}/>
                 </div>
               </Content>
               <FooterTab />

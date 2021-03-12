@@ -1,4 +1,5 @@
 import swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 export const appHelpers = {
   returnLabelsforDonut: (arr) => {
@@ -8,7 +9,12 @@ export const appHelpers = {
     }
     return label;
   },
-
+  alertError: (message, duration) => {
+    toast.error(message, {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: duration,
+    });
+  },
   toCapitalLetters: (value) => {
     if (typeof value === "string") {
       return value.toLocaleUpperCase();
@@ -39,6 +45,32 @@ export const appHelpers = {
     return "1T+";
   },
 
+  returnIndicatorsOnly : (indicators)=>{
+    let ind =[]
+    let f = indicators.filter((o) => o.status === true)
+    for(let i in f){
+      ind.push(parseInt(f[i].id))
+    }
+    return ind;
+  },
+  countProjectIndicators : (sdgs) =>{
+    let projectIndicators = [];
+    for(let i in sdgs){
+      const indicators = sdgs[i].indicators
+      projectIndicators.push(indicators)
+    }
+    return projectIndicators.length
+  },
+  formatSdgsIndicatorsPayload : (finalSdgChecks) =>{
+    let sdgs = []
+    for(let i in finalSdgChecks){
+      sdgs.push({
+        indicators:finalSdgChecks[i].indicators,
+        id:finalSdgChecks[i].id
+      })
+    }
+    return sdgs
+  },
   returnSelectedSdgs: (sdgCheckBoxes, sdgDump) => {
     Object.entries(sdgCheckBoxes).forEach(([key, value]) => {
       if (value === false) {
@@ -156,6 +188,7 @@ export const appHelpers = {
 
     return false;
   },
+
   filterSdgById: (id, allIndicators) => {
     let filtered = allIndicators.filter((item) => {
       return item.sdgId === id;

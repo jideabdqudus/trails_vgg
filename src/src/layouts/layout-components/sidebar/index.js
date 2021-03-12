@@ -29,6 +29,7 @@ export class SideBar extends Component {
       <Sider
         collapsed={this.state.collapsed}
         onCollapse={this.onCollapse}
+        className="display-sider"
         style={{
           border: "none",
           backgroundColor: "#001529",
@@ -37,21 +38,43 @@ export class SideBar extends Component {
           height: "100vh",
         }}
       >
-        <Menu theme="dark" mode="inline" style={{ backgroundColor: "#001529" }}>
-          <div style={{ textAlign: "center", marginBottom: "30px" }}>
-            <img src={LogoTrail} className={"logoImg"} />
-          </div>
-          <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
-            <Link to="/dashboard">Dashboard</Link>
+        <Menu
+          theme="dark"
+          mode="inline"
+          style={{ backgroundColor: "#001529", marginTop: "100px" }}
+        >
+          <div className="logos"></div>
+          <Menu.Item
+            to="/app/dashboard"
+            key="1"
+            icon={<PieChartOutlined />}
+            style={{ marginBottom: "20px" }}
+          >
+            <Link to="/app/dashboard">Dashboard</Link>
           </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            <Link to="/dashboard/projects">Programme Report</Link>
+          <Menu.Item
+            key="2"
+            to="/app/dashboard/projects"
+            icon={<DesktopOutlined />}
+            style={{ marginBottom: "20px" }}
+          >
+            <Link to="/app/dashboard/projects">Programme Report</Link>
           </Menu.Item>
-          <Menu.Item key="3" icon={<HighlightOutlined />}>
-            <Link to="/dashboard/manager">Programme Manager</Link>
+          <Menu.Item
+            key="3"
+            icon={<HighlightOutlined />}
+            style={{ marginBottom: "20px" }}
+            to="/app/dashboard/manager"
+          >
+            <Link to="/app/dashboard/manager">Programme Manager</Link>
           </Menu.Item>
-          <Menu.Item key="4" icon={<FileOutlined />}>
-            <Link to="/dashboard/form"></Link> Forms Management
+          <Menu.Item
+            key="4"
+            icon={<FileOutlined />}
+            style={{ marginBottom: "20px" }}
+            to="/app/dashboard/manager"
+          >
+            <Link to="/app/dashboard/form"></Link> Forms Management
           </Menu.Item>
         </Menu>
       </Sider>

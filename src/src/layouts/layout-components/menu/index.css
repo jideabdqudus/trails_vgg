@@ -1,13 +1,22 @@
 .menuBar {
   box-shadow: 0 0 30px #f3f1f1;
-  background-color: white !important;
+  background-color: #fff !important;
   padding-top: 10px !important;
   padding-bottom: 10px !important;
   z-index: 999 !important;
   -webkit-transform: translateZ(0);
   overflow: hidden;
   position: fixed;
-  width: 85%;
+  width: 100%;
+}
+
+
+@media screen and (max-width: 600px) {
+  .menuBar {
+    box-shadow: 0 0 30px #001529;
+    background-color: #001529 !important;
+    
+  }
 }
 
 .menuCon {
@@ -37,17 +46,22 @@
 }
 
 .menuCon .rightMenu {
-  float: right;
+ 
   -webkit-transform: translateZ(0) !important;
   transform: translateZ(0) !important;
   z-index: 1000;
 }
 
 .barsMenu {
-  float: right;
   height: 32px;
   padding: 6px;
   margin-top: 8px;
+  display: none !important;
+  background: none !important;
+}
+
+.barsMenuLogo {
+  height: 32px;
   display: none !important;
   background: none !important;
 }
@@ -82,6 +96,10 @@
   display: block;
 }
 
+.barsMenuLogo > span {
+  display: block;
+}
+
 .ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
 .ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
   display: inline-block;
@@ -98,6 +116,10 @@
 
 @media (max-width: 767px) {
   .barsMenu {
+    display: inline-block !important;
+  }
+
+  .barsMenuLogo {
     display: inline-block !important;
   }
 
