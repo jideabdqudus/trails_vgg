@@ -29,7 +29,7 @@ class FormBuild extends React.Component {
               />
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Form Manager</h1>
-                <BuildForm />
+                <BuildForm service={this.props.ServiceBase} />
               </Content>
               <FooterTab />
             </Layout>

@@ -21,7 +21,7 @@ export const RadioInput = ({ content }) => {
     }))
     
     return (
-          <Layout isPreview={content?.isPreview} id={content?.id} question={content?.question} >
+          <Layout indicatorquestion={content?.indicatorquestion || ''} formId={content?.programform} isPreview={content?.isPreview} id={content?.id} question={content?.question} >
             <Form.Item>
                 <Radio.Group onChange={handleChange}>
                     <Radio style={radioStyle} value={1}>Yes</Radio>

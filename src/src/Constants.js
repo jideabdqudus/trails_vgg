@@ -9,3 +9,5 @@ export const AUTHENTICATE = "authenticate";
 export const ALL = "all";
 export const SDGS = "sdgs";
 export const INDICATORS = "indicators";
+export const FORM  = "form";
+export const INDICATOR_QUESTIONS = "all_indicator_questions"

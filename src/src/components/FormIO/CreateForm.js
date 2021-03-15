@@ -6,13 +6,14 @@ import {getForms,deleteForm} from '../../actions/formActions'
 import { useSelector, useDispatch } from 'react-redux'
 import background from '../../assets/background123.svg'
 import {MoreOutlined} from '@ant-design/icons'
+import { FORM } from "../../constants/Types";
 
-const FormCard = ({title,id,page}) => {
+const FormCard = ({title,id,page,service}) => {
   const {token} = useSelector(state => state.auth)
 const dispatch = useDispatch()
   const menu = (
     <Menu>
-      <Menu.Item onClick={() => dispatch(deleteForm(token,id,page))} danger>Delete</Menu.Item>
+      <Menu.Item onClick={() => dispatch(deleteForm(id,service))} danger>Delete</Menu.Item>
     </Menu>
   )
 
@@ -22,7 +23,7 @@ const dispatch = useDispatch()
     className="form-card"
   >
     <div className="form-card-text-wrapper">
-    <Link to={`/dashboard/form/preview/${id}`}>
+    <Link to={`/app/dashboard/form/preview/${id}`}>
         <Typography.Paragraph className="form-card-text" ellipsis={{
         rows:2,
       }}>{title}</Typography.Paragraph>
@@ -37,24 +38,25 @@ const dispatch = useDispatch()
   )
 } 
 
-const CreateForm = () => {
+const CreateForm = ({service}) => {
   const dispatch = useDispatch()
   const {token} = useSelector(state => state.auth)
   const { forms, pagination,loading } = useSelector(state => state.form)
   const [page, setPage] = useState(1)
-
   const handlePageChange = (_page) => setPage(_page)
 
   useEffect(() => {
-    dispatch(getForms(token, page))
-  },[dispatch, token,page])
+    dispatch(getForms(service, page))
+  },[dispatch, service,page])
+
+  const handleReset = () => dispatch({type: FORM.getFormSuccess,payload: {}})
 console.log(forms)
   return (
     <Layout className="create-form">
       <Row gutter={[16, 16]}>
         <Col span={8}>
           <h1 className="create-form-title" >Create new form</h1>
-          <Link to="/app/dashboard/build_form">
+          <Link onClick={handleReset} to="/app/dashboard/build_form">
             <Card className="create-form-new-form">
               <h1 className="create-form-plus">+</h1>
             </Card>
@@ -65,7 +67,7 @@ console.log(forms)
           <Row gutter={[16, 16]}>
             {loading ? <Skeleton /> : forms?.map(({name,id},idx) => (
               <Col key={name} span={6}>
-                  <FormCard title={name} id={id} page={page} />
+                  <FormCard title={name} id={id} page={page} service={service} />
               </Col>
             ))}
           </Row>

@@ -7,6 +7,7 @@ import Aux from "../hocs/_Aux";
 import App from "../../App";
 import Login from "../../views/Login/Login";
 import CreateAccount from "../../views/Create/CreateAccount";
+import PublishedForm from "../../views/PublishedForm";
 
 export class Layout extends React.Component {
   constructor(props) {
@@ -23,6 +24,8 @@ export class Layout extends React.Component {
               <Router>
                 {/* All unthenticated Routes will go here */}
                 {/* login, reset-password, update-password */}
+                <Route exact path="/:id" render={(props) => <PublishedForm {...this.props} />}/>
+
 
                 <Route path={"/"} exact render={(props) => <Login {...this.props} />} />
 

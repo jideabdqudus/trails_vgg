@@ -7,11 +7,12 @@ import PublishedSection from '../../components/PublishedForm'
 import { dummyForms } from '../../components/FormIO/constants'
 import { startCase } from 'lodash'
 
-const PublishedForm = () => {
+const PublishedForm = (props) => {
+  console.log(props)
     return (
         <Layout style={{ minHeight: "100vh" }}>
             <Content className="published-section-container">
-              <PublishedSection />
+              <PublishedSection service={props.Service(null,null)} />
             </Content>
             <FooterTab />
         </Layout>

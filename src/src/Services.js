@@ -81,6 +81,18 @@ export const Service = (baseUrl, Axios, token, history) => {
   const uploadProgram = (controller, data) => {
     return instance.post(`${getApiv1Url(controller)}`, data);
   }
+  const getPaginatedData = (controller,page) => {
+    return instance.get(`${getApiv1Url(controller)}?page=${page}&pageBy=10`)
+  }
+  const getDataWithId = (controller, id, endingSlash) => {
+    return instance.get(`${getApiv1Url(controller)}${id}${endingSlash ? '/' : ''}`);
+  };
+  const createItemWithId = (data,controller,id) => {
+    return instance.post(`${getApiv1Url(controller)}${id}`, data);
+  }
+  const updateItemWithId = (data,controller,id) => {
+    return instance.put(`${getApiv1Url(controller)}${id}/`, data);
+  }
   // all other api service functions can be created here which is then accessible to other routes and components in the Authorized Layout
 
   return {
@@ -93,5 +105,9 @@ export const Service = (baseUrl, Axios, token, history) => {
     editItem,
     getItems,
     createItemV1,
+    getPaginatedData,
+    getDataWithId, 
+    updateItemWithId,
+    createItemWithId
   };
 };

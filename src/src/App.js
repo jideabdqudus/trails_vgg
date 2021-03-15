@@ -145,7 +145,20 @@ export class App extends Component {
                 />
               )}
             />
-
+            <Route
+              exact
+              path="/app/dashboard/build_form/:id"
+              render={(props) => (
+                <FormBuild
+                  {...props}
+                  {...this.state}
+                  userData={userData}
+                  {...this.props}
+                  ServiceBase={ServiceBase}
+                  Constants={this.props.Constants}
+                />
+              )}
+            />
             <Route
               exact
               path="/app/dashboard/form/preview/:id"
@@ -161,20 +174,6 @@ export class App extends Component {
               )}
             />
 
-            <Route
-              exact
-              path="/app/form/:id"
-              render={(props) => (
-                <PublishedForm
-                  {...props}
-                  {...this.state}
-                  userData={userData}
-                  {...this.props}
-                  ServiceBase={ServiceBase}
-                  Constants={this.props.Constants}
-                />
-              )}
-            />
           </Switch>
         )}
       </Provider>

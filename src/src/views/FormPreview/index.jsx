@@ -7,17 +7,18 @@ import PreviewSection from '../../components/FormPreview'
 
 const { Content } = Layout;
 
-const FormPreview = () => {
+const FormPreview = ({ServiceBase,userData}) => {
+  console.log(ServiceBase)
   return (
     <div>
       <Fragment>
         <Layout style={{ minHeight: "100vh" }}>
-          <SideBar />
+          <SideBar userData={userData} />
           <Layout className="site-layout">
-            <Navbar />
+            <Navbar userData={userData} />
             <Content style={{ margin: "0 16px" }}>
               <h1 style={h1}>Forms Management</h1> 
-              <PreviewSection />
+              <PreviewSection service={ServiceBase} />
             </Content>
             <FooterTab />
           </Layout>

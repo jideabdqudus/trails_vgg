@@ -10,7 +10,7 @@ import CreateForm from "../../components/FormIO/CreateForm";
 const { Content } = Layout;
 
 const FormManager = (props) => {
-  const {userData,history} = props
+  const {userData,history, ServiceBase} = props
   return (
     <div>
       <Fragment>
@@ -20,7 +20,7 @@ const FormManager = (props) => {
             <Navbar userData={userData} history={history}/>
             <Content style={{ margin: "0 16px" }}>
               <h1 style={h1}>Form Manager</h1>
-              <CreateForm />
+              <CreateForm service={ServiceBase} />
             </Content>
             <FooterTab />
           </Layout>

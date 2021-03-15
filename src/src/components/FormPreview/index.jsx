@@ -9,7 +9,7 @@ import { getForm } from '../../actions/formActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 
-const FormPreview = () => {
+const FormPreview = ({service}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { token } = useSelector(state => state.auth)
@@ -18,12 +18,13 @@ const FormPreview = () => {
 
     const handleSubmit = () => {
          appHelpers.successMessageAlert("Form Successfully Created", 2000)
-         history.push('/dashboard/form')
+         history.push('/app/dashboard/form')
     } 
 
     useEffect(() => {
-        dispatch(getForm(id,token))
-    },[id,dispatch,token])
+        console.log('ran')
+        dispatch(getForm(id,service,true))
+    },[id,dispatch,service])
 
     if(loading) return <Skeleton />
 
