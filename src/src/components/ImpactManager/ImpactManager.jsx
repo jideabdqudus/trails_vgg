@@ -130,6 +130,8 @@ class ImpactManager extends React.Component {
       impactManagerSummary: false,
       sdgCheckBoxes: {},
       sdgChecks: [],
+      totalNumberOfBeneficiaries: "",
+      budget: "",
       indicatorCheckBoxes: {},
       alert: null,
       allIndicators: null,
@@ -237,6 +239,8 @@ class ImpactManager extends React.Component {
         description: this.state.description,
         // projectLocation: this.state.projectLocation,
         programmeLocation: this.state.programmeLocation,
+        totalNumberOfBeneficiaries: this.state.totalNumberOfBeneficiaries,
+        budget: this.state.budget,
         image: this.state.image,
         programmePlaces: this.state.programmePlaces,
         sdgs: [],
@@ -292,6 +296,8 @@ class ImpactManager extends React.Component {
       code,
       mySdg,
       sdgCheckBoxes,
+      totalNumberOfBeneficiaries,
+      budget,
       indicatorCheckBoxes,
       image,
       location,
@@ -307,6 +313,8 @@ class ImpactManager extends React.Component {
       location,
       mapCenter,
       sdgCheckBoxes,
+      totalNumberOfBeneficiaries,
+      budget,
       mySdg,
       indicatorCheckBoxes,
     };
@@ -344,6 +352,8 @@ class ImpactManager extends React.Component {
     apiPayload.append("name", name);
     apiPayload.append("description", description);
     apiPayload.append("code", code);
+    apiPayload.append("budget", budget);
+    apiPayload.append("totalNumberOfBeneficiaries", totalNumberOfBeneficiaries);
     apiPayload.append("locations", JSON.stringify(locations));
     apiPayload.append("sdgs", JSON.stringify(sdgs));
     apiPayload.append("activeMarker", JSON.stringify(activeMarker));
@@ -359,10 +369,9 @@ class ImpactManager extends React.Component {
         }
       })
       .catch((err) => {
-        appHelpers.failedRequestAlert(err.response.data.message, 3500);
-        this.setState({ creating: false });
-        if (err) {
-          appHelpers.canceledRequestAlert(err.response.data.message);
+        if (err.response) {
+          appHelpers.failedRequestAlert(err.response.data.message, 3500);
+          this.setState({ creating: false });
         }
       });
   }
@@ -537,6 +546,8 @@ class ImpactManager extends React.Component {
       impactManagerFormTwo,
       impactManagerFormThree,
       impactManagerSummary,
+      totalNumberOfBeneficiaries,
+      budget,
       sdgCheckBoxes,
       indicators,
       indicatorCheckBoxes,
@@ -580,6 +591,8 @@ class ImpactManager extends React.Component {
                     handleBannerChange={this.handleBannerChange}
                     normFile={this.normFile}
                     formOneErrors={formOneErrors}
+                    totalNumberOfBeneficiaries={totalNumberOfBeneficiaries}
+                    budget={budget}
                     // locationsEnum={locationsEnum}
                     address={this.state.address}
                     handleChangePlace={this.handleChangePlace}

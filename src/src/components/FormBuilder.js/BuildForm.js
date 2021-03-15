@@ -17,10 +17,11 @@ import "./index.css";
 import { COMPONENT_TYPES } from '../../appHelpers/constants'
 import { MinusCircleOutlined} from "@ant-design/icons";
 import { connect,useDispatch, useSelector } from "react-redux";
-import { createForm, getPrograms,getIndicatorQuestion } from '../../actions/formActions'
+import { createForm, getPrograms,getIndicatorQuestion, getForm, updateForm } from '../../actions/formActions'
 import { camelCase, flatten, isEmpty, omit } from "lodash";
 import {useHistory} from 'react-router-dom'
 import { dummyQuestionLibrary } from "./constants";
+import {useParams} from 'react-router-dom'
 
 const { Option } = Select;
 
@@ -34,6 +35,9 @@ const reducer = (state, { type, payload }) => {
       return { ...state, builderType: payload }
     case 'customQuestionInput':
       return {...state, customQuestionInput: {...state.customQuestionInput, [payload.id]: payload.value}}
+    case 'updateForm':
+      console.log('testing',{...state,...payload})
+      return {...state, ...payload}
     default:
       return state
   }
@@ -49,7 +53,7 @@ const transformNonEventChange = ({ name, value }) => {
     return event;
 };
 
-const BuildForm = ({ project }) => {
+const BuildForm = ({service}) => {
   const initialState = {
     title: "",
     display: "form",
@@ -62,7 +66,7 @@ const BuildForm = ({ project }) => {
     customQuestionInput: {},
     components: []
   }
-
+  const {id} = useParams()
   const [state, dispatch] = useReducer(reducer,initialState)
   const { title,name,program,instructions, components, customQuestionInput } = state
 
@@ -71,6 +75,7 @@ const BuildForm = ({ project }) => {
   const projects = useSelector(state => state.projects.projects)
   const loadingState = useSelector(state => state.form.loading)
   const programs = useSelector(state => state.form.programs)
+  const {form} = useSelector(state => state.form)
   const indicatorQuestions = useSelector(state =>  state.form.indicatorQuestions)
 
   console.log({indicatorQuestions})
@@ -78,25 +83,42 @@ const BuildForm = ({ project }) => {
   const [indicatorId, setIndicatorId] = useState(null)
 
   useEffect(() => {
-    reduxDispatch(getPrograms(token))
-  },[token, reduxDispatch])
+    reduxDispatch(getPrograms(service))
+  },[service,reduxDispatch])
 
-  const onChange = (e) => {
+  useEffect(() => {
+    if(id){
+      reduxDispatch(getForm(id,service,true))
+      // 
+    }
+
+    //eslint-disable-next-line
+},[])
+
+useEffect(() => {
+  if(id){
+    dispatch({payload: {...form, title: form['form-title']}, type: 'updateForm'})
+  }
+},[form,id])
+
+const onChange = (e) => {
     dispatch({ payload: { name: e.target.name,value:e.target.value }, type:'formData'})
   };
+  console.log(form)
 
   const onFinish = () => {
     if (!state?.components || !state?.components.length) {
       return message.error('Please create some question fields')
     }
-    reduxDispatch(createForm(omit(state,['customQuestionInput','builderType']), token, history))
-  };
+    console.log('iddddddd',id)
+    id ? reduxDispatch(updateForm(omit(state,['customQuestionInput','builderType']), service, id, history)) : reduxDispatch(createForm(omit(state,['customQuestionInput','builderType']), service, history))
+  }; 
 
   const selectedProgramSdgs = (_programId) => {
     const selectedProgram = programs?.filter((program) =>  program?.id === _programId)
     return selectedProgram[0]?.sdgs || []
   }
-
+console.log(state)
   const indicators = (sdgs) => flatten(sdgs?.map(({indicators}) => indicators))
 
   const handleChangeBuilderType = (_type) => {  
@@ -111,7 +133,8 @@ const BuildForm = ({ project }) => {
                 question: "",
                 targetValue : null,
                 targetType : "percentage",
-                type: COMPONENT_TYPES.radio,
+                // type: COMPONENT_TYPES.radio,
+                inputType: COMPONENT_TYPES.radio,
                 input: true,
                 placeholder: "",
                 linkedIndicator : null,
@@ -140,7 +163,8 @@ const BuildForm = ({ project }) => {
                 ...components,
                 {
                   input: true,
-                  type: COMPONENT_TYPES.text,
+                  // type: COMPONENT_TYPES.text,
+                  inputType: COMPONENT_TYPES.text,
                   value: "text",
                   placeholder: "",
                   question: "",
@@ -192,9 +216,9 @@ console.log(state)
 
   const handleSelect = (id) => {
     setIndicatorId(id)
-    reduxDispatch(getIndicatorQuestion(id, token))
+    reduxDispatch(getIndicatorQuestion(id, service))
   }
- 
+
     return (
     <div className="form-builder">
       <Row>
@@ -214,6 +238,7 @@ console.log(state)
                     rules={[{ required: true, message: "Form title is required" }]}
                     style={{ marginBottom: "15px" }}
                   >
+                    {/* {console.log(state['form-title'])} */}
                     <Input
                       type="text"
                       name="title"
@@ -223,6 +248,7 @@ console.log(state)
                   </Form.Item>
                 </Col>
                 <Col span={8}>
+                  {/* {console.log(program)} */}
                   <Form.Item
                     label={titleName2}
                     name={"program"}
@@ -245,6 +271,7 @@ console.log(state)
                     rules={[{ required: true, message: "Form name is required" }]}
                     style={{ marginBottom: "15px" }}
                   >
+                    {/* {console.log(name)} */}
                     <Input
                       type="text"
                       name="name"
@@ -257,6 +284,7 @@ console.log(state)
               <Row>
                 <Col span={24}>
                   <Form.Item label={titleName3} name="instructions">
+                    {/* {console.log(instructions)} */}
                     <Input.TextArea
                       type="text"
                       name="instructions"
@@ -272,12 +300,12 @@ console.log(state)
             {/* Form Builder */}
             <Card>
               <Dropdown trigger={['hover','click']} overlay={menu}>
-                <Button style={{marginBottom:20}} type="primary" ghost>Create Field</Button>
+                <Button style={{marginBottom:20}} type="primary" ghost>Create Question</Button>
               </Dropdown> 
 
               {components?.map((component, idx) => {
-                const { targetType } = component
-                
+                const { targetType,linkedindicator,question,placeholder,targetvalue } = component
+                console.log({targetvalue})
                 const handleSelectQuestion = (val) => {
                   if (val === 'custom') {
                     change(transformNonEventChange({ name: 'indicatorquestion', value: '' }), idx)
@@ -301,8 +329,9 @@ console.log(state)
                               ]}
                           style={{ marginBottom: 0 }}
                         >
+                          {/* {console.log(linkedindicator)} */}
                           <Select onSelect={handleSelect} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val }), idx)} placeholder="--Select Indicator--" >
-                            {indicators(selectedProgramSdgs(+state?.program))?.map((indicator,idx) => <Option key={idx} value={indicator?.programIndicatorId}>{indicator?.description}</Option> )}
+                            {indicators(selectedProgramSdgs(+state?.program))?.map((indicator,idx) => <Option key={idx} value={indicator?.indicatorId}>{indicator?.description}</Option> )}
                           </Select>
                         </Form.Item>
                        </Col>
@@ -325,16 +354,18 @@ console.log(state)
                                 </Select>
                               </Form.Item>
                         </Col>
-                         {(customQuestionInput && customQuestionInput[idx]) && <Col span={6}>
+                         {((customQuestionInput && customQuestionInput[idx]) || !isEmpty(question)) && <Col span={6}>
                           <Form.Item
                               placeholder="--Type Question--"
                               style={{marginBottom: 0}}
                               >
+                                {/* {console.log(question)} */}
                                 <Input
                                   type="text"
                                   name="question"
                                   placeholder="--Type Question--"
                                   onChange={(e) => change(e,idx)}
+                                  value={question}
                                 />
                               </Form.Item>
                             </Col>}
@@ -370,6 +401,7 @@ console.log(state)
                                 style={{ marginBottom: 0 }}
                               >
                                 <InputNumber
+                                //  value={targetvalue}
                               min={0}
                               max={targetType === 'percentage' ? 99 : null}
                               style={{width:'100%'}}
@@ -383,9 +415,11 @@ console.log(state)
                               placeholder="--Placeholder--"
                               style={{marginBottom: 0}}
                               >
+                                {/* {console.log(placeholder)} */}
                                 <Input
                                   type="text"
                                   name="placeholder"
+                                  value={placeholder}
                                 placeholder={"Input Placeholder"}
                                 onChange={(e) => change(e,idx)}
                                 />
@@ -469,7 +503,7 @@ const titleName2 = (
       fontWeight: "bold",
     }}
   >
-    Link Form to program
+    Link Form to programme
   </p>
 );
 const titleName3 = (

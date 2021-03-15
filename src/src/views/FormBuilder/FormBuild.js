@@ -28,8 +28,8 @@ class FormBuild extends React.Component {
                 history={this.props.history}
               />
               <Content style={{ margin: "0 16px" }}>
-                <h1 style={h1}>Form Manager</h1>
-                <BuildForm />
+                <h1 style={h1}>Form Management</h1>
+                <BuildForm service={this.props.ServiceBase} />
               </Content>
               <FooterTab />
             </Layout>

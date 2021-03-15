@@ -84,7 +84,7 @@ export class Projects extends Component {
             <Layout className="site-layout">
               <Navbar userData={this.props.userData} history={this.props.history}/>
               <Content style={{ margin: "0 16px" }}>
-                <h1 style={h1}>Projects</h1>
+                <h1 style={h1}>Program</h1>
                 {!loading && projects.length === 0&&
                   <div>
                   <h3>

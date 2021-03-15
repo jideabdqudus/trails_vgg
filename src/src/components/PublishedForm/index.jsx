@@ -8,14 +8,15 @@ import {useParams} from 'react-router-dom'
 import Form from 'antd/lib/form/Form'
 import { isEmpty, size } from 'lodash'
 
-const PublisedForm = () => {
+const PublisedForm = ({service}) => {
     const { id } = useParams()
     const {form,loading, answers} = useSelector(state => state.form)
     const dispatch = useDispatch()
    
     useEffect(() => {
-        dispatch(getForm(id))
-    },[id,dispatch])
+        console.log('ran')
+        dispatch(getForm(id,service,false))
+    },[id,dispatch,service])
 
     if(loading) return <Skeleton />
 
@@ -28,7 +29,7 @@ const PublisedForm = () => {
                 return message.error('You have one or more empty fields')
             }
         }
-        dispatch(createSubmission(id, { answers: answersArray }))
+        dispatch(createSubmission(id, { answers: answersArray },service))
     } 
 
     return (

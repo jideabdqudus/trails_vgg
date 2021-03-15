@@ -15,7 +15,7 @@ export const ShortFreeText = ({ content }) => {
     }))
 
     return (
-        <Layout isPreview={content?.isPreview} id={content?.id} question={content?.question} >
+        <Layout indicatorquestion={content?.indicatorquestion || ''}  formId={content?.programform} isPreview={content?.isPreview} id={content?.id} question={content?.question} >
             <Form.Item rules={[
                       { required: true, message: "This field is required" },
                     ]}>

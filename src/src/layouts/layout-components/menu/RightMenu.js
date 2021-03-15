@@ -47,7 +47,7 @@ export const RightMenu = (props) => {
           <Link to="/app/dashboard">Dashboard</Link>
         </Menu.Item>
         <Menu.Item key="setting:2">
-          <Link to="/app/dashboard/projects">Projects</Link>
+          <Link to="/app/dashboard/projects">Program Report</Link>
         </Menu.Item>
         <Menu.Item key="setting:3">
           <Link to="/app/dashboard/manager">Programme Manager</Link>

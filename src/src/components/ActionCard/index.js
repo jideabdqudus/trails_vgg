@@ -30,13 +30,13 @@ console.log("mrPrograms",programs)
                 </p>
               </Col>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
-                <span className={"actionItemStyle"}>Amount Awarded</span>
+                <span className={"actionItemStyle"}>Budget</span>
                 <p className={"actionItemParagraph"}>
                  -
                 </p>
               </Col>
               <Col xs={{ span: 24 }} lg={{ span: 6 }}>
-                <span className={"actionItemStyle"}>Amount Disbursed</span>
+                <span className={"actionItemStyle"}>Beneficiary</span>
                 <p className={"actionItemParagraph"}>
                   -
                 </p>

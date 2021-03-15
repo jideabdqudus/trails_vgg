@@ -3,6 +3,7 @@ import axios from "axios";
 import { appConstants } from '../constants/app.constants'
 import {message as alert, message} from 'antd'
 import { appHelpers } from "../appHelpers/appHelpers";
+import {FORM as FORM_CONSTANT,INDICATOR_QUESTIONS,PROGRAMS} from '../Constants'
 
 export const setLoadingState = (payload) => ({
   payload,
@@ -14,29 +15,19 @@ export const buildAnswers = (payload) => ({
   type: FORM.buildAnswers
 })
 
-export const createForm = (form, token,history) => async (dispatch) => {
-  const config = {
-    headers: {
-          "Content-Type": "application/json",
-          "accessToken": token
-    },
-  };
+export const createForm = (form, service,history) => async (dispatch) => {
   try {
     dispatch(setLoadingState(true))
-    const response = await axios.post(
-      `${appConstants.REACT_APP_BASE_URL}/form/`,
-      form,
-      config
-    );
+    const response  = await service.createItemV1(form,FORM_CONSTANT)
     const {data, message} = response.data
     alert.success(message)
     dispatch({
       type: FORM.createFormSuccess,
       payload: data,
     });
-    history.push(`form/preview/${data?.id}`)
+    history.push(`/app/dashboard/form/preview/${data?.id}`)
   } catch (err) {
-    console.log(err.response)
+    console.log(err)
     alert.error(err?.response?.data?.message?.message || 'Something went wrong, Please try again later')
     dispatch({
       type: FORM.errors,
@@ -47,19 +38,10 @@ export const createForm = (form, token,history) => async (dispatch) => {
   }
 };
 
-export const getForms = (token,page) => async (dispatch) => {
+export const getForms = (service,page) => async (dispatch) => {
    dispatch(setLoadingState(true))
-  const config = {
-    headers: {
-          "Content-Type": "application/json",
-          "accessToken": token
-    },
-  };
   try {
-    const response = await axios.get(
-      `${appConstants.REACT_APP_BASE_URL}/form/?page=${page}&pageBy=10`,
-      config
-    );
+    const response = await service.getPaginatedData(FORM_CONSTANT,page)
     const { data } = response.data
   
     dispatch({
@@ -77,21 +59,10 @@ export const getForms = (token,page) => async (dispatch) => {
   }
 };
 
-export const getForm = (id, token) => async (dispatch) => {
+export const getForm = (id, service,endingSlash) => async (dispatch) => {
   dispatch(setLoadingState(true))
-  !token && delete axios.defaults.headers.common["x-auth-token"];
-  const config = {
-    headers: {
-          "Content-Type": "application/json",
-          "accessToken": token,
-    },
-  };
   try {
-
-    const response = await axios.get(
-      `${appConstants.REACT_APP_BASE_URL}/form/${id}${token ? '/' : ''}`,
-       token ? config : {}
-    );
+    const response = await service.getDataWithId(FORM_CONSTANT,id, endingSlash);
     const {data} = response.data
    
     dispatch({
@@ -111,21 +82,10 @@ export const getForm = (id, token) => async (dispatch) => {
 };
 
 
-export const createSubmission = (id,answers) => async (dispatch) => {
+export const createSubmission = (id,answers, service) => async (dispatch) => {
   dispatch(setLoadingState(true))
-  delete axios.defaults.headers.common["x-auth-token"];
-  const config = {
-    headers: {
-          "Content-Type": "application/json",
-    },
-  };
   try {
-
-    const response = await axios.post(
-      `${appConstants.REACT_APP_BASE_URL}/form/${id}`,
-       answers,
-       config
-    );
+    const response = await service.createItemWithId(answers, FORM_CONSTANT,id)
     const {data} = response.data
    
     dispatch({
@@ -133,11 +93,8 @@ export const createSubmission = (id,answers) => async (dispatch) => {
       payload: data,
     });
     appHelpers.successMessageAlert("Form Submitted Successfully", 2000)
-    setTimeout(() => {
-      window.location.reload()
-    }, 2000);
   } catch (err) {
-      console.log(err.response)
+      console.log(err)
     dispatch({
       type: FORM.errors,
       payload: { msg: err.response, status: err.response },
@@ -147,18 +104,10 @@ export const createSubmission = (id,answers) => async (dispatch) => {
   }
 };
 
-export const getPrograms = (token) => async (dispatch) => {
- const config = {
-   headers: {
-         "Content-Type": "application/json",
-         "accessToken": token
-   },
- };
+export const getPrograms = (service) => async (dispatch) => {
+
  try {
-   const response = await axios.get(
-     `${appConstants.REACT_APP_BASE_URL}/${appConstants.PROGRAMS}/`,
-     config
-   );
+   const response = await service.getItems(PROGRAMS)
    const { data } = response.data
    dispatch({
      type: FORM.getPrograms,
@@ -172,20 +121,10 @@ export const getPrograms = (token) => async (dispatch) => {
  } 
 };
 
-export const deleteForm = (token,id,page) => async (dispatch) => {
+export const deleteForm = (id,service) => async (dispatch) => {
   alert.loading('Deleting Form', 0)
-  const config = {
-    headers: {
-          "Content-Type": "application/json",
-          "accessToken": token
-    },
-  };
   try {
-    const response = await axios.delete(
-      `${appConstants.REACT_APP_BASE_URL}/form/${id}/`,
-      config
-    );
-    console.log(response)
+    await service.deleteItem(FORM_CONSTANT,id) 
     dispatch({
       type: FORM.deleteForm,
     });
@@ -202,24 +141,13 @@ export const deleteForm = (token,id,page) => async (dispatch) => {
   }
  };
 
- export const getIndicatorQuestion = (id, token) => async (dispatch) => {
-  const config = {
-    headers: {
-          "Content-Type": "application/json",
-          "accessToken": token,
-    },
-  };
+ export const getIndicatorQuestion = (id, service) => async (dispatch) => {
   try {
 
-    const response = await axios.get(
-      `${appConstants.REACT_APP_BASE_URL}/all_indicator_questions/${id}/`,
-       config
-    );
-    const {data} = response.data
-   
+    const response = await service.getDataWithId(INDICATOR_QUESTIONS,id, false)
     dispatch({
       type: FORM.getIndicatorQuestionSuccess,
-      payload: data,
+      payload: response?.data?.data || [],
     });
   } catch (err) {
     console.log(err)
@@ -230,3 +158,26 @@ export const deleteForm = (token,id,page) => async (dispatch) => {
     });
   }
 };
+
+export const updateForm = (form,service,id,history) => async (dispatch) => {
+  try {
+    dispatch(setLoadingState(true))
+    const response  = await service.updateItemWithId(form, FORM_CONSTANT,id)
+    const {data, message} = response.data
+    alert.success(message)
+    dispatch({
+      type: FORM.createFormSuccess,
+      payload: data,
+    });
+    history.push(`/app/form/preview/${data?.id}`)
+  } catch (err) {
+    console.log(err)
+    alert.error(err?.response?.data?.message?.message || 'Something went wrong, Please try again later')
+    dispatch({
+      type: FORM.errors,
+      payload: { msg: err.response, status: err.response },
+    });
+  } finally{
+     dispatch(setLoadingState(false))
+  }
+}

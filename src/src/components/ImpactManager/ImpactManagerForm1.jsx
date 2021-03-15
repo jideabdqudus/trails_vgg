@@ -145,8 +145,10 @@ function ImpactManagerForm1(props) {
     image,
     programmePlaces,
     address,
+    totalNumberOfBeneficiaries,
+    budget,
     handleDrop,
-    files
+    files,
   } = props;
 
   const {
@@ -162,18 +164,13 @@ function ImpactManagerForm1(props) {
     <div className={`flex items-center ${classes.root}`}>
       <Row>
         <Col span={5}>
-        <h4 className="m-0 p-0"  >
-              Banner Image
-            </h4>
-           <TopSpace length={6}/>
-        <ImageUpload handleDrop={handleDrop} files={files} />
-
+          <h4 className="m-0 p-0">Banner Image</h4>
+          <TopSpace length={6} />
+          <ImageUpload handleDrop={handleDrop} files={files} />
         </Col>
       </Row>
-      <TopSpace length={10}/>
+      <TopSpace length={10} />
       <Row>
-
-      
         <Col span={8}>
           <form className={classes.container} noValidate>
             <h4 for="project-name" style={{ margin: 0 }}>
@@ -195,6 +192,46 @@ function ImpactManagerForm1(props) {
           </form>
         </Col>
         <Col span={1}></Col>
+        <Col span={4}>
+          <form className={classes.container} noValidate>
+            <h4 for="project-code" style={{ margin: 0 }}>
+              Programme Budget
+            </h4>
+            <TextField
+              id="project-budget"
+              name={"budget"}
+              error={formOneErrors.code}
+              value={budget}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleInputChange}
+            />
+          </form>
+        </Col>
+        <Col span={4}>
+          <form className={classes.container} noValidate>
+            <h4 for="project-beneficiaries" style={{ margin: 0 }}>
+              Total Number of Beneficiaries
+            </h4>
+            <TextField
+              id="project-beneficiaries"
+              name={"totalNumberOfBeneficiaries"}
+              error={formOneErrors.code}
+              value={totalNumberOfBeneficiaries}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              onChange={handleInputChange}
+            />
+          </form>
+        </Col>
         <Col span={4}>
           <form className={classes.container} noValidate>
             <h4 for="project-code" style={{ margin: 0 }}>
@@ -237,7 +274,12 @@ function ImpactManagerForm1(props) {
                 }) => (
                   <div>
                     <input
-                      style={{ padding: "15px",width:"100%", border:"1px solid rgba(0, 0, 0, 0.23)", borderRadius:"4px" }}
+                      style={{
+                        padding: "15px",
+                        width: "100%",
+                        border: "1px solid rgba(0, 0, 0, 0.23)",
+                        borderRadius: "4px",
+                      }}
                       {...getInputProps({
                         placeholder: "Search Location",
                         className: "location-search-input",
@@ -268,7 +310,7 @@ function ImpactManagerForm1(props) {
                   </div>
                 )}
               </PlacesAutocomplete>
-            </FormControl> 
+            </FormControl>
           </form>
         </Col>
         <Col span={1}></Col>
@@ -294,7 +336,7 @@ function ImpactManagerForm1(props) {
           </form>
         </Col> */}
       </Row>
-      
+
       <Grid container spacing={3}>
         {/* Project Name */}
 

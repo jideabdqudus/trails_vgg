@@ -48,8 +48,8 @@ class Navbar extends Component {
             visible={this.state.visible}
             bodyStyle={{ backgroundColor: "#001529" }}
           >
-            <LeftMenu />
-            <RightMenu />
+            <LeftMenu {...this.props} history={this.props.history}/>
+            <RightMenu userData={this.props.userData} history={this.props.history} />
           </Drawer>
         </div>
       </nav>

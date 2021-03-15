@@ -9,7 +9,6 @@ import {
 import axios from "axios";
 
 export const getPrograms = (token, ServiceBase,Constants) => async (dispatch) => {
-  debugger
   const config = {
     headers: {
       "Content-Type": "application/json",
