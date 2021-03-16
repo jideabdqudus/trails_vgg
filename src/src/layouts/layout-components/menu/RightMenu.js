@@ -34,6 +34,22 @@ export const RightMenu = (props) => {
     props.history.push("/");
   };
 
+  const onDashboardClick = () => {
+    props.history.push("/app/dashboard");
+  };
+
+  const onProgramClick = () => {
+    props.history.push("/app/dashboard/projects");
+  };
+
+  const onManagerClick = () => {
+    props.history.push("/app/dashboard/manager");
+  };
+
+  const onFormClick = () => {
+    props.history.push("/app/dashboard/form");
+  };
+
   const { md } = useBreakpoint();
   return (
     <Menu mode={md ? "horizontal" : "inline"}>
@@ -43,17 +59,25 @@ export const RightMenu = (props) => {
           userData && userData.lastName
         }`}
       >
-        <Menu.Item key="setting:1">
-          <Link to="/app/dashboard">Dashboard</Link>
+        <Menu.Item key="setting:1" className={"blindMenu"}>
+          <Link to="/app/dashboard" onClick={onDashboardClick}>
+            Dashboard
+          </Link>
         </Menu.Item>
-        <Menu.Item key="setting:2">
-          <Link to="/app/dashboard/projects">Program Report</Link>
+        <Menu.Item key="setting:2" className={"blindMenu"}>
+          <Link to="/app/dashboard/projects" onClick={onProgramClick}>
+            Program Report
+          </Link>
         </Menu.Item>
-        <Menu.Item key="setting:3">
-          <Link to="/app/dashboard/manager">Programme Manager</Link>
+        <Menu.Item key="setting:3" className={"blindMenu"}>
+          <Link to="/app/dashboard/manager" onClick={onManagerClick}>
+            Programme Manager
+          </Link>
         </Menu.Item>
-        <Menu.Item key="setting:4">
-          <Link to="/app/dashboard/form">Forms</Link>
+        <Menu.Item key="setting:4" className={"blindMenu"}>
+          <Link to="/app/dashboard/form" onClick={onFormClick}>
+            Forms
+          </Link>
         </Menu.Item>
         <Menu.Item key="setting:5">
           <Link onClick={onLogout}>Logout</Link>
