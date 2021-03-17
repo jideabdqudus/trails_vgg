@@ -19,10 +19,16 @@ const Indicators = ({service,programId, projectDetails}) => {
       labels: ['Mar'],
       datasets: [
         {
-          label: `${report?.question}  |  Target: ${report?.targetValue}` || '',
+          label: 'Yes',
           data: [report?.submissions?.value?.positive || 0],
           backgroundColor: "#1a1aff",
-          maxBarThickness: 15,
+          maxBarThickness: 20,
+        },
+        {
+          label: 'No',
+          data: [report?.submissions?.value?.negative || 0],
+          backgroundColor: "#b0b0fc",
+          maxBarThickness: 20,
         },
       ],
     }
@@ -51,6 +57,7 @@ const Indicators = ({service,programId, projectDetails}) => {
       ],
       xAxes: [
         {
+          stacked: true,
           gridLines:{
             display: false
           }
@@ -74,6 +81,10 @@ const Indicators = ({service,programId, projectDetails}) => {
             {isEmpty(reports) ? <Empty style={{maxWidth:960, margin: "10rem auto"}} /> : reports?.map((report,idx) => (
               <Col key={idx} xs={{ span: 24 }} lg={{ span: 12 }}>
                 <Card loading={loading} className={"indicatorCard"}>
+                  <div style={{display:"flex", flexDirection:"row", justifyItems:"center", justifyContent:"space-between", padding:"0 2rem"}}>
+                    <small style={{fontSize: 15}}>{report?.question || ''}</small>
+                    <small style={{fontSize: 15}}>{`Target: ${report?.targetValue || ''}`}</small>
+                  </div>
                   <Bar
                     data={generateDataObject(report)}
                     width={100}
