@@ -205,14 +205,13 @@ console.log(state)
         components[idx][name] = value;
         dispatch({ payload: [...components], type: 'components' });
     };
-console.log(components)
+
     const handleRemoveClick = (e, index) => {
         e.stopPropagation();
         const list = [...components];
         const otherLists = list.filter((_, idx) => idx !== index);
         dispatch({ payload: otherLists, type: 'components' });
     };
-console.log(state)
 
   const handleSelect = (id) => {
     setIndicatorId(id)
@@ -331,7 +330,7 @@ console.log(state)
                         >
                           {/* {console.log(linkedindicator)} */}
                           <Select onSelect={handleSelect} onChange={(val) => change(transformNonEventChange({name:'linkedIndicator', value:val }), idx)} placeholder="--Select Indicator--" >
-                            {indicators(selectedProgramSdgs(+state?.program))?.map((indicator,idx) => <Option key={idx} value={indicator?.indicatorId}>{indicator?.description}</Option> )}
+                            {indicators(selectedProgramSdgs(+state?.program))?.map((indicator,idx) => <Option key={idx} value={indicator?.programIndicatorId}>{indicator?.description}</Option> )}
                           </Select>
                         </Form.Item>
                        </Col>

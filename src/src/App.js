@@ -50,7 +50,6 @@ export class App extends Component {
 
     // api call would be made to get detailed user information then the user state would be set and cascaded to all wrapper.
   }
-
   render() {
     const { ServiceBase, sending, userData } = this.state;
     return (

@@ -9,13 +9,13 @@ export const ShortFreeText = ({ content }) => {
     const dispatch = useDispatch()
 
     const handleChange = (value) => dispatch(buildAnswers({
-        value: value?.toString(),
+        value: content?.inputType,
         answer: value?.toString(),
-        questionId:  content?.questionid
+        questionId: content?.questionId
     }))
 
     return (
-        <Layout indicatorquestion={content?.indicatorquestion || ''}  formId={content?.programform} isPreview={content?.isPreview} id={content?.id} question={content?.question} >
+        <Layout indicatorquestion={content?.indicatorQuestion || ''}  formId={content?.programform} isPreview={content?.isPreview} id={content?.id} question={content?.question} >
             <Form.Item rules={[
                       { required: true, message: "This field is required" },
                     ]}>

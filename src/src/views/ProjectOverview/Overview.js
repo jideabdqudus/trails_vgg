@@ -19,6 +19,7 @@ export class Overview extends Component {
       projectDetails: {},
       projectName: "",
       loading: true,
+      projectId: null
     };
   }
 
@@ -29,9 +30,9 @@ export class Overview extends Component {
       this.props.location.state &&
       this.props.location.state.detail
     ) {
+      console.log(this.props.location)
       const { detail, name } = this.props.location.state;
-      this.setState({ projectName: name });
-
+      this.setState({ projectName: name, projectId: detail });
       ServiceBase &&
         ServiceBase.getDataUsingId(Constants.PROGRAMS, detail).then(
           ({ data }) => {
@@ -45,7 +46,7 @@ export class Overview extends Component {
     }
   };
   render() {
-    const { projectDetails, projectName, loading } = this.state;
+    const { projectDetails, projectName, loading, projectId } = this.state;
     return (
       <div>
         <Fragment>
@@ -79,7 +80,7 @@ export class Overview extends Component {
                   style={{ padding: 24, minHeight: 360 }}
                 >
                   <div>
-                    <Indicators />
+                    <Indicators projectDetails={projectDetails} programId={projectId} service={this.props.ServiceBase} />
                   </div>
                 </div>
               </Content>

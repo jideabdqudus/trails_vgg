@@ -22,10 +22,11 @@ const PublisedForm = ({service}) => {
 
     const onFinish = () => {
         const answersArray = Object.values(answers)
+        console.log('aasdasdsad', answersArray)
         if(size(answersArray) !== size(form.components)) return message.error('You have one or more empty fields')
         if (isEmpty(answersArray)) return message.error('Answers cannot be empty')
         for (const value of answersArray) {
-            if(isEmpty(value?.answer) || isEmpty(value?.value) || isEmpty(value?.questionId)){
+            if(isEmpty(value?.answer) || isEmpty(value?.value) || isEmpty(value?.questionId.toString())){
                 return message.error('You have one or more empty fields')
             }
         }

@@ -9,7 +9,7 @@ export const Layout = ({ question, id, children, isPreview, formId,indicatorques
     const handleEdit = () => history.push(`/app/dashboard/build_form/${formId}`)
     return (
         <Card className="preview-question-card" title={`Question ${id + 1}`} extra={isPreview && <Button onClick={handleEdit} icon={<EditOutlined/>} type="primary" ghost shape="round">Edit</Button>}>
-            <Typography.Paragraph>{isEmpty(question) ? indicatorquestion : question}</Typography.Paragraph>
+            <Typography.Paragraph>{isEmpty(question) ? indicatorquestion?.question : question}</Typography.Paragraph>
             {children}
         </Card>
     )
