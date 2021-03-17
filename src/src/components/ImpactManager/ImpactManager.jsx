@@ -114,7 +114,7 @@ class ImpactManager extends React.Component {
     this.state = {
       createBtn: (
         <span>
-          Create Project <i className="fa fa-angle-right" />{" "}
+          Create Programme <i className="fa fa-angle-right" />{" "}
         </span>
       ),
       sdgDump: [],
@@ -154,6 +154,8 @@ class ImpactManager extends React.Component {
         programmeLocation: false,
         code: false,
         programmePlaces: "",
+        totalNumberOfBeneficiaries: false,
+        budget: false,
         image: false,
       },
       formTwoErrors: {

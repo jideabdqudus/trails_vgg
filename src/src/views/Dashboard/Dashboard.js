@@ -35,7 +35,7 @@ export const Dashboard = (props) => {
     dispatch(getPrograms(token));
   }, [token, dispatch]);
 
-  const { userData, history } = props;
+  const { userData, history, ServiceBase } = props;
 
   return (
     <div>
@@ -50,7 +50,7 @@ export const Dashboard = (props) => {
             <Navbar {...props} userData={userData} history={history} />
             <Content style={{ margin: "0 16px" }}>
               <h1 style={h1}>Dashboard</h1>
-              <ActionCard />
+              <ActionCard ServiceBase={ServiceBase} />
               <div>
                 <Row>
                   <Col xs={{ span: 24 }} lg={{ span: 14 }}>

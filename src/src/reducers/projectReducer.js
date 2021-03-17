@@ -3,6 +3,7 @@ import {
   GET_PROJECT,
   TEST_DISPATCH,
   GET_PROGRAMS,
+  GET_BUDGET_AND_BENEFICIARIES,
 } from "../constants/Types";
 
 const initialState = {
@@ -10,6 +11,8 @@ const initialState = {
   awarded: null,
   disbursed: null,
   loading: false,
+  totalbudget: "",
+  totalbeneficiaries: "",
 };
 
 export default (state = initialState, action) => {
@@ -30,6 +33,8 @@ export default (state = initialState, action) => {
         ...action.payload,
         projects: [...state.projects, action.payload],
       };
+    case GET_BUDGET_AND_BENEFICIARIES:
+      return { ...state, ...action.payload };
     default:
       return state;
   }

@@ -205,6 +205,7 @@ function ImpactManagerForm1(props) {
               className={classes.textField}
               margin="normal"
               variant="outlined"
+              type="number"
               InputLabelProps={{
                 shrink: true,
               }}
@@ -212,7 +213,8 @@ function ImpactManagerForm1(props) {
             />
           </form>
         </Col>
-        <Col span={4}>
+        <Col span={1}></Col>
+        <Col span={5}>
           <form className={classes.container} noValidate>
             <h4 for="project-beneficiaries" style={{ margin: 0 }}>
               Total Number of Beneficiaries
@@ -224,6 +226,7 @@ function ImpactManagerForm1(props) {
               value={totalNumberOfBeneficiaries}
               className={classes.textField}
               margin="normal"
+              type="number"
               variant="outlined"
               InputLabelProps={{
                 shrink: true,
@@ -232,6 +235,7 @@ function ImpactManagerForm1(props) {
             />
           </form>
         </Col>
+        <Col span={1}></Col>
         <Col span={4}>
           <form className={classes.container} noValidate>
             <h4 for="project-code" style={{ margin: 0 }}>
@@ -252,8 +256,7 @@ function ImpactManagerForm1(props) {
             />
           </form>
         </Col>
-        <Col span={1}></Col>
-        <Col span={5}>
+        <Col span={10}>
           <form className={classes.container} noValidate>
             <h4 for="outlined-select-currency" style={{ margin: 0 }}>
               Programme Location
@@ -314,27 +317,7 @@ function ImpactManagerForm1(props) {
           </form>
         </Col>
         <Col span={1}></Col>
-        {/* No Longer supported */}
-        {/* <Col span={3}>
-          <form className={classes.container} noValidate>
-            <label for="outlined-select-currency" style={{ margin: 0 }}>
-              Banner
-            </label>
-            <FormControl fullWidth required margin="normal">
-              <Form.Item
-                name="upload"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-              >
-                <Upload name="logo" action="/" listType="picture">
-                  <Button icon={<UploadOutlined />} type="dashed" size="large">
-                    Click to upload
-                  </Button>
-                </Upload>
-              </Form.Item>
-            </FormControl>
-          </form>
-        </Col> */}
+      
       </Row>
 
       <Grid container spacing={3}>

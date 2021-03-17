@@ -5,7 +5,7 @@ import "./style.css";
 class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
-    this.state={}
+    this.state = {};
   }
 
   render() {
@@ -25,11 +25,11 @@ class ImageUpload extends React.Component {
       />
     ));
     const render =
-    Object.keys(this.props.files).length !== 0 ? (
-      this.props.files.map(file => <aside>{thumbs}</aside>)
-    ) : (
-      <p className="hello">+ image here to prompt users to click</p>
-    );
+      Object.keys(this.props.files).length !== 0 ? (
+        this.props.files.map((file) => <aside>{thumbs}</aside>)
+      ) : (
+        <p className="hello">+ image here to prompt users to click</p>
+      );
     return (
       <div className="App">
         <Dropzone
@@ -43,8 +43,7 @@ class ImageUpload extends React.Component {
             objectPosition: "center",
             border: " 1px dashed",
           }}
-          accept="image/*"
-          
+          accept="image/png"
         >
           {({ getRootProps, getInputProps }) => (
             <>
