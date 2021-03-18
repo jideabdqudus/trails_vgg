@@ -15,6 +15,7 @@ import FormBuild from "./views/FormBuilder/FormBuild";
 import { appHelpers } from "./appHelpers/appHelpers";
 import FormPreview from "./views/FormPreview";
 import PublishedForm from "./views/PublishedForm";
+import NotFound from "./views/404/index.js";
 
 // if (localStorage.token) {
 //   setAuthToken(localStorage.token);
@@ -172,7 +173,7 @@ export class App extends Component {
                 />
               )}
             />
-
+            {/* <Route component={NotFound} /> */}
           </Switch>
         )}
       </Provider>

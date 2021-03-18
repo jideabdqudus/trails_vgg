@@ -9,6 +9,8 @@ import Login from "../../views/Login/Login";
 import CreateAccount from "../../views/Create/CreateAccount";
 import PublishedForm from "../../views/PublishedForm";
 
+import NotFound from "../../views/404/index";
+
 export class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -24,22 +26,31 @@ export class Layout extends React.Component {
               <Router>
                 {/* All unthenticated Routes will go here */}
                 {/* login, reset-password, update-password */}
-                <Route exact path="/:id" render={(props) => <PublishedForm {...this.props} />}/>
+                <Route
+                  exact
+                  path="/app/form/:id"
+                  render={(props) => <PublishedForm {...this.props} />}
+                />
 
+                <Route
+                  path={"/login"}
+                  exact
+                  render={(props) => <Login {...this.props} />}
+                />
 
-                <Route path={"/"} exact render={(props) => <Login {...this.props} />} />
+                <Route
+                  path={"/signup"}
+                  exact
+                  render={(props) => <CreateAccount {...this.props} />}
+                />
 
-                <Route path={"/create"} exact render={(props) => <CreateAccount {...this.props}/>} />
-
-               
                 {/* This layout with house a layout containing all authenticated routes */}
                 <Route
                   path="/app"
-                  render={(props) => (
-                    <App {...this.props} {...props} />
-                  )}
+                  render={(props) => <App {...this.props} {...props} />}
                 />
               </Router>
+              {/* <Route component={NotFound} /> */}
             </Switch>
           </Suspense>
         </ScrollToTop>

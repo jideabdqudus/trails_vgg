@@ -42,6 +42,7 @@ instance.get('/config.json').then(res => {
             <ToastContainer style={{ width: "500px" }} limit={1} />
           </>
         </Router>
+        
       </Provider>
       ,
       rootElement

@@ -60,7 +60,7 @@ const LoginForm = (
                   className="loginH3"
                   style={{ color: "#064E89", textAlign: "left" }}
                 >
-                  Track your objectives using Trails.
+                  Track your objectives using Trail.
                 </h3>
                 <p className="loginP">
                   Access to the most powerfull tool that allows you track your Objectives and Goals.
@@ -74,7 +74,7 @@ const LoginForm = (
               <div className="logo"></div>
               <div className="cardWrap">
                 <div style={{ marginBottom: "30px" }}>
-                  <Link to="/">
+                  <Link to="/login">
                     <span
                       style={{
                         fontSize: "16px",
@@ -89,7 +89,7 @@ const LoginForm = (
                       Login
                     </span>
                   </Link>
-                  <Link to="/create">
+                  <Link to="/signup">
                     <span
                       style={{
                         fontSize: "15px",
@@ -168,7 +168,7 @@ const LoginForm = (
                           </Button>
                         </Form.Item>
                       </Col>
-                      <Col xs={{ span: 12 }} lg={{ span: 12 }}>
+                      {/* <Col xs={{ span: 12 }} lg={{ span: 12 }}>
                         {" "}
                         <Link to="/">
                           <Button
@@ -179,7 +179,7 @@ const LoginForm = (
                             Forgot Password ?
                           </Button>
                         </Link>
-                      </Col>
+                      </Col> */}
                     </Row>
                   </Form>
                 </div>
