@@ -33,6 +33,12 @@ export class Layout extends React.Component {
                 />
 
                 <Route
+                  path={"/"}
+                  exact
+                  render={(props) => <Login {...this.props} />}
+                />
+
+                <Route
                   path={"/login"}
                   exact
                   render={(props) => <Login {...this.props} />}
