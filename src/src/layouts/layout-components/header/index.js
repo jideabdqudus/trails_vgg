@@ -23,7 +23,7 @@ export const TopHeader = (
   
   
   const onLogout = () => {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   };
 
   const [current, setCurrent] = useState("account");

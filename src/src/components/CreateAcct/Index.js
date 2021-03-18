@@ -73,7 +73,7 @@ const CreateAcct = (
 
   if (registerSuccess) {
     appHelpers.successMessageAlert("Succesfully Registered, Login here", 2000);
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 
   return (

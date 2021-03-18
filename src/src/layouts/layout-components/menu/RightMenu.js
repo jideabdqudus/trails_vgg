@@ -31,7 +31,7 @@ export const RightMenu = (props) => {
       type: CLEAR_SESS,
       payload: {},
     });
-    props.history.push("/");
+    props.history.push("/login");
   };
 
   const onDashboardClick = () => {
