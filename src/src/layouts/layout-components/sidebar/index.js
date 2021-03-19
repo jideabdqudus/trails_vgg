@@ -9,6 +9,8 @@ import {
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
+import "./index.css";
+import LogoTrail from "../../../assets/Trail2.svg";
 
 const { Sider } = Layout;
 
@@ -24,38 +26,58 @@ export class SideBar extends Component {
   };
   render() {
     return (
-      <div>
-        <Sider
-          collapsed={this.state.collapsed}
-          onCollapse={this.onCollapse}
-          style={{
-            overflow: "auto",
-            height: "100vh",
-            position: "fixed",
-            left: 0,
-            zIndex: 999,
-          }}
+      <Sider
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
+        className="display-sider"
+        style={{
+          border: "none",
+          backgroundColor: "#001529",
+          position: "fixed",
+          zIndex: "999",
+          height: "100vh",
+        }}
+      >
+        <Menu
+          theme="dark"
+          mode="inline"
+          style={{ backgroundColor: "#001529", marginTop: "100px" }}
         >
-          <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-            <Menu.Item to="/dashboard" key="1" icon={<PieChartOutlined />}>
-              <Link to="/dashboard">Dashboard</Link>
-            </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <Link to="/dashboard/projects">Programme Report</Link>
-            </Menu.Item>
-            <Menu.Item key="3" icon={<HighlightOutlined />}>
-              Programme Manager
-            </Menu.Item>
-            <Menu.Item key="4" icon={<FileOutlined />}>
-              Forms Management
-            </Menu.Item>
-            <Menu.Item key="5" icon={<ExportOutlined />}>
-              Admin
-            </Menu.Item>
-          </Menu>
-        </Sider>
-      </div>
+          <div className="logos"></div>
+          <Menu.Item
+            to="/app/dashboard"
+            key="1"
+            icon={<PieChartOutlined />}
+            style={{ marginBottom: "20px" }}
+          >
+            <Link to="/app/dashboard">Dashboard</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="2"
+            to="/app/dashboard/projects"
+            icon={<DesktopOutlined />}
+            style={{ marginBottom: "20px" }}
+          >
+            <Link to="/app/dashboard/projects">Programme Report</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="3"
+            icon={<HighlightOutlined />}
+            style={{ marginBottom: "20px" }}
+            to="/app/dashboard/manager"
+          >
+            <Link to="/app/dashboard/manager">Programme Manager</Link>
+          </Menu.Item>
+          <Menu.Item
+            key="4"
+            icon={<FileOutlined />}
+            style={{ marginBottom: "20px" }}
+            to="/app/dashboard/manager"
+          >
+            <Link to="/app/dashboard/form"></Link> Forms Management
+          </Menu.Item>
+        </Menu>
+      </Sider>
     );
   }
 }

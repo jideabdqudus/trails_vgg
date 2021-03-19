@@ -1,0 +1,38 @@
+.form-card {
+  .form-card {
+    max-width: 10rem;
+    &-image {
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    &-text {
+      &-wrapper {
+        max-width: 8rem;
+        margin: 0 auto;
+        text-align: center;
+      }
+      text-transform: uppercase;
+    }
+  }
+}
+
+.create-form {
+  .create-form {
+    &-title {
+      font-size: 20px;
+    }
+    &-new-form {
+      width: 300px;
+      height: 350px;
+      border: 1px solid black;
+    }
+    &-plus {
+      text-align: center;
+      font-size: 150px;
+      margin: 0;
+      padding: 0;
+      font-weight: 200;
+    }
+  }
+}

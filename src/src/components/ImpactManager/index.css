@@ -1,0 +1,14 @@
+.impact::-webkit-scrollbar {
+  width: 10px; /* width of the entire scrollbar */
+}
+
+.impact::-webkit-scrollbar-track {
+  background: #f0f2f5; /* color of the tracking area */
+  border-radius: 20px;
+}
+
+.impact::-webkit-scrollbar-thumb {
+  background-color: #333; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #f0f2f5; /* creates padding around scroll thumb */
+}
