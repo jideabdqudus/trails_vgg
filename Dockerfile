@@ -1,7 +1,7 @@
 # Node Build
 FROM node:12.7-alpine AS build
 WORKDIR /usr/src/app
-COPY src/package.json package-lock.json ./
+COPY src/package.json src/package-lock.json ./
 RUN npm install
 COPY . .
 RUN npm run build:prod
