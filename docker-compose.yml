@@ -1,0 +1,13 @@
+version: "3"
+services:
+  trail-web:
+    build: .
+    image: &img engineeringresearch/trail-web
+    # context: /app
+    ports:
+      - "4000:4000"
+    container_name: trail-web
+    stdin_open: true
+    volumes:
+      - /app:/usr/src/app
+      - /usr/src/app/node_modules
