@@ -1,8 +1,12 @@
 # Node Build
-FROM node:13.12.0-alpine as build
+FROM node:12.7-alpine AS build
+
 WORKDIR /usr/src/app
+
 COPY src/package.json ./
+
 RUN npm install
+
 COPY ./ ./
 RUN npm run build
 
