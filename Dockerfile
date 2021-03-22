@@ -1,12 +1,10 @@
-FROM node:12.7-alpine AS build
+FROM node:latest AS build
 WORKDIR /app
 COPY package.json ./
-COPY package-lock.json ./
+
+COPY . /app
+
 RUN npm install
-
-ENV PATH="./node_modules/.bin:$PATH"
-
-COPY . ./
 RUN npm run build
 
 # Nginx Serve
