@@ -15,9 +15,3 @@ export const REPORTS = "program_report";
 export const PROGRAM_FORMS = "program_forms";
 export const GET_BUDGET_AND_BENEFICIARIES =
   "total_number_of_beneficiaries_and_budget";
-export const appConstant = {
-  SERVICEBASEURI:
-    process.env.NODE_ENV === "development"
-      ? "https://trail-api.test.vggdev.com"
-      : window.env.SERVICEBASEURI,
-};
