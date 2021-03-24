@@ -182,6 +182,7 @@ export const updateForm = (form, service, id, history) => async (dispatch) => {
       payload: data,
     });
     history.push(`/app/form/preview/${data?.id}`);
+    console.log(data)
   } catch (err) {
     console.log(err);
     alert.error(

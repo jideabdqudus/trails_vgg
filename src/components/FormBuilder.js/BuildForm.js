@@ -237,7 +237,7 @@ console.log(state)
                     rules={[{ required: true, message: "Form title is required" }]}
                     style={{ marginBottom: "15px" }}
                   >
-                    {/* {console.log(state['form-title'])} */}
+                    {console.log("namify",state['instructions'])}
                     <Input
                       type="text"
                       name="title"
