@@ -25,6 +25,7 @@ export const LOGOUT = "LOGOUT";
 
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
+
 export const FORM = {
     createFormSuccess: 'CREATE_FORM_SUCCESS',
     errors: 'FORM_ERROR',
