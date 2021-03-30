@@ -2,7 +2,7 @@ import React, { Component, useEffect } from "react";
 import { Row, Col, Card } from "antd";
 import "./index.css";
 import { flatten, size, uniqBy } from "lodash";
-import { getBudgetandBeneficiaries } from "../../actions/projectAction";
+import { getBudgetandBeneficiaries, getPrograms } from "../../actions/projectAction";
 import { useSelector, useDispatch } from "react-redux";
 
 const ActionCard = ({ ServiceBase }) => {
@@ -10,7 +10,6 @@ const ActionCard = ({ ServiceBase }) => {
   const { totalbudget } = useSelector((state) => state.projects);
   const { totalbeneficiaries } = useSelector((state) => state.projects);
   const { token } = useSelector((state) => state.auth);
-  console.log("mrPrograms", programs);
   const handleSdgs = (_programs) => {
     const sdgs = uniqBy(flatten(_programs?.map(({ sdgs }) => sdgs)), "sdgId");
     return sdgs || [];
@@ -19,8 +18,9 @@ const ActionCard = ({ ServiceBase }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getBudgetandBeneficiaries(ServiceBase));
+    dispatch(getPrograms(ServiceBase))
   }, [token, dispatch]);
-
+  console.log("from",programs)
   return (
     <div>
       <Col span={24}>

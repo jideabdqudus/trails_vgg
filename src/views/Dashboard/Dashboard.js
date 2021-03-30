@@ -32,7 +32,7 @@ export const Dashboard = (props) => {
 
   useEffect(() => {
     const { ServiceBase, Constants } = props;
-    dispatch(getPrograms(token));
+    dispatch(getPrograms(ServiceBase));
   }, [token, dispatch]);
 
   const { userData, history, ServiceBase } = props;

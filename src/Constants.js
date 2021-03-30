@@ -15,3 +15,4 @@ export const REPORTS = "program_report";
 export const PROGRAM_FORMS = "program_forms";
 export const GET_BUDGET_AND_BENEFICIARIES =
   "total_number_of_beneficiaries_and_budget";
+export const GET_PROGRAMS = "programs"

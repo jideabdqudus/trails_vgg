@@ -11,43 +11,36 @@ import { appConstants } from "../../constants/app.constants";
 import { connect } from "react-redux";
 import CatalogMagic from "../../components/Loader/CatalogMagic";
 import { Link } from "react-router-dom";
-import "./index.css"
+import "./index.css";
 const { Content } = Layout;
 
-const styles = theme => ({
-
+const styles = (theme) => ({
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
 });
 export class Projects extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       projects: [],
-      loading: true
-    }
+      loading: true,
+    };
   }
-
-
 
   componentDidMount = () => {
-
-    const {ServiceBase, Constants} = this.props;
-    ServiceBase.getItems(Constants.PROGRAMS)
-      .then(({ data }) => {
-        this.setState({ projects: data.data }, () => {
-          this.setState({ loading: false })
-        })
-      })
-  }
-
+    const { ServiceBase, Constants } = this.props;
+    ServiceBase.getItems(Constants.PROGRAMS).then(({ data }) => {
+      this.setState({ projects: data.data }, () => {
+        this.setState({ loading: false });
+      });
+    });
+  };
 
   renderProjectList = (projects) => {
-    let projectElem = []
+    let projectElem = [];
     for (let i in projects) {
       projectElem.push(
         <Grid item xs={12} sm={4} key={projects[i].id}>
@@ -58,41 +51,46 @@ export class Projects extends Component {
             id={projects[i].id}
             image={projects[i].image}
             sdgs={projects[i].sdgs}
+            locations={projects[i].locations[0].description}
           />
         </Grid>
-      )
+      );
     }
-    return projectElem
-  }
+    return projectElem;
+  };
 
-  handleOverview = (id,name) => {
+  handleOverview = (id, name) => {
     this.props.history.push({
-      pathname: '/app/dashboard/overview',
-      state: { detail: id ,name:name }
-    })
-  }
+      pathname: "/app/dashboard/overview",
+      state: { detail: id, name: name },
+    });
+  };
   render() {
-
-
     const { classes } = this.props;
     const { projects, loading } = this.state;
     return (
       <div>
         <Fragment>
           <Layout style={{ minHeight: "100vh" }}>
-            <SideBar userData={this.props.userData} history={this.props.history}/>
+            <SideBar
+              userData={this.props.userData}
+              history={this.props.history}
+            />
             <Layout className="site-layout">
-              <Navbar userData={this.props.userData} history={this.props.history}/>
+              <Navbar
+                userData={this.props.userData}
+                history={this.props.history}
+              />
               <Content style={{ margin: "0 16px" }}>
                 <h1 style={h1}>Program</h1>
-                {!loading && projects.length === 0&&
+                {!loading && projects.length === 0 && (
                   <div>
-                  <h3>
-                    When you add new projects, It would appear here!,{" "}
-                    <Link to="/app/dashboard/manager">Click to add</Link>{" "}
-                  </h3>
-                </div>
-                }
+                    <h3>
+                      When you add new projects, It would appear here!,{" "}
+                      <Link to="/app/dashboard/manager">Click to add</Link>{" "}
+                    </h3>
+                  </div>
+                )}
                 <Grid container spacing={3}>
                   {loading &&
                     [0, 1, 2, 3, 4, 5].map((index) => {
@@ -100,13 +98,9 @@ export class Projects extends Component {
                         <Grid item xs={12} sm={4} key={index}>
                           <CatalogMagic />
                         </Grid>
-                      )
-                    })
-
-                  }
+                      );
+                    })}
                   {!loading && this.renderProjectList(projects)}
-
-
                 </Grid>
               </Content>
               <FooterTab />
@@ -123,8 +117,7 @@ const mapStateToProps = (state) => ({
 
 // export default connect(mapStateToProps, {})(ProjectsCard);
 
-export default withStyles(styles)(connect(mapStateToProps, {})(Projects))
-
+export default withStyles(styles)(connect(mapStateToProps, {})(Projects));
 
 const h1 = {
   fontWeight: "700",

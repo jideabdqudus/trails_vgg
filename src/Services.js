@@ -96,6 +96,13 @@ export const Service = (baseUrl, Axios, token, history) => {
   const getBudgetandBeneficiaries = (data, controller, id) => {
     return instance.get(`${getApiv1Url(controller)}`);
   };
+
+  const getPrograms = (data, controller, id) => {
+    return instance.get(`${getApiv1Url(controller)}`);
+  };
+  
+  
+
   return {
     uploadProgram,
     getDataUsingId,
@@ -103,6 +110,7 @@ export const Service = (baseUrl, Axios, token, history) => {
     deleteItem,
     createItem,
     userLogin,
+    getPrograms,
     editItem,
     getItems,
     createItemV1,

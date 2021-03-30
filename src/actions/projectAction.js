@@ -5,39 +5,34 @@ import {
   GET_INDICATORS,
   PROJECT_ERROR,
   GET_PROGRAMS,
+  PROGRAMS,
   GET_BUDGET_AND_BENEFICIARIES,
 } from "../constants/Types";
 import { message as alert, message } from "antd";
 import { appHelpers } from "../appHelpers/appHelpers";
-import { GET_BUDGET_AND_BENEFICIARIES as BAB } from "../Constants";
+import {
+  GET_BUDGET_AND_BENEFICIARIES as BAB,
+  PROGRAMS as PR,
+  GET_PROGRAMS as PROG,
+} from "../Constants";
 import axios from "axios";
 
-export const getPrograms = (token, ServiceBase, Constants) => async (
-  dispatch
-) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-      accessToken: token,
-    },
-  };
-  try {
-    const res = await axios.get(
-      "https://trail-api.test.vggdev.com/programs",
-      config
-    );
-    // const res = await ServiceBase.getItems(Constants.PROGRAMS)
-    dispatch({
-      type: GET_PROGRAMS,
-      payload: res.data.data,
-    });
-  } catch (err) {
-    dispatch({
-      type: PROJECT_ERROR,
-      payload: err.response,
-    });
-  }
-};
+// export const getPrograms = (token, service) => async (dispatch) => {
+//   try {
+//     const res = await service.getItems(PROG);
+//     console.log("guy", res.data.data);
+//     dispatch({
+//       type: GET_PROGRAMS,
+//       payload: res.data.data,
+//     });
+//     console.log("yasu",res.data.data)
+//   } catch (err) {
+//     dispatch({
+//       type: GET_PROGRAMS,
+//       payload: err.response,
+//     });
+//   }
+// };
 
 export const getProject = () => {
   return {
@@ -85,12 +80,18 @@ export const getBudgetandBeneficiaries = (service) => async (dispatch) => {
   }
 };
 
-//http://trail-api.test.vggdev.com/
-
-/*{
-  "data": {
-    "totalbudget": 32.0,
-    "totalbeneficiaries": 88
-},
-"message": "Total budget and beneficaries"
-}*/
+export const getPrograms = (service) => async (dispatch) =>{
+  try {
+    const response = await service.getItems(PR)
+    dispatch({
+      type: PROGRAMS,
+      payload: response.data.data
+    })
+    console.log("working",response.data.data)
+  } catch (err) {
+    dispatch({
+      type: PROGRAMS,
+      payload: {msg: err.response, status: err.response}
+    })
+  }
+}
