@@ -629,6 +629,7 @@
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 270px);
+  margin-left: 270px;
   min-height: calc(100vh - 63px);
   display: flex;
   flex-direction: column; }

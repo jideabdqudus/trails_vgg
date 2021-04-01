@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import Logo from "../../../assets/Trail2.svg";
 import LogoMini from "../../../assets/Trail2.svg";
 import Face from "../../../assets/face17.jpg";
-import { Drawer, Button, Menu, Dropdown } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Drawer, Button, Menu, Dropdown, Grid } from "antd";
+import { DownOutlined, MenuFoldOutlined } from "@ant-design/icons";
 import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { logout, loadUser } from "../../../actions/authAuctions";
@@ -12,6 +12,11 @@ import { Redirect } from "react-router";
 import { Link } from "@material-ui/core";
 import { CLEAR_SESS } from "../../../constants/Types";
 import { Fragment } from "react";
+import "./index.css";
+
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
+const { useBreakpoint } = Grid;
 
 const TopHeader = (props) => {
   const { logout, user, loadUser, isAuthenticated, auth, history } = props;
@@ -44,6 +49,24 @@ const TopHeader = (props) => {
     props.history.push("/login");
   };
 
+  const onDashboardClick = () => {
+    props.history.push("/app/dashboard");
+  };
+
+  const onProgramClick = () => {
+    props.history.push("/app/dashboard/projects");
+  };
+
+  const onManagerClick = () => {
+    props.history.push("/app/dashboard/manager");
+  };
+
+  const onFormClick = () => {
+    props.history.push("/app/dashboard/form");
+  };
+
+  const { md } = useBreakpoint();
+
   const menu = (
     <Menu>
       <Menu.Item key="setting:5">
@@ -75,7 +98,7 @@ const TopHeader = (props) => {
           </form> */}
           <ul className="navbar-nav ml-auto">
             <li>
-              <Dropdown overlay={menu}>
+              <Dropdown overlay={menu} className="dropDownHidden">
                 <a
                   className="nav-link dropdown-toggle"
                   id="UserDropdown"
@@ -91,25 +114,60 @@ const TopHeader = (props) => {
               </Dropdown>
 
               <Drawer
-                title="Basic Drawer"
+                title={`${userData && userData.firstName} ${
+                  userData && userData.lastName
+                }`}
                 placement="right"
                 closable={false}
                 onClose={onClose}
                 visible={visible}
+                style={{ zIndex: "9999" }}
               >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <div className="drawerMenu">
+                  <Link to="/app/dashboard" onClick={onDashboardClick}>
+                    <span style={{ color: "blue", fontWeight: "bold" }}>
+                      Dashboard
+                    </span>
+                  </Link>
+                </div>
+                <div className="drawerMenu">
+                  <Link to="/app/dashboard/projects" onClick={onProgramClick}>
+                    <span style={{ color: "blue", fontWeight: "bold" }}>
+                      Program Report
+                    </span>
+                  </Link>
+                </div>
+                <div className="drawerMenu">
+                  <Link to="/app/dashboard/manager" onClick={onManagerClick}>
+                    <span style={{ color: "blue", fontWeight: "bold" }}>
+                      Programme Manager
+                    </span>
+                  </Link>
+                </div>
+                <div className="drawerMenu">
+                  <Link to="/app/dashboard/form" onClick={onFormClick}>
+                    <span style={{ color: "blue", fontWeight: "bold" }}>
+                      Forms
+                    </span>
+                  </Link>
+                </div>
+                <div className="drawerMenu">
+                  <Link onClick={onLogout}>
+                    <span style={{ color: "red", fontWeight: "bold" }}>
+                      Logout
+                    </span>
+                  </Link>
+                </div>
               </Drawer>
             </li>
           </ul>
           <button
-            className="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+            className="folderHidden"
             type="button"
             data-toggle="offcanvas"
             onClick={showDrawer}
           >
-            <span className="mdi mdi-menu"></span>
+            <MenuFoldOutlined />
           </button>
         </div>
       </nav>

@@ -6,6 +6,8 @@ import SideBar from "../../../src/layouts/layout-components/sidebar";
 import FooterTab from "../../../src/layouts/layout-components/footer";
 import CreateForm from "../../components/FormIO/CreateForm";
 import BuildForm from "../../components/FormBuilder.js/BuildForm";
+import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
+import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
 
 const { Content } = Layout;
 
@@ -15,26 +17,32 @@ class FormBuild extends React.Component {
   }
   render() {
     return (
-      <div>
-        <Fragment>
-          <Layout style={{ minHeight: "100vh" }}>
-            <SideBar
-              userData={this.props.userData}
-              history={this.props.history}
-            />
-            <Layout className="site-layout">
-              <Navbar
-                userData={this.props.userData}
-                history={this.props.history}
-              />
-              <Content style={{ margin: "0 16px" }}>
-                <h1 style={h1}>Form Management</h1>
-                <BuildForm service={this.props.ServiceBase} />
-              </Content>
-              <FooterTab />
-            </Layout>
-          </Layout>
-        </Fragment>
+      <div className="container-scroller">
+        <TopHeader
+          userData={this.props.userData}
+          history={this.props.history}
+        />
+        <div className="page-body-wrapper" style={{ marginTop: "60px" }}>
+          <SideBarPanel
+            userData={this.props.userData}
+            history={this.props.history}
+          />
+          <div className="main-panel">
+            <div className="content-wrapper">
+              <div className="row page-title-header">
+                <div className="col-12">
+                  <div className="page-header">
+                    <h4 className="page-title">Form Management</h4>
+                  </div>
+                  <Fragment>
+                    {" "}
+                    <BuildForm service={this.props.ServiceBase} />
+                  </Fragment>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

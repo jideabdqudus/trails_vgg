@@ -13,22 +13,22 @@ const { Content } = Layout;
 export class Projects extends Component {
   render() {
     return (
-      <div class="container-scroller">
+      <div className="container-scroller">
         <TopHeader
           userData={this.props.userData}
           history={this.props.history}
         />
-        <div class="page-body-wrapper" style={{ marginTop: "60px" }}>
+        <div className="page-body-wrapper" style={{ marginTop: "60px" }}>
           <SideBarPanel
             userData={this.props.userData}
             history={this.props.history}
           />
-          <div class="main-panel" style={{ marginLeft: "270px" }}>
-            <div class="content-wrapper">
-              <div class="row page-title-header">
-                <div class="col-12">
-                  <div class="page-header">
-                    <h4 class="page-title">Impact Manager</h4>
+          <div className="main-panel">
+            <div className="content-wrapper">
+              <div className="row page-title-header">
+                <div className="col-12">
+                  <div className="page-header">
+                    <h4 className="page-title">Impact Manager</h4>
                   </div>
                   <Fragment>
                     <div>

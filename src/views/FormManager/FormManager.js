@@ -17,7 +17,7 @@ const FormManager = (props) => {
       <TopHeader {...props} userData={userData} history={history} />
       <div class="page-body-wrapper" style={{ marginTop: "60px" }}>
         <SideBarPanel userData={userData} history={history} />
-        <div class="main-panel" style={{ marginLeft: "270px" }}>
+        <div class="main-panel">
           <div class="content-wrapper">
             <div class="row page-title-header">
               <div class="col-12">

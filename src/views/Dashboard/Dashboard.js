@@ -40,16 +40,16 @@ export const Dashboard = (props) => {
   const { userData, history, ServiceBase } = props;
 
   return (
-    <div class="container-scroller">
+    <div className="container-scroller">
       <TopHeader {...props} userData={userData} history={history} />
-      <div class="page-body-wrapper" style={{ marginTop: "60px" }}>
+      <div className="page-body-wrapper" style={{ marginTop: "60px" }}>
         <SideBarPanel userData={userData} history={history} />
-        <div class="main-panel" style={{marginLeft:"270px"}}>
-          <div class="content-wrapper">
-            <div class="row page-title-header">
-              <div class="col-12">
-                <div class="page-header">
-                  <h4 class="page-title">Dashboard</h4>
+        <div className="main-panel">
+          <div className="content-wrapper">
+            <div className="row page-title-header">
+              <div className="col-12">
+                <div className="page-header">
+                  <h4 className="page-title">Dashboard</h4>
                 </div>
                 <Fragment>
                   <ActionCard ServiceBase={ServiceBase} />

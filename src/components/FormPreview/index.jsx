@@ -31,9 +31,9 @@ const FormPreview = ({ service }) => {
   console.log("form",form);
   console.log("forms",form.formlink);
 
-  const formName = form.name
+  // const formName = form.name
 
-  const newFormName = formName.split(" ").join("");
+  // const newFormName = formName.split(" ").join("");
 
 
   return (
@@ -45,10 +45,10 @@ const FormPreview = ({ service }) => {
             <a
               target="_blank"
               rel="noreferrer"
-              href={`https://${window.location.host}/app/form/${newFormName}-${form.formid}`}
+              href={`https://${window.location.host}/app/form/${form.name}-${form.formid}`}
             >
               {" "}
-              {`https://${window.location.host}/app/form/${newFormName}-${form.formid}`}
+              {`https://${window.location.host}/app/form/${form.name}-${form.formid}`}
             </a>
           </Typography.Paragraph>
         </Col>
