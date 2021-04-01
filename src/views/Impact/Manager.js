@@ -4,28 +4,42 @@ import Navbar from "../../../src/layouts/layout-components/menu";
 import SideBar from "../../layouts/layout-components/sidebar";
 import FooterTab from "../../layouts/layout-components/footer";
 import ImpactManager from "../../components/ImpactManager/ImpactManager";
+
+import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
+import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
+
 const { Content } = Layout;
 
 export class Projects extends Component {
   render() {
     return (
-      <div>
-        <Fragment>
-          <Layout style={{ minHeight: "100vh" }}>
-            <SideBar userData={this.props.userData} history={this.props.history}/>
-            <Layout className="site-layout">
-              <Navbar userData={this.props.userData} history={this.props.history}/>
-              <Content style={{ margin: "0 16px" }}>
-                {/* {window.location.href.indexOf("Trails") > -1 ? "Trails" : "Signals"} */}
-                <h1 style={h1}>Impact Manager</h1>
-                <div>
-                  <ImpactManager  {...this.props}/>
+      <div class="container-scroller">
+        <TopHeader
+          userData={this.props.userData}
+          history={this.props.history}
+        />
+        <div class="page-body-wrapper" style={{ marginTop: "60px" }}>
+          <SideBarPanel
+            userData={this.props.userData}
+            history={this.props.history}
+          />
+          <div class="main-panel" style={{ marginLeft: "270px" }}>
+            <div class="content-wrapper">
+              <div class="row page-title-header">
+                <div class="col-12">
+                  <div class="page-header">
+                    <h4 class="page-title">Impact Manager</h4>
+                  </div>
+                  <Fragment>
+                    <div>
+                      <ImpactManager {...this.props} />
+                    </div>
+                  </Fragment>
                 </div>
-              </Content>
-              <FooterTab />
-            </Layout>
-          </Layout>
-        </Fragment>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

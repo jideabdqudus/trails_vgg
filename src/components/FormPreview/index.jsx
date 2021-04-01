@@ -28,7 +28,13 @@ const FormPreview = ({ service }) => {
 
   if (loading) return <Skeleton />;
 
-  console.log(window.location.host);
+  console.log("form",form);
+  console.log("forms",form.formlink);
+
+  const formName = form.name
+
+  const newFormName = formName.split(" ").join("");
+
 
   return (
     <section className="form-preview-section">
@@ -39,10 +45,10 @@ const FormPreview = ({ service }) => {
             <a
               target="_blank"
               rel="noreferrer"
-              href={`https://${window.location.host}/app/form/${form.name}-${form.formid}`}
+              href={`https://${window.location.host}/app/form/${newFormName}-${form.formid}`}
             >
               {" "}
-              {`https://${window.location.host}/app/form/${form.name}-${form.formid}`}
+              {`https://${window.location.host}/app/form/${newFormName}-${form.formid}`}
             </a>
           </Typography.Paragraph>
         </Col>

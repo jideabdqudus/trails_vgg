@@ -12,8 +12,8 @@ import PropTypes from "prop-types";
 import { getPrograms } from "../../actions/projectAction";
 import { loadUser } from "../../actions/authAuctions";
 import axios from "axios";
-import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
-import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
+import TopHeader from "../../../src/layouts/layout-components/header/TopHeader"
+import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel"
 
 const { Content } = Layout;
 
@@ -40,35 +40,36 @@ export const Dashboard = (props) => {
   const { userData, history, ServiceBase } = props;
 
   return (
-    <div class="container-scroller">
-      <TopHeader {...props} userData={userData} history={history} />
-      <div class="page-body-wrapper" style={{ marginTop: "60px" }}>
-        <SideBarPanel userData={userData} history={history} />
-        <div class="main-panel" style={{marginLeft:"270px"}}>
-          <div class="content-wrapper">
-            <div class="row page-title-header">
-              <div class="col-12">
-                <div class="page-header">
-                  <h4 class="page-title">Dashboard</h4>
-                </div>
-                <Fragment>
-                  <ActionCard ServiceBase={ServiceBase} />
-                  <div>
-                    <Row>
-                      <Col xs={{ span: 24 }} lg={{ span: 14 }}>
-                        <ImpactMap />
-                      </Col>
-                      <Col xs={{ span: 24 }} lg={{ span: 10 }}>
-                        <DoughnutChart />
-                      </Col>
-                    </Row>
-                  </div>
-                </Fragment>
+    <div>
+      <Fragment>
+        <Layout
+          style={{
+            minHeight: "100vh",
+          }}
+        >
+          <SideBar userData={userData} history={history} />
+          <SideBarPanel/>
+          <Layout className="site-layout">
+            <Navbar {...props} userData={userData} history={history} />
+            <TopHeader/>
+            <Content style={{ margin: "0 16px" }}>
+              <h1 style={h1}>Dashboard</h1>
+              <ActionCard ServiceBase={ServiceBase} />
+              <div>
+                <Row>
+                  <Col xs={{ span: 24 }} lg={{ span: 14 }}>
+                    <ImpactMap />
+                  </Col>
+                  <Col xs={{ span: 24 }} lg={{ span: 10 }}>
+                    <DoughnutChart />
+                  </Col>
+                </Row>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Content>
+            <FooterTab />
+          </Layout>
+        </Layout>
+      </Fragment>
     </div>
   );
 };

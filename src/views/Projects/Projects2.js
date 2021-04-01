@@ -12,10 +12,6 @@ import { connect } from "react-redux";
 import CatalogMagic from "../../components/Loader/CatalogMagic";
 import { Link } from "react-router-dom";
 import "./index.css";
-
-import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
-import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
-
 const { Content } = Layout;
 
 const styles = (theme) => ({
@@ -73,49 +69,44 @@ export class Projects extends Component {
     const { classes } = this.props;
     const { projects, loading } = this.state;
     return (
-      <div class="container-scroller">
-        <TopHeader
-          userData={this.props.userData}
-          history={this.props.history}
-        />
-        <div class="page-body-wrapper" style={{ marginTop: "60px" }}>
-          <SideBarPanel
-            userData={this.props.userData}
-            history={this.props.history}
-          />
-          <div class="main-panel" style={{ marginLeft: "270px" }}>
-            <div class="content-wrapper">
-              <div class="row page-title-header">
-                <div class="col-12">
-                  <div class="page-header">
-                    <h4 class="page-title">Program</h4>
+      <div>
+        <Fragment>
+          <Layout style={{ minHeight: "100vh" }}>
+            <SideBar
+              userData={this.props.userData}
+              history={this.props.history}
+            />
+            <Layout className="site-layout">
+              <Navbar
+                userData={this.props.userData}
+                history={this.props.history}
+              />
+              <Content style={{ margin: "0 16px" }}>
+                <h1 style={h1}>Program</h1>
+                {!loading && projects.length === 0 && (
+                  <div>
+                    <h3>
+                      When you add new projects, It would appear here!,{" "}
+                      <Link to="/app/dashboard/manager">Click to add</Link>{" "}
+                    </h3>
                   </div>
-                  <Fragment>
-                    {!loading && projects.length === 0 && (
-                      <div>
-                        <h3>
-                          When you add new projects, It would appear here!,{" "}
-                          <Link to="/app/dashboard/manager">Click to add</Link>{" "}
-                        </h3>
-                      </div>
-                    )}
-                    <Grid container spacing={3}>
-                      {loading &&
-                        [0, 1, 2, 3, 4, 5].map((index) => {
-                          return (
-                            <Grid item xs={12} sm={4} key={index}>
-                              <CatalogMagic />
-                            </Grid>
-                          );
-                        })}
-                      {!loading && this.renderProjectList(projects)}
-                    </Grid>
-                  </Fragment>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+                )}
+                <Grid container spacing={3}>
+                  {loading &&
+                    [0, 1, 2, 3, 4, 5].map((index) => {
+                      return (
+                        <Grid item xs={12} sm={4} key={index}>
+                          <CatalogMagic />
+                        </Grid>
+                      );
+                    })}
+                  {!loading && this.renderProjectList(projects)}
+                </Grid>
+              </Content>
+              <FooterTab />
+            </Layout>
+          </Layout>
+        </Fragment>
       </div>
     );
   }
