@@ -103,7 +103,7 @@ const ImpactManagerForm2 = (props) => {
   const renderSdgs = () => {
     const allSdgs =
       props.sdgDump &&
-      props.sdgDump.slice(7, 8).map((item, index) => {
+      props.sdgDump.slice(0, 1).map((item, index) => {
         return (
           <SvgCard
             key={index}
