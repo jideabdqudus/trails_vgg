@@ -229,10 +229,10 @@ const BuildForm = ({ service }) => {
   };
 
   const BUILDER_TYPES = [
-    // {
-    //   name: 'Text Input',
-    //   value: COMPONENT_TYPES.text
-    // },
+    {
+      name: 'Text Input',
+      value: COMPONENT_TYPES.text
+    },
     {
       name: "Radio Input",
       value: COMPONENT_TYPES.radio,

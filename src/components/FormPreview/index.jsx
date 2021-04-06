@@ -45,10 +45,10 @@ const FormPreview = ({ service }) => {
             <a
               target="_blank"
               rel="noreferrer"
-              href={`https://${window.location.host}/app/form/${form.name}-${form.formid}`}
+              href={form.formlink}
             >
               {" "}
-              {`https://${window.location.host}/app/form/${form.name}-${form.formid}`}
+              {form.formlink}
             </a>
           </Typography.Paragraph>
         </Col>

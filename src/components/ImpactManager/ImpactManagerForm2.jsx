@@ -11,6 +11,8 @@ import {
 //import { sdgDump } from "./sdgDump";
 import SvgCard from "../SvgCard/SvgCard";
 import axios from "axios";
+import _ from "lodash";
+
 const styles = (theme) => ({
   container: {
     display: "flex",
@@ -61,25 +63,6 @@ const styles = (theme) => ({
 const ImpactManagerForm2 = (props) => {
   const [sdgDumping, setSdgDumping] = useState("");
 
-  console.log("props in form 2", props);
-  // useEffect(() => {
-  //   async function fetchSdgDump() {
-  //    const config = {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         accessToken: props.auth.data.accessToken,
-  //       },
-  //     };
-  //     let result = await axios.get(
-  //       "http://trail-api.test.vggdev.com/sdgs/all/indicators",
-  //       config
-  //     );
-  //     setSdgDumping(result.data.data);
-  //   }
-
-  //   fetchSdgDump();
-  // }, []);
-
   const { classes } = props;
 
   const setOpacity = (sdgCheckBoxes, sdgNum) => {
@@ -101,9 +84,12 @@ const ImpactManagerForm2 = (props) => {
   } = props;
 
   const renderSdgs = () => {
+    const newArray = props.sdgDump.slice(0, 3);
+    const pulled = _.pullAt(newArray, [0, 2]);
+
     const allSdgs =
       props.sdgDump &&
-      props.sdgDump.slice(0, 1).map((item, index) => {
+      pulled.map((item, index) => {
         return (
           <SvgCard
             key={index}
@@ -119,6 +105,26 @@ const ImpactManagerForm2 = (props) => {
 
     return allSdgs;
   };
+
+  // const renderSdgs = () => {
+  //   const allSdgs =
+  //     editedSDGArray &&
+  //     editedSDGArray.map((item, index) => {
+  //       return (
+  //         <SvgCard
+  //           key={index}
+  //           path={item.image}
+  //           width={120}
+  //           height={120}
+  //           sdgCheckBoxes={sdgCheckBoxes}
+  //           opacity={setOpacity(sdgCheckBoxes, item.id)}
+  //           onClick={handleSdgBoxChange.bind(this, item.id)}
+  //         />
+  //       );
+  //     });
+
+  //   return allSdgs;
+  // };
 
   return (
     <div className={`flex items-center ${classes.root}`}>
