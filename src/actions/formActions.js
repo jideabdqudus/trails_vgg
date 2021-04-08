@@ -102,10 +102,10 @@ export const createSubmission = (id, answers, service) => async (dispatch) => {
       type: FORM.createSubmissionSuccess,
       payload: data,
     });
-    appHelpers.successMessageAlert("Form Submitted Successfully", 2000)
+    appHelpers.successMessageAlert("Form Submitted Successfully", 2000);
     window.setTimeout(() => {
-      window.close()
-    },2000)
+      window.close();
+    }, 2000);
   } catch (err) {
     console.log(err);
     dispatch({
@@ -155,8 +155,7 @@ export const deleteForm = (id, service) => async (dispatch) => {
 
 export const getIndicatorQuestion = (id, service) => async (dispatch) => {
   try {
-
-    const response = await service.getDataWithId(INDICATOR_QUESTIONS,id, true)
+    const response = await service.getDataWithId(INDICATOR_QUESTIONS, id, true);
     dispatch({
       type: FORM.getIndicatorQuestionSuccess,
       payload: response?.data?.data || [],
@@ -182,7 +181,7 @@ export const updateForm = (form, service, id, history) => async (dispatch) => {
       payload: data,
     });
     history.push(`/app/form/preview/${data?.id}`);
-    console.log(data)
+    console.log(data);
   } catch (err) {
     console.log(err);
     alert.error(

@@ -28,13 +28,12 @@ const FormPreview = ({ service }) => {
 
   if (loading) return <Skeleton />;
 
-  console.log("form",form);
-  console.log("forms",form.formlink);
+  console.log("form", form);
+  console.log("forms", form.formlink);
 
   // const formName = form.name
 
   // const newFormName = formName.split(" ").join("");
-
 
   return (
     <section className="form-preview-section">
@@ -42,11 +41,7 @@ const FormPreview = ({ service }) => {
         <Col span={24}>
           <Typography.Paragraph className="form-preview-section-link">
             Generated Link:{" "}
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={form.formlink}
-            >
+            <a target="_blank" rel="noreferrer" href={form.formlink}>
               {" "}
               {form.formlink}
             </a>

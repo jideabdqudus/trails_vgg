@@ -28,10 +28,9 @@ export class Layout extends React.Component {
                 {/* login, reset-password, update-password */}
                 <Route
                   exact
-                  path="/app/form/:id"
+                  path="/form/:id"
                   render={(props) => <PublishedForm {...this.props} />}
                 />
-
                 <Route
                   path={"/"}
                   exact

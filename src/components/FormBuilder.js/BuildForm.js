@@ -230,8 +230,8 @@ const BuildForm = ({ service }) => {
 
   const BUILDER_TYPES = [
     {
-      name: 'Text Input',
-      value: COMPONENT_TYPES.text
+      name: "Text Input",
+      value: COMPONENT_TYPES.text,
     },
     {
       name: "Radio Input",
@@ -520,12 +520,12 @@ const BuildForm = ({ service }) => {
                           >
                             <InputNumber
                               //  value={targetvalue}
-                              min={0}
-                              max={
-                                targetType === "percentage" || "number"
-                                  ? 99
-                                  : null
-                              }
+                              // min={0}
+                              // max={
+                              //   targetType === "percentage" || "number"
+                              //     ? 99
+                              //     : null
+                              // }
                               style={{ width: "100%" }}
                               placeholder="--Target Value--"
                               onChange={(val) =>

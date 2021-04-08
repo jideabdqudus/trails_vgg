@@ -1,3 +1,10 @@
+//create pubblic folder in the docker, env variables is variable thats configured on the system. check if react app can read the env variables 
+
+
+//login, look for teams, garden data 
+//for gsv focus on trails, for garden data anything that involves around frontend
+
+
 ////TRASH CODE
 
 
