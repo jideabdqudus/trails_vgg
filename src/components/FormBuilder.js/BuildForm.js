@@ -521,11 +521,11 @@ const BuildForm = ({ service }) => {
                             <InputNumber
                               //  value={targetvalue}
                               // min={0}
-                              // max={
-                              //   targetType === "percentage" || "number"
-                              //     ? 99
-                              //     : null
-                              // }
+                              max={
+                                targetType === "percentage" 
+                                  ? 99
+                                  : 1000000
+                              }
                               style={{ width: "100%" }}
                               placeholder="--Target Value--"
                               onChange={(val) =>
