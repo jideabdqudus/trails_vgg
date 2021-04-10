@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Card, Skeleton } from "antd";
 import "./index.css";
-import { Bar, Line } from "react-chartjs-2";
-import { data } from "./data";
-
 export class FundingGraph extends Component {
   render() {
     return (

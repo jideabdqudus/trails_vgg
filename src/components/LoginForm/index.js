@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.css";
-import { Form, Input, Button, Row, Col, Card, Checkbox, Tabs } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Row, Col, } from "antd";
 import { Link } from "react-router-dom";
 import LoginImg from "../../assets/graphic_login.svg";
 import { connect } from "react-redux";
@@ -16,8 +15,6 @@ const LoginForm = (
   props
 ) => {
   useEffect(() => {
-    console.log("props in login",Service ,{Constants})
-
     if (error) {
       setAlert(error.data.message, "error");
       clearErrors();
@@ -66,7 +63,7 @@ const LoginForm = (
                   Access to the most powerfull tool that allows you track your Objectives and Goals.
                 </p>
               </div>
-              <img src={LoginImg} width="350px" className="loginImg" />
+              <img src={LoginImg} width="350px" className="loginImg" alt="loginImage" />
             </div>
           </Col>
           <Col xs={{ span: 20 }} lg={{ span: 14 }} className="logins_container">
@@ -192,11 +189,6 @@ const LoginForm = (
   );
 };
 
-const textLogin = {
-  textAlign: "center",
-  marginBottom: 10,
-  paddingBottom: 10,
-};
 
 LoginForm.propTypes = {
   setAlert: PropTypes.func.isRequired,

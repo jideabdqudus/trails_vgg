@@ -1,5 +1,4 @@
 import React from "react";
-import { Switch } from "react-router-dom";
 import Wrapper from "../Wrapper/Wrapper";
 
 class AuthenticatedLayout extends React.Component {
@@ -22,7 +21,6 @@ class AuthenticatedLayout extends React.Component {
   componentDidMount() {
     // let user = {};
     let tk = JSON.parse(localStorage.getItem("TRAIL_TOKEN"));
-    let email = JSON.parse(localStorage.getItem("TRAIL_EMAIL"));
     const AUTH_TOKEN = `${tk}`;
 
     // the token in LocalStorage was set on Login
@@ -43,7 +41,6 @@ class AuthenticatedLayout extends React.Component {
   };
 
   render() {
-    console.log("authorized layout state", this.state);
     return (
       <div>
         {this.state.sending && <div>Loading</div>}

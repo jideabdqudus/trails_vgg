@@ -1,19 +1,10 @@
 import React, { Component, Fragment } from "react";
-import { Layout, Row, Col } from "antd";
-
-import Navbar from "../../../src/layouts/layout-components/menu";
-import SideBar from "../../../src/layouts/layout-components/sidebar";
-import FooterTab from "../../../src/layouts/layout-components/footer";
 import IndicatorsCard from "../../components/IndicatorsCard";
 import Indicators from "../../components/PerformanceIndicators";
-import axios from "axios";
-import { appConstants } from "../../constants/app.constants";
 import { connect } from "react-redux";
 import { appHelpers } from "../../appHelpers/appHelpers";
 import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
 import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
-
-const { Content } = Layout;
 
 export class Overview extends Component {
   constructor(props) {
@@ -33,7 +24,6 @@ export class Overview extends Component {
       this.props.location.state &&
       this.props.location.state.detail
     ) {
-      console.log(this.props.location);
       const { detail, name } = this.props.location.state;
       this.setState({ projectName: name, projectId: detail });
       ServiceBase &&
@@ -113,10 +103,3 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {})(Overview);
 
-const h1 = {
-  fontWeight: "700",
-  fontSize: "23px",
-  padding: "16px",
-  paddingLeft: "0px",
-  marginTop: "80px",
-};

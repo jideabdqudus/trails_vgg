@@ -1,16 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { withStore } from "@spyna/react-store";
-import {
-  TextField,
-  Grid,
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-} from "@material-ui/core";
-//import { sdgDump } from "./sdgDump";
+import { Grid } from "@material-ui/core";
 import SvgCard from "../SvgCard/SvgCard";
-import axios from "axios";
 import _ from "lodash";
 
 const styles = (theme) => ({
@@ -61,8 +52,6 @@ const styles = (theme) => ({
 });
 
 const ImpactManagerForm2 = (props) => {
-  const [sdgDumping, setSdgDumping] = useState("");
-
   const { classes } = props;
 
   const setOpacity = (sdgCheckBoxes, sdgNum) => {
@@ -75,13 +64,7 @@ const ImpactManagerForm2 = (props) => {
     return opacity;
   };
 
-  const {
-    handleInputChange,
-    handleSdgBoxChange,
-    sdgCheckBoxes,
-    formTwoErrors,
-    sdgDump,
-  } = props;
+  const { handleSdgBoxChange, sdgCheckBoxes, formTwoErrors, sdgDump } = props;
 
   const renderSdgs = () => {
     const newArray = props.sdgDump.slice(0, 3);

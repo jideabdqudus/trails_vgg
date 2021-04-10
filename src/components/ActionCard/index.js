@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, {  useEffect } from "react";
 import { Row, Col, Card } from "antd";
 import "./index.css";
 import { flatten, size, uniqBy } from "lodash";
@@ -19,8 +19,7 @@ const ActionCard = ({ ServiceBase }) => {
   useEffect(() => {
     dispatch(getBudgetandBeneficiaries(ServiceBase));
     dispatch(getPrograms(ServiceBase))
-  }, [token, dispatch]);
-  console.log("from",programs)
+  }, [token, dispatch, ServiceBase]);
   return (
     <div>
       <Col span={24}>

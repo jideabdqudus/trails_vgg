@@ -5,16 +5,11 @@ import SideBar from "../../layouts/layout-components/sidebar";
 import FooterTab from "../../layouts/layout-components/footer";
 import PreviewSection from '../../components/FormPreview'
 
-import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
-import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
-
 const { Content } = Layout;
 
-const { userData, history, ServiceBase } = props;
 
 
 const FormPreview = ({ServiceBase,userData}) => {
-  console.log(ServiceBase)
   return (
     <div>
       <Fragment>

@@ -14,7 +14,6 @@ const PublisedForm = ({service}) => {
     const dispatch = useDispatch()
    
     useEffect(() => {
-        console.log('ran')
         dispatch(getForm(id,service,false))
     },[id,dispatch,service])
 
@@ -22,7 +21,6 @@ const PublisedForm = ({service}) => {
 
     const onFinish = () => {
         const answersArray = Object.values(answers)
-        console.log('aasdasdsad', answersArray)
         if(size(answersArray) !== size(form.components)) return message.error('You have one or more empty fields')
         if (isEmpty(answersArray)) return message.error('Answers cannot be empty')
         for (const value of answersArray) {

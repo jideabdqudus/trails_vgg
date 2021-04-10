@@ -1,7 +1,6 @@
 import {
   CREATE_PROJECT,
   GET_PROJECT,
-  GET_PROGRAMS,
   GET_BUDGET_AND_BENEFICIARIES,
   PROGRAMS
 } from "../constants/Types";

@@ -24,9 +24,8 @@ import {
   getForm,
   updateForm,
 } from "../../actions/formActions";
-import { camelCase, flatten, isEmpty, omit } from "lodash";
+import { flatten, isEmpty, omit } from "lodash";
 import { useHistory } from "react-router-dom";
-import { dummyQuestionLibrary } from "./constants";
 import { useParams } from "react-router-dom";
 
 const { Option } = Select;
@@ -48,7 +47,6 @@ const reducer = (state, { type, payload }) => {
         },
       };
     case "updateForm":
-      console.log("testing", { ...state, ...payload });
       return { ...state, ...payload };
     default:
       return state;
@@ -90,8 +88,6 @@ const BuildForm = ({ service }) => {
   } = state;
 
   const reduxDispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
-  const projects = useSelector((state) => state.projects.projects);
   const loadingState = useSelector((state) => state.form.loading);
   const programs = useSelector((state) => state.form.programs);
   const { form } = useSelector((state) => state.form);
@@ -99,9 +95,8 @@ const BuildForm = ({ service }) => {
     (state) => state.form.indicatorQuestions
   );
 
-  console.log({ indicatorQuestions });
   const history = useHistory();
-  const [indicatorId, setIndicatorId] = useState(null);
+  const [ setIndicatorId] = useState(null);
 
   useEffect(() => {
     reduxDispatch(getPrograms(service));
@@ -131,13 +126,11 @@ const BuildForm = ({ service }) => {
       type: "formData",
     });
   };
-  console.log(form);
 
   const onFinish = () => {
     if (!state?.components || !state?.components.length) {
       return message.error("Please create some question fields");
     }
-    console.log("iddddddd", id);
     id
       ? reduxDispatch(
           updateForm(
@@ -162,7 +155,6 @@ const BuildForm = ({ service }) => {
     );
     return selectedProgram[0]?.sdgs || [];
   };
-  console.log(state);
   const indicators = (sdgs) =>
     flatten(sdgs?.map(({ indicators }) => indicators));
 
@@ -229,10 +221,10 @@ const BuildForm = ({ service }) => {
   };
 
   const BUILDER_TYPES = [
-    {
-      name: "Text Input",
-      value: COMPONENT_TYPES.text,
-    },
+    // {
+    //   name: "Text Input",
+    //   value: COMPONENT_TYPES.text,
+    // },
     {
       name: "Radio Input",
       value: COMPONENT_TYPES.radio,
@@ -285,7 +277,6 @@ const BuildForm = ({ service }) => {
                     name="title"
                     style={{ marginBottom: "15px" }}
                   >
-                    {console.log("namify", state["instructions"])}
                     <Input
                       type="text"
                       name="title"
@@ -295,7 +286,6 @@ const BuildForm = ({ service }) => {
                   </Form.Item>
                 </Col>
                 <Col span={8}>
-                  {/* {console.log(program)} */}
                   <Form.Item
                     label={titleName2}
                     name={"program"}
@@ -330,7 +320,6 @@ const BuildForm = ({ service }) => {
                     ]}
                     style={{ marginBottom: "15px" }}
                   >
-                    {/* {console.log(name)} */}
                     <Input
                       type="text"
                       name="name"
@@ -343,7 +332,6 @@ const BuildForm = ({ service }) => {
               <Row>
                 <Col span={24}>
                   <Form.Item label={titleName3} name="instructions">
-                    {/* {console.log(instructions)} */}
                     <Input.TextArea
                       type="text"
                       name="instructions"
@@ -367,12 +355,9 @@ const BuildForm = ({ service }) => {
               {components?.map((component, idx) => {
                 const {
                   targetType,
-                  linkedindicator,
                   question,
                   placeholder,
-                  targetvalue,
                 } = component;
-                console.log({ targetvalue });
                 const handleSelectQuestion = (val) => {
                   if (val === "custom") {
                     change(
@@ -413,7 +398,6 @@ const BuildForm = ({ service }) => {
                             ]}
                             style={{ marginBottom: 0 }}
                           >
-                            {/* {console.log(linkedindicator)} */}
                             <Select
                               onSelect={handleSelect}
                               onChange={(val) =>
@@ -468,7 +452,6 @@ const BuildForm = ({ service }) => {
                               placeholder="--Type Question--"
                               style={{ marginBottom: 0 }}
                             >
-                              {/* {console.log(question)} */}
                               <Input
                                 type="text"
                                 name="question"
@@ -521,11 +504,7 @@ const BuildForm = ({ service }) => {
                             <InputNumber
                               //  value={targetvalue}
                               // min={0}
-                              max={
-                                targetType === "percentage" 
-                                  ? 99
-                                  : 1000000
-                              }
+                              max={targetType === "percentage" ? 99 : 1000000}
                               style={{ width: "100%" }}
                               placeholder="--Target Value--"
                               onChange={(val) =>
@@ -545,7 +524,6 @@ const BuildForm = ({ service }) => {
                             placeholder="--Placeholder--"
                             style={{ marginBottom: 0 }}
                           >
-                            {/* {console.log(placeholder)} */}
                             <Input
                               type="text"
                               name="placeholder"

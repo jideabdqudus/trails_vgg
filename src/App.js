@@ -1,26 +1,16 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
+import { Route,Switch } from "react-router-dom";
 import Dashboard from "./views/Dashboard/Dashboard";
 import Projects from "./views/Projects/Projects";
 import Overview from "./views/ProjectOverview/Overview";
 import Manager from "./views/Impact/Manager";
-import Login from "./views/Login/Login";
-import setAuthToken from "../src/utils/setAuthToken";
 import { Provider } from "react-redux";
 import store from "./store";
-import CreateAccount from "./views/Create/CreateAccount";
 import FormManager from "./views/FormManager/FormManager";
 import FormBuild from "./views/FormBuilder/FormBuild";
 import { appHelpers } from "./appHelpers/appHelpers";
 import FormPreview from "./views/FormPreview";
-import PublishedForm from "./views/PublishedForm";
-import NotFound from "./views/404/index.js";
-
-// if (localStorage.token) {
-//   setAuthToken(localStorage.token);
-//   console.log(localStorage.token)
-// }
 
 export class App extends Component {
   constructor(props) {

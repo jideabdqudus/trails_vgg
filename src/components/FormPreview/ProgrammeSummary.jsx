@@ -15,7 +15,7 @@ export const ProgrammeSummary = ({ form }) => {
         <Col span={24}>
           <Card
             title="Programme Summary"
-            // extra={<Button onClick={handleEdit} icon={<EditOutlined />} type="primary" ghost shape="round">Edit</Button>}
+            extra={<Button onClick={handleEdit} icon={<EditOutlined />} type="primary" ghost shape="round">Edit</Button>}
           >
             <Row gutter={[16, 16]}>
               <Col span={12}>
@@ -33,7 +33,7 @@ export const ProgrammeSummary = ({ form }) => {
                   Instructions
                 </Typography.Text>
                 <Typography.Paragraph className="programme-summary-description">
-                  {form?.instructions}
+                {form.instructions}
                 </Typography.Paragraph>
               </Col>
             </Row>

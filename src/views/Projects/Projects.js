@@ -1,13 +1,6 @@
 import React, { Component, Fragment } from "react";
-import { Layout } from "antd";
-import Navbar from "../../../src/layouts/layout-components/menu";
-import SideBar from "../../../src/layouts/layout-components/sidebar";
-import FooterTab from "../../../src/layouts/layout-components/footer";
-// import ProjectsCard from "../../components/ProjectsCard/index.js";
-import { Grid, Paper, withStyles } from "@material-ui/core";
+import { Grid, withStyles } from "@material-ui/core";
 import ImageCard from "../../components/Card/ImageCard";
-import axios from "axios";
-import { appConstants } from "../../constants/app.constants";
 import { connect } from "react-redux";
 import CatalogMagic from "../../components/Loader/CatalogMagic";
 import { Link } from "react-router-dom";
@@ -15,8 +8,6 @@ import "./index.css";
 
 import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
 import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
-
-const { Content } = Layout;
 
 const styles = (theme) => ({
   paper: {
@@ -70,7 +61,6 @@ export class Projects extends Component {
     });
   };
   render() {
-    const { classes } = this.props;
     const { projects, loading } = this.state;
     return (
       <div className="container-scroller">
@@ -128,10 +118,10 @@ const mapStateToProps = (state) => ({
 
 export default withStyles(styles)(connect(mapStateToProps, {})(Projects));
 
-const h1 = {
-  fontWeight: "700",
-  fontSize: "23px",
-  padding: "16px",
-  paddingLeft: "0px",
-  marginTop: "80px",
-};
+// const h1 = {
+//   fontWeight: "700",
+//   fontSize: "23px",
+//   padding: "16px",
+//   paddingLeft: "0px",
+//   marginTop: "80px",
+// };

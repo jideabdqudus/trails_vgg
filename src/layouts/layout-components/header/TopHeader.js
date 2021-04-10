@@ -1,34 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Logo from "../../../assets/Trail2.svg";
 import LogoMini from "../../../assets/Trail2.svg";
-import Face from "../../../assets/face17.jpg";
-import { Drawer, Button, Menu, Dropdown, Grid } from "antd";
-import { DownOutlined, MenuFoldOutlined } from "@ant-design/icons";
+import { Drawer, Menu, Dropdown } from "antd";
+import { MenuFoldOutlined } from "@ant-design/icons";
 import { connect, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import { logout, loadUser } from "../../../actions/authAuctions";
-import { Redirect } from "react-router";
 import { Link } from "@material-ui/core";
 import { CLEAR_SESS } from "../../../constants/Types";
-import { Fragment } from "react";
+
 import "./index.css";
 
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-const { useBreakpoint } = Grid;
-
 const TopHeader = (props) => {
-  const { logout, user, loadUser, isAuthenticated, auth, history } = props;
-  const { data } = auth;
   const { userData } = props;
   const dispatch = useDispatch();
-  useEffect(() => {
-    // loadUser();
-    //eslint-disable-next-line
-
-    console.log("props in right menu", props);
-  }, []);
 
   const [visible, setVisible] = useState(false);
 
@@ -64,8 +50,6 @@ const TopHeader = (props) => {
   const onFormClick = () => {
     props.history.push("/app/dashboard/form");
   };
-
-  const { md } = useBreakpoint();
 
   const menu = (
     <Menu>

@@ -1,14 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { Layout } from "antd";
-import Navbar from "../../../src/layouts/layout-components/menu";
-import SideBar from "../../layouts/layout-components/sidebar";
-import FooterTab from "../../layouts/layout-components/footer";
 import ImpactManager from "../../components/ImpactManager/ImpactManager";
 
 import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
 import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
 
-const { Content } = Layout;
 
 export class Projects extends Component {
   render() {
@@ -46,11 +41,3 @@ export class Projects extends Component {
 }
 
 export default Projects;
-
-const h1 = {
-  fontWeight: "700",
-  fontSize: "23px",
-  padding: "16px",
-  paddingLeft: "0px",
-  marginTop: "80px",
-};

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import "./index.css";
-import { Layout, Row, Col, Card, Skeleton, Select,Empty } from "antd";
+import { Layout, Row, Col, Card,  Select,Empty } from "antd";
 import {Bar} from 'react-chartjs-2'
 import {useDispatch, useSelector} from 'react-redux'
 import { getReport } from "../../actions/reportActions";
@@ -14,7 +14,6 @@ const Indicators = ({service,programId, projectDetails}) => {
   const [formName,setFormName] = React.useState('')
 
   const generateDataObject = (report) => {
-    console.log('reports',report)
     const data = {
       labels: ['Mar'],
       datasets: [

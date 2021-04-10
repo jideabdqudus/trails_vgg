@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Face from "../../../assets/face17.jpg";
 import { Link } from "react-router-dom";
+import "./index.css";
 
 class SiderBarPanel extends Component {
   render() {
@@ -47,7 +47,6 @@ class SiderBarPanel extends Component {
                 <span className="menu-title">Forms Management</span>
               </Link>
             </li>
-
           </ul>
         </nav>
       </div>

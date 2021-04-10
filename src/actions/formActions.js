@@ -1,7 +1,5 @@
 import { FORM } from "../constants/Types";
-import axios from "axios";
-import { appConstants } from "../constants/app.constants";
-import { message as alert, message } from "antd";
+import { message as alert } from "antd";
 import { appHelpers } from "../appHelpers/appHelpers";
 import {
   FORM as FORM_CONSTANT,
@@ -31,7 +29,6 @@ export const createForm = (form, service, history) => async (dispatch) => {
     });
     history.push(`/app/dashboard/form/preview/${data?.id}`);
   } catch (err) {
-    console.log(err);
     alert.error(
       err?.response?.data?.message?.message ||
         "Something went wrong, Please try again later"
@@ -56,7 +53,6 @@ export const getForms = (service, page) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err.response);
     dispatch({
       type: FORM.errors,
       payload: { msg: err.response, status: err.response },
@@ -81,8 +77,6 @@ export const getForm = (id, service, endingSlash) => async (dispatch) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err);
-    console.log(err.response);
     dispatch({
       type: FORM.errors,
       payload: { msg: err.response, status: err.response },
@@ -107,7 +101,6 @@ export const createSubmission = (id, answers, service) => async (dispatch) => {
       window.close();
     }, 2000);
   } catch (err) {
-    console.log(err);
     dispatch({
       type: FORM.errors,
       payload: { msg: err.response, status: err.response },
@@ -161,8 +154,6 @@ export const getIndicatorQuestion = (id, service) => async (dispatch) => {
       payload: response?.data?.data || [],
     });
   } catch (err) {
-    console.log(err);
-    console.log(err.response);
     dispatch({
       type: FORM.errors,
       payload: { msg: err.response, status: err.response },
@@ -181,9 +172,8 @@ export const updateForm = (form, service, id, history) => async (dispatch) => {
       payload: data,
     });
     history.push(`/app/form/preview/${data?.id}`);
-    console.log(data);
+    
   } catch (err) {
-    console.log(err);
     alert.error(
       err?.response?.data?.message?.message ||
         "Something went wrong, Please try again later"

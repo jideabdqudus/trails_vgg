@@ -1,29 +1,29 @@
 import React, { Component } from "react";
-import { Card, Skeleton, Typography } from "antd";
+import { Card, Skeleton } from "antd";
 import { Doughnut } from "react-chartjs-2";
 import "./index.css";
 import { connect } from "react-redux";
-import _, { flatten, uniqBy } from "lodash";
+import { flatten, uniqBy } from "lodash";
 
-const renderObjects =  (programs) => {
-  const sdgs = uniqBy(flatten(programs?.map(({sdgs}) => sdgs)),'sdgId')
-  const sdgsNames = sdgs?.map(({name}) => name)
-  console.log(sdgsNames)
-  return sdgsNames; 
+const renderObjects = (programs) => {
+  const sdgs = uniqBy(flatten(programs?.map(({ sdgs }) => sdgs)), "sdgId");
+  const sdgsNames = sdgs?.map(({ name }) => name);
+ 
+  return sdgsNames;
 };
 
 const renderOccurence = (programs) => {
-  const sdgs = flatten(programs?.map(({sdgs}) => sdgs))
-  const sdgsNames = sdgs?.map(({name}) => name)
-  const countOccurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
+  const sdgs = flatten(programs?.map(({ sdgs }) => sdgs));
+  const sdgsNames = sdgs?.map(({ name }) => name);
+  const countOccurrences = (arr) =>
+    // eslint-disable-next-line no-sequences
+    arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
 
   const counts = countOccurrences(sdgsNames);
-  console.log(counts)
   return Object.values(counts);
 };
 
 export class DoughnutChart extends Component {
-
   colorArray = [
     "#4DB380",
     "#FF4D4D",
@@ -95,19 +95,18 @@ export class DoughnutChart extends Component {
           "#CC9999",
           "#B3B31A",
           "#00E680",
-        ], 
+        ],
         data: renderOccurence(this.props.project?.programs),
       },
     ],
   };
 
   render() {
-   
     return (
       <div>
         <Card title={"Impact Summary"} className={"doughnutCard"}>
           {renderOccurence(this.props.project?.programs).length === 0 ? (
-            <div style={{textAlign: 'center'}}>
+            <div style={{ textAlign: "center" }}>
               <Skeleton active />
             </div>
           ) : (

@@ -8,7 +8,6 @@ const Components = {
 };
 
 const Builder = ({ content, id, isPreview }) => {
-  console.log(content);
   if (typeof Components[content?.inputType] !== "undefined") {
     return React.createElement(Components[content?.inputType], {
       content: { ...content, id, isPreview },

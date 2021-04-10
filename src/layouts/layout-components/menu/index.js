@@ -23,7 +23,6 @@ class Navbar extends Component {
   };
 
   render() {
-    console.log("userData={userData}",this.props)
     return (
       <nav className="menuBar">
         <div className="menuCon" style={{ marginLeft: "20px" }}>

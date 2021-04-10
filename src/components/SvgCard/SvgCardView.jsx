@@ -5,7 +5,7 @@ const SvgCardView = props => {
   const {width} = props;
   return (
     <>
-      <img href="svg" src={props.path} style={{ width: `${width}`,padding:".2rem" }} />
+      <img href="svg" src={props.path} alt="svg" style={{ width: `${width}`,padding:".2rem" }} />
     </>
   );
 };

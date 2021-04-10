@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // import App from "./App";
-import { BrowserRouter, Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 import store from "./store";
 
 import "antd/dist/antd.css";
@@ -41,7 +41,7 @@ instance
                 Constants={Constants}
                 Service={Service.bind(null, config.SERVICEBASEURI, Axios)}
               />
-              <ToastContainer style={{ width: "500px" }} limit={1} />
+              <ToastContainer position="top-right" style={{ width: "500px", zIndex:"99999" }} limit={1} />
             </>
           </Router>
         </Provider>,

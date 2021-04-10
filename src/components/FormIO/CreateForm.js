@@ -19,7 +19,6 @@ import { MoreOutlined } from "@ant-design/icons";
 import { FORM } from "../../constants/Types";
 
 const FormCard = ({ title, id, page, service }) => {
-  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const menu = (
     <Menu>
@@ -61,7 +60,6 @@ const FormCard = ({ title, id, page, service }) => {
 
 const CreateForm = ({ service }) => {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
   const { forms, pagination, loading } = useSelector((state) => state.form);
   const [page, setPage] = useState(1);
   const handlePageChange = (_page) => setPage(_page);
@@ -72,7 +70,7 @@ const CreateForm = ({ service }) => {
 
   const handleReset = () =>
     dispatch({ type: FORM.getFormSuccess, payload: {} });
-  console.log(forms);
+  
   return (
     <Layout className="create-form">
       <Row gutter={[16, 16]}>

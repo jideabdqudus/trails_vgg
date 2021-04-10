@@ -1,21 +1,10 @@
 import React, { Fragment } from "react";
-import FormIO from "../../components/FormIO/Index";
-import { Layout, Row, Col } from "antd";
-import Navbar from "../../../src/layouts/layout-components/menu";
-import SideBar from "../../../src/layouts/layout-components/sidebar";
-import FooterTab from "../../../src/layouts/layout-components/footer";
-import CreateForm from "../../components/FormIO/CreateForm";
 import BuildForm from "../../components/FormBuilder.js/BuildForm";
 
 import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
 import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
 
-const { Content } = Layout;
-
 class FormBuild extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div className="container-scroller">
@@ -49,11 +38,3 @@ class FormBuild extends React.Component {
   }
 }
 export default FormBuild;
-
-const h1 = {
-  fontWeight: "700",
-  fontSize: "23px",
-  padding: "16px",
-  paddingLeft: "0px",
-  marginTop: "80px",
-};

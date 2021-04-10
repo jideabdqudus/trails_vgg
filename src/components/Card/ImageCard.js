@@ -1,12 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import { Row, Col } from "antd";
 import modulestyle from "./imagecard.module.css";
 const useStyles = makeStyles({
@@ -29,11 +27,10 @@ const ImageCard = ({
   const renderSdgs = (sdgs) => {
     let sdgElems = [];
     for (let i in sdgs) {
-      const lastIndex = sdgs.length - 1;
       sdgElems.push(
         <>
           <label className="p-0 m-0">
-            SDG {`${sdgs[i].sdgId} `} {i != sdgs.length - 1 ? ", " : ""}
+            SDG {`${sdgs[i].sdgId} `} {i !== sdgs.length - 1 ? ", " : ""}
           </label>
         </>
       );
@@ -41,7 +38,6 @@ const ImageCard = ({
     return sdgElems;
   };
 
-  console.log(locations);
   return (
     <Card className={classes.root}>
       <CardMedia

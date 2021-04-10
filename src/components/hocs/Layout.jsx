@@ -9,8 +9,6 @@ import Login from "../../views/Login/Login";
 import CreateAccount from "../../views/Create/CreateAccount";
 import PublishedForm from "../../views/PublishedForm";
 
-import NotFound from "../../views/404/index";
-
 export class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -63,18 +61,19 @@ export class Layout extends React.Component {
     );
   }
 }
-const initialValue = {
-  userData: {
-    firstname: "John",
-  },
-  impactManager: {
-    name: "",
-    description: "",
-    code: "",
-    projectLocation: "",
-    sdgs: [],
-    indicators: [],
-  },
-};
+
+// const initialValue = {
+//   userData: {
+//     firstname: "John",
+//   },
+//   impactManager: {
+//     name: "",
+//     description: "",
+//     code: "",
+//     projectLocation: "",
+//     sdgs: [],
+//     indicators: [],
+//   },
+// };
 
 export default Layout;
