@@ -1,9 +1,8 @@
 import {
   CREATE_PROJECT,
   GET_PROJECT,
-  TEST_DISPATCH,
-  GET_PROGRAMS,
   GET_BUDGET_AND_BENEFICIARIES,
+  PROGRAMS
 } from "../constants/Types";
 
 const initialState = {
@@ -15,9 +14,10 @@ const initialState = {
   totalbeneficiaries: "",
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_PROGRAMS:
+    case PROGRAMS:
       return {
         ...state,
         programs: action.payload,

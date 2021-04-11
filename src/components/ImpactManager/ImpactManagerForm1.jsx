@@ -1,29 +1,10 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {
-  TextField,
-  Grid,
-  Checkbox,
-  FormControlLabel,
-  MenuItem,
-  FormControl,
-} from "@material-ui/core";
-import { Upload, Form, Row, Col, Button } from "antd";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
-import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { DropzoneArea } from "material-ui-dropzone";
-import { useDropzone } from "react-dropzone";
-import ImpactManagerSummary from "./ImpactManagerSummary";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
-import { UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { TextField, Grid, FormControl } from "@material-ui/core";
+import { Row, Col } from "antd";
+import PlacesAutocomplete from "react-places-autocomplete";
 import ImageUpload from "../Upload/ImageUpload";
 import TopSpace from "../Space/TopSpace";
-
-const { Option } = Select;
 
 const styles = (theme) => ({
   container: {
@@ -73,65 +54,6 @@ const styles = (theme) => ({
   },
 });
 
-const baseStyle = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  transition: "border .24s ease-in-out",
-};
-
-const activeStyle = {
-  borderColor: "#2196f3",
-};
-
-const acceptStyle = {
-  borderColor: "#00e676",
-};
-
-const rejectStyle = {
-  borderColor: "#ff1744",
-};
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
-
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: "auto",
-  height: 200,
-  padding: 4,
-  boxSizing: "border-box",
-};
-
-const thumbInner = {
-  display: "flex",
-  minWidth: 0,
-  overflow: "hidden",
-};
-
-const img = {
-  display: "block",
-  width: "auto",
-  height: "100%",
-};
-
 function ImpactManagerForm1(props) {
   const {
     classes,
@@ -139,11 +61,8 @@ function ImpactManagerForm1(props) {
     code,
     name,
     //projectLocation,
-    programmeLocation,
     formOneErrors,
     //locationsEnum,
-    image,
-    programmePlaces,
     address,
     totalNumberOfBeneficiaries,
     budget,
@@ -151,14 +70,7 @@ function ImpactManagerForm1(props) {
     files,
   } = props;
 
-  const {
-    handleInputChange,
-    handleSelectChange,
-    handleBannerChange,
-    handleChangePlace,
-    handleSelectPlace,
-    normFile,
-  } = props;
+  const { handleInputChange, handleChangePlace, handleSelectPlace } = props;
 
   return (
     <div className={`flex items-center ${classes.root}`}>
@@ -317,7 +229,6 @@ function ImpactManagerForm1(props) {
           </form>
         </Col>
         <Col span={1}></Col>
-      
       </Row>
 
       <Grid container spacing={3}>

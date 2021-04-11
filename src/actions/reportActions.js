@@ -43,8 +43,6 @@ export const getReport = (id, service) => async (dispatch) => {
         payload: data,
       });
     } catch (err) {
-      console.log(err)
-        console.log(err.response)
       dispatch({
         type: REPORT.errors,
         payload: { msg: err.response, status: err.response },

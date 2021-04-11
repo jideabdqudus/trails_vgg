@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import BuildForm from "../../components/FormBuilder.js/BuildForm";
-
 import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
 import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
 
 class FormBuild extends React.Component {
+  
   render() {
     return (
       <div className="container-scroller">

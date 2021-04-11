@@ -1,8 +1,35 @@
-.headerTop{
+.headerTop {
   border-radius: 0 !important;
   padding: 0 !important;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 99;
+}
+
+.dropDownHidden {
+}
+@media (max-width: 991px) {
+  .dropDownHidden {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.folderHidden {
+  display: none;
+  visibility: hidden;
+}
+
+@media (max-width: 991px) {
+  .folderHidden {
+    display: contents;
+    visibility: visible !important;
+  }
+}
+
+.drawerMenu {
+  margin: 0px;
+  text-align: center;
+  font-size: 25px;
 }

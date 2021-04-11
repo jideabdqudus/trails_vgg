@@ -1,4 +1,5 @@
 import swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 export const appHelpers = {
   returnLabelsforDonut: (arr) => {
@@ -8,7 +9,12 @@ export const appHelpers = {
     }
     return label;
   },
-
+  alertError: (message, duration) => {
+    toast.error(message, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: duration,
+    });
+  },
   toCapitalLetters: (value) => {
     if (typeof value === "string") {
       return value.toLocaleUpperCase();
@@ -39,6 +45,32 @@ export const appHelpers = {
     return "1T+";
   },
 
+  returnIndicatorsOnly: (indicators) => {
+    let ind = [];
+    let f = indicators.filter((o) => o.status === true);
+    for (let i in f) {
+      ind.push(parseInt(f[i].id));
+    }
+    return ind;
+  },
+  countProjectIndicators: (sdgs) => {
+    let projectIndicators = [];
+    for (let i in sdgs) {
+      const indicators = sdgs[i].indicators;
+      projectIndicators.push(indicators);
+    }
+    return projectIndicators.length;
+  },
+  formatSdgsIndicatorsPayload: (finalSdgChecks) => {
+    let sdgs = [];
+    for (let i in finalSdgChecks) {
+      sdgs.push({
+        indicators: finalSdgChecks[i].indicators,
+        id: finalSdgChecks[i].id,
+      });
+    }
+    return sdgs;
+  },
   returnSelectedSdgs: (sdgCheckBoxes, sdgDump) => {
     Object.entries(sdgCheckBoxes).forEach(([key, value]) => {
       if (value === false) {
@@ -46,7 +78,7 @@ export const appHelpers = {
       }
     });
     return Object.keys(sdgCheckBoxes).map((id) =>
-      sdgDump.find((sdg) => sdg.Number === id)
+      sdgDump.find((sdg) => sdg.id === id)
     );
   },
 
@@ -59,28 +91,31 @@ export const appHelpers = {
   returnIndicators: (sdgCheckBoxes, sdgDump) => {
     const filtered = appHelpers.returnSelectedSdgs(sdgCheckBoxes, sdgDump);
     const returnedIndicators = [];
+    // eslint-disable-next-line array-callback-return
     filtered.map((filteredItem, index) => {
-      filteredItem.Indicators.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
+      filteredItem.indicators.map((item, index) => {
         returnedIndicators.push({
-          value: item.Text,
+          value: item.description,
           status: false,
-          sdgId: filteredItem.Number,
+          sdgId: filteredItem.id,
         });
       });
     });
-
     return returnedIndicators;
   },
 
   indicatorSummary: (sdgChecks) => {
     const returnedIndicators = [];
 
+    // eslint-disable-next-line array-callback-return
     sdgChecks.map((item, index) => {
-      item.Indicators.map((indicator, indicatorIndex) => {
-        if (indicator.Status === true) {
+      // eslint-disable-next-line array-callback-return
+      item.indicators.map((indicator, indicatorIndex) => {
+        if (indicator.status === true) {
           returnedIndicators.push({
-            Text: indicator.Text,
-            SdgId: item.Number,
+            description: indicator.description,
+            SdgId: item.id,
           });
         }
       });
@@ -92,6 +127,7 @@ export const appHelpers = {
     const returnedLocations = [];
     let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     apiGeoData.map((geolocation, geolocationIndex) => {
       returnedLocations.push({
         id: count++,
@@ -106,7 +142,9 @@ export const appHelpers = {
     const returnedLocations = [];
     let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     dashboardData.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.GeoLocations.map((geolocation, geolocationIndex) => {
         returnedLocations.push({
           id: count++,
@@ -120,8 +158,8 @@ export const appHelpers = {
 
   returnApiMapDefaultCenter: (apiGeoData) => {
     const defautlCenter = [];
-    let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     apiGeoData.map((geolocation, geolocationIndex) => {
       defautlCenter.push({
         lat: parseFloat(geolocation.Latitude),
@@ -133,9 +171,10 @@ export const appHelpers = {
 
   returnMapDefaultCenter: (dashboardData) => {
     const defautlCenter = [];
-    let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     dashboardData.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.GeoLocations.map((geolocation, geolocationIndex) => {
         defautlCenter.push({
           lat: parseFloat(geolocation.Latitude),
@@ -149,30 +188,31 @@ export const appHelpers = {
   containsObject: (obj, list) => {
     var i;
     for (i = 0; i < list.length; i++) {
-      if (parseInt(list[i].Number) === parseInt(obj.Number)) {
+      if (list[i].id === obj.id) {
         return true;
       }
     }
 
     return false;
   },
+
   filterSdgById: (id, allIndicators) => {
     let filtered = allIndicators.filter((item) => {
-      return parseInt(item.sdgId) === parseInt(id);
+      return item.sdgId === id;
     });
     return filtered;
   },
   returnSdgNameById: (id, sdgDump) => {
     let filtered = sdgDump.filter((item) => {
-      return parseInt(item.Number) === parseInt(id);
+      return item.id === id;
     });
     const filteredObj = Object.assign({}, ...filtered);
-    return filteredObj.Text;
+    return filteredObj.description;
   },
   setIndicatorCheckBoxes: (indicators, index) => {
     let isTrue = false;
     Object.keys(indicators).forEach(function (key) {
-      isTrue = parseInt(key) === index ? true : false;
+      isTrue = key === index ? true : false;
     });
     return isTrue;
   },

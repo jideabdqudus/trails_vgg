@@ -2,18 +2,11 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { Grid, Checkbox, FormControlLabel } from "@material-ui/core";
 //import { sdgDump } from "./sdgDump";
-import { appHelpers } from "../../appHelpers/appHelpers";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Autocomplete from "@material-ui/lab/Autocomplete";
-import { Row, Col, Select } from "antd";
 import SvgCard from "../SvgCard/SvgCard";
-import { DataGrid } from "@material-ui/data-grid";
 
-const { Option } = Select;
 const styles = (theme) => ({
   container: {
     display: "flex",
@@ -68,13 +61,11 @@ const styles = (theme) => ({
 });
 
 const renderIndicators = (indicators, props, sdgIndex) => {
-  const {sdgDump} = props
-  const { allIndicators } = props;
   const allUIIndicators = indicators.map((item, index) => {
     return (
       <FormControlLabel
         key={index}
-        style={{ width: "100%", }}
+        style={{ width: "100%" }}
         control={
           <Checkbox
             checked={item.status}
@@ -98,7 +89,7 @@ const renderIndicators = (indicators, props, sdgIndex) => {
 };
 
 const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
-  const { allIndicators } = props;
+  // const { allIndicators } = props;
   const sdgPanels = sdgChecks.map((opt, index) => {
     return (
       <ExpansionPanel key={index}>
@@ -116,7 +107,9 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
               style={{ height: "10px" }}
             />
             <Grid item xs={3} sm={3}>
-              <Typography className={classes.heading}>{opt.description}</Typography>
+              <Typography className={classes.heading}>
+                {opt.description}
+              </Typography>
             </Grid>
             <Grid item xs={12} sm={12}>
               <div
@@ -147,8 +140,10 @@ const returnSdgPanels = (sdgChecks, classes, props, sdgDump) => {
 
 function ImpactManagerForm3(props) {
   const { classes } = props;
-  const {sdgDump} = props
-  const { allIndicators, sdgChecks } = props;
+  const { sdgDump } = props;
+  //  const { allIndicators, sdgChecks } = props;
+
+  const { sdgChecks } = props;
 
   return (
     <div className={`flex items-center ${classes.root}`}>

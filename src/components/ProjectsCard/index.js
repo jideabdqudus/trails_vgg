@@ -1,6 +1,7 @@
+/* eslint-disable array-callback-return */
 import React, { Component } from "react";
 import "./index.css";
-import { Layout, Row, Col, Card, Button, Skeleton } from "antd";
+import {Row, Col, Card, Button, } from "antd";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -18,9 +19,11 @@ export class ProjectsCard extends Component {
   }
   renderProjects = () => {
     const { projects } = this.props.project;
-    let string = "";
+  
     projects.map((project, string) => {
+      // eslint-disable-next-line react/jsx-no-comment-textnodes
       <>
+        // eslint-disable-next-line array-callback-return
         {project.image.fileList.map((image) => {
           <>{image.thumbUrl}</>;
         })}
@@ -36,7 +39,6 @@ export class ProjectsCard extends Component {
        headers: { accessToken: this.props.auth.data.accessToken},
     })
     .then(({data})=>{
-      console.log("data".data)
       this.setState({projects:data.data})
     })
   }
@@ -45,7 +47,7 @@ export class ProjectsCard extends Component {
     const {projects} = this.state
     return (
       <div>
-        {projects.length == 0 ? (
+        {projects.length === 0 ? (
           <div>
             <h3>
               When you add new projects, It would appear here!,{" "}

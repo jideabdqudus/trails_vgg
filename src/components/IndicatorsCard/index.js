@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Col, Row, Card } from "antd";
 import "./index.css";
 import CustomCircularProgress from "../Loader/CustomCircularProgress";

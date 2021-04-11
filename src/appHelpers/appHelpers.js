@@ -11,7 +11,7 @@ export const appHelpers = {
   },
   alertError: (message, duration) => {
     toast.error(message, {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.TOP_RIGHT,
       autoClose: duration,
     });
   },
@@ -45,31 +45,31 @@ export const appHelpers = {
     return "1T+";
   },
 
-  returnIndicatorsOnly : (indicators)=>{
-    let ind =[]
-    let f = indicators.filter((o) => o.status === true)
-    for(let i in f){
-      ind.push(parseInt(f[i].id))
+  returnIndicatorsOnly: (indicators) => {
+    let ind = [];
+    let f = indicators.filter((o) => o.status === true);
+    for (let i in f) {
+      ind.push(parseInt(f[i].id));
     }
     return ind;
   },
-  countProjectIndicators : (sdgs) =>{
+  countProjectIndicators: (sdgs) => {
     let projectIndicators = [];
-    for(let i in sdgs){
-      const indicators = sdgs[i].indicators
-      projectIndicators.push(indicators)
+    for (let i in sdgs) {
+      const indicators = sdgs[i].indicators;
+      projectIndicators.push(indicators);
     }
-    return projectIndicators.length
+    return projectIndicators.length;
   },
-  formatSdgsIndicatorsPayload : (finalSdgChecks) =>{
-    let sdgs = []
-    for(let i in finalSdgChecks){
+  formatSdgsIndicatorsPayload: (finalSdgChecks) => {
+    let sdgs = [];
+    for (let i in finalSdgChecks) {
       sdgs.push({
-        indicators:finalSdgChecks[i].indicators,
-        id:finalSdgChecks[i].id
-      })
+        indicators: finalSdgChecks[i].indicators,
+        id: finalSdgChecks[i].id,
+      });
     }
-    return sdgs
+    return sdgs;
   },
   returnSelectedSdgs: (sdgCheckBoxes, sdgDump) => {
     Object.entries(sdgCheckBoxes).forEach(([key, value]) => {
@@ -91,7 +91,9 @@ export const appHelpers = {
   returnIndicators: (sdgCheckBoxes, sdgDump) => {
     const filtered = appHelpers.returnSelectedSdgs(sdgCheckBoxes, sdgDump);
     const returnedIndicators = [];
+    // eslint-disable-next-line array-callback-return
     filtered.map((filteredItem, index) => {
+      // eslint-disable-next-line array-callback-return
       filteredItem.indicators.map((item, index) => {
         returnedIndicators.push({
           value: item.description,
@@ -100,14 +102,15 @@ export const appHelpers = {
         });
       });
     });
-    //console.log("asjaskj",filtered)
     return returnedIndicators;
   },
 
   indicatorSummary: (sdgChecks) => {
     const returnedIndicators = [];
 
+    // eslint-disable-next-line array-callback-return
     sdgChecks.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.indicators.map((indicator, indicatorIndex) => {
         if (indicator.status === true) {
           returnedIndicators.push({
@@ -124,6 +127,7 @@ export const appHelpers = {
     const returnedLocations = [];
     let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     apiGeoData.map((geolocation, geolocationIndex) => {
       returnedLocations.push({
         id: count++,
@@ -138,7 +142,9 @@ export const appHelpers = {
     const returnedLocations = [];
     let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     dashboardData.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.GeoLocations.map((geolocation, geolocationIndex) => {
         returnedLocations.push({
           id: count++,
@@ -152,8 +158,8 @@ export const appHelpers = {
 
   returnApiMapDefaultCenter: (apiGeoData) => {
     const defautlCenter = [];
-    let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     apiGeoData.map((geolocation, geolocationIndex) => {
       defautlCenter.push({
         lat: parseFloat(geolocation.Latitude),
@@ -165,9 +171,10 @@ export const appHelpers = {
 
   returnMapDefaultCenter: (dashboardData) => {
     const defautlCenter = [];
-    let count = 0;
 
+    // eslint-disable-next-line array-callback-return
     dashboardData.map((item, index) => {
+      // eslint-disable-next-line array-callback-return
       item.GeoLocations.map((geolocation, geolocationIndex) => {
         defautlCenter.push({
           lat: parseFloat(geolocation.Latitude),

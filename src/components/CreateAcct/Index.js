@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Index.css";
-import { Form, Input, Button, Row, Col, Card, Checkbox, Tabs } from "antd";
+import { Form, Input, Button, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import LoginImg from "../../assets/graphic_login.svg";
 import { connect } from "react-redux";
@@ -30,8 +30,6 @@ const CreateAcct = (
   props
 ) => {
   useEffect(() => {
-    console.log("props in login", Service, { Constants });
-
     if (error === "A user with this email already exists") {
       setAlert(error, "error");
       clearErrors();

@@ -1,7 +1,6 @@
 import React from "react";
 import Aux from "../hocs/_Aux";
 import { Button } from "@material-ui/core";
-import { withStore } from "@spyna/react-store";
 import { Row, Col, Card } from "antd";
 //import { sdgDump } from "./sdgDump";
 import { appHelpers } from "../../appHelpers/appHelpers";
@@ -67,12 +66,6 @@ class ImpactManagerSummary extends React.Component {
       description,
       code,
       name,
-      programmeLocation,
-      programmePlaces,
-      //projectLocation,
-      image,
-      sdgChecks,
-      sdgDump,
     } = this.state;
     
     return (

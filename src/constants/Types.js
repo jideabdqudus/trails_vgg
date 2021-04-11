@@ -2,6 +2,7 @@ export const CREATE_PROJECT = "CREATE_PROJECT";
 export const GET_PROJECT = "GET_PROJECT";
 export const PROJECT_ERROR = "PROJECT_ERROR";
 export const GET_PROGRAMS = "GET_PROGRAMS";
+export const PROGRAMS = "PROGRAMS";
 export const GET_BUDGET_AND_BENEFICIARIES = "GET_BUDGET_AND_BENEFICIARIES";
 
 export const SET_CURRENT = "SET_CURRENT";
@@ -23,6 +24,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+
 
 export const FORM = {
     createFormSuccess: 'CREATE_FORM_SUCCESS',

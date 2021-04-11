@@ -1,87 +1,20 @@
 import React from "react";
 import Aux from "../hocs/_Aux";
 import { Button } from "@material-ui/core";
-import { withStore } from "@spyna/react-store";
-import { Row, Col, Card, Form, Divider } from "antd";
+import { Card, Divider } from "antd";
 import ImpactManagerForm1 from "./ImpactManagerForm1";
 import ImpactManagerForm2 from "./ImpactManagerForm2";
 import ImpactManagerForm3 from "./ImpactManagerForm3";
 import ImpactManagerSummary from "./ImpactManagerSummary";
 import { appHelpers } from "../../appHelpers/appHelpers";
-//import { sdgDump } from "./sdgDump";
 import "./index.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectAction";
-import { useDropzone } from "react-dropzone";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
-import axios from "axios";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
-import { appConstants } from "../../constants/app.constants";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { GoogleApiWrapper } from "google-maps-react";
 import CustomButton from "../CustomButton/CustomButton";
-
-const baseStyle = {
-  flex: 1,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "20px",
-  borderWidth: 2,
-  borderRadius: 2,
-  borderColor: "#eeeeee",
-  borderStyle: "dashed",
-  backgroundColor: "#fafafa",
-  color: "#bdbdbd",
-  outline: "none",
-  transition: "border .24s ease-in-out",
-};
-
-const activeStyle = {
-  borderColor: "#2196f3",
-};
-
-const acceptStyle = {
-  borderColor: "#00e676",
-};
-
-const rejectStyle = {
-  borderColor: "#ff1744",
-};
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-};
-
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: "auto",
-  height: 200,
-  padding: 4,
-  boxSizing: "border-box",
-};
-
-const thumbInner = {
-  display: "flex",
-  minWidth: 0,
-  overflow: "hidden",
-};
-
-const img = {
-  display: "block",
-  width: "auto",
-  height: "100%",
-};
 
 const { Meta } = Card;
 
@@ -206,7 +139,6 @@ class ImpactManager extends React.Component {
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
       .then((latLng) => {
-        console.log("Success", latLng);
         // update center state
         this.setState({ mapCenter: latLng });
       })
@@ -235,21 +167,7 @@ class ImpactManager extends React.Component {
         impactManagerFormOne: false,
         impactManagerFormTwo: true,
       });
-      const impactManager = {
-        name: this.state.name,
-        code: this.state.code,
-        description: this.state.description,
-        // projectLocation: this.state.projectLocation,
-        programmeLocation: this.state.programmeLocation,
-        totalNumberOfBeneficiaries: this.state.totalNumberOfBeneficiaries,
-        budget: this.state.budget,
-        image: this.state.image,
-        programmePlaces: this.state.programmePlaces,
-        sdgs: [],
-        indicators: [],
-      };
     } else {
-      console.log("some fields are missing");
     }
   };
 
@@ -290,45 +208,20 @@ class ImpactManager extends React.Component {
   };
 
   createProject() {
-    const indicatorStrings = [];
     this.setState({ creating: true });
     const {
       name,
       description,
       code,
-      mySdg,
-      sdgCheckBoxes,
       totalNumberOfBeneficiaries,
       budget,
-      indicatorCheckBoxes,
-      image,
       location,
-      address,
       mapCenter,
-      imageData,
     } = this.state;
-    const payload = {
-      name,
-      description,
-      code,
-      image,
-      location,
-      mapCenter,
-      sdgCheckBoxes,
-      totalNumberOfBeneficiaries,
-      budget,
-      mySdg,
-      indicatorCheckBoxes,
-    };
     // this.props.createProject(payload);
     // appHelpers.successMessageAlert("Programme Successfully Created");
     const { ServiceBase, Constants } = this.props;
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-        accessToken: this.props.auth.data.accessToken,
-      },
-    };
+
     const locations = {
       name: location.formattedSuggestion.mainText,
       description: location.description,
@@ -535,7 +428,6 @@ class ImpactManager extends React.Component {
   };
   render() {
     //this.props.project.projects
-    const { projects } = this.props.project;
     const {
       description,
       code,

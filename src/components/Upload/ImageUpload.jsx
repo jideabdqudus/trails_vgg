@@ -24,12 +24,6 @@ class ImageUpload extends React.Component {
         key={file.size}
       />
     ));
-    const render =
-      Object.keys(this.props.files).length !== 0 ? (
-        this.props.files.map((file) => <aside>{thumbs}</aside>)
-      ) : (
-        <p className="hello">+ image here to prompt users to click</p>
-      );
     return (
       <div className="App">
         <Dropzone

@@ -11,6 +11,8 @@ export const Service = (baseUrl, Axios, token, history) => {
     (response) => response,
     (error) => {
       if (error.response) {
+        appHelpers.alertError(error.response.data.message.message) || appHelpers.alertError(error.response.data.message) 
+        console.log("from here" ,error.response.data.message)
         let status = error.response.status;
         // debugger
         const url = error.response.config.url;
@@ -72,6 +74,7 @@ export const Service = (baseUrl, Axios, token, history) => {
   const createItemV1 = (data, controller) => {
     return instance.post(getApiv1Url(controller), data);
   };
+
   const getItems = (controller) => {
     return instance.get(`${getApiv1Url(controller)}`);
   };
@@ -86,16 +89,21 @@ export const Service = (baseUrl, Axios, token, history) => {
       `${getApiv1Url(controller)}${id}${endingSlash ? "/" : ""}`
     );
   };
-  const createItemWithId = (data,controller,id) => {
+  const createItemWithId = (data, controller, id) => {
     return instance.post(`${getApiv1Url(controller)}${id}/`, data);
-  }
-  const updateItemWithId = (data,controller,id) => {
+  };
+  const updateItemWithId = (data, controller, id) => {
     return instance.put(`${getApiv1Url(controller)}${id}/`, data);
   };
   // all other api service functions can be created here which is then accessible to other routes and components in the Authorized Layout
   const getBudgetandBeneficiaries = (data, controller, id) => {
     return instance.get(`${getApiv1Url(controller)}`);
   };
+
+  const getPrograms = (data, controller, id) => {
+    return instance.get(`${getApiv1Url(controller)}`);
+  };
+
   return {
     uploadProgram,
     getDataUsingId,
@@ -103,6 +111,7 @@ export const Service = (baseUrl, Axios, token, history) => {
     deleteItem,
     createItem,
     userLogin,
+    getPrograms,
     editItem,
     getItems,
     createItemV1,

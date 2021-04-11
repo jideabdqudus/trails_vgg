@@ -1,28 +1,28 @@
-import {REPORT} from '../constants/Types'
+import { REPORT } from "../constants/Types";
 
 const initialState = {
-    reports:[],
-    errors: null,
-    loading: false,
-    programForms: []
-}
+  reports: [],
+  errors: null,
+  loading: false,
+  programForms: [],
+};
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, { type, payload }) => {
-    switch (type) {
-
+  switch (type) {
     case REPORT.setLoadingState:
-            return {...state, loading: payload}
+      return { ...state, loading: payload };
 
     case REPORT.getReportSuccess:
-        return { ...state, reports: payload, loading: false }
-    
+      return { ...state, reports: payload, loading: false };
+
     case REPORT.errors:
-        return {...state, reports:[],  error: payload, loading: false}
+      return { ...state, reports: [], error: payload, loading: false };
 
     case REPORT.getProgramFormsSuccess:
-        return {...state, programForms: payload, loading: false}
+      return { ...state, programForms: payload, loading: false };
 
     default:
-        return state
-    }
-}
+      return state;
+  }
+};

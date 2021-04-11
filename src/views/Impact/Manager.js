@@ -1,42 +1,43 @@
 import React, { Component, Fragment } from "react";
-import { Layout } from "antd";
-import Navbar from "../../../src/layouts/layout-components/menu";
-import SideBar from "../../layouts/layout-components/sidebar";
-import FooterTab from "../../layouts/layout-components/footer";
 import ImpactManager from "../../components/ImpactManager/ImpactManager";
-const { Content } = Layout;
+
+import TopHeader from "../../../src/layouts/layout-components/header/TopHeader";
+import SideBarPanel from "../../../src/layouts/layout-components/sidebar/SiderBarPanel";
+
 
 export class Projects extends Component {
   render() {
     return (
-      <div>
-        <Fragment>
-          <Layout style={{ minHeight: "100vh" }}>
-            <SideBar userData={this.props.userData} history={this.props.history}/>
-            <Layout className="site-layout">
-              <Navbar userData={this.props.userData} history={this.props.history}/>
-              <Content style={{ margin: "0 16px" }}>
-                {/* {window.location.href.indexOf("Trails") > -1 ? "Trails" : "Signals"} */}
-                <h1 style={h1}>Impact Manager</h1>
-                <div>
-                  <ImpactManager  {...this.props}/>
+      <div className="container-scroller">
+        <TopHeader
+          userData={this.props.userData}
+          history={this.props.history}
+        />
+        <div className="page-body-wrapper" style={{ marginTop: "60px" }}>
+          <SideBarPanel
+            userData={this.props.userData}
+            history={this.props.history}
+          />
+          <div className="main-panel">
+            <div className="content-wrapper">
+              <div className="row page-title-header">
+                <div className="col-12">
+                  <div className="page-header">
+                    <h4 className="page-title">Impact Manager</h4>
+                  </div>
+                  <Fragment>
+                    <div>
+                      <ImpactManager {...this.props} />
+                    </div>
+                  </Fragment>
                 </div>
-              </Content>
-              <FooterTab />
-            </Layout>
-          </Layout>
-        </Fragment>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 export default Projects;
-
-const h1 = {
-  fontWeight: "700",
-  fontSize: "23px",
-  padding: "16px",
-  paddingLeft: "0px",
-  marginTop: "80px",
-};

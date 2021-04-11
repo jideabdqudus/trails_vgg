@@ -1,21 +1,17 @@
 import {Form,Radio} from 'antd'
 import {Layout} from './Layout'
 import React from 'react'
-import { connect, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { buildAnswers } from '../../actions/formActions'
-import { isEmpty } from 'lodash'
 
 export const RadioInput = ({ content }) => {
     const dispatch = useDispatch()
-    console.log(content)
-    
+   
     const radioStyle = {
         display: 'block',
         height: '30px',
         lineHeight: '30px',
     };
-    console.log('reereas', content)
-console.log(content)
     const handleChange = (e) => dispatch(buildAnswers({
         value: content?.inputType,
         answer: e.target?.value,
