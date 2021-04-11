@@ -6,7 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT,
 } from "../constants/Types";
-
+import { USER } from "../Constants";
+import axios from "axios";
 //Load User
 
 export const loadUser = () => async (dispatch) => {
@@ -26,24 +27,49 @@ export const loadUser = () => async (dispatch) => {
 };
 
 //Register User
-
-export const register = (formData, ServiceBase, Constants) => async (
-  dispatch
-) => {
+export const register = (formData, service) => async (dispatch) => {
   try {
-    const res = await ServiceBase.createItemV1(formData, Constants.USER);
+    // const res = await service.createItemV1(formData, USER);
+    const res = await axios.post(
+      " http://trail-api.test.vggdev.com/user/",
+      formData
+    );
+    const { data } = res.data;
+    console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
-      payload: res.data,
+      payload: data,
     });
-    loadUser();
-  } catch (res) {
-    dispatch({
-      type: REGISTER_FAIL,
-      payload: res,
-    });
+  } catch (error) {
+    dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
+    console.log(error.response.data.message.message);
   }
 };
+
+//Register User
+
+// export const register = (formData, ServiceBase, Constants) => async (
+//   dispatch
+// ) => {
+//   try {
+//     // const res = await ServiceBase.createItemV1(formData, Constants.USER);
+//     const res = await axios.post(
+//       " http://trail-api.test.vggdev.com/user/",
+//       formData,
+//     );
+//     dispatch({
+//       type: REGISTER_SUCCESS,
+//       payload: res,
+//     });
+//     loadUser();
+//   } catch (error) {
+//     // dispatch({
+//     //   type: REGISTER_FAIL,
+//     //   payload: error,
+//     // });
+//     console.log(error);
+//   }
+// };
 
 // Login User
 
