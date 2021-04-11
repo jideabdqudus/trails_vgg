@@ -7,34 +7,11 @@ import {
   LOGOUT,
 } from "../constants/Types";
 import { USER } from "../Constants";
-//import axios from "axios";
-//Load User
 
 export const loadUser = () => async (dispatch) => {
   //Empty
 };
 
-//Register User
-// export const register = (formData, service) => async (dispatch) => {
-//   try {
-//     // const res = await service.createItemV1(formData, USER);
-//     const res = await axios.post(
-//       " http://trail-api.test.vggdev.com/user/",
-//       formData
-//     );
-//     console.log(service.createUserUrl)
-//     const { data } = res.data;
-//     console.log(res);
-//     dispatch({
-//       type: REGISTER_SUCCESS,
-//       payload: data,
-//     });
-//   } catch (error) {
-//     dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
-//     console.log(error.response.data.message.message);
-//     console.log(service.createUserUrl)
-//   }
-// };
 
 //Register User
 

@@ -101,10 +101,21 @@ export class DoughnutChart extends Component {
     ],
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setState({ data: this.data });
+  }
+
   renderDoughnut = () => {
     return (
       <Doughnut
-        data={this.data}
+        data={this.state.data}
         width={100}
         height={100}
         options={{
