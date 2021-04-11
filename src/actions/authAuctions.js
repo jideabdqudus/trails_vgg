@@ -7,69 +7,52 @@ import {
   LOGOUT,
 } from "../constants/Types";
 import { USER } from "../Constants";
-import axios from "axios";
+//import axios from "axios";
 //Load User
 
 export const loadUser = () => async (dispatch) => {
-  // setAuthToken(localStorage.token);
-  // try {
-  //   const res = await axios.get("http://trail-api.test.vggdev.com/user");
-  //   dispatch({
-  //     type: USER_LOADED,
-  //     payload: res.data,
-  //   });
-  // } catch (error) {
-  //   dispatch({
-  //     type: AUTH_ERROR,
-  //     payload: error.response,
-  //   });
-  // }
+  //Empty
 };
 
 //Register User
-export const register = (formData, service) => async (dispatch) => {
+// export const register = (formData, service) => async (dispatch) => {
+//   try {
+//     // const res = await service.createItemV1(formData, USER);
+//     const res = await axios.post(
+//       " http://trail-api.test.vggdev.com/user/",
+//       formData
+//     );
+//     console.log(service.createUserUrl)
+//     const { data } = res.data;
+//     console.log(res);
+//     dispatch({
+//       type: REGISTER_SUCCESS,
+//       payload: data,
+//     });
+//   } catch (error) {
+//     dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
+//     console.log(error.response.data.message.message);
+//     console.log(service.createUserUrl)
+//   }
+// };
+
+//Register User
+
+export const register = (formData, ServiceBase) => async (dispatch) => {
   try {
-    // const res = await service.createItemV1(formData, USER);
-    const res = await axios.post(
-      " http://trail-api.test.vggdev.com/user/",
-      formData
-    );
+    const res = await ServiceBase.createItemV1(formData, USER);
     const { data } = res.data;
-    console.log(res);
     dispatch({
       type: REGISTER_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    dispatch({ type: REGISTER_FAIL, payload: error.response.data.msg });
-    console.log(error.response.data.message.message);
+    dispatch({
+      type: REGISTER_FAIL,
+      payload: error,
+    });
   }
 };
-
-//Register User
-
-// export const register = (formData, ServiceBase, Constants) => async (
-//   dispatch
-// ) => {
-//   try {
-//     // const res = await ServiceBase.createItemV1(formData, Constants.USER);
-//     const res = await axios.post(
-//       " http://trail-api.test.vggdev.com/user/",
-//       formData,
-//     );
-//     dispatch({
-//       type: REGISTER_SUCCESS,
-//       payload: res,
-//     });
-//     loadUser();
-//   } catch (error) {
-//     // dispatch({
-//     //   type: REGISTER_FAIL,
-//     //   payload: error,
-//     // });
-//     console.log(error);
-//   }
-// };
 
 // Login User
 

@@ -11,6 +11,8 @@ export const Service = (baseUrl, Axios, token, history) => {
     (response) => response,
     (error) => {
       if (error.response) {
+        appHelpers.alertError(error.response.data.message.message) || appHelpers.alertError(error.response.data.message) 
+        console.log("from here" ,error.response.data.message)
         let status = error.response.status;
         // debugger
         const url = error.response.config.url;
@@ -72,6 +74,7 @@ export const Service = (baseUrl, Axios, token, history) => {
   const createItemV1 = (data, controller) => {
     return instance.post(getApiv1Url(controller), data);
   };
+
   const getItems = (controller) => {
     return instance.get(`${getApiv1Url(controller)}`);
   };
@@ -100,7 +103,6 @@ export const Service = (baseUrl, Axios, token, history) => {
   const getPrograms = (data, controller, id) => {
     return instance.get(`${getApiv1Url(controller)}`);
   };
-
 
   return {
     uploadProgram,

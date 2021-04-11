@@ -8,7 +8,7 @@ import { flatten, uniqBy } from "lodash";
 const renderObjects = (programs) => {
   const sdgs = uniqBy(flatten(programs?.map(({ sdgs }) => sdgs)), "sdgId");
   const sdgsNames = sdgs?.map(({ name }) => name);
- 
+
   return sdgsNames;
 };
 
@@ -101,6 +101,22 @@ export class DoughnutChart extends Component {
     ],
   };
 
+  renderDoughnut = () => {
+    return (
+      <Doughnut
+        data={this.data}
+        width={100}
+        height={100}
+        options={{
+          legend: {
+            display: true,
+            position: "bottom",
+          },
+        }}
+      />
+    );
+  };
+
   render() {
     return (
       <div>
@@ -110,17 +126,7 @@ export class DoughnutChart extends Component {
               <Skeleton active />
             </div>
           ) : (
-            <Doughnut
-              data={this.data}
-              width={100}
-              height={100}
-              options={{
-                legend: {
-                  display: true,
-                  position: "bottom",
-                },
-              }}
-            />
+            this.renderDoughnut()
           )}
         </Card>
       </div>
